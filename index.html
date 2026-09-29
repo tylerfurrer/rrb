@@ -33,7 +33,7 @@
 <title>Rat River Boys</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Oswald:wght@400;500;600;700&family=Crimson+Pro:ital,wght@0,400;0,600;1,400&family=Permanent+Marker&family=Caveat:wght@600&family=Fredoka:wght@600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Oswald:wght@400;500;600;700&family=Crimson+Pro:ital,wght@0,400;0,600;1,400&family=Permanent+Marker&family=Caveat:wght@600&display=swap">
 <style>
 /* Layout: a beat-up gig poster stapled to a bar wall. Night-sky hero with the lasso rat, then mustard, rust and navy slabs with grime, stains and torn edges. */
 :root {
@@ -1020,21 +1020,6 @@ html.gate-on, html.gate-on body { overflow: hidden; }
 /* doors swing INTO the bar and disappear behind the frame, never through the lanterns */
 .door-clip { position: absolute; inset: 0; overflow: hidden; perspective: 700px; perspective-origin: 50% 45%; z-index: 1; pointer-events: none; }
 
-
-/* ---------- hero rotating line: yellow rope lettering ---------- */
-.slogan .s2.hero-typer { font-family: 'Fredoka', var(--label); font-weight: 600; letter-spacing: .03em; word-spacing: .1em; line-height: 1.16; text-shadow: none; }
-.slogan .s2.hero-typer #typed {
-  color: transparent; -webkit-text-fill-color: transparent;
-  background:
-    linear-gradient(180deg, rgba(255,245,200,.45), transparent 40%, rgba(90,50,5,.35)),
-    repeating-linear-gradient(-58deg, #ffd658 0 .07em, #e5ae2c .07em .13em, #a8741a .13em .16em, #ffd658 .16em .17em);
-  -webkit-background-clip: text; background-clip: text;
-  filter: drop-shadow(1px 1px 0 #5a3a0c) drop-shadow(2px 3px 0 var(--rust-deep));
-}
-.slogan .s2.hero-typer .caret { background: #e5ae2c; box-shadow: 2px 3px 0 var(--rust-deep); width: .42em; height: .78em; margin-left: .1em; border-radius: 2px; }
-@media (max-width: 640px) {
-  .slogan .s2.hero-typer #typed { filter: drop-shadow(1px 1px 0 #5a3a0c) drop-shadow(1px 2px 0 var(--rust-deep)); }
-}
 
 /* ---------- warning sign: snapping rope ---------- */
 .sign-hang { cursor: pointer; }
