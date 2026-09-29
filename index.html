@@ -8,6 +8,20 @@
 <meta property="og:url" content="https://ratriverboys.com">
 <link rel="icon" href="rat-badge.jpg">
 <link rel="apple-touch-icon" href="rat-badge.jpg">
+<script>
+/* every load or refresh starts at the top of the page */
+(function () {
+  try { if ('scrollRestoration' in history) history.scrollRestoration = 'manual'; } catch (e) {}
+  function toTop() {
+    if (location.hash) { try { history.replaceState(null, '', location.pathname + location.search); } catch (e) {} }
+    window.scrollTo(0, 0);
+  }
+  toTop();
+  window.addEventListener('DOMContentLoaded', toTop);
+  window.addEventListener('load', function () { setTimeout(toTop, 0); });
+  window.addEventListener('pageshow', function (e) { if (e.persisted) toTop(); });
+})();
+</script>
 <title>Rat River Boys</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -233,7 +247,7 @@ h2 {
 
 /* ---------- BOOK: mustard with crest ---------- */
 .book-slab { background: #f9ba0d; color: var(--ink); }
-.book-grid { display: grid; grid-template-columns: .9fr 1.1fr; gap: 44px; align-items: center; }
+.book-grid { display: grid; grid-template-columns: 1fr 1.05fr; gap: 56px; align-items: start; }
 .book-grid > * { min-width: 0; }
 .crest { max-width: 100%; position: relative; }
 .crest img { display: block; width: 100%; height: auto; }
@@ -468,7 +482,7 @@ footer a.fb-foot:hover { background: var(--bone); }
 .cd-quip { font-style: italic; font-size: 1.15rem; }
 
 /* booking form */
-.book-form { margin-top: 34px; display: grid; gap: 14px; border-top: 3px dashed var(--ink); padding-top: 24px; }
+.book-form { display: grid; gap: 14px; }
 .book-form .kicker { margin: 0; }
 .bf-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px 16px; }
 .book-form label { display: grid; gap: 5px; font-family: var(--label); font-weight: 700; text-transform: uppercase; letter-spacing: .12em; font-size: .8rem; min-width: 0; }
@@ -659,7 +673,6 @@ footer a.fb-foot:hover { background: var(--bone); }
 
   /* booking */
   .book-grid { gap: 18px; }
-  .crest { width: min(210px, 60%); justify-self: center; }
   .lastcall { padding: 8px 18px; margin-bottom: 14px; }
   .lastcall span { font-size: 1.8rem; }
   .email-row { gap: 10px; }
@@ -667,7 +680,6 @@ footer a.fb-foot:hover { background: var(--bone); }
   .email-row .btn { width: 100%; text-align: center; }
   .perks { margin-top: 18px; gap: 8px; }
   .perks li { font-size: .74rem; padding: 5px 10px; }
-  .book-form { margin-top: 26px; padding-top: 20px; gap: 12px; }
   .bf-actions .btn { flex: 1 1 100%; text-align: center; }
 
   /* footer and floating bits */
@@ -677,6 +689,108 @@ footer a.fb-foot:hover { background: var(--bone); }
   .pint-wrap, .pint { width: 18px; height: 46px; }
   .pint-wrap { right: 6px; }
   .puddle { width: 44px; margin-left: -22px; }
+}
+
+/* ---------- booking: pitch + bar tab ---------- */
+.book-pitch .lastcall { margin-bottom: 22px; }
+.book-pitch h2 { font-size: clamp(2.2rem, 3.2vw, 2.75rem); }
+.book-pitch .email { font-size: clamp(1.05rem, 1.6vw, 1.3rem); padding: 12px 16px; }
+.tab .bf-actions { flex-wrap: nowrap; }
+.tab .bf-actions .btn { flex: 1 1 0; text-align: center; font-size: .86rem; padding: 12px 10px; white-space: nowrap; }
+.book-pitch .lede { max-width: 36ch; }
+.email {
+  background: var(--ink); color: var(--bone); border: 0; box-shadow: 4px 4px 0 var(--rust);
+  user-select: all;
+}
+.email-row .btn { padding-block: 12px; }
+.tab {
+  --tab: #f5ebd2;
+  position: relative; background: var(--tab); color: var(--ink);
+  padding: 26px 28px 30px; margin-top: 8px; transform: rotate(1.2deg);
+  filter: drop-shadow(7px 7px 0 var(--ink));
+  background-image: repeating-linear-gradient(transparent 0 31px, rgba(43,23,11,.06) 31px 32px);
+}
+.tab::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: -13px; height: 14px;
+  background: linear-gradient(-45deg, transparent 9px, var(--tab) 0) 0 0 / 18px 14px repeat-x,
+              linear-gradient(45deg, transparent 9px, var(--tab) 0) 0 0 / 18px 14px repeat-x;
+}
+.tab-head { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-bottom: 12px; border-bottom: 3px double var(--ink); }
+.tab-title { font-family: var(--display); font-size: 2.2rem; line-height: 1; color: var(--rust); }
+.tab-no { font-family: var(--label); font-weight: 600; font-size: .8rem; letter-spacing: .18em; text-transform: uppercase; margin-top: 6px; }
+.tab-stamp {
+  width: 96px; height: 96px; flex: none; border-radius: 50%; object-fit: cover; object-position: 50% 42%;
+  border: 3px solid var(--ink); transform: rotate(-12deg); box-shadow: 3px 3px 0 var(--rust);
+}
+.tab-note { margin: 2px 0 2px; font-family: "Caveat", cursive; font-size: 1.6rem; line-height: 1.1; color: var(--rust); transform: rotate(-1deg); }
+.tab .book-form label, .tab label { color: var(--ink); }
+.tab input, .tab textarea {
+  background: transparent !important; border: 0 !important; border-bottom: 2px dashed var(--ink) !important;
+  padding: 6px 2px !important; font-size: 1.15rem !important;
+}
+.tab textarea { border: 2px dashed var(--ink) !important; padding: 8px 10px !important; }
+.tab input:focus, .tab textarea:focus { outline: none; background: rgba(233,174,28,.18) !important; }
+.tab .bf-actions { margin-top: 4px; }
+.tab-foot { margin-top: 6px; padding-top: 12px; border-top: 2px dashed var(--ink); text-align: center; font-style: italic; font-size: 1.05rem; }
+#bf-status:empty { display: none; }
+
+/* ---------- desktop: pinned saloon bar ---------- */
+nav ul a.fb-nav .fb-f { display: none; }
+@media (min-width: 641px) {
+  .hero { padding-top: 96px; }
+  section[id] { scroll-margin-top: 90px; }
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 90;
+    display: flex; flex-wrap: nowrap; align-items: center; gap: 26px;
+    padding: 14px max(24px, calc((100vw - 1100px) / 2 + 20px));
+    background: rgba(11,21,40,.95); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
+    border-bottom: 3px solid var(--mustard); box-shadow: 0 8px 24px rgba(0,0,0,.35);
+    transition: padding .25s ease;
+  }
+  nav.scrolled { padding-block: 8px; }
+  .badge { transition: width .25s ease, height .25s ease; }
+  nav.scrolled .badge { width: 44px; height: 44px; }
+  nav .brand { margin-right: auto; flex: none; }
+  nav ul.nav-links { flex-wrap: nowrap; gap: 0; align-items: center; }
+  nav ul.nav-links li + li::before { content: "\2605"; color: var(--rust); font-size: .7rem; margin: 0 14px; position: relative; top: -2px; }
+  nav ul.nav-links a { display: inline-block; padding: 6px 0; font-size: .95rem; letter-spacing: .14em; white-space: nowrap; }
+  nav ul.nav-cta { flex-wrap: nowrap; align-items: center; gap: 12px; }
+  nav ul.nav-cta a.neon {
+    display: inline-block; background: var(--mustard); color: var(--ink); text-shadow: none; white-space: nowrap;
+    padding: 10px 18px; border: 2px solid var(--ink); box-shadow: 3px 3px 0 var(--rust); letter-spacing: .14em;
+    transition: transform .12s, box-shadow .12s;
+  }
+  nav ul.nav-cta a.neon:hover { transform: translate(-1px,-1px); box-shadow: 5px 5px 0 var(--rust); border-color: var(--ink); }
+  nav ul.nav-cta a.neon .flick { animation: none; }
+  nav ul.nav-cta a.fb-nav {
+    display: grid; place-items: center; width: 40px; height: 40px; padding: 0;
+    background: transparent; color: var(--mustard); border: 2px solid var(--mustard);
+    font-family: var(--label); font-weight: 700; font-size: 1.45rem; text-transform: lowercase; letter-spacing: 0;
+  }
+  nav ul.nav-cta a.fb-nav:hover { background: var(--mustard); color: var(--ink); border-color: var(--mustard); }
+  nav ul.nav-cta a.fb-nav .fb-word { display: none; }
+  nav ul.nav-cta a.fb-nav .fb-f { display: block; line-height: 1; margin-top: 2px; }
+}
+@media (min-width: 641px) and (max-width: 1080px) {
+  nav { gap: 16px; }
+  .brand-text .b2 { display: none; }
+  nav ul.nav-links a { font-size: .8rem; letter-spacing: .08em; }
+  nav ul.nav-links li + li::before { margin: 0 8px; }
+}
+@media (min-width: 641px) and (max-width: 860px) {
+  nav ul.nav-links li:nth-child(5) { display: none; }
+}
+@media (max-width: 800px) {
+  .tab { transform: none; }
+}
+@media (max-width: 640px) {
+  .tab { padding: 20px 18px 26px; }
+  .tab-title { font-size: 1.8rem; }
+  .tab-stamp { width: 74px; height: 74px; }
+  .tab .bf-actions { flex-wrap: wrap; }
+  .tab .bf-actions .btn { flex: 1 1 100%; }
+  .book-pitch h2 { font-size: 2.05rem; }
+  .book-grid { gap: 34px; }
 }
 </style>
 
@@ -692,14 +806,14 @@ footer a.fb-foot:hover { background: var(--bone); }
         <li><a href="#sound">The Sound</a></li>
         <li><a href="#rules">House Rules</a></li>
         <li class="m-only"><a href="#tips">Tip Jar</a></li>
-        <li class="m-only"><a href="#merch">Merch</a></li>
+        <li><a href="#merch">Merch</a></li>
         <li class="m-only"><a href="#wall">Bathroom Wall</a></li>
         <li class="m-only"><a href="#book">Book Us</a></li>
         <li class="m-only m-fb"><a class="btn" href="https://www.facebook.com/profile.php?id=61589395443501" target="_blank" rel="noopener">Follow us on Facebook</a></li>
       </ul>
       <ul class="nav-cta">
         <li><a class="neon" href="#book">Boo<span class="flick">k</span> Us</a></li>
-        <li><a class="fb-nav" href="https://www.facebook.com/profile.php?id=61589395443501" target="_blank" rel="noopener">Facebook</a></li>
+        <li><a class="fb-nav" href="https://www.facebook.com/profile.php?id=61589395443501" target="_blank" rel="noopener" aria-label="Rat River Boys on Facebook"><span class="fb-word">Facebook</span><span class="fb-f" aria-hidden="true">f</span></a></li>
         <li class="m-only"><button class="menu-btn" id="menu-btn" type="button" aria-expanded="false" aria-controls="nav-links"><span class="bars" aria-hidden="true"><span></span><span></span><span></span></span><span class="menu-word">Menu</span></button></li>
       </ul>
     </nav>
@@ -758,7 +872,7 @@ footer a.fb-foot:hover { background: var(--bone); }
           <div class="time">8 PM</div>
         </li>
       </ul>
-      <p class="note">Bring cash for the tip jar and a designated driver. We are not driving your drunk ass home, Brenda. Designated drivers drink free. Just kidding, they drink water, the losers. Leave the kids with grandma. She's coming out too, though.</p>
+      <p class="note">Bring cash for the tip jar and a designated driver. We are not driving your drunk ass home, Brenda. Designated drivers drink free. Just kidding, they get tap water and our respect. Leave the kids with grandma. She's coming out too, though.</p>
       <a class="btn fb-btn" href="https://www.facebook.com/profile.php?id=61589395443501" target="_blank" rel="noopener">New dates hit our Facebook first</a>
     </div>
   </section>
@@ -884,10 +998,7 @@ footer a.fb-foot:hover { background: var(--bone); }
 
   <section class="slab book-slab torn" id="book">
     <div class="wrap book-grid">
-      <div class="crest">
-        <img src="rat-crest.jpg" alt="RRB Rat River Boys logo with a rat crouched under a white circle" width="690" height="760">
-      </div>
-      <div>
+      <div class="book-pitch">
         <div class="lastcall" id="lastcall" aria-label="Last call"><span>LAST</span> <span>CALL</span></div>
         <p class="kicker">Booking</p>
         <h2>Got a venue that needs its reputation ruined?</h2>
@@ -896,38 +1007,46 @@ footer a.fb-foot:hover { background: var(--bone); }
           <span class="email" id="email">ratriverboysband@gmail.com</span>
           <button class="btn" id="copy" type="button">Copy email</button>
         </div>
-        <p class="fb-line">Or slide into our DMs on <a href="https://www.facebook.com/profile.php?id=61589395443501" target="_blank" rel="noopener">Facebook</a>. We answer faster than your ex.</p>
         <div class="copied" id="copied" aria-live="polite"></div>
+        <p class="fb-line">Or slide into our DMs on <a href="https://www.facebook.com/profile.php?id=61589395443501" target="_blank" rel="noopener">Facebook</a>. We answer faster than your ex.</p>
         <ul class="perks">
           <li>Mostly sober</li>
           <li>We run our own sound</li>
           <li>Will play for beer (and money)</li>
           <li>Long sets, short memories</li>
         </ul>
-        <form class="book-form" id="book-form" novalidate>
-          <p class="kicker">Or fill this out and we'll write the email for you</p>
-          <div class="bf-grid">
-            <label>Venue<input id="bf-venue" name="venue" type="text" placeholder="Brenda's Bar &amp; Grill" autocomplete="organization"></label>
-            <label>City<input id="bf-city" name="city" type="text" placeholder="Oshkosh, WI" autocomplete="address-level2"></label>
-            <label>Date<input id="bf-date" name="date" type="text" placeholder="Saturday, Dec 12"></label>
-            <label>Budget<input id="bf-budget" name="budget" type="text" placeholder="Beer and money"></label>
-          </div>
-          <label>Anything else<textarea id="bf-notes" name="notes" rows="3" placeholder="Set length, stage size, how drunk your regulars get"></textarea></label>
-          <div class="bf-actions">
-            <a class="btn" id="bf-mail" href="mailto:ratriverboysband@gmail.com">Open it in my email</a>
-            <button class="btn alt" id="bf-copy" type="button">Copy the message</button>
-          </div>
-          <div class="copied" id="bf-status" aria-live="polite"></div>
-          <pre class="bf-preview" id="bf-preview"></pre>
-        </form>
       </div>
+      <form class="book-form tab" id="book-form" novalidate>
+        <div class="tab-head">
+          <div>
+            <div class="tab-title">Bar Tab</div>
+            <div class="tab-no">No. 0169 &middot; Booking request</div>
+          </div>
+          <img class="tab-stamp" src="rat-crest.jpg" alt="" width="690" height="760">
+        </div>
+        <p class="tab-note">Fill it out and we'll write the email for you.</p>
+        <div class="bf-grid">
+          <label>Venue<input id="bf-venue" name="venue" type="text" placeholder="Brenda's Bar &amp; Grill" autocomplete="organization"></label>
+          <label>City<input id="bf-city" name="city" type="text" placeholder="Oshkosh, WI" autocomplete="address-level2"></label>
+          <label>Date<input id="bf-date" name="date" type="text" placeholder="Saturday, Dec 12"></label>
+          <label>Budget<input id="bf-budget" name="budget" type="text" placeholder="Beer and money"></label>
+        </div>
+        <label>Anything else<textarea id="bf-notes" name="notes" rows="3" placeholder="Set length, stage size, how drunk your regulars get"></textarea></label>
+        <div class="bf-actions">
+          <a class="btn" id="bf-mail" href="mailto:ratriverboysband@gmail.com">Open it in my email</a>
+          <button class="btn alt" id="bf-copy" type="button">Copy the message</button>
+        </div>
+        <div class="copied" id="bf-status" aria-live="polite"></div>
+        <pre class="bf-preview" id="bf-preview"></pre>
+        <div class="tab-foot">Gratuity not included. Tip your band.</div>
+      </form>
     </div>
   </section>
 </main>
 
 <footer>
   <div class="wrap">
-    <span class="foot-lines"><span>Rat River Boys. Your daughter's biggest mistake.</span><span>Rated R for rowdy, raunchy, and Rat River.</span><span>Made in Wisconsin, where the beer is cold and the cousins are close.</span><span>Tip your bartender, you animals.</span></span>
+    <span class="foot-lines"><span>Rat River Boys. Your biggest mistake.</span><span>Rated R for rowdy, raunchy, and Rat River.</span><span>Made in Wisconsin, where the beer is cold and the cousins are close.</span><span>Tip your bartender, you animals.</span></span>
     <a class="fb-foot" href="https://www.facebook.com/profile.php?id=61589395443501" target="_blank" rel="noopener">Follow us on Facebook</a>
   </div>
 </footer>
@@ -1070,7 +1189,7 @@ footer a.fb-foot:hover { background: var(--bone); }
         else target.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
         return;
       }
-      gsap.to(window, { duration: 1.2, scrollTo: { y: target, autoKill: true }, ease: 'power3.inOut' });
+      gsap.to(window, { duration: 1.2, scrollTo: { y: target, offsetY: 84, autoKill: true }, ease: 'power3.inOut' });
     });
   });
 
@@ -1115,8 +1234,8 @@ footer a.fb-foot:hover { background: var(--bone); }
     // venue stickers get slapped on
     gsap.from('.venues li', { y: -80, rotate: function () { return gsap.utils.random(-30, 30); }, opacity: 0, stagger: .08, duration: .6, ease: 'bounce.out', scrollTrigger: { trigger: '.venues', start: 'top 85%', toggleActions: 'restart none restart none' } });
 
-    // crest rat scurries in
-    gsap.from('.crest', { x: -120, rotate: -8, opacity: 0, duration: .8, ease: 'back.out(1.4)', scrollTrigger: { trigger: '.book-slab', start: 'top 70%', toggleActions: 'restart none restart none' } });
+    // bar tab gets slapped down on the counter
+    gsap.from('.tab', { y: 80, rotate: 8, opacity: 0, duration: .7, ease: 'back.out(1.6)', scrollTrigger: { trigger: '.book-slab', start: 'top 70%', toggleActions: 'restart none restart none' } });
     gsap.from('.perks li', { y: 20, opacity: 0, stagger: .08, duration: .35, scrollTrigger: { trigger: '.perks', start: 'top 90%', toggleActions: 'restart none restart none' } });
 
 
@@ -1457,7 +1576,7 @@ footer a.fb-foot:hover { background: var(--bone); }
   var SEL = [
     '.poster', '.warning', '.slogan .s1', '.hero .btn', '.show', '.cd-clock > div', '.fb-btn',
     '.legends li', '.rule-list li', '.jar-rim', '.tip-buttons .btn', '.venues li', '.item', '.g',
-    '.crest img', '.lastcall', '.email', '.perks li', '.bf-actions .btn', '.book-form textarea',
+    '.tab-head', '.lastcall', '.email', '.perks li', '.bf-actions .btn', '.book-form textarea',
     '.kicker', 'main h2', '.fb-foot', 'footer'
   ].join(',');
   var G = 2400, WALK = 90, RUN = 250, CLIMB = 150, MAX_UP = 250, MAX_GAP = 360;
@@ -1705,5 +1824,13 @@ document.querySelectorAll('.fight-inline').forEach(function (b) {
   document.addEventListener('click', function (e) { if (nav.classList.contains('open') && !nav.contains(e.target)) setOpen(false); });
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape') setOpen(false); });
   window.addEventListener('resize', function () { if (window.innerWidth > 640) setOpen(false); });
+})();
+</script>
+
+<script>
+(function () {
+  var nav = document.querySelector('nav'); if (!nav) return;
+  function onScroll() { nav.classList.toggle('scrolled', window.scrollY > 40); }
+  window.addEventListener('scroll', onScroll, { passive: true }); onScroll();
 })();
 </script>
