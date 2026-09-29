@@ -1469,10 +1469,6 @@ img { -webkit-user-drag: none; }
         </div>
         <label>Anything else<textarea id="bf-notes" name="notes" rows="3" placeholder="Set length, stage size, how drunk your regulars get"></textarea></label>
         <button class="btn bf-send" id="bf-send" type="submit">Close out the tab</button>
-        <div class="bf-actions">
-          <a class="btn" id="bf-mail" href="mailto:ratriverboysband@gmail.com">Open it in my email</a>
-          <button class="btn alt" id="bf-copy" type="button">Copy the message</button>
-        </div>
         <div class="copied" id="bf-status" aria-live="polite"></div>
         <pre class="bf-preview" id="bf-preview"></pre>
         <div class="tab-foot">Gratuity not included. Tip your band.</div>
@@ -1993,7 +1989,7 @@ img { -webkit-user-drag: none; }
       var body = 'Hey Rat River Boys,\n\nWe want you to come ruin our reputation.\n\n' +
         'Venue: ' + (v('venue') || '') + '\nCity: ' + (v('city') || '') + '\nDate: ' + (v('date') || '') + '\nBudget: ' + (v('budget') || '') +
         (v('notes') ? '\n\n' + v('notes') : '') + '\n\nThanks,\n' + (v('name') ? v('name') + '\n' : '') + (v('email') ? v('email') + '\n' : '');
-      mail.href = 'mailto:ratriverboysband@gmail.com?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+      if (mail) mail.href = 'mailto:ratriverboysband@gmail.com?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
       return 'To: ratriverboysband@gmail.com\nSubject: ' + subject + '\n\n' + body;
     }
     ids.forEach(function (id) { document.getElementById('bf-' + id).addEventListener('input', build); });
@@ -2021,15 +2017,8 @@ img { -webkit-user-drag: none; }
         })
         .catch(function () {
           sendBtn.textContent = 'Close out the tab'; sendBtn.disabled = false; sending = false;
-          status.textContent = 'The bartender dropped it. Hit "Open it in my email" or write us at ratriverboysband@gmail.com.';
+          status.textContent = 'The bartender dropped it. Try again, or email us at ratriverboysband@gmail.com.';
         });
-    });
-    document.getElementById('bf-copy').addEventListener('click', function () {
-      var text = build();
-      try {
-        navigator.clipboard.writeText(text).then(function () { status.textContent = 'Copied. Paste it in an email to ratriverboysband@gmail.com.'; },
-          function () { status.textContent = 'Could not copy. Email us at ratriverboysband@gmail.com.'; });
-      } catch (err) { status.textContent = 'Could not copy. Email us at ratriverboysband@gmail.com.'; }
     });
   }
 
