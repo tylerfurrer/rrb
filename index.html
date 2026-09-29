@@ -33,7 +33,7 @@
 <title>Rat River Boys</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Oswald:wght@400;500;600;700&family=Crimson+Pro:ital,wght@0,400;0,600;1,400&family=Permanent+Marker&family=Caveat:wght@600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Oswald:wght@400;500;600;700&family=Crimson+Pro:ital,wght@0,400;0,600;1,400&family=Permanent+Marker&family=Caveat:wght@600&family=Tilt+Neon&display=swap">
 <style>
 /* Layout: a beat-up gig poster stapled to a bar wall. Night-sky hero with the lasso rat, then mustard, rust and navy slabs with grime, stains and torn edges. */
 :root {
@@ -860,8 +860,8 @@ html.gate-on, html.gate-on body { overflow: hidden; }
 @media (prefers-reduced-motion: no-preference) {
   .door.left { animation: sway-l 3.2s ease-in-out infinite; }
   .door.right { animation: sway-r 3.2s ease-in-out infinite; }
-  @keyframes sway-l { 50% { transform: rotateY(-6deg); } }
-  @keyframes sway-r { 50% { transform: rotateY(6deg); } }
+  @keyframes sway-l { 50% { transform: rotateY(7deg); } }
+  @keyframes sway-r { 50% { transform: rotateY(-7deg); } }
 }
 @media (max-height: 640px) {
   .doorway { height: 30vh; }
@@ -1016,6 +1016,82 @@ html.gate-on, html.gate-on body { overflow: hidden; }
 }
 @media (max-height: 640px) { .gate-inner > .doorway { margin-top: 36px; } }
 
+
+/* doors swing INTO the bar and disappear behind the frame, never through the lanterns */
+.door-clip { position: absolute; inset: 0; overflow: hidden; perspective: 700px; perspective-origin: 50% 45%; z-index: 1; pointer-events: none; }
+
+
+/* ---------- hero neon sign ---------- */
+.slogan .s2.nsign {
+  --nc: #ff4f8b;
+  --off: color-mix(in srgb, var(--nc) 22%, #2e2a33);
+  --on: color-mix(in srgb, var(--nc) 28%, #fff);
+  --glow: 0 0 1px #fff, 0 0 5px var(--nc), 0 0 12px var(--nc), 0 0 26px var(--nc), 0 0 50px var(--nc);
+  --dark: 0 1px 0 rgba(0,0,0,.6), 0 0 0 transparent, 0 0 0 transparent, 0 0 0 transparent, 0 0 0 transparent;
+  display: flex; align-items: center; justify-content: center; text-align: center;
+  margin: 22px 0 26px; font-family: 'Tilt Neon', var(--label); font-weight: 400; letter-spacing: .02em; word-spacing: .08em;
+  line-height: 1.14; text-shadow: none; text-wrap: balance; isolation: isolate; width: 100%;
+}
+.slogan .s2.nsign::before {
+  content: ""; position: absolute; inset: -16px -20px; z-index: -1; border-radius: 12px;
+  background:
+    radial-gradient(circle, #8d8272 0 2px, #2b2620 3px, transparent 4px) 10px 10px / calc(100% - 20px) calc(100% - 20px),
+    linear-gradient(180deg, rgba(255,255,255,.035), transparent 45%),
+    #0d0b10;
+  border: 2px solid #26212a;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.04), inset 0 0 34px rgba(0,0,0,.85), 0 12px 28px rgba(0,0,0,.55);
+  transition: box-shadow .25s;
+}
+.slogan .s2.nsign.lit::before {
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.05), inset 0 0 60px color-mix(in srgb, var(--nc) 20%, transparent),
+    0 12px 28px rgba(0,0,0,.55), 0 0 46px color-mix(in srgb, var(--nc) 26%, transparent);
+}
+.nsign .tl { display: block; }
+.nsign #typed { display: inline; color: var(--off); text-shadow: var(--dark); transition: color .12s, text-shadow .12s; }
+.nsign #typed .buzz { display: inline; }
+.nsign.lit #typed { color: var(--on); text-shadow: var(--glow); }
+.nsign.ign #typed { animation: neon-ign .95s linear both; }
+.nsign.dying #typed { animation: neon-die .48s linear both; }
+.nsign.lit:not(.ign):not(.dying) .buzz { animation: neon-buzz 4.2s linear 1.4s infinite; }
+@keyframes neon-ign {
+  0%, 10% { color: var(--off); text-shadow: var(--dark); }
+  11%, 15% { color: var(--on); text-shadow: var(--glow); }
+  16%, 30% { color: var(--off); text-shadow: var(--dark); }
+  31%, 35% { color: var(--on); text-shadow: var(--glow); }
+  36%, 44% { color: var(--off); text-shadow: var(--dark); }
+  45%, 100% { color: var(--on); text-shadow: var(--glow); }
+}
+@keyframes neon-die {
+  0%, 20% { color: var(--on); text-shadow: var(--glow); }
+  21%, 30% { color: var(--off); text-shadow: var(--dark); }
+  31%, 44% { color: var(--on); text-shadow: var(--glow); }
+  45%, 100% { color: var(--off); text-shadow: var(--dark); }
+}
+@keyframes neon-buzz {
+  0%, 86%, 88%, 91%, 100% { color: var(--on); text-shadow: var(--glow); }
+  87%, 89%, 90% { color: var(--off); text-shadow: var(--dark); }
+}
+@media (max-width: 640px) {
+  .slogan .s2.nsign { margin: 20px 0 24px; }
+  .slogan .s2.nsign::before { inset: -12px -12px; }
+}
+
+
+/* ---------- warning sign: snapping rope ---------- */
+.sign-hang { cursor: pointer; }
+.gate-sign { will-change: transform; }
+.hang-rope.snapped::after { bottom: -5px; left: -2px; width: 10px; height: 8px; border-radius: 0;
+  background: repeating-linear-gradient(90deg, #d4b27a 0 2px, #9c7a46 2px 3px);
+  clip-path: polygon(0 0, 100% 0, 92% 100%, 78% 35%, 62% 90%, 48% 30%, 34% 100%, 20% 40%, 8% 85%); box-shadow: none; }
+.rope-tail { position: absolute; z-index: 4; width: 6px; border-radius: 3px; transform-origin: 50% 0; pointer-events: none;
+  background: repeating-linear-gradient(155deg, #d4b27a 0 3px, #9c7a46 3px 6px, #7a5c30 6px 7px);
+  box-shadow: inset -1px 0 0 rgba(0,0,0,.35), 2px 3px 3px rgba(0,0,0,.4); }
+.rope-tail::before { content: ""; position: absolute; top: -5px; left: -3px; width: 12px; height: 10px; border-radius: 50%;
+  background: radial-gradient(circle at 40% 35%, #d4b27a, #7a5c30 75%); }
+.rope-tail::after { content: ""; position: absolute; bottom: -6px; left: -2px; width: 10px; height: 8px;
+  background: repeating-linear-gradient(90deg, #d4b27a 0 2px, #9c7a46 2px 3px);
+  clip-path: polygon(0 0, 100% 0, 92% 100%, 78% 35%, 62% 90%, 48% 30%, 34% 100%, 20% 40%, 8% 85%); }
+
 /* ---------- phones: center the hero and a few loose pieces ---------- */
 @media (max-width: 640px) {
   .hero-grid > div:last-child { text-align: center; }
@@ -1131,8 +1207,10 @@ html.gate-on, html.gate-on body { overflow: hidden; }
       <span class="lantern ln-l" aria-hidden="true"><span class="arm"></span><span class="body"></span></span><span class="lantern ln-r" aria-hidden="true"><span class="arm"></span><span class="body"></span></span>
       <svg class="horseshoe" viewBox="0 0 60 60" aria-hidden="true"><path d="M14 6 Q4 30 14 48 Q30 62 46 48 Q56 30 46 6" fill="none" stroke="#6b5a48" stroke-width="10" stroke-linecap="round"/><path d="M14 6 Q4 30 14 48 Q30 62 46 48 Q56 30 46 6" fill="none" stroke="#9c8a74" stroke-width="3" stroke-linecap="round" stroke-dasharray="1 9"/></svg>
       <div class="glow" aria-hidden="true"><svg class="bar-scene" viewBox="0 0 440 330" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><rect x="18" y="58" width="404" height="4" fill="#2a0f05"/><rect x="24" y="36" width="10" height="22" rx="2" fill="#4a1c09"/><rect x="27.5" y="29" width="3" height="7" fill="#4a1c09"/><rect x="37" y="40" width="8" height="18" rx="2" fill="#4a1c09"/><rect x="39.5" y="33" width="3" height="7" fill="#4a1c09"/><rect x="48" y="40" width="9" height="18" rx="2" fill="#3a1508"/><rect x="51.0" y="35" width="3" height="5" fill="#3a1508"/><rect x="66" y="36" width="8" height="22" rx="2" fill="#4a1c09"/><rect x="68.5" y="31" width="3" height="5" fill="#4a1c09"/><rect x="83" y="40" width="8" height="18" rx="2" fill="#4a1c09"/><rect x="85.5" y="35" width="3" height="5" fill="#4a1c09"/><rect x="94" y="40" width="12" height="18" rx="2" fill="#2a0f05"/><rect x="98.5" y="35" width="3" height="5" fill="#2a0f05"/><rect x="110" y="28" width="10" height="30" rx="2" fill="#4a1c09"/><rect x="113.5" y="23" width="3" height="5" fill="#4a1c09"/><rect x="123" y="36" width="10" height="22" rx="2" fill="#4a1c09"/><rect x="126.5" y="31" width="3" height="5" fill="#4a1c09"/><rect x="137" y="40" width="10" height="18" rx="2" fill="#4a1c09"/><rect x="140.5" y="31" width="3" height="9" fill="#4a1c09"/><rect x="150" y="36" width="8" height="22" rx="2" fill="#4a1c09"/><rect x="152.5" y="29" width="3" height="7" fill="#4a1c09"/><rect x="167" y="28" width="10" height="30" rx="2" fill="#3a1508"/><rect x="170.5" y="19" width="3" height="9" fill="#3a1508"/><rect x="183" y="36" width="10" height="22" rx="2" fill="#4a1c09"/><rect x="186.5" y="31" width="3" height="5" fill="#4a1c09"/><rect x="197" y="32" width="8" height="26" rx="2" fill="#3a1508"/><rect x="199.5" y="23" width="3" height="9" fill="#3a1508"/><rect x="211" y="32" width="12" height="26" rx="2" fill="#2a0f05"/><rect x="215.5" y="23" width="3" height="9" fill="#2a0f05"/><rect x="226" y="36" width="12" height="22" rx="2" fill="#2a0f05"/><rect x="230.5" y="29" width="3" height="7" fill="#2a0f05"/><rect x="247" y="40" width="12" height="18" rx="2" fill="#2a0f05"/><rect x="251.5" y="31" width="3" height="9" fill="#2a0f05"/><rect x="265" y="32" width="10" height="26" rx="2" fill="#3a1508"/><rect x="268.5" y="23" width="3" height="9" fill="#3a1508"/><rect x="284" y="40" width="8" height="18" rx="2" fill="#3a1508"/><rect x="286.5" y="33" width="3" height="7" fill="#3a1508"/><rect x="295" y="32" width="8" height="26" rx="2" fill="#4a1c09"/><rect x="297.5" y="23" width="3" height="9" fill="#4a1c09"/><rect x="312" y="28" width="10" height="30" rx="2" fill="#3a1508"/><rect x="315.5" y="19" width="3" height="9" fill="#3a1508"/><rect x="325" y="32" width="12" height="26" rx="2" fill="#4a1c09"/><rect x="329.5" y="27" width="3" height="5" fill="#4a1c09"/><rect x="340" y="40" width="12" height="18" rx="2" fill="#3a1508"/><rect x="344.5" y="35" width="3" height="5" fill="#3a1508"/><rect x="356" y="28" width="9" height="30" rx="2" fill="#3a1508"/><rect x="359.0" y="21" width="3" height="7" fill="#3a1508"/><rect x="368" y="28" width="9" height="30" rx="2" fill="#4a1c09"/><rect x="371.0" y="21" width="3" height="7" fill="#4a1c09"/><rect x="383" y="28" width="9" height="30" rx="2" fill="#3a1508"/><rect x="386.0" y="19" width="3" height="9" fill="#3a1508"/><rect x="401" y="28" width="10" height="30" rx="2" fill="#2a0f05"/><rect x="404.5" y="23" width="3" height="5" fill="#2a0f05"/><line x1="95" y1="0" x2="95" y2="18" stroke="#2a0f05" stroke-width="2"/><path d="M81 30 L89 18 L101 18 L109 30 Z" fill="#2a0f05"/><path d="M81 30 L35 150 L155 150 L109 30 Z" fill="#fff3c4" opacity=".16"/><line x1="220" y1="0" x2="220" y2="18" stroke="#2a0f05" stroke-width="2"/><path d="M206 30 L214 18 L226 18 L234 30 Z" fill="#2a0f05"/><path d="M206 30 L160 150 L280 150 L234 30 Z" fill="#fff3c4" opacity=".16"/><line x1="345" y1="0" x2="345" y2="18" stroke="#2a0f05" stroke-width="2"/><path d="M331 30 L339 18 L351 18 L359 30 Z" fill="#2a0f05"/><path d="M331 30 L285 150 L405 150 L359 30 Z" fill="#fff3c4" opacity=".16"/><rect x="0" y="262" width="440" height="10" fill="#2a0f05"/><rect x="48" y="272" width="24" height="5" fill="#2a0f05"/><line x1="51" y1="277" x2="47" y2="330" stroke="#2a0f05" stroke-width="3"/><line x1="69" y1="277" x2="73" y2="330" stroke="#2a0f05" stroke-width="3"/><line x1="49" y1="305" x2="71" y2="305" stroke="#2a0f05" stroke-width="2"/><rect x="148" y="272" width="24" height="5" fill="#2a0f05"/><line x1="151" y1="277" x2="147" y2="330" stroke="#2a0f05" stroke-width="3"/><line x1="169" y1="277" x2="173" y2="330" stroke="#2a0f05" stroke-width="3"/><line x1="149" y1="305" x2="171" y2="305" stroke="#2a0f05" stroke-width="2"/><rect x="268" y="272" width="24" height="5" fill="#2a0f05"/><line x1="271" y1="277" x2="267" y2="330" stroke="#2a0f05" stroke-width="3"/><line x1="289" y1="277" x2="293" y2="330" stroke="#2a0f05" stroke-width="3"/><line x1="269" y1="305" x2="291" y2="305" stroke="#2a0f05" stroke-width="2"/><rect x="368" y="272" width="24" height="5" fill="#2a0f05"/><line x1="371" y1="277" x2="367" y2="330" stroke="#2a0f05" stroke-width="3"/><line x1="389" y1="277" x2="393" y2="330" stroke="#2a0f05" stroke-width="3"/><line x1="369" y1="305" x2="391" y2="305" stroke="#2a0f05" stroke-width="2"/><rect x="0" y="322" width="440" height="8" fill="#2a0f05" opacity=".6"/></svg><span class="bar-sign">OPEN</span></div>
-      <div class="door left" id="door-l" aria-hidden="true"><span class="hinge h1"></span><span class="hinge h2"></span></div>
-      <div class="door right" id="door-r" aria-hidden="true"><span class="hinge h1"></span><span class="hinge h2"></span></div>
+      <div class="door-clip" aria-hidden="true">
+        <div class="door left" id="door-l" aria-hidden="true"><span class="hinge h1"></span><span class="hinge h2"></span></div>
+        <div class="door right" id="door-r" aria-hidden="true"><span class="hinge h1"></span><span class="hinge h2"></span></div>
+      </div>
       <span class="sill" aria-hidden="true"></span>
     </div>
     <button class="btn gate-btn" id="gate-btn" type="button">Kick the doors open</button>
@@ -1174,7 +1252,7 @@ html.gate-on, html.gate-on body { overflow: hidden; }
       <div>
         <h1 class="slogan">
           <span class="s1">Your mom's favorite band.</span>
-          <span class="s2 hero-typer"><span class="tl"><span id="typed">Got a venue that needs its reputation ruined?</span><span class="caret" aria-hidden="true"></span></span></span>
+          <span class="s2 hero-typer nsign"><span class="tl"><span id="typed">Got a venue that needs its reputation ruined?</span></span></span>
         </h1>
         <p class="lede">Wisconsin's filthiest honky tonk band. We play the songs your granddad got divorced to, three times, to the same woman.</p>
         <div class="cta-row">
@@ -1488,32 +1566,40 @@ html.gate-on, html.gate-on body { overflow: hidden; }
     while (measure.offsetHeight > h && size > 14) { size *= .95; measure.style.fontSize = size + 'px'; }
     box.style.fontSize = size + 'px';
   }
-  fit(lines[0]);
+  // neon sign: one letter in each line has a bad transformer and buzzes
+  var colors = ['#ff4f8b', '#ffb33a', '#40d9ff'], ci = Math.floor(Math.random() * 3);
+  function setColor() { box.style.setProperty('--nc', colors[ci % colors.length]); ci++; }
+  function setText(line) {
+    el.textContent = '';
+    var idx = [];
+    for (var j = 0; j < line.length; j++) if (/[A-Za-z]/.test(line[j])) idx.push(j);
+    if (!idx.length) { el.textContent = line; return; }
+    var bz = idx[Math.floor(Math.random() * idx.length)];
+    el.appendChild(document.createTextNode(line.slice(0, bz)));
+    var sp = document.createElement('span'); sp.className = 'buzz'; sp.textContent = line[bz]; el.appendChild(sp);
+    el.appendChild(document.createTextNode(line.slice(bz + 1)));
+  }
+  setColor(); setText(lines[0]); fit(lines[0]);
   window.addEventListener('resize', function () { fit(lines[i]); });
 
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  var pos = lines[0].length, deleting = true;
-  function tick() {
-    var line = lines[i];
-    if (deleting) {
-      // wipe the whole line at once with a quick fade, then start the next one
-      el.style.transition = 'opacity .16s ease';
-      el.style.opacity = '0';
-      setTimeout(function () {
-        el.textContent = ''; el.style.opacity = '1';
-        pos = 0; deleting = false; i = (i + 1) % lines.length; fit(lines[i]);
-        setTimeout(tick, 300);
-      }, 180);
-      return;
-    } else {
-      line = lines[i];
-      pos++;
-      el.textContent = line.slice(0, pos);
-      if (pos >= line.length) { deleting = true; setTimeout(tick, 2600); return; }
-      setTimeout(tick, 55 + Math.random() * 60);
-    }
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) { box.classList.add('lit'); return; }
+  // same pace as the old typewriter: longer lines stay lit longer
+  function ignite() {
+    box.classList.remove('dying'); box.classList.add('lit', 'ign');
+    setTimeout(function () { box.classList.remove('ign'); }, 950);
+    setTimeout(die, 950 + 2600 + lines[i].length * 85);
   }
-  afterGate(function () { setTimeout(tick, 3800); });
+  function die() {
+    box.classList.add('dying');
+    setTimeout(function () {
+      box.classList.remove('lit', 'dying');
+      setTimeout(function () {
+        i = (i + 1) % lines.length; setText(lines[i]); fit(lines[i]); setColor();
+        setTimeout(ignite, 380);
+      }, 260);
+    }, 480);
+  }
+  afterGate(function () { setTimeout(ignite, 1500); });
 })();
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
@@ -2253,11 +2339,11 @@ document.querySelectorAll('.fight-inline').forEach(function (b) {
     if (!window.gsap || reduce) { gate.style.transition = 'opacity .35s'; gate.style.opacity = '0'; setTimeout(finish, 360); return; }
     gsap.timeline({ onComplete: finish })
       .to(btn, { scale: .9, duration: .08, yoyo: true, repeat: 1 })
-      .to(L, { rotateY: -118, duration: .42, ease: 'power3.out' }, '<')
-      .to(R, { rotateY: 118, duration: .42, ease: 'power3.out' }, '<')
+      .to(L, { rotateY: 118, duration: .42, ease: 'power3.out' }, '<')
+      .to(R, { rotateY: -118, duration: .42, ease: 'power3.out' }, '<')
       .to('#sign-hang', { rotate: 14, y: -26, duration: .25, ease: 'power2.out' }, '<')
-      .to(L, { rotateY: -62, duration: .9, ease: 'elastic.out(1, .35)' })
-      .to(R, { rotateY: 62, duration: .9, ease: 'elastic.out(1, .35)' }, '<')
+      .to(L, { rotateY: 62, duration: .9, ease: 'elastic.out(1, .35)' })
+      .to(R, { rotateY: -62, duration: .9, ease: 'elastic.out(1, .35)' }, '<')
       .to('#sign-hang', { y: 900, rotate: 40, duration: .7, ease: 'power2.in' }, '<')
       .to('#gate-inner', { scale: 4.2, duration: .8, ease: 'power2.in' }, '<.15')
       .to(gate, { opacity: 0, duration: .45, ease: 'power1.in' }, '-=.4');
@@ -2265,6 +2351,82 @@ document.querySelectorAll('.fight-inline').forEach(function (b) {
   btn.addEventListener('click', function (e) { e.stopPropagation(); open(); });
   document.getElementById('doorway').addEventListener('click', open);
   document.addEventListener('keydown', function (e) { if (!opened && document.getElementById('gate') && (e.key === 'Enter' || e.key === ' ' || e.key === 'Escape')) { e.preventDefault(); open(); } });
+})();
+</script>
+
+<script>
+// warning sign: smack it twice and the right rope snaps, then it swings from the left rope like a real pendulum
+(function () {
+  var hang = document.getElementById('sign-hang'), sign = document.getElementById('gate-sign');
+  if (!hang || !sign) return;
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var hits = 0, broken = false, last = 0;
+  var th = 0, om = 0, ph, k2, dist, v, P, tail, beta = 0, bom = 0, TL = 44, t0;
+  var G = 9800, DAMP = 0.55, TDAMP = 3.2;
+  function smack(e) {
+    e.stopPropagation();
+    var now = performance.now(); if (now - last < 220) return; last = now;
+    hits++;
+    if (broken) { om += (Math.random() < .5 ? -1 : 1) * 3.2; return; }
+    if (hits === 1) {
+      if (window.gsap && !reduce) gsap.fromTo(sign, { rotate: 0 }, { keyframes: [{ rotate: 3.5, duration: .09 }, { rotate: -2.5, duration: .14 }, { rotate: 1.2, duration: .16 }, { rotate: 0, duration: .2 }], transformOrigin: '50% 0%' });
+      return;
+    }
+    snap();
+  }
+  function eye(el) { return { x: el.offsetLeft + el.offsetWidth / 2, y: el.offsetTop + el.offsetHeight / 2 }; }
+  function snap() {
+    broken = true;
+    if (window.gsap) gsap.killTweensOf(sign);
+    hang.style.animation = 'none'; hang.style.transform = 'none'; sign.style.transform = 'none';
+    var eL = eye(sign.querySelector('.e-l')), eR = eye(sign.querySelector('.e-r'));
+    var w = sign.offsetWidth, h = sign.offsetHeight;
+    // rigid plank pivoting on the left eyelet: equilibrium puts its center of mass straight under the pivot
+    var dx = w / 2 - eL.x, dy = h / 2 - eL.y;
+    dist = Math.hypot(dx, dy); ph = Math.atan2(dx, dy);
+    k2 = (w * w + h * h) / 12 + dist * dist;
+    G = 9800 * (w / 490);
+    v = eR.x - eL.x;
+    P = { x: sign.offsetLeft + eL.x, y: sign.offsetTop + eL.y };
+    sign.style.transformOrigin = eL.x + 'px ' + eL.y + 'px';
+    // broken rope: stub recoils up to the hook, the other half stays tied to the sign
+    var rr = hang.querySelector('.r-r');
+    rr.classList.add('snapped');
+    if (window.gsap && !reduce) gsap.fromTo(rr, { height: rr.offsetHeight }, { height: 20, duration: .5, ease: 'elastic.out(1.2,.3)' });
+    else rr.style.height = '20px';
+    tail = document.createElement('span'); tail.className = 'rope-tail'; tail.setAttribute('aria-hidden', 'true');
+    hang.appendChild(tail);
+    TL = Math.max(30, Math.min(48, rr.offsetHeight * .6));
+    tail.style.height = TL + 'px';
+    beta = Math.PI - 0.25; bom = 0;   // tail starts pointing up at the hook it came from
+    th = 0; om = -1.2;                // a little kick back from the snap
+    t0 = performance.now();
+    if (reduce) { th = ph; draw(); return; }
+    requestAnimationFrame(step);
+  }
+  function draw() {
+    sign.style.transform = 'rotate(' + th + 'rad)';
+    var x = P.x + v * Math.cos(th), y = P.y + v * Math.sin(th);
+    tail.style.left = (x - 3) + 'px'; tail.style.top = y + 'px';
+    tail.style.transform = 'rotate(' + beta + 'rad)';
+  }
+  function step(now) {
+    if (!document.getElementById('gate')) return;
+    var dt = Math.min(.033, (now - t0) / 1000); t0 = now;
+    var n = 4, h = dt / n;
+    for (var s = 0; s < n; s++) {
+      // plank: torque from gravity about the pivot, plus air drag
+      var a = -(G * dist / k2) * Math.sin(th - ph) - DAMP * om;
+      om += a * h; th += om * h;
+      // loose rope end: its own little pendulum hanging off the swinging eyelet
+      var ax = -v * (a * Math.sin(th) + om * om * Math.cos(th)), ay = v * (a * Math.cos(th) - om * om * Math.sin(th));
+      var ba = -(G / TL) * .5 * Math.sin(beta) - (ax * Math.cos(beta) + ay * Math.sin(beta)) / TL * .5 - TDAMP * bom;
+      bom += ba * h; beta += bom * h;
+    }
+    draw();
+    requestAnimationFrame(step);
+  }
+  hang.addEventListener('click', smack);
 })();
 </script>
 
