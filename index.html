@@ -83,7 +83,7 @@ nav {
   padding-block: 18px;
   font-family: var(--label); text-transform: uppercase; letter-spacing: .14em; font-size: .88rem; font-weight: 600;
 }
-.brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+.brand { display: flex; align-items: center; gap: 12px; text-decoration: none; margin-right: auto; }
 .badge {
   width: 58px; height: 58px; border-radius: 50%; overflow: hidden; flex: none;
   border: 3px solid var(--mustard); box-shadow: 3px 3px 0 var(--rust);
@@ -538,16 +538,18 @@ footer a.fb-foot:hover { background: var(--bone); }
 
   /* nav: logo + Book Us + Facebook on one row, section links spread evenly under it */
   nav { display: flex; flex-wrap: wrap; align-items: center; gap: 14px 12px; padding-block: 14px 6px; }
-  nav .brand { flex: 1 1 auto; gap: 10px; }
+  nav .brand { flex: 1 1 auto; gap: 10px; margin-right: 0; }
   .badge { width: 46px; height: 46px; border-width: 2px; }
   .brand-text .b1 { font-size: 1.35rem; }
   .brand-text .b2 { font-size: .62rem; letter-spacing: .2em; }
-  nav ul { display: contents; }
-  nav ul li { order: 2; flex: 1 1 26%; text-align: center; font-size: .78rem; letter-spacing: .12em; }
-  nav ul li:nth-child(4), nav ul li:nth-child(5) { order: 1; flex: 0 0 auto; }
-  nav ul li:nth-child(1) { text-align: left; }
-  nav ul li:nth-child(3) { text-align: right; }
-  nav ul li:nth-child(1), nav ul li:nth-child(2), nav ul li:nth-child(3) { border-top: 2px solid rgba(233,174,28,.25); padding-top: 12px; }
+  nav ul.nav-cta { order: 1; flex: 0 0 auto; gap: 6px 12px; }
+  nav ul.nav-links {
+    order: 2; flex: 1 1 100%; gap: 6px;
+    border-top: 2px solid rgba(233,174,28,.25); padding-top: 12px;
+  }
+  nav ul.nav-links li { flex: 1 1 0; text-align: center; font-size: .78rem; letter-spacing: .12em; }
+  nav ul.nav-links li:first-child { text-align: left; }
+  nav ul.nav-links li:last-child { text-align: right; }
   nav ul a.fb-nav { padding: 4px 8px; }
 
   /* hero */
@@ -648,10 +650,12 @@ footer a.fb-foot:hover { background: var(--bone); }
         <span class="badge"><img src="rat-badge.jpg" alt="" width="240" height="240"></span>
         <span class="brand-text"><span class="b1">RRB</span><span class="b2">Rat River Boys</span></span>
       </a>
-      <ul>
+      <ul class="nav-links">
         <li><a href="#shows">Shows</a></li>
         <li><a href="#sound">The Sound</a></li>
         <li><a href="#rules">House Rules</a></li>
+      </ul>
+      <ul class="nav-cta">
         <li><a class="neon" href="#book">Boo<span class="flick">k</span> Us</a></li>
         <li><a class="fb-nav" href="https://www.facebook.com/profile.php?id=61589395443501" target="_blank" rel="noopener">Facebook</a></li>
       </ul>
@@ -683,8 +687,7 @@ footer a.fb-foot:hover { background: var(--bone); }
 <main>
   <section class="slab shows-slab torn" id="shows">
     <div class="wrap">
-      <p class="kicker">Upcoming shows</p>
-      <h2>Come get loose. Stay loose. Call in sick.</h2>
+      <h2>Upcoming shows</h2>
       <div class="countdown" id="countdown" aria-live="off">
         <div class="cd-label" id="cd-label">Next show: Station 1 Brewing, Suamico</div>
         <div class="cd-clock">
