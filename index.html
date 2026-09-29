@@ -532,30 +532,65 @@ footer a.fb-foot:hover { background: var(--bone); }
 
 /* ---------- phones ---------- */
 .fight-inline { display: none; }
+@media (min-width: 641px) { nav .m-only { display: none !important; } }
 @media (max-width: 640px) {
   body { font-size: 1.1rem; }
   .wrap { padding-inline: 18px; }
 
-  /* nav: logo + Book Us + Facebook on one row, section links spread evenly under it */
-  nav { display: flex; flex-wrap: wrap; align-items: center; gap: 14px 12px; padding-block: 14px 6px; }
-  nav .brand { flex: 1 1 auto; gap: 10px; margin-right: 0; }
-  .badge { width: 46px; height: 46px; border-width: 2px; }
-  .brand-text .b1 { font-size: 1.35rem; }
-  .brand-text .b2 { font-size: .62rem; letter-spacing: .2em; }
-  nav ul.nav-cta { order: 1; flex: 0 0 auto; gap: 6px 12px; }
-  nav ul.nav-links {
-    order: 2; flex: 1 1 100%; gap: 6px;
-    border-top: 2px solid rgba(233,174,28,.25); padding-top: 12px;
+  /* nav: pinned bar with logo, Book Us and a drop-down menu */
+  .hero { padding-top: calc(68px + env(safe-area-inset-top, 0px)); }
+  section[id], main > section { scroll-margin-top: calc(72px + env(safe-area-inset-top, 0px)); }
+  nav {
+    position: fixed; left: 0; right: 0; top: 0; z-index: 90;
+    display: flex; flex-wrap: nowrap; align-items: center; gap: 10px;
+    padding: calc(10px + env(safe-area-inset-top, 0px)) 16px 10px;
+    background: rgba(11,21,40,.94); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
+    border-bottom: 2px solid rgba(233,174,28,.35);
+    box-shadow: 0 6px 18px rgba(0,0,0,.35);
   }
-  nav ul.nav-links li { flex: 1 1 0; text-align: center; font-size: .78rem; letter-spacing: .12em; }
-  nav ul.nav-links li:first-child { text-align: left; }
-  nav ul.nav-links li:last-child { text-align: right; }
-  nav ul a.fb-nav { padding: 6px 10px; }
-  nav ul.nav-links a, nav ul.nav-cta a.neon { display: inline-block; padding-block: 10px; margin-block: -6px; }
-  nav a, nav .brand { -webkit-tap-highlight-color: rgba(233,174,28,.25); touch-action: manipulation; }
+  nav .brand { flex: 1 1 auto; gap: 10px; margin-right: 0; min-width: 0; }
+  .badge { width: 44px; height: 44px; border-width: 2px; box-shadow: 2px 2px 0 var(--rust); }
+  .brand-text .b1 { font-size: 1.3rem; }
+  .brand-text .b2 { font-size: .6rem; letter-spacing: .18em; white-space: nowrap; }
+  nav ul.nav-cta { display: flex; align-items: center; flex-wrap: nowrap; gap: 8px; flex: none; }
+  nav ul.nav-cta a.fb-nav { display: none; }
+  nav ul.nav-cta a.neon {
+    display: inline-block; background: var(--mustard); color: var(--ink); text-shadow: none;
+    padding: 9px 12px; border: 2px solid var(--ink); box-shadow: 3px 3px 0 var(--rust); font-size: .78rem; letter-spacing: .1em;
+  }
+  nav ul.nav-cta a.neon .flick { animation: none; }
+  .menu-btn {
+    display: inline-flex; align-items: center; gap: 7px; height: 40px; padding: 0 11px;
+    background: transparent; color: var(--mustard); border: 2px solid var(--mustard); cursor: pointer;
+    font-family: var(--label); font-weight: 700; font-size: .78rem; letter-spacing: .12em; text-transform: uppercase;
+  }
+  .menu-btn .bars { display: grid; gap: 3px; width: 16px; }
+  .menu-btn .bars span { display: block; height: 2px; background: currentColor; transition: transform .25s, opacity .2s; }
+  nav.open .menu-btn .bars span:nth-child(1) { transform: translateY(5px) rotate(45deg); }
+  nav.open .menu-btn .bars span:nth-child(2) { opacity: 0; }
+  nav.open .menu-btn .bars span:nth-child(3) { transform: translateY(-5px) rotate(-45deg); }
+
+  nav ul.nav-links {
+    position: absolute; left: 0; right: 0; top: 100%;
+    display: flex; flex-direction: column; gap: 0; margin: 0; padding: 6px 16px 22px;
+    background: var(--navy-deep); border-bottom: 3px solid var(--mustard);
+    box-shadow: 0 18px 30px rgba(0,0,0,.5);
+    max-height: calc(100dvh - 70px - env(safe-area-inset-top, 0px)); overflow-y: auto;
+    visibility: hidden; opacity: 0; transform: translateY(-10px); transition: opacity .2s, transform .2s, visibility 0s .2s;
+  }
+  nav.open ul.nav-links { visibility: visible; opacity: 1; transform: none; transition: opacity .2s, transform .2s; }
+  nav ul.nav-links li { text-align: left; border-bottom: 2px dashed rgba(241,228,196,.18); }
+  nav ul.nav-links li a {
+    display: block; padding: 14px 2px; font-family: var(--display); font-weight: 400; text-transform: none;
+    letter-spacing: .01em; font-size: 1.55rem; color: var(--bone); border: 0;
+  }
+  nav ul.nav-links li a:active { color: var(--mustard); }
+  nav ul.nav-links li.m-fb { border-bottom: 0; padding-top: 18px; }
+  nav ul.nav-links li.m-fb a.btn { font-family: var(--label); font-size: .95rem; letter-spacing: .12em; text-transform: uppercase; text-align: center; background: var(--mustard); color: var(--ink); padding: 13px 16px; }
+  nav a, nav .brand, .menu-btn { -webkit-tap-highlight-color: rgba(233,174,28,.25); touch-action: manipulation; }
 
   /* hero */
-  .hero-grid { gap: 22px; padding-block: 8px 44px; }
+  .hero-grid { gap: 22px; padding-block: 20px 44px; }
   .poster-wrap { width: min(250px, 70%); justify-self: center; }
   .poster { border-width: 5px; }
   .tape { width: 80px; height: 24px; }
@@ -652,14 +687,20 @@ footer a.fb-foot:hover { background: var(--bone); }
         <span class="badge"><img src="rat-badge.jpg" alt="" width="240" height="240"></span>
         <span class="brand-text"><span class="b1">RRB</span><span class="b2">Rat River Boys</span></span>
       </a>
-      <ul class="nav-links">
+      <ul class="nav-links" id="nav-links">
         <li><a href="#shows">Shows</a></li>
         <li><a href="#sound">The Sound</a></li>
         <li><a href="#rules">House Rules</a></li>
+        <li class="m-only"><a href="#tips">Tip Jar</a></li>
+        <li class="m-only"><a href="#merch">Merch</a></li>
+        <li class="m-only"><a href="#wall">Bathroom Wall</a></li>
+        <li class="m-only"><a href="#book">Book Us</a></li>
+        <li class="m-only m-fb"><a class="btn" href="https://www.facebook.com/profile.php?id=61589395443501" target="_blank" rel="noopener">Follow us on Facebook</a></li>
       </ul>
       <ul class="nav-cta">
         <li><a class="neon" href="#book">Boo<span class="flick">k</span> Us</a></li>
         <li><a class="fb-nav" href="https://www.facebook.com/profile.php?id=61589395443501" target="_blank" rel="noopener">Facebook</a></li>
+        <li class="m-only"><button class="menu-btn" id="menu-btn" type="button" aria-expanded="false" aria-controls="nav-links"><span class="bars" aria-hidden="true"><span></span><span></span><span></span></span><span class="menu-word">Menu</span></button></li>
       </ul>
     </nav>
     <div class="hero-grid">
@@ -1648,4 +1689,21 @@ footer a.fb-foot:hover { background: var(--bone); }
 document.querySelectorAll('.fight-inline').forEach(function (b) {
   b.addEventListener('click', function () { var f = document.getElementById('fight'); if (f) f.click(); });
 });
+</script>
+
+<script>
+(function () {
+  var nav = document.querySelector('nav'), btn = document.getElementById('menu-btn');
+  if (!nav || !btn) return;
+  function setOpen(open) {
+    nav.classList.toggle('open', open);
+    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    btn.querySelector('.menu-word').textContent = open ? 'Close' : 'Menu';
+  }
+  btn.addEventListener('click', function (e) { e.stopPropagation(); setOpen(!nav.classList.contains('open')); });
+  nav.querySelectorAll('a').forEach(function (a) { a.addEventListener('click', function () { setOpen(false); }); });
+  document.addEventListener('click', function (e) { if (nav.classList.contains('open') && !nav.contains(e.target)) setOpen(false); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') setOpen(false); });
+  window.addEventListener('resize', function () { if (window.innerWidth > 640) setOpen(false); });
+})();
 </script>
