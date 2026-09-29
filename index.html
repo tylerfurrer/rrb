@@ -1,0 +1,1516 @@
+<title>Rat River Boys</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Oswald:wght@400;500;600;700&family=Crimson+Pro:ital,wght@0,400;0,600;1,400&family=Permanent+Marker&family=Caveat:wght@600&display=swap">
+<style>
+/* Layout: a beat-up gig poster stapled to a bar wall. Night-sky hero with the lasso rat, then mustard, rust and navy slabs with grime, stains and torn edges. */
+:root {
+  --mustard: #e9ae1c;
+  --mustard-deep: #c98e10;
+  --rust: #b8401d;
+  --rust-deep: #8e2e12;
+  --navy: #13213f;
+  --navy-deep: #0b1528;
+  --steel: #3f5f8c;
+  --bone: #f1e4c4;
+  --ink: #2b170b;
+  --display: "Alfa Slab One", "Rockwell", "Courier New", serif;
+  --label: "Oswald", "Arial Narrow", "Helvetica Neue", sans-serif;
+  --body: "Crimson Pro", Georgia, "Times New Roman", serif;
+  --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.12 0 0 0 0 0.07 0 0 0 0 0.02 0 0 0 .55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  --scratch: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='600'%3E%3Cfilter id='s'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.012 .5' numOctaves='2' seed='7'/%3E%3CfeColorMatrix values='0 0 0 0 0.1 0 0 0 0 0.06 0 0 0 0 0.02 0 0 0 1.4 -.75'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23s)'/%3E%3C/svg%3E");
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { background: var(--navy-deep); }
+body {
+  margin: 0;
+  background: var(--navy-deep);
+  color: var(--ink);
+  font-family: var(--body);
+  font-size: 1.2rem;
+  line-height: 1.5;
+  overflow-x: hidden;
+}
+/* global grime over everything */
+body::after {
+  content: "";
+  position: fixed; inset: 0;
+  pointer-events: none;
+  background-image: var(--grain);
+  opacity: .5;
+  mix-blend-mode: multiply;
+  z-index: 50;
+}
+.wrap { max-width: 1060px; margin: 0 auto; padding-inline: 20px; }
+a { color: inherit; }
+a:focus-visible, button:focus-visible { outline: 3px solid var(--mustard); outline-offset: 3px; }
+
+/* torn paper edges between slabs */
+.torn { position: relative; }
+.torn::before {
+  content: ""; position: absolute; left: 0; right: 0; top: -18px; height: 20px;
+  background: inherit;
+  clip-path: polygon(0 60%,4% 20%,9% 70%,14% 30%,19% 80%,24% 25%,30% 65%,35% 15%,41% 70%,47% 35%,52% 85%,58% 20%,63% 60%,69% 10%,74% 70%,80% 30%,86% 75%,91% 20%,96% 65%,100% 30%,100% 100%,0 100%);
+}
+
+/* ---------- HERO: night sky + lasso rat ---------- */
+.hero {
+  background: var(--navy);
+  color: var(--bone);
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background-image: var(--scratch);
+  opacity: .35;
+}
+nav {
+  position: relative; z-index: 2;
+  display: flex; flex-wrap: wrap; gap: 8px 24px;
+  justify-content: space-between; align-items: center;
+  padding-block: 18px;
+  font-family: var(--label); text-transform: uppercase; letter-spacing: .14em; font-size: .88rem; font-weight: 600;
+}
+.brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+.badge {
+  width: 58px; height: 58px; border-radius: 50%; overflow: hidden; flex: none;
+  border: 3px solid var(--mustard); box-shadow: 3px 3px 0 var(--rust);
+  background: var(--navy-deep);
+}
+.badge img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.brand-text { display: grid; line-height: 1; gap: 3px; }
+.brand-text .b1 { font-family: var(--display); font-size: 1.7rem; color: var(--rust); letter-spacing: .02em; text-shadow: 2px 2px 0 var(--navy-deep), 0 0 0 transparent; -webkit-text-stroke: 1px var(--mustard); }
+.brand-text .b2 { font-family: var(--label); font-weight: 700; font-size: .72rem; letter-spacing: .24em; text-transform: uppercase; color: var(--mustard); }
+nav ul { display: flex; flex-wrap: wrap; gap: 6px 22px; list-style: none; margin: 0; padding: 0; }
+nav ul a { text-decoration: none; color: var(--mustard); border-bottom: 2px solid transparent; }
+nav ul a:hover { border-color: var(--mustard); }
+
+.hero-grid {
+  position: relative; z-index: 1;
+  display: grid; grid-template-columns: .85fr 1.15fr; gap: 44px; align-items: center;
+  padding-block: 10px 70px;
+}
+.hero-grid > * { min-width: 0; }
+.poster-wrap { min-width: 0; }
+.poster {
+  cursor: pointer; transform-origin: 20% 0;
+  position: relative;
+  transform: rotate(-2.5deg);
+  box-shadow: 0 18px 40px rgba(0,0,0,.55);
+  border: 6px solid var(--bone);
+  max-width: 100%;
+}
+.poster img { display: block; width: 100%; height: auto; filter: contrast(1.08) saturate(1.05); }
+.poster::after {
+  content: ""; position: absolute; inset: 0;
+  background-image: var(--grain), var(--scratch);
+  mix-blend-mode: multiply; opacity: .55;
+}
+.tape {
+  position: absolute; width: 110px; height: 30px; z-index: 2;
+  background: rgba(241,228,196,.7);
+  box-shadow: 0 2px 4px rgba(0,0,0,.25);
+}
+.tape.t1 { top: -16px; left: 18px; transform: rotate(-8deg); }
+.tape.t2 { bottom: -14px; right: 24px; transform: rotate(6deg); }
+
+.warning {
+  display: inline-block;
+  font-family: var(--label); text-transform: uppercase; letter-spacing: .16em; font-size: .78rem; font-weight: 700;
+  border: 2px solid var(--mustard); color: var(--mustard); padding: 6px 12px; transform: rotate(-1.5deg);
+  margin-bottom: 20px;
+}
+h1 {
+  font-family: var(--display); font-weight: 400;
+  font-size: clamp(2.6rem, 6.5vw, 4.6rem); line-height: .95;
+  margin: 0 0 20px; color: var(--mustard); text-wrap: balance;
+  text-shadow: 4px 4px 0 var(--rust-deep);
+}
+.lede { font-size: 1.35rem; max-width: 34ch; margin: 0 0 28px; color: var(--bone); }
+.cta-row { display: flex; flex-wrap: wrap; gap: 14px; }
+.btn {
+  font-family: var(--label); text-transform: uppercase; letter-spacing: .12em; font-weight: 700; font-size: 1rem;
+  padding: 14px 24px; border: 3px solid var(--ink); text-decoration: none; cursor: pointer;
+  background: var(--rust); color: var(--bone);
+  box-shadow: 5px 5px 0 var(--ink);
+  transition: transform .12s, box-shadow .12s;
+}
+.btn.alt { background: var(--mustard); color: var(--ink); }
+.btn:hover { transform: translate(-2px,-2px); box-shadow: 7px 7px 0 var(--ink); }
+
+/* ---------- shared section styles ---------- */
+.slab { position: relative; padding-block: 72px; overflow-x: clip; }
+.slab::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background-image: var(--scratch);
+  opacity: .28; mix-blend-mode: multiply;
+}
+.slab > .wrap { position: relative; z-index: 1; }
+.kicker {
+  font-family: var(--label); text-transform: uppercase; letter-spacing: .22em; font-size: .85rem; font-weight: 700;
+  display: flex; align-items: center; gap: 12px; margin: 0 0 10px;
+}
+.kicker::after { content: ""; flex: 1; height: 3px; background: currentColor; opacity: .5; }
+h2 {
+  font-family: var(--display); font-weight: 400;
+  font-size: clamp(2.3rem, 6.5vw, 4rem); line-height: .98; margin: 0 0 20px;
+  text-wrap: balance;
+}
+
+/* ---------- SHOWS: mustard ---------- */
+.shows-slab { background: var(--mustard); color: var(--ink); }
+.shows-slab h2 { color: var(--rust); text-shadow: 3px 3px 0 var(--ink); }
+.shows { list-style: none; margin: 30px 0 0; padding: 0; display: grid; }
+.show {
+  display: grid;
+  grid-template-columns: 7rem 1fr auto;
+  gap: 8px 28px; align-items: center;
+  padding-block: 20px;
+  border-top: 3px solid var(--ink);
+}
+.show:last-child { border-bottom: 3px solid var(--ink); }
+.date { font-family: var(--display); line-height: .9; color: var(--rust); }
+.date .m { display: block; font-family: var(--label); font-weight: 700; letter-spacing: .2em; font-size: .9rem; color: var(--ink); }
+.date .d { font-size: 3.3rem; font-variant-numeric: tabular-nums; text-shadow: 2px 2px 0 var(--ink); }
+.where { min-width: 0; }
+.where .venue { font-family: var(--label); font-weight: 700; font-size: 1.6rem; text-transform: uppercase; letter-spacing: .03em; line-height: 1.1; color: var(--navy); }
+.where .town { font-size: 1.15rem; }
+.time {
+  font-family: var(--label); font-weight: 700; letter-spacing: .12em; text-transform: uppercase;
+  background: var(--ink); color: var(--mustard); padding: 7px 12px; white-space: nowrap; transform: rotate(-2deg);
+}
+.note { margin: 24px 0 0; font-style: italic; font-size: 1.2rem; }
+
+/* ---------- SOUND: navy ---------- */
+.sound-slab { background: var(--navy); color: var(--bone); }
+.sound-slab::after { mix-blend-mode: screen; opacity: .12; }
+.sound-slab h2 { color: var(--mustard); }
+.sound-slab .kicker { color: var(--mustard); }
+.two { display: grid; grid-template-columns: 1.1fr 1fr; gap: 48px; align-items: start; }
+.two > * { min-width: 0; }
+.prose p { margin: 0 0 16px; max-width: 58ch; }
+.legends { list-style: none; margin: 8px 0 0; padding: 0; }
+.legends li {
+  font-family: var(--display); font-size: clamp(1.5rem, 4vw, 2.1rem); line-height: 1.2; color: var(--bone);
+  padding-block: 9px; border-bottom: 2px dashed rgba(241,228,196,.35);
+  display: flex; justify-content: space-between; align-items: baseline; gap: 12px;
+}
+.legends li span {
+  font-family: var(--label); font-size: .78rem; letter-spacing: .14em; text-transform: uppercase; font-weight: 600;
+  color: var(--mustard); text-align: right;
+}
+
+/* ---------- RULES: rust ---------- */
+.rules-slab { background: var(--rust); color: var(--bone); }
+.rules-slab h2 { color: var(--mustard); text-shadow: 3px 3px 0 var(--rust-deep); }
+.rule-list { list-style: none; margin: 26px 0 0; padding: 0; display: grid; grid-template-columns: repeat(2, 1fr); gap: 22px 44px; counter-reset: r; }
+.rule-list li { counter-increment: r; display: grid; grid-template-columns: 3rem 1fr; gap: 12px; align-items: baseline; font-size: 1.28rem; }
+.rule-list li::before { content: counter(r) "."; font-family: var(--display); font-size: 2.1rem; color: var(--mustard); line-height: 1; }
+
+/* ---------- PLAYED: bone ---------- */
+.played-slab { background: var(--bone); color: var(--ink); }
+.played-slab h2 { color: var(--rust); }
+.venues { list-style: none; margin: 24px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 12px; }
+.venues li {
+  font-family: var(--label); font-weight: 700; text-transform: uppercase; letter-spacing: .06em; font-size: 1.05rem;
+  border: 3px solid var(--ink); padding: 10px 14px; background: var(--mustard);
+}
+.venues li:nth-child(3n+2) { background: var(--navy); color: var(--bone); transform: rotate(1.5deg); }
+.venues li:nth-child(3n) { background: var(--rust); color: var(--bone); transform: rotate(-1.5deg); }
+.venues li small { display: block; font-weight: 500; font-size: .78rem; letter-spacing: .14em; opacity: .85; }
+
+/* ---------- BOOK: mustard with crest ---------- */
+.book-slab { background: #f9ba0d; color: var(--ink); }
+.book-grid { display: grid; grid-template-columns: .9fr 1.1fr; gap: 44px; align-items: center; }
+.book-grid > * { min-width: 0; }
+.crest { max-width: 100%; position: relative; }
+.crest img { display: block; width: 100%; height: auto; }
+.book-slab h2 { color: var(--rust); text-shadow: 3px 3px 0 var(--ink); }
+.book-slab .lede { color: var(--ink); max-width: 40ch; }
+.email-row { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-top: 8px; }
+.email {
+  font-family: var(--label); font-weight: 700; font-size: clamp(1.05rem, 3.8vw, 1.5rem); letter-spacing: .03em;
+  background: var(--bone); border: 3px solid var(--ink); padding: 12px 16px; user-select: all; overflow-wrap: anywhere;
+}
+.copied { font-family: var(--label); text-transform: uppercase; letter-spacing: .12em; font-size: .85rem; min-height: 1.2em; margin-top: 10px; }
+.perks { display: flex; flex-wrap: wrap; gap: 10px; margin: 22px 0 0; padding: 0; list-style: none; }
+.perks li { font-family: var(--label); text-transform: uppercase; letter-spacing: .12em; font-size: .85rem; font-weight: 700; background: var(--ink); color: var(--mustard); padding: 6px 12px; }
+
+footer {
+  background: var(--navy-deep); color: var(--mustard);
+  padding-block: 28px 44px;
+  font-family: var(--label); text-transform: uppercase; letter-spacing: .14em; font-size: .85rem;
+}
+footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; }
+footer a { color: var(--mustard); }
+.foot-lines { display: grid; gap: 6px; }
+.legends li span { max-width: 22ch; }
+
+@media (max-width: 800px) {
+  .hero-grid, .two, .book-grid { grid-template-columns: 1fr; gap: 36px; }
+  .poster { max-width: 460px; }
+  .rule-list { grid-template-columns: 1fr; }
+  .show { grid-template-columns: 5.5rem 1fr; }
+  .show .time { grid-column: 2; justify-self: start; }
+  .date .d { font-size: 2.6rem; }
+  .where .venue { font-size: 1.3rem; }
+  .crest { max-width: 360px; }
+}
+@media (prefers-reduced-motion: no-preference) {
+}
+
+.caret { display: inline-block; width: .5em; height: .85em; margin-left: .08em; background: var(--rust); vertical-align: -.05em; box-shadow: 3px 3px 0 var(--ink); }
+@media (prefers-reduced-motion: no-preference) { .caret { animation: blink 1s steps(1) infinite; } @keyframes blink { 50% { opacity: 0; } } }
+
+.slogan { display: grid; gap: .12em; text-shadow: none; line-height: .92; }
+.slogan span { display: block; }
+.slogan .s1 {
+  font-family: var(--label); font-weight: 700; text-transform: uppercase; letter-spacing: .08em;
+  font-size: clamp(1.05rem, 2.4vw, 1.45rem); color: var(--bone);
+  background: var(--rust); justify-self: start; padding: 6px 12px 5px; transform: rotate(-2deg);
+  box-shadow: 4px 4px 0 var(--navy-deep); margin-bottom: .3em;
+}
+.slogan .s2 {
+  font-size: clamp(1.9rem, 3.9vw, 3.2rem); line-height: 1; color: var(--mustard);
+  text-shadow: 4px 4px 0 var(--rust-deep), 7px 7px 0 var(--navy-deep);
+  height: 3.05em; position: relative; text-wrap: balance;
+}
+.slogan .caret { box-shadow: 3px 3px 0 var(--navy-deep); background: var(--bone); }
+.slogan .s2 #typed { display: inline; }
+.slogan .s2 .caret { display: inline-block; }
+
+
+/* ---------- fun stuff ---------- */
+:root { --bill: #8fae6b; --bill-deep: #5d7a3f; --neon: #ff5a36; }
+.fx-layer { position: absolute; left: 0; top: 0; width: 0; height: 0; z-index: 58; pointer-events: none; }
+.lasso {
+  position: absolute; width: 70px; height: 34px; margin: -17px 0 0 -35px;
+  border: 3px dashed var(--mustard); border-radius: 50%; pointer-events: none;
+}
+.beer-ring {
+  position: absolute; width: 90px; height: 90px; margin: -45px 0 0 -45px; border-radius: 50%; pointer-events: none;
+  background: radial-gradient(circle, transparent 54%, rgba(120,70,15,.45) 58%, rgba(120,70,15,.2) 64%, transparent 70%);
+  mix-blend-mode: multiply;
+}
+
+/* neon Book Us */
+nav ul a.neon { color: var(--bone); text-shadow: 0 0 4px var(--mustard), 0 0 12px var(--mustard), 0 0 22px var(--rust); }
+nav ul a.neon .flick { display: inline-block; }
+@media (prefers-reduced-motion: no-preference) {
+  nav ul a.neon .flick { animation: flick 5s infinite; }
+  @keyframes flick { 0%, 17%, 19%, 21%, 60%, 62%, 100% { opacity: 1; } 18%, 20%, 61% { opacity: .15; } }
+}
+
+
+/* tip jar */
+.tips-slab { background: var(--navy); color: var(--bone); }
+.tips-slab::after { mix-blend-mode: screen; opacity: .12; }
+.tips-slab h2 { color: var(--mustard); }
+.tips-slab .kicker { color: var(--mustard); }
+.tips-grid { display: grid; grid-template-columns: 260px 1fr; gap: 48px; align-items: center; }
+.tips-grid > * { min-width: 0; }
+.jar {
+  position: relative; width: 220px; height: 270px; margin: 0 auto; max-width: 100%;
+  border: 5px solid rgba(241,228,196,.8); border-top: none; border-radius: 18px 18px 60px 60px;
+  background: linear-gradient(90deg, rgba(241,228,196,.12), rgba(241,228,196,.03) 40%, rgba(241,228,196,.14));
+  overflow: hidden;
+}
+.jar::before { content: ""; position: absolute; left: 10%; top: 8%; width: 10px; height: 70%; border-radius: 8px; background: rgba(255,255,255,.18); }
+.jar-label {
+  position: absolute; left: 50%; top: 34%; transform: translateX(-50%) rotate(-4deg); z-index: 3;
+  background: var(--bone); color: var(--ink); padding: 6px 14px; font-family: var(--display); font-size: 1.4rem;
+  box-shadow: 2px 2px 0 var(--ink);
+}
+.jar-rim { width: 240px; max-width: 100%; height: 18px; margin: 0 auto -2px; border-radius: 6px; background: rgba(241,228,196,.85); position: relative; z-index: 2; }
+.bill {
+  position: absolute; width: 74px; height: 34px; border: 2px solid var(--bill-deep); background: var(--bill);
+  font-family: var(--display); color: var(--bill-deep); font-size: .95rem; display: grid; place-items: center;
+  box-shadow: 1px 2px 0 rgba(0,0,0,.25);
+}
+.tip-buttons { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 8px; }
+.tip-buttons .btn { font-size: 1.1rem; padding: 12px 20px; }
+.tip-say { font-family: var(--display); font-size: clamp(1.3rem, 3vw, 1.9rem); line-height: 1.15; color: var(--bone); min-height: 2.4em; margin: 20px 0 6px; }
+.tip-total { font-family: var(--label); text-transform: uppercase; letter-spacing: .14em; font-weight: 600; color: var(--mustard); }
+.request { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; align-items: stretch; }
+.request input {
+  flex: 1 1 220px; min-width: 0; font: inherit; font-size: 1.1rem; padding: 10px 14px;
+  border: 3px solid var(--ink); background: var(--bone); color: var(--ink);
+}
+.denied {
+  display: inline-block; margin-top: 16px; font-family: var(--display); font-size: clamp(1.6rem, 4vw, 2.4rem);
+  color: var(--neon); border: 5px solid var(--neon); padding: 6px 16px; transform: rotate(-6deg);
+}
+
+/* merch */
+.merch-slab { background: var(--rust-deep); color: var(--bone); }
+.merch-slab h2 { color: var(--mustard); }
+.merch-slab .kicker { color: var(--mustard); }
+.merch { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 22px; margin-top: 26px; }
+.item {
+  position: relative; background: var(--bone); color: var(--ink); border: 3px solid var(--ink); padding: 22px 20px 20px;
+  display: grid; gap: 8px; align-content: start; box-shadow: 5px 5px 0 var(--ink);
+}
+.item .name { font-family: var(--display); font-size: 1.35rem; line-height: 1.1; color: var(--rust); }
+.item .price { font-family: var(--label); font-weight: 700; letter-spacing: .1em; font-size: 1.1rem; }
+.item p { margin: 0; font-size: 1.1rem; }
+.item .soon {
+  position: absolute; top: -14px; right: -10px; transform: rotate(8deg);
+  background: var(--mustard); border: 2px solid var(--ink); padding: 4px 10px;
+  font-family: var(--label); font-weight: 700; font-size: .75rem; letter-spacing: .14em; text-transform: uppercase;
+}
+
+/* last call neon */
+.lastcall {
+  display: inline-block; background: var(--navy-deep); border: 4px solid var(--ink); border-radius: 10px;
+  padding: 10px 22px; margin-bottom: 18px; box-shadow: 5px 5px 0 var(--ink);
+}
+.lastcall span {
+  font-family: var(--display); font-size: clamp(1.8rem, 4.5vw, 2.8rem); letter-spacing: .06em; color: #3a1a12;
+}
+.lastcall.lit span { color: #ffd9cc; text-shadow: 0 0 4px var(--neon), 0 0 12px var(--neon), 0 0 26px var(--neon), 0 0 44px var(--rust); }
+@media (prefers-reduced-motion: no-preference) {
+  .lastcall.lit span:nth-child(2) { animation: flick 6s 2s infinite; display: inline-block; }
+}
+
+/* beer glass scroll bar */
+.pint-wrap { position: fixed; right: 14px; bottom: calc(18px + env(safe-area-inset-bottom, 0px)); z-index: 60; width: 30px; height: 78px; }
+.pint {
+  position: absolute; inset: 0;
+  width: 30px; height: 78px; border: 3px solid var(--bone); border-top: none; border-radius: 3px 3px 8px 8px;
+  background: rgba(11,21,40,.55); overflow: hidden; box-shadow: 2px 3px 0 rgba(0,0,0,.4);
+  clip-path: polygon(0 0, 100% 0, 88% 100%, 12% 100%);
+}
+.pint .beer { position: absolute; left: 0; right: 0; bottom: 0; height: 0%; background: linear-gradient(#f4c23b, #d9951a); }
+.spill { position: absolute; inset: 0; pointer-events: none; z-index: 2; }
+.spill .heap {
+  position: absolute; left: -5px; right: -5px; top: -9px; height: 16px; border-radius: 10px 10px 6px 6px;
+  background: radial-gradient(circle at 25% 60%, #fffaf0 0 38%, transparent 40%), radial-gradient(circle at 60% 40%, #fffaf0 0 42%, transparent 44%), radial-gradient(circle at 85% 65%, #fffaf0 0 34%, transparent 36%), #fff3dc;
+  transform-origin: 50% 100%; transform: scaleY(0);
+}
+.spill .drip { position: absolute; top: 2px; width: 6px; height: 0; border-radius: 0 0 4px 4px; background: linear-gradient(#fff3dc 0 12px, #e6a722 12px); }
+.spill .d1 { left: -3px; }
+.spill .d2 { right: -3px; width: 5px; }
+.spill .d3 { left: 12px; width: 4px; }
+.puddle {
+  position: absolute; left: 50%; bottom: -5px; width: 70px; height: 8px; margin-left: -35px; border-radius: 50%;
+  background: radial-gradient(ellipse, rgba(230,167,34,.9) 0 55%, rgba(230,167,34,.4) 70%, transparent 72%);
+  transform: scaleX(0); z-index: -1;
+}
+.pint .bubbles { position: absolute; inset: 0; background-image: radial-gradient(circle at 30% 70%, rgba(255,255,255,.6) 0 1.5px, transparent 2px), radial-gradient(circle at 65% 40%, rgba(255,255,255,.5) 0 1px, transparent 1.5px), radial-gradient(circle at 45% 20%, rgba(255,255,255,.5) 0 1px, transparent 1.5px); }
+
+/* bar fight button */
+.fight-btn {
+  position: fixed; left: 14px; bottom: calc(18px + env(safe-area-inset-bottom, 0px)); z-index: 60;
+  font-size: .8rem; padding: 10px 14px;
+}
+.fight-btn { transition: transform .35s ease, opacity .35s ease; }
+.fight-btn.gone { transform: translateY(160%); opacity: 0; pointer-events: none; }
+.fb-btn { display: inline-block; margin-top: 22px; background: var(--navy); color: var(--mustard); }
+nav ul a.fb-nav { background: var(--mustard); color: var(--ink); padding: 3px 9px; border: 2px solid var(--ink); }
+nav ul a.fb-nav:hover { border-color: var(--ink); background: var(--bone); }
+.fb-line { margin: 14px 0 0; font-size: 1.15rem; }
+.fb-line a { color: var(--rust); font-weight: 600; text-decoration-thickness: 2px; }
+.pow {
+  position: fixed; z-index: 70; pointer-events: none; font-family: var(--display); color: var(--mustard);
+  font-size: clamp(2.4rem, 8vw, 5rem); text-shadow: 4px 4px 0 var(--rust-deep), 8px 8px 0 var(--ink);
+}
+
+/* hidden rat */
+.sneaky-rat {
+  position: fixed; bottom: -4px; left: 40%; width: 84px; height: 52px; z-index: 59;
+  transform: translateY(110%); pointer-events: auto;
+}
+.sneaky-rat svg { display: block; width: 100%; height: 100%; }
+.squeak {
+  position: fixed; z-index: 70; pointer-events: none; font-family: var(--label); font-weight: 700; text-transform: uppercase;
+  letter-spacing: .12em; background: var(--bone); color: var(--ink); border: 2px solid var(--ink); padding: 4px 10px;
+}
+
+/* whiskey mode toast */
+.toast {
+  position: fixed; left: 50%; top: calc(20px + env(safe-area-inset-top, 0px)); transform: translateX(-50%); z-index: 80;
+  background: var(--ink); color: var(--mustard); border: 3px solid var(--mustard); padding: 10px 18px;
+  font-family: var(--label); font-weight: 700; letter-spacing: .12em; text-transform: uppercase; max-width: calc(100% - 32px); text-align: center;
+}
+
+@media (max-width: 800px) {
+  .tips-grid { grid-template-columns: 1fr; gap: 30px; }
+  .pint-wrap, .pint { width: 24px; height: 62px; }
+  .fight-btn { font-size: .7rem; padding: 8px 10px; box-shadow: 3px 3px 0 var(--ink); }
+}
+
+/* facebook footer */
+footer a.fb-foot { background: var(--mustard); color: var(--ink); padding: 8px 14px; border: 2px solid var(--ink); text-decoration: none; font-weight: 700; box-shadow: 3px 3px 0 var(--rust); align-self: start; }
+footer a.fb-foot:hover { background: var(--bone); }
+
+/* countdown */
+.countdown { margin: 8px 0 26px; display: grid; gap: 10px; }
+.cd-label { font-family: var(--label); font-weight: 700; text-transform: uppercase; letter-spacing: .14em; font-size: .95rem; }
+.cd-clock { display: flex; flex-wrap: wrap; gap: 12px; }
+.cd-clock > div {
+  background: var(--ink); color: var(--mustard); min-width: 86px; padding: 10px 12px 8px; text-align: center;
+  box-shadow: 4px 4px 0 var(--rust); display: grid;
+}
+.cd-clock span { font-family: var(--display); font-size: clamp(2rem, 5vw, 2.8rem); line-height: 1; font-variant-numeric: tabular-nums; }
+.cd-clock small { font-family: var(--label); font-weight: 600; letter-spacing: .18em; text-transform: uppercase; font-size: .7rem; color: var(--bone); margin-top: 4px; }
+.cd-quip { font-style: italic; font-size: 1.15rem; }
+
+/* booking form */
+.book-form { margin-top: 34px; display: grid; gap: 14px; border-top: 3px dashed var(--ink); padding-top: 24px; }
+.book-form .kicker { margin: 0; }
+.bf-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px 16px; }
+.book-form label { display: grid; gap: 5px; font-family: var(--label); font-weight: 700; text-transform: uppercase; letter-spacing: .12em; font-size: .8rem; min-width: 0; }
+.book-form input, .book-form textarea {
+  font: inherit; font-family: var(--body); font-size: 1.1rem; text-transform: none; letter-spacing: 0; font-weight: 400;
+  padding: 10px 12px; border: 3px solid var(--ink); background: var(--bone); color: var(--ink); width: 100%; min-width: 0;
+}
+.book-form textarea { resize: vertical; }
+.bf-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+.bf-preview { display: none; }
+
+/* bathroom wall */
+.wall-slab {
+  background-color: #d6cfbb; color: var(--ink);
+  background-image: linear-gradient(rgba(60,50,30,.28) 2px, transparent 2px), linear-gradient(90deg, rgba(60,50,30,.28) 2px, transparent 2px);
+  background-size: 64px 64px;
+}
+.wall-slab h2 { color: var(--navy); }
+.graffiti { position: relative; display: flex; flex-wrap: wrap; gap: 26px 44px; align-items: center; justify-content: center; margin-top: 24px; padding-block: 10px; }
+.g { font-family: "Permanent Marker", "Comic Sans MS", cursive; line-height: 1.1; display: inline-block; max-width: 100%; }
+.g1 { color: var(--rust); font-size: 2rem; transform: rotate(-6deg); }
+.g2 { color: var(--navy); font-family: "Caveat", cursive; font-size: 1.9rem; transform: rotate(3deg); }
+.g3 { color: #1b1b1b; font-size: 2.4rem; transform: rotate(-2deg); text-decoration: line-through; text-decoration-color: var(--rust); }
+.g4 { color: var(--steel); font-family: "Caveat", cursive; font-size: 1.8rem; transform: rotate(-4deg); }
+.g5 { color: var(--rust-deep); font-size: 2.6rem; transform: rotate(5deg); }
+.g6 { color: #1b1b1b; font-family: "Caveat", cursive; font-size: 1.7rem; transform: rotate(-1deg); }
+.g7 { color: var(--navy); font-size: 1.5rem; transform: rotate(4deg); }
+.g8 { color: var(--rust); font-family: "Caveat", cursive; font-size: 2rem; transform: rotate(-5deg); }
+.g9 { color: var(--steel); font-size: 1.4rem; transform: rotate(2deg); }
+.g1 small { font-family: "Caveat", cursive; font-size: .7em; }
+.g11 { color: var(--navy); font-family: "Caveat", cursive; font-size: 1.6rem; transform: rotate(1.5deg); max-width: 22ch; text-align: center; }
+.g12 { color: var(--rust); font-size: 1.7rem; transform: rotate(-4deg); }
+.g10 { color: #1b1b1b; font-size: 1.8rem; transform: rotate(-3deg); border: 3px solid #1b1b1b; border-radius: 50% 45% 55% 40%; padding: 8px 18px; }
+
+@media (max-width: 800px) {
+  .bf-grid { grid-template-columns: 1fr; }
+  .cd-clock > div { min-width: 70px; }
+  .graffiti { gap: 18px 24px; }
+  .g { font-size: 1.4rem !important; }
+}
+.chaser {
+  position: absolute; left: 0; top: 0; width: 72px; height: 52px; z-index: 65; pointer-events: none;
+  will-change: transform;
+}
+.chaser .flip { width: 100%; height: 100%; transform-origin: 36px 49px; }
+.chaser .leg { stroke: #2b170b; stroke-width: 3; stroke-linecap: round; transform-box: fill-box; transform-origin: 50% 0; }
+.chaser.running .leg.a { animation: stepA var(--step, .16s) linear infinite alternate; }
+.chaser.running .leg.b { animation: stepB var(--step, .16s) linear infinite alternate; }
+.chaser.running svg { animation: bob var(--step, .16s) ease-in-out infinite alternate; }
+.chaser.running .tail { animation: wag calc(var(--step, .16s) * 2) ease-in-out infinite alternate; transform-box: fill-box; transform-origin: 100% 0; }
+@keyframes stepA { from { transform: rotate(-35deg); } to { transform: rotate(35deg); } }
+@keyframes stepB { from { transform: rotate(35deg); } to { transform: rotate(-35deg); } }
+@keyframes bob { from { transform: translateY(0); } to { transform: translateY(-2px); } }
+@keyframes wag { from { transform: rotate(-8deg); } to { transform: rotate(8deg); } }
+.chaser-say {
+  position: absolute; z-index: 66; pointer-events: none; font-family: var(--label); font-weight: 700; text-transform: uppercase;
+  letter-spacing: .1em; font-size: .8rem; background: var(--bone); color: var(--ink); border: 2px solid var(--ink); padding: 3px 8px; white-space: nowrap;
+}
+.rope { position: absolute; width: 3px; z-index: 64; pointer-events: none; background: repeating-linear-gradient(#c98e10 0 6px, #8a5d0a 6px 9px); }
+.rope-loop { position: absolute; width: 80px; height: 30px; z-index: 66; pointer-events: none; border: 4px solid #c98e10; border-radius: 50%; box-shadow: inset 0 0 0 1px #8a5d0a, 0 0 0 1px #8a5d0a; }
+</style>
+
+<section class="hero" id="top">
+  <div class="wrap">
+    <nav aria-label="Main">
+      <a class="brand" href="#top" aria-label="Rat River Boys, back to top">
+        <span class="badge"><img src="rat-badge.jpg" alt="" width="240" height="240"></span>
+        <span class="brand-text"><span class="b1">RRB</span><span class="b2">Rat River Boys</span></span>
+      </a>
+      <ul>
+        <li><a href="#shows">Shows</a></li>
+        <li><a href="#sound">The Sound</a></li>
+        <li><a href="#rules">House Rules</a></li>
+        <li><a class="neon" href="#book">Boo<span class="flick">k</span> Us</a></li>
+        <li><a class="fb-nav" href="https://www.facebook.com/profile.php?id=61589395443501" target="_blank" rel="noopener">Facebook</a></li>
+      </ul>
+    </nav>
+    <div class="hero-grid">
+      <div class="poster-wrap">
+      <div class="poster" role="button" tabindex="0" aria-label="Give the poster a smack">
+        <span class="tape t1" aria-hidden="true"></span>
+        <img src="rat-moon.jpg" alt="A cowboy rat in a bandana lassoing the moon under a starry sky, over the RRB Rat River Boys logo" width="1000" height="1000">
+        <span class="tape t2" aria-hidden="true"></span>
+      </div>
+      </div>
+      <div>
+        <div class="warning">Not responsible for lost wives, lost panties, or lost teeth.</div>
+        <h1 class="slogan">
+          <span class="s1">Your mom's favorite band.</span>
+          <span class="s2 hero-typer"><span id="typed">Got a venue that needs its reputation ruined?</span><span class="caret" aria-hidden="true"></span></span>
+        </h1>
+        <p class="lede">Wisconsin's filthiest honky tonk band. We play the songs your granddad got divorced to, three times, to the same woman.</p>
+        <div class="cta-row">
+          <a class="btn" href="#shows">Where we're drinkin' next</a>
+          <a class="btn alt" href="#book">Book these degenerates</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<main>
+  <section class="slab shows-slab torn" id="shows">
+    <div class="wrap">
+      <p class="kicker">Upcoming shows</p>
+      <h2>Come get loose. Stay loose. Call in sick.</h2>
+      <div class="countdown" id="countdown" aria-live="off">
+        <div class="cd-label" id="cd-label">Next show: Station 1 Brewing, Suamico</div>
+        <div class="cd-clock">
+          <div><span id="cd-d">--</span><small>Days</small></div>
+          <div><span id="cd-h">--</span><small>Hours</small></div>
+          <div><span id="cd-m">--</span><small>Minutes</small></div>
+          <div><span id="cd-s">--</span><small>Seconds</small></div>
+        </div>
+        <div class="cd-quip" id="cd-quip">Start hydrating now.</div>
+      </div>
+      <ul class="shows">
+        <li class="show">
+          <div class="date"><span class="m">Oct</span><span class="d">10</span></div>
+          <div class="where"><div class="venue">Station 1 Brewing</div><div class="town">Suamico, WI</div></div>
+          <div class="time">7 PM</div>
+        </li>
+        <li class="show">
+          <div class="date"><span class="m">Oct</span><span class="d">17</span></div>
+          <div class="where"><div class="venue">Plymouth Arts Center</div><div class="town">Plymouth, WI</div></div>
+          <div class="time">7 PM</div>
+        </li>
+        <li class="show">
+          <div class="date"><span class="m">Nov</span><span class="d">21</span></div>
+          <div class="where"><div class="venue">Fletch's Local Tap House</div><div class="town">Oshkosh, WI</div></div>
+          <div class="time">8 PM</div>
+        </li>
+      </ul>
+      <p class="note">Bring cash for the tip jar and a designated driver. We are not driving your drunk ass home, Brenda. Designated drivers drink free. Just kidding, they drink water, the losers. Leave the kids with grandma. She's coming out too, though.</p>
+      <a class="btn fb-btn" href="https://www.facebook.com/profile.php?id=61589395443501" target="_blank" rel="noopener">New dates hit our Facebook first</a>
+    </div>
+  </section>
+
+  <section class="slab sound-slab torn" id="sound">
+    <div class="wrap two">
+      <div class="prose">
+        <p class="kicker">The sound</p>
+        <h2>Golden age country, served warm, flat, and a little hungover.</h2>
+        <p>We play the real stuff. The records that came out of jukeboxes in bars with sawdust on the floor, a lady named Darlene on her fourth husband, and a fistfight in the parking lot by 11.</p>
+        <p>No bro country. No songs about tailgates or sippin' on Fireball. If there's no steel guitar crying in it, we don't know it, and we are not learning it for your cousin's wedding. Unless he pays. Then we'll learn anything.</p>
+        <p>We run our own sound, so all you gotta do is pour. Heavy.</p>
+      </div>
+      <ul class="legends" aria-label="Who we cover">
+        <li>Merle Haggard <span>Sang about prison because he'd been there</span></li>
+        <li>Waylon Jennings <span>Did more cocaine than your whole county</span></li>
+        <li>Willie Nelson <span>Smoked weed on the White House roof. Look it up.</span></li>
+        <li>Loretta Lynn <span>Would kick your ass</span></li>
+        <li>George Jones <span>Drove a mower to the bar</span></li>
+        <li>Hank Williams <span>Pills, whiskey, and heartbreak. Our role model.</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="slab rules-slab torn" id="rules">
+    <div class="wrap">
+      <p class="kicker">Posted by the stage, legally binding</p>
+      <h2>House rules.</h2>
+      <ol class="rule-list">
+        <li>Requests go in the tip jar. A five gets you a song. A twenty gets you a song and our respect.</li>
+        <li>We will not play Wagon Wheel. Ask again and we play it for 45 minutes straight.</li>
+        <li>Dance like your ex is watching. They are. They're with someone worse.</li>
+        <li>Cry during a George Jones song and the next round's on the drummer.</li>
+        <li>Line dancing requires a minimum of four drinks and a signed waiver.</li>
+        <li>Hitting on the band is encouraged. Hitting the band is a misdemeanor.</li>
+        <li>If you lose your panties on the dance floor, we're keeping them for the merch table.</li>
+        <li>The bathroom is not a VIP room. Get a motel.</li>
+        <li>Married folks may only dance with someone else's spouse after 10 PM.</li>
+        <li>Anyone caught line dancing sober will be asked to leave.</li>
+        <li>If you throw your bra, throw a twenty with it.</li>
+        <li>Slow songs are for grinding, not for texting your ex.</li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="slab tips-slab torn" id="tips">
+    <div class="wrap tips-grid">
+      <div>
+        <div class="jar-rim" aria-hidden="true"></div>
+        <div class="jar" id="jar" aria-hidden="true"><div class="jar-label">TIPS</div></div>
+      </div>
+      <div>
+        <p class="kicker">The tip jar</p>
+        <h2>Feed the band.</h2>
+        <p>It's fake money. We still appreciate it more than your applause.</p>
+        <div class="tip-buttons">
+          <button class="btn" type="button" data-tip="1">$1</button>
+          <button class="btn" type="button" data-tip="5">$5</button>
+          <button class="btn alt" type="button" data-tip="20">$20</button>
+          <button class="btn alt" type="button" data-tip="100">$100</button>
+        </div>
+        <div class="tip-say" id="tip-say" aria-live="polite">Go on. Nobody's watching.</div>
+        <div class="tip-total" id="tip-total">Tonight's take: $0</div>
+        <form class="request" id="request" hidden>
+          <label for="request-song" class="tip-total" style="flex-basis:100%">You earned a request</label>
+          <input id="request-song" name="song" type="text" placeholder="What do you want to hear?" autocomplete="off">
+          <button class="btn" type="submit">Request it</button>
+        </form>
+        <div id="denied-wrap" aria-live="polite"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slab played-slab torn" id="played">
+    <div class="wrap">
+      <p class="kicker">Crime scenes</p>
+      <h2>Places that somehow let us back in.</h2>
+      <ul class="venues">
+        <li>Harley-Davidson Museum Bike Night<small>Milwaukee</small></li>
+        <li>Hometown Days<small>Verona</small></li>
+        <li>Hagemeister Park<small>Green Bay</small></li>
+        <li>South Park Food Truck Friday<small>Oshkosh</small></li>
+        <li>Wisconsin State Fair, Miller Lite Stage<small>West Allis</small></li>
+        <li>Tosa Fest<small>Wauwatosa</small></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="slab merch-slab torn" id="merch">
+    <div class="wrap">
+      <p class="kicker">Merch table</p>
+      <h2>Coming soon. Probably.</h2>
+      <div class="merch">
+        <div class="item"><span class="soon">Coming soon</span><div class="name">RRB Koozie</div><div class="price">$5</div><p>Keeps your beer cold and your hands out of trouble.</p></div>
+        <div class="item"><span class="soon">Coming soon</span><div class="name">"Not Responsible" Panties</div><div class="price">$15</div><p>Lose them at the show. Legally, that's on you.</p></div>
+        <div class="item"><span class="soon">Coming soon</span><div class="name">Brenda's Designated Driver Tee</div><div class="price">$20</div><p>For the saint who drives everybody home and hates all of you.</p></div>
+        <div class="item"><span class="soon">Coming soon</span><div class="name">"Worse Decisions" Trucker Hat</div><div class="price">$25</div><p>Pairs well with a mullet and a restraining order.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slab wall-slab torn" id="wall">
+    <div class="wrap">
+      <p class="kicker">Men's room, stall two</p>
+      <h2>Written on the bathroom wall.</h2>
+      <div class="graffiti" aria-label="Bathroom wall graffiti">
+        <span class="g g1">For a good time call<br>920-555-0169<br><small>ask for Darlene</small></span>
+        <span class="g g2">Save a horse, ride a Rat River Boy</span>
+        <span class="g g3">WAGON WHEEL SUCKS</span>
+        <span class="g g4">Left my dignity and my panties in stall three</span>
+        <span class="g g5">RRB &gt; your ex</span>
+        <span class="g g6">Brenda was here. So was her husband's truck.</span>
+        <span class="g g7">Ran into my ex here. Worse decisions were made.</span>
+        <span class="g g8">The fiddle player owes me $20 and an apology</span>
+        <span class="g g9">The drummer's got small sticks</span>
+        <span class="g g11">Here I sit, broken hearted, paid a cover and the band just started</span>
+        <span class="g g12">Your mom's favorite band. Ask her.</span>
+        <span class="g g10">Stop reading the wall and go dance</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="slab book-slab torn" id="book">
+    <div class="wrap book-grid">
+      <div class="crest">
+        <img src="rat-crest.jpg" alt="RRB Rat River Boys logo with a rat crouched under a white circle" width="690" height="760">
+      </div>
+      <div>
+        <div class="lastcall" id="lastcall" aria-label="Last call"><span>LAST</span> <span>CALL</span></div>
+        <p class="kicker">Booking</p>
+        <h2>Got a venue that needs its reputation ruined?</h2>
+        <p class="lede">Bars, breweries, festivals, divorce parties, backyard blowouts. We'll turn your place into a country night, drag a crowd in, and leave before anyone checks the bathroom.</p>
+        <div class="email-row">
+          <span class="email" id="email">ratriverboysband@gmail.com</span>
+          <button class="btn" id="copy" type="button">Copy email</button>
+        </div>
+        <p class="fb-line">Or slide into our DMs on <a href="https://www.facebook.com/profile.php?id=61589395443501" target="_blank" rel="noopener">Facebook</a>. We answer faster than your ex.</p>
+        <div class="copied" id="copied" aria-live="polite"></div>
+        <ul class="perks">
+          <li>Mostly sober</li>
+          <li>We run our own sound</li>
+          <li>Will play for beer (and money)</li>
+          <li>Long sets, short memories</li>
+        </ul>
+        <form class="book-form" id="book-form" novalidate>
+          <p class="kicker">Or fill this out and we'll write the email for you</p>
+          <div class="bf-grid">
+            <label>Venue<input id="bf-venue" name="venue" type="text" placeholder="Brenda's Bar &amp; Grill" autocomplete="organization"></label>
+            <label>City<input id="bf-city" name="city" type="text" placeholder="Oshkosh, WI" autocomplete="address-level2"></label>
+            <label>Date<input id="bf-date" name="date" type="text" placeholder="Saturday, Dec 12"></label>
+            <label>Budget<input id="bf-budget" name="budget" type="text" placeholder="Beer and money"></label>
+          </div>
+          <label>Anything else<textarea id="bf-notes" name="notes" rows="3" placeholder="Set length, stage size, how drunk your regulars get"></textarea></label>
+          <div class="bf-actions">
+            <a class="btn" id="bf-mail" href="mailto:ratriverboysband@gmail.com">Open it in my email</a>
+            <button class="btn alt" id="bf-copy" type="button">Copy the message</button>
+          </div>
+          <div class="copied" id="bf-status" aria-live="polite"></div>
+          <pre class="bf-preview" id="bf-preview"></pre>
+        </form>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span class="foot-lines"><span>Rat River Boys. Your daughter's biggest mistake.</span><span>Rated R for rowdy, raunchy, and Rat River.</span><span>Made in Wisconsin, where the beer is cold and the cousins are close.</span><span>Tip your bartender, you animals.</span></span>
+    <a class="fb-foot" href="https://www.facebook.com/profile.php?id=61589395443501" target="_blank" rel="noopener">Follow us on Facebook</a>
+  </div>
+</footer>
+
+<div class="pint-wrap" aria-hidden="true">
+  <div class="spill" id="spill"><span class="heap"></span><span class="drip d1"></span><span class="drip d2"></span><span class="drip d3"></span></div>
+  <div class="pint"><div class="beer" id="beer"><div class="bubbles"></div></div></div>
+  <div class="puddle" id="puddle"></div>
+</div>
+<button class="btn fight-btn" id="fight" type="button">Start a bar fight</button>
+<div class="sneaky-rat" id="sneaky-rat" aria-hidden="true"><svg xmlns='http://www.w3.org/2000/svg' width='100%' height='100%' viewBox='0 0 64 40'><path d='M11 30 Q1 34 3 24 Q5 16 1 11' stroke='#2b170b' stroke-width='2.2' fill='none' stroke-linecap='round'/><ellipse cx='26' cy='28' rx='16' ry='9' fill='#e9ae1c' stroke='#2b170b' stroke-width='1.8'/><path d='M36 21 Q44 16 52 21 L60 27 Q52 32 42 31 Z' fill='#e9ae1c' stroke='#2b170b' stroke-width='1.8' stroke-linejoin='round'/><circle cx='60' cy='27' r='1.6' fill='#2b170b'/><circle cx='41' cy='18' r='4' fill='#e9ae1c' stroke='#2b170b' stroke-width='1.6'/><circle cx='48' cy='23' r='1.4' fill='#2b170b'/><path d='M20 36 v3 M32 36 v3' stroke='#2b170b' stroke-width='2' stroke-linecap='round'/><ellipse cx='42' cy='14' rx='10' ry='2.2' fill='#b8401d' stroke='#2b170b' stroke-width='1.4'/><path d='M36 14 Q36 5 42 6 Q48 5 48 14 Z' fill='#b8401d' stroke='#2b170b' stroke-width='1.4'/></svg></div>
+<div class="fx-layer" id="fx" aria-hidden="true"></div>
+<div class="chaser" id="chaser" aria-hidden="true"><div class="flip"><svg viewBox="0 0 64 46" width="100%" height="100%" aria-hidden="true">
+  <g class="legs back"><line class="leg a" x1="17" y1="33" x2="15" y2="43"/><line class="leg b" x1="22" y1="34" x2="24" y2="43"/></g>
+  <path d="M11 30 Q1 34 3 24 Q5 16 1 11" stroke="#2b170b" stroke-width="2.2" fill="none" stroke-linecap="round" class="tail"/>
+  <ellipse cx="26" cy="28" rx="16" ry="9" fill="#e9ae1c" stroke="#2b170b" stroke-width="1.8"/>
+  <g class="legs front"><line class="leg b" x1="33" y1="34" x2="31" y2="43"/><line class="leg a" x1="38" y1="33" x2="40" y2="43"/></g>
+  <path d="M36 21 Q44 16 52 21 L60 27 Q52 32 42 31 Z" fill="#e9ae1c" stroke="#2b170b" stroke-width="1.8" stroke-linejoin="round"/>
+  <circle cx="60" cy="27" r="1.6" fill="#2b170b"/>
+  <circle cx="41" cy="18" r="4" fill="#e9ae1c" stroke="#2b170b" stroke-width="1.6"/>
+  <circle cx="48" cy="23" r="1.4" fill="#2b170b"/>
+  <path d="M55 26 l7 -3 M55 28 l7 1" stroke="#2b170b" stroke-width=".8"/>
+  <ellipse cx="42" cy="14" rx="10" ry="2.2" fill="#b8401d" stroke="#2b170b" stroke-width="1.4"/>
+  <path d="M36 14 Q36 5 42 6 Q48 5 48 14 Z" fill="#b8401d" stroke="#2b170b" stroke-width="1.4"/>
+</svg></div></div>
+
+<script>
+  document.getElementById('copy').addEventListener('click', function () {
+    var email = document.getElementById('email');
+    var out = document.getElementById('copied');
+    var text = email.textContent.trim();
+    function fallback() {
+      var r = document.createRange(); r.selectNodeContents(email);
+      var s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
+      out.textContent = 'Selected. Hit copy.';
+    }
+    try {
+      navigator.clipboard.writeText(text).then(function () { out.textContent = 'Copied. Now book us before you sober up.'; }, fallback);
+    } catch (e) { fallback(); }
+  });
+</script>
+<script>
+(function () {
+  var lines = [
+    "Got a venue that needs its reputation ruined?",
+    "Looking for a bunch of sweaty men who go all night?",
+    "Need a band that'll drain your beer cooler?",
+    "Need a band your wife would leave you for?",
+    "Wedding too classy? We can fix that.",
+    "We never finish early. Ask any bartender at close.",
+    "Tired of the guy with the acoustic and the loop pedal?",
+    "Tip big and we go longer. Get your mind out of the gutter.",
+    "Your dance floor looking a little too sober?",
+    "Our fiddle player's got a longer bow than your husband.",
+    "Want your bartender to earn it tonight?",
+    "We play long, hard, and loud. That's what she said.",
+    "Dance floor emptier than your love life?",
+    "We've made more women cry than George Jones.",
+    "Want your crowd limping out at bar time?",
+    "Four chords and no shame.",
+    "Your bartender will need a cigarette after.",
+    "We're like your first husband. Loud, sweaty, and gone by 2 AM.",
+    "Bring your wife. Leave with regrets.",
+    "We don't do encores. We do a second round.",
+    "Like a good one night stand, you'll pretend you don't remember us.",
+    "Warning: may cause pregnancy in the front row."
+  ];
+  // shuffle so every visit starts somewhere different
+  for (var k = lines.length - 1; k > 0; k--) {
+    var r = Math.floor(Math.random() * (k + 1)), t = lines[k]; lines[k] = lines[r]; lines[r] = t;
+  }
+  var el = document.getElementById('typed');
+  if (!el) return;
+  el.textContent = lines[0];
+  var box = el.parentNode;
+  var i = 0;
+
+  // Every line gets its own font size so it always fills the same
+  // three-line box: short lines go big, long lines shrink to fit.
+  var measure = document.createElement('span');
+  measure.setAttribute('aria-hidden', 'true');
+  measure.style.cssText = 'position:absolute;left:0;top:0;visibility:hidden;pointer-events:none;white-space:normal;text-wrap:balance;';
+  box.appendChild(measure);
+  function fit(line) {
+    box.style.fontSize = '';
+    var base = parseFloat(getComputedStyle(box).fontSize);
+    var h = Math.ceil(base * 3.05);
+    box.style.height = h + 'px';
+    measure.style.width = box.clientWidth + 'px';
+    var size = base * 1.35;
+    measure.textContent = line + ' W';
+    measure.style.fontSize = size + 'px';
+    while (measure.offsetHeight > h && size > 14) { size *= .95; measure.style.fontSize = size + 'px'; }
+    box.style.fontSize = size + 'px';
+  }
+  fit(lines[0]);
+  window.addEventListener('resize', function () { fit(lines[i]); });
+
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var pos = lines[0].length, deleting = true;
+  function tick() {
+    var line = lines[i];
+    if (deleting) {
+      pos--;
+      el.textContent = line.slice(0, pos);
+      if (pos <= 0) { deleting = false; i = (i + 1) % lines.length; fit(lines[i]); setTimeout(tick, 350); return; }
+      setTimeout(tick, 28);
+    } else {
+      line = lines[i];
+      pos++;
+      el.textContent = line.slice(0, pos);
+      if (pos >= line.length) { deleting = true; setTimeout(tick, 2600); return; }
+      setTimeout(tick, 55 + Math.random() * 60);
+    }
+  }
+  setTimeout(tick, 3800);
+})();
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollToPlugin.min.js"></script>
+<script>
+(function () {
+  if (!window.gsap) return;
+  gsap.registerPlugin(ScrollTrigger);
+  if (window.ScrollToPlugin) gsap.registerPlugin(ScrollToPlugin);
+
+  // nav and button links glide to their section instead of jumping
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  document.querySelectorAll('a[href^="#"]').forEach(function (a) {
+    a.addEventListener('click', function (e) {
+      var id = a.getAttribute('href');
+      var target = id === '#top' ? 0 : document.querySelector(id);
+      if (target === null) return;
+      e.preventDefault();
+      if (reduce || !window.ScrollToPlugin) {
+        (target === 0 ? document.body : target).scrollIntoView({ behavior: reduce ? 'auto' : 'smooth' });
+        return;
+      }
+      gsap.to(window, { duration: 1.2, scrollTo: { y: target, autoKill: true }, ease: 'power3.inOut' });
+    });
+  });
+
+  var mm = gsap.matchMedia();
+  mm.add('(prefers-reduced-motion: no-preference)', function () {
+    // hero entrance
+    var tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+    tl.from('nav', { y: -40, opacity: 0, duration: .5 })
+      .from('.poster', { scale: 1.35, rotate: 10, opacity: 0, duration: .7, ease: 'back.out(1.6)' }, '-=.2')
+      .from('.tape', { scale: 2.2, opacity: 0, duration: .3, stagger: .12, ease: 'power4.in' }, '-=.15')
+      .from('.warning', { scale: 1.8, rotate: -12, opacity: 0, duration: .35, ease: 'power4.in' }, '-=.1')
+      .from('.slogan .s1', { x: -60, rotate: -8, opacity: 0, duration: .4 })
+      .from('.slogan .s2', { y: 40, scale: .9, opacity: 0, duration: .5, ease: 'back.out(2)' }, '-=.15')
+      .from('.hero .lede', { y: 20, opacity: 0, duration: .5 }, '-=.2')
+      .from('.hero .btn', { y: 24, opacity: 0, stagger: .1, duration: .4, ease: 'back.out(2)' }, '-=.3');
+    // never leave the hero half-built if the tab is throttled
+    setTimeout(function () { if (tl.progress() < 1) tl.progress(1); }, 4200);
+
+    // poster drifts as you scroll away
+    gsap.to('.poster-wrap', { yPercent: 12, rotate: 4, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true } });
+
+    // section kickers draw their line, headings punch up
+    gsap.utils.toArray('.slab').forEach(function (sec) {
+      var k = sec.querySelector('.kicker'), h = sec.querySelector('h2');
+      var t = gsap.timeline({ scrollTrigger: { trigger: sec, start: 'top 75%', toggleActions: 'restart none restart none' } });
+      if (k) t.from(k, { x: -30, opacity: 0, duration: .4 });
+      if (h) t.from(h, { y: 40, opacity: 0, duration: .55, ease: 'back.out(1.7)' }, '-=.2');
+    });
+
+    // shows slide in like tickets from alternating sides
+    gsap.utils.toArray('.show').forEach(function (row, i) {
+      gsap.from(row, { x: i % 2 ? 80 : -80, opacity: 0, duration: .6, ease: 'power3.out', scrollTrigger: { trigger: row, start: 'top 88%', toggleActions: 'restart none restart none' } });
+      gsap.from(row.querySelector('.time'), { scale: 2, rotate: -20, opacity: 0, duration: .35, delay: .35, ease: 'power4.in', scrollTrigger: { trigger: row, start: 'top 88%', toggleActions: 'restart none restart none' } });
+    });
+
+    // legends roll in
+    gsap.from('.legends li', { x: 60, opacity: 0, stagger: .08, duration: .5, scrollTrigger: { trigger: '.legends', start: 'top 80%', toggleActions: 'restart none restart none' } });
+
+    // rules get stamped
+    gsap.from('.rule-list li', { scale: 1.4, rotate: function () { return gsap.utils.random(-6, 6); }, opacity: 0, stagger: .1, duration: .35, ease: 'power4.in', scrollTrigger: { trigger: '.rule-list', start: 'top 80%', toggleActions: 'restart none restart none' } });
+
+    // venue stickers get slapped on
+    gsap.from('.venues li', { y: -80, rotate: function () { return gsap.utils.random(-30, 30); }, opacity: 0, stagger: .08, duration: .6, ease: 'bounce.out', scrollTrigger: { trigger: '.venues', start: 'top 85%', toggleActions: 'restart none restart none' } });
+
+    // crest rat scurries in
+    gsap.from('.crest', { x: -120, rotate: -8, opacity: 0, duration: .8, ease: 'back.out(1.4)', scrollTrigger: { trigger: '.book-slab', start: 'top 70%', toggleActions: 'restart none restart none' } });
+    gsap.from('.perks li', { y: 20, opacity: 0, stagger: .08, duration: .35, scrollTrigger: { trigger: '.perks', start: 'top 90%', toggleActions: 'restart none restart none' } });
+
+
+    // smack the poster and it swings off the tape
+    var poster = document.querySelector('.poster');
+    if (poster) {
+      // lazy idle sway, like it's hanging off one piece of tape
+      var startIdle = function () {
+        gsap.fromTo(poster, { rotate: -2.5 }, { rotate: .8, duration: 2.6, ease: 'sine.inOut', yoyo: true, repeat: -1 });
+      };
+      if (tl.progress() >= 1) startIdle(); else tl.eventCallback('onComplete', startIdle);
+      var swing = function () {
+        var dir = Math.random() < .5 ? -1 : 1;
+        gsap.killTweensOf(poster, 'rotate');
+        gsap.fromTo(poster, { rotate: -2.5 }, {
+          keyframes: [
+            { rotate: -2.5 + 22 * dir, duration: .18, ease: 'power2.out' },
+            { rotate: -2.5 - 15 * dir, duration: .35, ease: 'sine.inOut' },
+            { rotate: -2.5 + 9 * dir, duration: .32, ease: 'sine.inOut' },
+            { rotate: -2.5 - 5 * dir, duration: .3, ease: 'sine.inOut' },
+            { rotate: -2.5 + 2 * dir, duration: .28, ease: 'sine.inOut' },
+            { rotate: -2.5, duration: .3, ease: 'sine.out' }
+          ],
+          onComplete: function () { if (!falling) startIdle(); }
+        });
+      };
+      var hits = 0, falling = false;
+      var hero = document.querySelector('.hero');
+      var wrap = document.querySelector('.poster-wrap');
+      var tapes = poster.querySelectorAll('.tape');
+      var fall = function () {
+        falling = true;
+        gsap.killTweensOf(poster);
+        var r = poster.getBoundingClientRect();
+        var dropBy = window.innerHeight - r.top + 200;
+        var startAbove = -(r.bottom + 200);
+        hero.style.overflow = 'visible';
+        wrap.style.position = 'relative'; wrap.style.zIndex = 60;
+        gsap.timeline({
+          onComplete: function () {
+            hits = 0; falling = false; startIdle();
+            hero.style.overflow = ''; wrap.style.zIndex = '';
+          }
+        })
+          .to(tapes, { y: -50, rotate: function (i) { return i ? 40 : -40; }, opacity: 0, duration: .25, ease: 'power2.out' })
+          .to(poster, { rotate: -2.5 + 25, duration: .2, ease: 'power2.in' }, '<')
+          .to(poster, { y: dropBy, rotate: 110, duration: .9, ease: 'power2.in' })
+          .set(poster, { y: startAbove, rotate: -30 })
+          .to({}, { duration: .6 })
+          .to(poster, { y: 0, rotate: -2.5, duration: 1.1, ease: 'bounce.out' })
+          .to(tapes, { y: 0, rotate: function (i) { return i ? 6 : -8; }, opacity: 1, duration: .25, stagger: .12, ease: 'power4.in' }, '-=.2');
+      };
+      poster.addEventListener('click', function () {
+        if (falling) return;
+        hits++;
+        if (hits >= 5) fall(); else swing();
+      });
+      poster.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); poster.click(); } });
+    }
+
+    // badge spins like a lasso on hover
+    var badge = document.querySelector('.badge');
+    var brand = document.querySelector('.brand');
+    if (badge && brand) {
+      brand.addEventListener('mouseenter', function () { gsap.fromTo(badge, { rotate: 0 }, { rotate: 360, duration: .7, ease: 'power2.out' }); });
+    }
+
+    // buttons wobble on hover
+    gsap.utils.toArray('.btn').forEach(function (b) {
+      b.addEventListener('mouseenter', function () { gsap.fromTo(b, { rotate: 0 }, { keyframes: [{ rotate: -3 }, { rotate: 3 }, { rotate: -1.5 }, { rotate: 0 }], duration: .4 }); });
+    });
+  });
+})();
+</script>
+
+<script>
+(function () {
+  var hasG = !!window.gsap;
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var fine = window.matchMedia('(pointer: fine)').matches;
+  var fx = document.getElementById('fx');
+  function pick(a) { return a[Math.floor(Math.random() * a.length)]; }
+  function toast(msg, ms) {
+    var t = document.createElement('div'); t.className = 'toast'; t.textContent = msg; document.body.appendChild(t);
+    setTimeout(function () { t.remove(); }, ms || 2600);
+  }
+
+  // ---- beer glass scroll bar ----
+  var beer = document.getElementById('beer');
+  var heap = document.querySelector('.spill .heap'), drips = document.querySelectorAll('.spill .drip'), puddle = document.getElementById('puddle');
+  var overflowing = false, spillTl = null;
+  function spill(on) {
+    if (on === overflowing) return;
+    overflowing = on;
+    if (spillTl) spillTl.kill();
+    if (!hasG || reduce) {
+      heap.style.transform = on ? 'scaleY(1)' : 'scaleY(0)';
+      drips.forEach(function (d, k) { d.style.height = on ? [46, 60, 30][k] + 'px' : '0'; });
+      puddle.style.transform = on ? 'scaleX(1)' : 'scaleX(0)';
+      return;
+    }
+    if (on) {
+      spillTl = gsap.timeline()
+        .to(heap, { scaleY: 1.25, duration: .35, ease: 'back.out(3)' })
+        .to(heap, { scaleY: 1, duration: .3 })
+        .to(drips, { height: function (k) { return [74, 88, 40][k]; }, duration: 1.1, stagger: .18, ease: 'power1.in' }, .15)
+        .to(puddle, { scaleX: 1, duration: .8, ease: 'power2.out' }, .9)
+        .to(drips, { height: function (k) { return [70, 84, 36][k]; }, duration: 1.4, repeat: -1, yoyo: true, ease: 'sine.inOut' });
+    } else {
+      spillTl = gsap.timeline()
+        .to(drips, { height: 0, duration: .35, ease: 'power2.in' })
+        .to(puddle, { scaleX: 0, duration: .3 }, 0)
+        .to(heap, { scaleY: 0, duration: .25 }, .1);
+    }
+  }
+  function pour() {
+    var max = document.documentElement.scrollHeight - window.innerHeight;
+    var pct = max > 0 ? Math.min(1, window.scrollY / max) : 0;
+    beer.style.height = (pct * 100) + '%';
+    spill(pct > .97);
+  }
+  window.addEventListener('scroll', pour, { passive: true }); window.addEventListener('resize', pour); pour();
+
+  // ---- tip jar ----
+  var jar = document.getElementById('jar'), say = document.getElementById('tip-say'), totalEl = document.getElementById('tip-total');
+  var req = document.getElementById('request'), deniedWrap = document.getElementById('denied-wrap');
+  var total = 0, billCount = 0;
+  var lines = {
+    1: ['A whole dollar. Easy, big spender.', 'That buys one guitar pick. Thanks, cheapskate.', 'The drummer says thanks. He is counting it right now.', 'One dollar. We will play one note.'],
+    5: ['Five bucks! Now we will pretend to know your name.', 'That covers a gas station hot dog. Hero.', 'Five dollars and a wink. We accept.', 'Now that is a tip. Barely.'],
+    20: ['Twenty! Somebody is getting a shoutout.', 'Twenty bucks. Your ex could never.', 'You are officially our favorite drunk tonight.', 'Now we are playing it faster and louder.'],
+    100: ['A HUNDRED? Marry us.', 'Holy hell. Who let you in here with that kind of money?', 'We are naming our next divorce after you.', 'The fiddle player just fainted.']
+  };
+  document.querySelectorAll('[data-tip]').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var amt = +b.getAttribute('data-tip');
+      total += amt; billCount++;
+      say.textContent = pick(lines[amt]);
+      totalEl.textContent = "Tonight's take: $" + total.toLocaleString();
+      if (total >= 100) req.hidden = false;
+      if (billCount > 40) return;
+      var bill = document.createElement('div'); bill.className = 'bill'; bill.textContent = '$' + amt;
+      var w = jar.clientWidth, h = jar.clientHeight;
+      var left = 10 + Math.random() * (w - 94);
+      var bottom = Math.min(h - 60, Math.floor(billCount / 3) * 9);
+      bill.style.left = left + 'px'; bill.style.bottom = bottom + 'px';
+      jar.appendChild(bill);
+      var rot = -30 + Math.random() * 60;
+      if (hasG && !reduce) gsap.fromTo(bill, { y: -h, rotate: rot * 3 }, { y: 0, rotate: rot, duration: .7, ease: 'bounce.out' });
+      else bill.style.transform = 'rotate(' + rot + 'deg)';
+    });
+  });
+  req.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var song = (document.getElementById('request-song').value || '').trim();
+    var msg = /wagon/i.test(song) ? 'WAGON WHEEL: HELL NO' : (song ? '"' + song + '"? DENIED. WE PLAY WAGON WHEEL NOW.' : 'WAGON WHEEL: DENIED');
+    deniedWrap.innerHTML = '';
+    var d = document.createElement('div'); d.className = 'denied'; d.textContent = msg; deniedWrap.appendChild(d);
+    if (hasG && !reduce) gsap.fromTo(d, { scale: 2.4, opacity: 0, rotate: -20 }, { scale: 1, opacity: 1, rotate: -6, duration: .35, ease: 'power4.in' });
+  });
+
+  // ---- hide the bar fight button while the footer is on screen ----
+  var fightBtn = document.getElementById('fight'), foot = document.querySelector('footer');
+  if ('IntersectionObserver' in window && foot) {
+    new IntersectionObserver(function (es) { fightBtn.classList.toggle('gone', es[0].isIntersecting); }).observe(foot);
+  }
+
+  // ---- bar fight ----
+  var fighting = false;
+  document.getElementById('fight').addEventListener('click', function () {
+    if (fighting) return;
+    fighting = true;
+    var words = ['POW!', 'WHAM!', 'CRACK!', 'THUD!', 'OOF!', 'BRENDA NO!'];
+    var targets = document.querySelectorAll('.slab .wrap > *, .hero-grid > *, nav, .show, .legends li, .rule-list li, .venues li, .item');
+    if (!hasG || reduce) { toast('Bar fight! Everybody out. Just kidding, stay.'); fighting = false; return; }
+    for (var k = 0; k < 5; k++) {
+      (function (k) {
+        setTimeout(function () {
+          var p = document.createElement('div'); p.className = 'pow'; p.textContent = pick(words);
+          p.style.left = (10 + Math.random() * 60) + 'vw'; p.style.top = (15 + Math.random() * 60) + 'vh';
+          document.body.appendChild(p);
+          gsap.fromTo(p, { scale: 3, rotate: -30 + Math.random() * 60, opacity: 0 }, { scale: 1, opacity: 1, duration: .2, ease: 'power4.in' });
+          gsap.to(p, { opacity: 0, y: -30, delay: .7, duration: .4, onComplete: function () { p.remove(); } });
+        }, k * 260);
+      })(k);
+    }
+    gsap.fromTo(document.body, { x: 0 }, { x: 14, duration: .05, repeat: 21, yoyo: true, ease: 'none', onComplete: function () { gsap.set(document.body, { x: 0, clearProps: 'transform' }); } });
+    gsap.to(targets, { rotate: function () { return gsap.utils.random(-9, 9); }, x: function () { return gsap.utils.random(-18, 18); }, duration: .25, ease: 'power3.out', stagger: .004 });
+    setTimeout(function () {
+      toast('Alright, alright. Everybody hug it out.');
+      gsap.to(targets, { rotate: 0, x: 0, duration: 1.4, ease: 'elastic.out(1, .4)', stagger: .005, onComplete: function () { gsap.set(targets, { clearProps: 'rotate,x' }); fighting = false; } });
+    }, 3000);
+  });
+
+  // ---- last call neon ----
+  var lc = document.getElementById('lastcall');
+  function light() {
+    if (lc.classList.contains('lit')) return;
+    if (reduce) { lc.classList.add('lit'); return; }
+    var steps = [0, 120, 220, 420, 520, 900];
+    steps.forEach(function (t, n) { setTimeout(function () { lc.classList.toggle('lit', n % 2 === 0 || n === steps.length - 1); }, t); });
+  }
+  if (window.ScrollTrigger) ScrollTrigger.create({ trigger: lc, start: 'top 85%', onEnter: light, onEnterBack: function () { lc.classList.remove('lit'); light(); } });
+  else light();
+
+  // ---- hidden rat ----
+  var rat = document.getElementById('sneaky-rat');
+  var busy = false;
+  function peek() {
+    if (!hasG || reduce || busy) return schedule();
+    busy = true;
+    var faceLeft = Math.random() < .5;
+    rat.style.left = (8 + Math.random() * 70) + 'vw';
+    gsap.set(rat, { scaleX: faceLeft ? -1 : 1, x: 0 });
+    gsap.timeline({ onComplete: function () { busy = false; schedule(); } })
+      .to(rat, { yPercent: 25, duration: .4, ease: 'power2.out' })
+      .to(rat, { scaleX: faceLeft ? 1 : -1, duration: .01, delay: .8 })
+      .to(rat, { scaleX: faceLeft ? -1 : 1, duration: .01, delay: .7 })
+      .to(rat, { yPercent: 110, duration: .3, ease: 'power2.in', delay: .6 });
+  }
+  function schedule() { setTimeout(peek, 9000 + Math.random() * 12000); }
+  function bolt(e) {
+    if (!hasG) return;
+    gsap.killTweensOf(rat);
+    var dir = Math.random() < .5 ? -1 : 1;
+    var sq = document.createElement('div'); sq.className = 'squeak'; sq.textContent = pick(['Squeak!', 'Not today!', 'Hands off, pal!', 'Tip the band!']);
+    var r = rat.getBoundingClientRect();
+    sq.style.left = Math.max(8, Math.min(window.innerWidth - 150, r.left)) + 'px'; sq.style.top = (window.innerHeight - 110) + 'px';
+    document.body.appendChild(sq); setTimeout(function () { sq.remove(); }, 1200);
+    busy = true;
+    gsap.timeline({ onComplete: function () { gsap.set(rat, { x: 0, yPercent: 110 }); busy = false; } })
+      .set(rat, { scaleX: dir, yPercent: 25 })
+      .to(rat, { x: dir * window.innerWidth, duration: .5, ease: 'power2.in' });
+  }
+  rat.addEventListener('mouseenter', bolt);
+  rat.addEventListener('touchstart', bolt, { passive: true });
+  if (hasG) { rat.style.transform = ''; gsap.set(rat, { yPercent: 110 }); }
+  schedule();
+
+  // ---- secret word: whiskey ----
+  var buf = '';
+  document.addEventListener('keydown', function (e) {
+    if (e.target.closest && e.target.closest('input, textarea')) return;
+    if (e.key.length !== 1) return;
+    buf = (buf + e.key.toLowerCase()).slice(-7);
+    if (buf === 'whiskey') {
+      buf = '';
+      toast("Whoa. You've had enough, pal.", 3500);
+      if (!hasG || reduce) return;
+      var main = document.querySelectorAll('main, .hero, footer');
+      var tl = gsap.timeline({ onComplete: function () { gsap.set(main, { clearProps: 'all' }); } });
+      tl.to(main, { rotate: 2.5, skewX: 3, filter: 'blur(1.6px) hue-rotate(20deg)', x: 20, duration: 1.2, ease: 'sine.inOut' })
+        .to(main, { rotate: -2.5, skewX: -3, x: -20, duration: 1.2, ease: 'sine.inOut', repeat: 6, yoyo: true })
+        .to(main, { rotate: 0, skewX: 0, x: 0, filter: 'blur(0px) hue-rotate(0deg)', duration: 1, ease: 'sine.out' });
+    }
+  });
+})();
+</script>
+
+<script>
+(function () {
+  // ---- countdown to the next show ----
+  var shows = [
+    { at: '2026-10-10T19:00:00-05:00', name: 'Station 1 Brewing, Suamico' },
+    { at: '2026-10-17T19:00:00-05:00', name: 'Plymouth Arts Center, Plymouth' },
+    { at: '2026-11-21T20:00:00-06:00', name: "Fletch's Local Tap House, Oshkosh" }
+  ];
+  var quips = ['Start hydrating now.', 'Tell your boss you have a cold.', 'Plenty of time to lie to your wife about it.', 'Iron your good jeans.', 'Warn your liver.'];
+  var q = quips[Math.floor(Math.random() * quips.length)];
+  var el = { d: document.getElementById('cd-d'), h: document.getElementById('cd-h'), m: document.getElementById('cd-m'), s: document.getElementById('cd-s'), label: document.getElementById('cd-label'), quip: document.getElementById('cd-quip'), box: document.getElementById('countdown') };
+  function pad(n) { return (n < 10 ? '0' : '') + n; }
+  function tickCd() {
+    var now = Date.now(), next = null;
+    for (var k = 0; k < shows.length; k++) {
+      var t = new Date(shows[k].at).getTime();
+      if (t + 4 * 3600e3 > now) { next = { t: t, name: shows[k].name }; break; }
+    }
+    if (!next) {
+      el.label.textContent = 'No shows on the books right now';
+      el.box.querySelector('.cd-clock').hidden = true;
+      el.quip.innerHTML = 'New dates hit our <a href="https://www.facebook.com/profile.php?id=61589395443501" target="_blank" rel="noopener">Facebook</a> first.';
+      return;
+    }
+    el.label.textContent = 'Next show: ' + next.name;
+    var diff = Math.max(0, next.t - now);
+    if (diff === 0) { el.quip.textContent = "We're on right now. What are you doing on your phone?"; }
+    else el.quip.textContent = q;
+    var sec = Math.floor(diff / 1000);
+    el.d.textContent = Math.floor(sec / 86400);
+    el.h.textContent = pad(Math.floor(sec % 86400 / 3600));
+    el.m.textContent = pad(Math.floor(sec % 3600 / 60));
+    el.s.textContent = pad(sec % 60);
+  }
+  tickCd(); setInterval(tickCd, 1000);
+
+  // ---- booking form writes the email ----
+  var f = document.getElementById('book-form');
+  if (f) {
+    var ids = ['venue', 'city', 'date', 'budget', 'notes'];
+    var mail = document.getElementById('bf-mail'), status = document.getElementById('bf-status');
+    function v(id) { return (document.getElementById('bf-' + id).value || '').trim(); }
+    function build() {
+      var subject = 'Booking inquiry' + (v('venue') ? ': ' + v('venue') : '') + (v('date') ? ' (' + v('date') + ')' : '');
+      var body = 'Hey Rat River Boys,\n\nWe want you to come ruin our reputation.\n\n' +
+        'Venue: ' + (v('venue') || '') + '\nCity: ' + (v('city') || '') + '\nDate: ' + (v('date') || '') + '\nBudget: ' + (v('budget') || '') +
+        (v('notes') ? '\n\n' + v('notes') : '') + '\n\nThanks,\n';
+      mail.href = 'mailto:ratriverboysband@gmail.com?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+      return 'To: ratriverboysband@gmail.com\nSubject: ' + subject + '\n\n' + body;
+    }
+    ids.forEach(function (id) { document.getElementById('bf-' + id).addEventListener('input', build); });
+    build();
+    f.addEventListener('submit', function (e) { e.preventDefault(); });
+    document.getElementById('bf-copy').addEventListener('click', function () {
+      var text = build();
+      try {
+        navigator.clipboard.writeText(text).then(function () { status.textContent = 'Copied. Paste it in an email to ratriverboysband@gmail.com.'; },
+          function () { status.textContent = 'Could not copy. Email us at ratriverboysband@gmail.com.'; });
+      } catch (err) { status.textContent = 'Could not copy. Email us at ratriverboysband@gmail.com.'; }
+    });
+  }
+
+  // ---- graffiti gets scribbled on ----
+  if (window.gsap && window.ScrollTrigger && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    gsap.from('.g', { scale: 1.6, opacity: 0, stagger: .09, duration: .3, ease: 'power3.in', scrollTrigger: { trigger: '.graffiti', start: 'top 80%', toggleActions: 'restart none restart none' } });
+  }
+})();
+</script>
+
+<script>
+(function () {
+  // A rat with real(ish) physics. It only walks on the tops of page elements,
+  // climbs up the sides of things, leaps between them under gravity, and falls
+  // when the ground moves out from under it.
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var rat = document.getElementById('chaser'); if (!rat) return;
+  var flip = rat.querySelector('.flip');
+
+  var SEL = [
+    'nav .brand', '.poster', '.warning', '.slogan .s1', '.hero .btn', '.show', '.cd-clock > div', '.fb-btn',
+    '.legends li', '.rule-list li', '.jar-rim', '.tip-buttons .btn', '.venues li', '.item', '.g',
+    '.crest img', '.lastcall', '.email', '.perks li', '.bf-actions .btn', '.book-form textarea',
+    '.kicker', 'main h2', '.fb-foot', 'footer'
+  ].join(',');
+  var G = 2400, WALK = 90, RUN = 250, CLIMB = 150, MAX_UP = 250, MAX_GAP = 360;
+  var plats = [];
+  function refresh() {
+    var sx = window.scrollX, sy = window.scrollY, out = [];
+    document.querySelectorAll(SEL).forEach(function (el) {
+      var r = el.getBoundingClientRect();
+      if (r.width < 40 || r.height < 12) return;
+      var cs = getComputedStyle(el);
+      if (cs.visibility === 'hidden' || cs.display === 'none' || +cs.opacity < .3) return;
+      out.push({ el: el, l: r.left + sx, r: r.right + sx, t: r.top + sy, b: r.bottom + sy });
+    });
+    plats = out;
+  }
+  function platOf(el) { for (var i = 0; i < plats.length; i++) if (plats[i].el === el) return plats[i]; return null; }
+  function clamp(v, a, b) { return Math.max(a, Math.min(b, v)); }
+
+  var mode = 'air', x = 0, y = 0, vx = 0, vy = 0, cur = null, side = 'L', face = 1;
+  var ignoreEl = null, stuckAt = 0, stuckDist = 1e9;
+  var goal = null, action = null, pauseUntil = 0, lastPlatEl = null, planAt = 0;
+  var mouse = null, lastMove = 0, caughtStamp = -1, chasing = false, offscreenSince = 0;
+
+  document.addEventListener('mousemove', function (e) {
+    mouse = { x: e.pageX, y: e.pageY }; lastMove = performance.now();
+    if (chasing) { chasing = false; goal = null; action = null; }
+  });
+  document.documentElement.addEventListener('mouseleave', function () { mouse = null; });
+  window.addEventListener('scroll', function () { if (mouse) { mouse.x += 0; } }, { passive: true });
+
+  function dropIn() {
+    refresh();
+    x = window.scrollX + 60 + Math.random() * (window.innerWidth - 120);
+    y = window.scrollY - 60; vx = (Math.random() - .5) * 80; vy = 0; mode = 'air'; cur = null; goal = null; action = null; ignoreEl = null;
+  }
+
+  function nearestTopPoint(px, py) {
+    var best = null, bd = 1e9;
+    plats.forEach(function (p) {
+      var cx = clamp(px, p.l + 8, p.r - 8), d = Math.hypot(cx - px, p.t - py);
+      if (d < bd) { bd = d; best = { el: p.el, x: cx }; }
+    });
+    return best;
+  }
+  function pickWander() {
+    var top = window.scrollY, bot = top + window.innerHeight;
+    var vis = plats.filter(function (p) { return p.t > top + 40 && p.t < bot - 20 && p.el !== (cur && cur.el); });
+    if (!vis.length) vis = plats;
+    var p = vis[Math.floor(Math.random() * vis.length)];
+    return p ? { el: p.el, x: p.l + 10 + Math.random() * Math.max(1, p.r - p.l - 20) } : null;
+  }
+
+  function plan() {
+    var gp = goal && platOf(goal.el);
+    if (!gp || !cur) return null;
+    if (cur === gp) return { type: 'walk', x: clamp(goal.x, cur.l + 6, cur.r - 6) };
+    var here = Math.hypot(goal.x - x, gp.t - y), best = null, bestScore = 1e9, fallback = [];
+    plats.forEach(function (n) {
+      if (n === cur) return;
+      var up = cur.t - n.t;
+      var gap = Math.max(0, n.l - cur.r, cur.l - n.r);
+      // climb onto something sitting on this surface
+      if (up > 8 && n.b >= cur.t - 12 && n.t < cur.t && gap === 0 && (n.l > cur.l + 4 || n.r < cur.r - 4)) {
+        var sideL = n.l > cur.l + 4 && (x < n.l || n.r >= cur.r - 4);
+        var wx = sideL ? n.l : n.r;
+        var s1 = Math.hypot(goal.x - wx, gp.t - n.t) + (up * .2);
+        if (n === gp) s1 -= 200;
+        if (s1 < bestScore && s1 < here - 10) { bestScore = s1; best = { type: 'climb', to: n.el, side: sideL ? 'L' : 'R', x: wx }; }
+        return;
+      }
+      if (up > MAX_UP || gap > MAX_GAP) return;
+      var lx, tx;
+      var overlap = n.r > cur.l && n.l < cur.r;
+      if (up < 0 && overlap) {
+        // something underneath: hop down onto it
+        lx = clamp(n === gp ? goal.x : x, n.l + 8, n.r - 8);
+        tx = clamp(lx, cur.l + 6, cur.r - 6);
+      } else {
+        lx = clamp(n === gp ? goal.x : (x < n.l ? n.l + 14 : n.r - 14), n.l + 8, n.r - 8);
+        tx = clamp(lx, cur.l + 4, cur.r - 4);
+
+      }
+      var score = Math.hypot(goal.x - lx, gp.t - n.t) + Math.hypot(lx - tx, n.t - cur.t) * .25 + (n.el === lastPlatEl ? 150 : 0);
+      if (n === gp) score -= 120;
+      var a = { type: 'leap', to: n.el, x: tx, lx: lx };
+      if (score < bestScore && score < here - 10) { bestScore = score; best = a; }
+      fallback.push(a);
+    });
+    if (best) return best;
+    if (fallback.length) return fallback[Math.floor(Math.random() * fallback.length)];
+    // stuck: step off the edge toward the goal and let gravity sort it out
+    var vl = window.scrollX + 30, vr = window.scrollX + window.innerWidth - 30;
+    var goLeft = goal.x < x;
+    if (goLeft && cur.l - 6 < vl) goLeft = false;
+    if (!goLeft && cur.r + 6 > vr) goLeft = true;
+    return { type: 'fall', x: goLeft ? cur.l - 6 : cur.r + 6 };
+  }
+
+  function launch(a) {
+    var n = platOf(a.to); if (!n) { action = null; return; }
+    var dx = a.lx - x, dy = n.t - y;
+    var T = clamp(Math.hypot(dx, dy) / 700 + .25, .32, .85);
+    if (dy < 0) T = Math.max(T, Math.sqrt(-2 * dy / G) * 1.2);
+    vx = dx / T; vy = (dy - .5 * G * T * T) / T;
+    lastPlatEl = cur && cur.el; ignoreEl = lastPlatEl; mode = 'air'; cur = null; action = null;
+  }
+
+  function say(text) {
+    var b = document.createElement('div'); b.className = 'chaser-say'; b.textContent = text;
+    b.style.left = (x - 40) + 'px'; b.style.top = (y - 80) + 'px';
+    document.body.appendChild(b); setTimeout(function () { b.remove(); }, 1300);
+  }
+  var gotcha = ['Got ya!', 'Squeak!', 'Mine now.', 'Gotcha, pal.', 'Too slow!'];
+
+  // click the rat: it gets lassoed and yanked off the top of the screen
+  var lassoed = false;
+  rat.style.pointerEvents = 'auto'; rat.style.cursor = 'pointer';
+  rat.addEventListener('click', function (e) {
+    e.stopPropagation();
+    if (lassoed) return;
+    lassoed = true; chasing = false; goal = null; action = null;
+    var rope = document.createElement('div'); rope.className = 'rope';
+    var loop = document.createElement('div'); loop.className = 'rope-loop';
+    document.body.appendChild(rope); document.body.appendChild(loop);
+    var top = window.scrollY - 20;
+    var o = { ly: top, y: y };
+    function draw() {
+      loop.style.left = (x - 40) + 'px'; loop.style.top = (o.ly - 34) + 'px';
+      rope.style.left = (x - 1.5) + 'px'; rope.style.top = top + 'px'; rope.style.height = Math.max(0, o.ly - 34 - top) + 'px';
+    }
+    draw();
+    say(['Nooo!', 'Not the rope!', 'Put me down!', 'I have a family!'][Math.floor(Math.random() * 4)]);
+    var done = function () { rope.remove(); loop.remove(); setTimeout(function () { lassoed = false; dropIn(); }, 2500); };
+    if (!window.gsap) { done(); return; }
+    gsap.timeline({ onUpdate: draw, onComplete: done })
+      .to(o, { ly: y - 12, duration: .35, ease: 'power2.in' })
+      .to(loop, { scaleX: .7, duration: .12 })
+      .to(o, { ly: top - 200, y: top - 180, duration: .7, ease: 'power3.in', onUpdate: function () { y = o.y + 12; } }, '+=.25');
+  });
+
+  refresh(); dropIn();
+  var lastRefresh = 0, last = performance.now();
+  function frame(now) {
+    var dt = Math.min(.033, (now - last) / 1000); last = now;
+    if (lassoed) {
+      rat.classList.add('running'); rat.style.setProperty('--step', '.05s');
+      rat.style.transform = 'translate(' + (x - 36).toFixed(1) + 'px,' + (y - 49).toFixed(1) + 'px)';
+      flip.style.transform = 'scaleX(' + face + ') rotate(' + (Math.sin(now / 60) * 35).toFixed(1) + 'deg)';
+      requestAnimationFrame(frame); return;
+    }
+    if (now - lastRefresh > 350) { refresh(); lastRefresh = now; if (cur) cur = platOf(cur.el); }
+
+    // chase when the mouse sits still
+    if (mouse && now - lastMove > 750 && caughtStamp !== lastMove && !chasing) {
+      chasing = true; goal = nearestTopPoint(mouse.x, mouse.y); action = null; pauseUntil = 0;
+    }
+    if (chasing && mouse && Math.hypot(mouse.x - x, mouse.y - (y - 20)) < 70) {
+      chasing = false; caughtStamp = lastMove; goal = null; action = null; pauseUntil = now + 1500;
+      say(gotcha[Math.floor(Math.random() * gotcha.length)]);
+    }
+
+    // not getting anywhere? pick somewhere else to go
+    if (goal && mode !== 'air') {
+      var gpp = platOf(goal.el), gd = gpp ? Math.hypot(goal.x - x, gpp.t - y) : 0;
+      if (!stuckAt) { stuckAt = now; stuckDist = gd; }
+      else if (now - stuckAt > 3500) {
+        if (gd > stuckDist - 25) { goal = chasing ? nearestTopPoint(mouse ? mouse.x : x, mouse ? mouse.y : y) : pickWander(); action = null; if (chasing && Math.random() < .5) { chasing = false; caughtStamp = lastMove; goal = pickWander(); } }
+        stuckAt = now; stuckDist = gd;
+      }
+    } else stuckAt = 0;
+
+    // fell off the world or got left way behind by scrolling: drop back in from the top
+    var vt = window.scrollY, vb = vt + window.innerHeight;
+    if (y > document.documentElement.scrollHeight + 200) dropIn();
+    if (y < vt - 400 || y > vb + 400) { if (!offscreenSince) offscreenSince = now; else if (now - offscreenSince > 1500) { dropIn(); offscreenSince = 0; } }
+    else offscreenSince = 0;
+
+    var moving = false, rot = 0, climbing = false;
+    if (mode === 'air') {
+      var py = y;
+      vy += G * dt; x += vx * dt; y += vy * dt; moving = true;
+      if (Math.abs(vx) > 5) face = vx > 0 ? 1 : -1;
+      if (vy > 0) {
+        var land = null;
+        plats.forEach(function (p) { if (p.el !== ignoreEl && py <= p.t + 1 && y >= p.t && x >= p.l - 4 && x <= p.r + 4 && (!land || p.t < land.t)) land = p; });
+        if (land) { cur = land; y = land.t; mode = 'walk'; vx = 0; vy = 0; action = null; ignoreEl = null; }
+      }
+      rot = clamp(Math.atan2(vy, Math.abs(vx) + 1) * 57.3 * .4, -35, 35);
+    } else if (mode === 'climb') {
+      var w = cur;
+      if (!w) { mode = 'air'; vx = 0; vy = 0; }
+      else {
+        x = side === 'L' ? w.l : w.r;
+        y -= CLIMB * dt; moving = true; climbing = true;
+        if (y <= w.t) { y = w.t; x = side === 'L' ? w.l + 8 : w.r - 8; mode = 'walk'; action = null; }
+      }
+    } else if (mode === 'walk') {
+      if (!cur) { mode = 'air'; vx = 0; vy = 0; }
+      else {
+        y = cur.t;
+        if (x < cur.l - 3 || x > cur.r + 3) { mode = 'air'; vy = 0; vx = face * 60; }
+        else if (now >= pauseUntil) {
+          if (!goal) goal = pickWander();
+          if (!action || now - planAt > 1200) { action = plan(); planAt = now; }
+          if (action) {
+            var target = action.x, dx = target - x, sp = (chasing ? RUN : WALK) * dt;
+            if (Math.abs(dx) > 2) { x += Math.sign(dx) * Math.min(sp, Math.abs(dx)); face = dx > 0 ? 1 : -1; moving = true; }
+            else if (action.type === 'leap') launch(action);
+            else if (action.type === 'climb') { var n = platOf(action.to); if (n) { lastPlatEl = cur.el; cur = n; side = action.side; x = side === 'L' ? n.l : n.r; mode = 'climb'; action = null; } }
+            else if (action.type === 'fall') { mode = 'air'; vx = face * 70; vy = -120; cur = null; action = null; }
+            else { action = null; if (!chasing) { goal = null; pauseUntil = now + 700 + Math.random() * 2500; } }
+          }
+        }
+      }
+    }
+
+    rat.classList.toggle('running', moving);
+    rat.style.setProperty('--step', chasing ? '.08s' : climbing ? '.12s' : '.16s');
+    rat.style.transform = 'translate(' + (x - 36).toFixed(1) + 'px,' + (y - 49).toFixed(1) + 'px)';
+    if (mode === 'climb') flip.style.transform = side === 'L' ? 'rotate(-90deg)' : 'scaleX(-1) rotate(-90deg)';
+    else flip.style.transform = 'scaleX(' + face + ') rotate(' + rot.toFixed(1) + 'deg)';
+    requestAnimationFrame(frame);
+  }
+  setTimeout(function () { refresh(); dropIn(); requestAnimationFrame(frame); }, 2600);
+})();
+</script>
