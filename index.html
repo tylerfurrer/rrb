@@ -550,7 +550,9 @@ footer a.fb-foot:hover { background: var(--bone); }
   nav ul.nav-links li { flex: 1 1 0; text-align: center; font-size: .78rem; letter-spacing: .12em; }
   nav ul.nav-links li:first-child { text-align: left; }
   nav ul.nav-links li:last-child { text-align: right; }
-  nav ul a.fb-nav { padding: 4px 8px; }
+  nav ul a.fb-nav { padding: 6px 10px; }
+  nav ul.nav-links a, nav ul.nav-cta a.neon { display: inline-block; padding-block: 10px; margin-block: -6px; }
+  nav a, nav .brand { -webkit-tap-highlight-color: rgba(233,174,28,.25); touch-action: manipulation; }
 
   /* hero */
   .hero-grid { gap: 22px; padding-block: 8px 44px; }
@@ -1020,8 +1022,11 @@ footer a.fb-foot:hover { background: var(--bone); }
       var target = id === '#top' ? 0 : document.querySelector(id);
       if (target === null) return;
       e.preventDefault();
-      if (reduce || !window.ScrollToPlugin) {
-        (target === 0 ? document.body : target).scrollIntoView({ behavior: reduce ? 'auto' : 'smooth' });
+      // phones and tablets use the browser's own smooth scroll (iPhone Safari cancels GSAP's mid-scroll)
+      var touch = window.matchMedia('(hover: none), (pointer: coarse)').matches;
+      if (reduce || touch || !window.ScrollToPlugin) {
+        if (target === 0) window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' });
+        else target.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
         return;
       }
       gsap.to(window, { duration: 1.2, scrollTo: { y: target, autoKill: true }, ease: 'power3.inOut' });
@@ -1409,7 +1414,7 @@ footer a.fb-foot:hover { background: var(--bone); }
   var flip = rat.querySelector('.flip');
 
   var SEL = [
-    'nav .brand', '.poster', '.warning', '.slogan .s1', '.hero .btn', '.show', '.cd-clock > div', '.fb-btn',
+    '.poster', '.warning', '.slogan .s1', '.hero .btn', '.show', '.cd-clock > div', '.fb-btn',
     '.legends li', '.rule-list li', '.jar-rim', '.tip-buttons .btn', '.venues li', '.item', '.g',
     '.crest img', '.lastcall', '.email', '.perks li', '.bf-actions .btn', '.book-form textarea',
     '.kicker', 'main h2', '.fb-foot', 'footer'
