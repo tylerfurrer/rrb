@@ -1070,6 +1070,11 @@ img { -webkit-user-drag: none; }
   .tips-grid #denied-wrap { text-align: center; }
 }
 
+
+/* bar tab: send button */
+.tab .bf-send { width: 100%; text-align: center; font-size: 1.05rem; padding: 14px 12px; margin-top: 4px; }
+.tab .bf-send:disabled { opacity: .75; cursor: default; }
+
 /* ---------- phones: center the hero and a few loose pieces ---------- */
 @media (max-width: 640px) {
   .hero-grid > div:last-child { text-align: center; }
@@ -1445,7 +1450,7 @@ img { -webkit-user-drag: none; }
           <li>Long sets, short memories</li>
         </ul>
       </div>
-      <form class="book-form tab" id="book-form" novalidate>
+      <form class="book-form tab" id="book-form" novalidate><input id="bf-hp" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
         <div class="tab-head">
           <div>
             <div class="tab-title">Bar Tab</div>
@@ -1453,14 +1458,17 @@ img { -webkit-user-drag: none; }
           </div>
           <img class="tab-stamp" src="rat-crest.jpg" alt="" width="690" height="760">
         </div>
-        <p class="tab-note">Fill it out and we'll write the email for you.</p>
+        <p class="tab-note">Fill it out and close out the tab. We'll holler back.</p>
         <div class="bf-grid">
           <label>Venue<input id="bf-venue" name="venue" type="text" placeholder="Brenda's Bar &amp; Grill" autocomplete="organization"></label>
           <label>City<input id="bf-city" name="city" type="text" placeholder="Nashville, TN" autocomplete="address-level2"></label>
           <label>Date<input id="bf-date" name="date" type="text" placeholder="Saturday, Dec 12"></label>
           <label>Budget<input id="bf-budget" name="budget" type="text" placeholder="Beer and money"></label>
+          <label>Your name<input id="bf-name" name="name" type="text" placeholder="Brenda" autocomplete="name"></label>
+          <label>Your email<input id="bf-email" name="email" type="email" placeholder="brenda@brendasbar.com" autocomplete="email"></label>
         </div>
         <label>Anything else<textarea id="bf-notes" name="notes" rows="3" placeholder="Set length, stage size, how drunk your regulars get"></textarea></label>
+        <button class="btn bf-send" id="bf-send" type="submit">Close out the tab</button>
         <div class="bf-actions">
           <a class="btn" id="bf-mail" href="mailto:ratriverboysband@gmail.com">Open it in my email</a>
           <button class="btn alt" id="bf-copy" type="button">Copy the message</button>
@@ -1977,20 +1985,45 @@ img { -webkit-user-drag: none; }
   // ---- booking form writes the email ----
   var f = document.getElementById('book-form');
   if (f) {
-    var ids = ['venue', 'city', 'date', 'budget', 'notes'];
+    var ids = ['venue', 'city', 'date', 'budget', 'name', 'email', 'notes'];
     var mail = document.getElementById('bf-mail'), status = document.getElementById('bf-status');
     function v(id) { return (document.getElementById('bf-' + id).value || '').trim(); }
     function build() {
       var subject = 'Booking inquiry' + (v('venue') ? ': ' + v('venue') : '') + (v('date') ? ' (' + v('date') + ')' : '');
       var body = 'Hey Rat River Boys,\n\nWe want you to come ruin our reputation.\n\n' +
         'Venue: ' + (v('venue') || '') + '\nCity: ' + (v('city') || '') + '\nDate: ' + (v('date') || '') + '\nBudget: ' + (v('budget') || '') +
-        (v('notes') ? '\n\n' + v('notes') : '') + '\n\nThanks,\n';
+        (v('notes') ? '\n\n' + v('notes') : '') + '\n\nThanks,\n' + (v('name') ? v('name') + '\n' : '') + (v('email') ? v('email') + '\n' : '');
       mail.href = 'mailto:ratriverboysband@gmail.com?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
       return 'To: ratriverboysband@gmail.com\nSubject: ' + subject + '\n\n' + body;
     }
     ids.forEach(function (id) { document.getElementById('bf-' + id).addEventListener('input', build); });
     build();
-    f.addEventListener('submit', function (e) { e.preventDefault(); });
+    // Close out the tab: sends straight to ratriverboysband@gmail.com through formto.email
+    var ENDPOINT = 'https://formto.email/f/eimilyqV', sendBtn = document.getElementById('bf-send'), sending = false;
+    f.addEventListener('submit', function (e) {
+      e.preventDefault();
+      if (sending) return;
+      var email = v('email');
+      if (!v('venue') && !v('notes')) { status.textContent = "Tab's empty, partner. Tell us the venue at least."; document.getElementById('bf-venue').focus(); return; }
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { status.textContent = 'We need your email so we can holler back.'; document.getElementById('bf-email').focus(); return; }
+      var subject = 'Bar Tab: ' + (v('venue') || 'Booking request') + (v('date') ? ' (' + v('date') + ')' : '');
+      var payload = { venue: v('venue'), city: v('city'), date: v('date'), budget: v('budget'), name: v('name'), email: email, notes: v('notes'),
+        _subject: subject, _replyto: email, _gotcha: document.getElementById('bf-hp').value };
+      sending = true; sendBtn.disabled = true; sendBtn.textContent = 'Running it to the bar...'; status.textContent = '';
+      fetch(ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' }, body: JSON.stringify(payload) })
+        .then(function (r) { if (!r.ok) throw new Error(r.status); return r; })
+        .then(function () {
+          sendBtn.textContent = 'Tab closed. Cheers!';
+          status.textContent = "Got it. We'll holler back before last call.";
+          ['venue', 'city', 'date', 'budget', 'notes'].forEach(function (id) { document.getElementById('bf-' + id).value = ''; });
+          build();
+          setTimeout(function () { sendBtn.textContent = 'Close out the tab'; sendBtn.disabled = false; sending = false; }, 4000);
+        })
+        .catch(function () {
+          sendBtn.textContent = 'Close out the tab'; sendBtn.disabled = false; sending = false;
+          status.textContent = 'The bartender dropped it. Hit "Open it in my email" or write us at ratriverboysband@gmail.com.';
+        });
+    });
     document.getElementById('bf-copy').addEventListener('click', function () {
       var text = build();
       try {
