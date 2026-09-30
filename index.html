@@ -1120,6 +1120,22 @@ h1, h2, h3, .kicker, .fb-line, .lede, .tab-note, .rule-list li, .item p, .note, 
 @media (max-width: 640px) { .freedom .pole { height: 30vh; width: 6px; } .freedom .rider { top: 3vh; } .freedom .msg { top: 45%; } }
 .freedom .msg { z-index: 3; }
 
+
+/* sign hardware: a bolted plate on the beam for each hook, rope tied off inside the eyelet */
+.gate .hook::after { content: ""; position: absolute; top: -14px; left: 50%; width: 22px; height: 7px; margin-left: -11px; border-radius: 2px;
+  background: radial-gradient(circle at 4px 3.5px, #9a8e7c 0 1.6px, transparent 2.2px), radial-gradient(circle at 18px 3.5px, #9a8e7c 0 1.6px, transparent 2.2px), linear-gradient(#4a4238, #2b2621);
+  box-shadow: 0 2px 2px rgba(0,0,0,.5); }
+.gate .hook::before { top: -9px; height: 11px; }
+.gate .hang-rope { z-index: 4; }
+.gate .hang-rope::after { bottom: -6px; }
+
+
+@media (hover: none), (pointer: coarse) { .chaser { display: none !important; } }
+
+
+/* nothing (rat, shards, puddles, animations) is ever allowed to widen the page, so phones never zoom out */
+html, body { overflow-x: hidden; overflow-x: clip; -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+
 /* ---------- phones: center the hero and a few loose pieces ---------- */
 @media (max-width: 640px) {
   .hero-grid > div:last-child { text-align: center; }
@@ -1266,6 +1282,26 @@ h1, h2, h3, .kicker, .fb-line, .lede, .tab-note, .rule-list li, .item p, .note, 
       dw.style.width = Math.min(dw.offsetWidth, Math.round(h * 1.02)) + 'px';
     }
   }
+  // hang the sign for real: each hook is bolted under the beam straight above its eyelet,
+  // and each rope runs from inside the hook down into the eyelet ring
+  var hang = document.getElementById('sign-hang'), sign = document.getElementById('gate-sign'), beam = gate.querySelector('.beam');
+  function alignRopes() {
+    if (!hang || !sign || !beam || !document.getElementById('gate')) return;
+    var beamBottom = beam.offsetTop + beam.offsetHeight - hang.offsetTop;
+    ['l', 'r'].forEach(function (side) {
+      var eye = sign.querySelector('.e-' + side), hook = hang.querySelector('.h-' + side), rope = hang.querySelector('.r-' + side);
+      if (!eye || !hook || !rope) return;
+      var ex = sign.offsetLeft + eye.offsetLeft + eye.offsetWidth / 2, ey = sign.offsetTop + eye.offsetTop + eye.offsetHeight / 2;
+      hook.style.left = (ex - hook.offsetWidth / 2) + 'px'; hook.style.right = 'auto'; hook.style.top = (beamBottom + 4) + 'px';
+      if (rope.classList.contains('snapped')) return;
+      var rt = beamBottom + 4 + hook.offsetHeight - 6;
+      rope.style.left = (ex - rope.offsetWidth / 2) + 'px'; rope.style.right = 'auto';
+      rope.style.top = rt + 'px'; rope.style.height = Math.max(8, ey - rt) + 'px';
+    });
+  }
+  var fit0 = fitGate;
+  fitGate = function () { fit0(); alignRopes(); };
+  window.__alignRopes = alignRopes;
   window.__fitGate = fitGate;
   fitGate();
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitGate);
@@ -1838,7 +1874,9 @@ h1, h2, h3, .kicker, .fb-line, .lede, .tab-note, .rule-list li, .item p, .note, 
     var badge = document.querySelector('.badge');
     var brand = document.querySelector('.brand');
     if (badge && brand) {
-      brand.addEventListener('mouseenter', function () { gsap.fromTo(badge, { rotate: 0 }, { rotate: 360, duration: .7, ease: 'power2.out' }); });
+      brand.addEventListener('mouseenter', function () { gsap.to(badge, { rotate: '+=360', duration: .7, ease: 'power2.out' }); });
+      // every click spins it, even mid-spin
+      brand.addEventListener('click', function () { gsap.to(badge, { rotate: '+=720', duration: 1.1, ease: 'power3.out', overwrite: true }); });
     }
 
     // buttons wobble on hover
@@ -2176,6 +2214,8 @@ h1, h2, h3, .kicker, .fb-line, .lede, .tab-note, .rule-list li, .item p, .note, 
   // when the ground moves out from under it.
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   var rat = document.getElementById('chaser'); if (!rat) return;
+  // phones and tablets: no mouse to chase, so no rat
+  if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) { rat.style.display = 'none'; return; }
   var flip = rat.querySelector('.flip');
 
   var SEL = [
