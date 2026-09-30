@@ -2550,16 +2550,22 @@ document.querySelectorAll('.fight-inline').forEach(function (b) {
   function open() {
     if (opened) return; opened = true;
     var L = document.getElementById('door-l'), R = document.getElementById('door-r');
-    L.style.animation = 'none'; R.style.animation = 'none'; document.getElementById('sign-hang').style.animation = 'none';
+    L.style.animation = 'none'; R.style.animation = 'none';
+    // the kick snaps both ropes: stubs stay on the beam anchors, the sign drops
+    var hangEl = document.getElementById('sign-hang'), signEl = document.getElementById('gate-sign');
+    hangEl.dataset.broken = '1'; window.__signFalling = true;
+    hangEl.querySelectorAll('.hang-rope').forEach(function (r) {
+      r.classList.add('snapped'); r.style.transform = '';
+      if (window.gsap && !reduce) gsap.to(r, { height: 18, duration: .5, ease: 'elastic.out(1.2,.3)' }); else r.style.height = '18px';
+    });
     if (!window.gsap || reduce) { gate.style.transition = 'opacity .35s'; gate.style.opacity = '0'; setTimeout(finish, 360); return; }
     gsap.timeline({ onComplete: finish })
       .to(btn, { scale: .9, duration: .08, yoyo: true, repeat: 1 })
       .to(L, { rotateY: 118, duration: .42, ease: 'power3.out' }, '<')
+      .to([signEl, hangEl.querySelector('.rope-tail')].filter(Boolean), { y: '+=' + (window.innerHeight + 200), rotate: '+=' + (Math.random() < .5 ? -24 : 24), duration: .85, ease: 'power2.in' }, '<.05')
       .to(R, { rotateY: -118, duration: .42, ease: 'power3.out' }, '<')
-      .to('#sign-hang', { rotate: 14, y: -26, duration: .25, ease: 'power2.out' }, '<')
       .to(L, { rotateY: 62, duration: .9, ease: 'elastic.out(1, .35)' })
       .to(R, { rotateY: -62, duration: .9, ease: 'elastic.out(1, .35)' }, '<')
-      .to('#sign-hang', { y: 900, rotate: 40, duration: .7, ease: 'power2.in' }, '<')
       .to('#gate-inner', { scale: 4.2, duration: .8, ease: 'power2.in' }, '<.15')
       .to(gate, { opacity: 0, duration: .45, ease: 'power1.in' }, '-=.4');
   }
@@ -2627,7 +2633,7 @@ document.querySelectorAll('.fight-inline').forEach(function (b) {
     tail.style.transform = 'rotate(' + beta + 'rad)';
   }
   function step(now) {
-    if (!document.getElementById('gate')) return;
+    if (!document.getElementById('gate') || window.__signFalling) return;
     var dt = Math.min(.033, (now - t0) / 1000); t0 = now;
     var n = 4, h = dt / n;
     for (var s = 0; s < n; s++) {
