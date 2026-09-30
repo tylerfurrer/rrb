@@ -1080,6 +1080,46 @@ img { -webkit-user-drag: none; }
 p, li, small, label, .tip-say, .gate-hint, .foot-lines span { text-wrap: pretty; }
 h1, h2, h3, .kicker, .fb-line, .lede, .tab-note, .rule-list li, .item p, .note, .perks li { text-wrap: balance; }
 
+
+/* tip jar: cracks and shattering */
+.jar-box { cursor: pointer; -webkit-tap-highlight-color: transparent; }
+.jar .cracks { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 4; pointer-events: none; }
+.jar .cracks .c { display: none; }
+.jar .cracks path { fill: none; stroke: rgba(255,255,255,.8); stroke-width: 1.3; vector-effect: non-scaling-stroke; stroke-linecap: round; stroke-linejoin: round;
+  filter: drop-shadow(0 0 1px rgba(0,0,0,.6)); }
+.jar.cr1 .c1, .jar.cr2 .c1, .jar.cr2 .c2, .jar.cr3 .c1, .jar.cr3 .c2, .jar.cr3 .c3,
+.jar.cr4 .c1, .jar.cr4 .c2, .jar.cr4 .c3, .jar.cr4 .c4 { display: inline; }
+
+
+/* ---------- FREEBIRD: maximum freedom ---------- */
+.freedom { position: fixed; inset: 0; z-index: 400; pointer-events: none; overflow: hidden; }
+.freedom .fw { position: absolute; inset: 0; width: 100%; height: 100%; }
+.freedom .flash { position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 40%, rgba(20,40,110,.55), rgba(8,14,40,.8)); }
+.freedom .pole { position: absolute; bottom: -8px; width: 8px; height: 62vh; border-radius: 4px;
+  background: linear-gradient(90deg, #8a8a8a, #f2f2f2 40%, #9a9a9a); box-shadow: 2px 0 6px rgba(0,0,0,.5); }
+.freedom .pole::before { content: ""; position: absolute; top: -12px; left: -6px; width: 20px; height: 20px; border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #fff3b0, #d4a017 60%, #7a5a08); }
+.freedom .pole.l { left: 4vw; } .freedom .pole.r { right: 4vw; }
+.freedom .flag { position: absolute; top: 6px; display: flex; width: var(--fw); height: var(--fh); filter: drop-shadow(3px 5px 4px rgba(0,0,0,.45)); }
+.freedom .pole.l .flag { left: 8px; }
+.freedom .pole.r .flag { right: 8px; transform: scaleX(-1); }
+.freedom .flag i { flex: 1 0 auto; height: 100%; background-size: var(--fw) var(--fh); animation: flag-wave 1s ease-in-out infinite alternate; }
+@keyframes flag-wave { from { transform: translateY(calc(var(--amp) * -1)); filter: brightness(1.12); } to { transform: translateY(var(--amp)); filter: brightness(.82); } }
+.freedom .rider { position: absolute; top: 14vh; left: 0; width: min(560px, 78vw); }
+.freedom .rider .bob { animation: rider-bob .9s ease-in-out infinite alternate; }
+@keyframes rider-bob { from { transform: translateY(-10px) rotate(-3deg); } to { transform: translateY(10px) rotate(2deg); } }
+.freedom .wing-near { transform-box: view-box; transform-origin: 120px 112px; animation: flap-n .45s ease-in-out infinite alternate; }
+.freedom .wing-far { transform-box: view-box; transform-origin: 110px 108px; animation: flap-f .45s ease-in-out infinite alternate; }
+@keyframes flap-n { from { transform: rotate(-26deg); } to { transform: rotate(30deg) scaleY(.7); } }
+@keyframes flap-f { from { transform: rotate(-18deg); } to { transform: rotate(26deg) scaleY(.75); } }
+.freedom .msg { position: absolute; left: 50%; top: 58%; width: min(92vw, 900px); transform: translate(-50%, -50%); text-align: center;
+  font-family: var(--display); color: #fff; line-height: .95; letter-spacing: .02em;
+  text-shadow: 3px 3px 0 #b22234, 6px 6px 0 #1b2f7a, 0 0 30px rgba(255,255,255,.35); }
+.freedom .msg b { display: block; font-weight: 400; font-size: clamp(2.4rem, 8vw, 6rem); }
+.freedom .msg span { display: block; margin-top: .3em; font-size: clamp(1.2rem, 3.4vw, 2.4rem); color: #ffd84a; }
+@media (max-width: 640px) { .freedom .pole { height: 30vh; width: 6px; } .freedom .rider { top: 3vh; } .freedom .msg { top: 45%; } }
+.freedom .msg { z-index: 3; }
+
 /* ---------- phones: center the hero and a few loose pieces ---------- */
 @media (max-width: 640px) {
   .hero-grid > div:last-child { text-align: center; }
@@ -1362,7 +1402,12 @@ h1, h2, h3, .kicker, .fb-line, .lede, .tab-note, .rule-list li, .item p, .note, 
     <div class="wrap tips-grid">
       <div class="jar-box">
         <div class="jar-rim" aria-hidden="true"></div>
-        <div class="jar" id="jar" aria-hidden="true"><div class="jar-label">TIPS</div></div>
+        <div class="jar" id="jar" aria-hidden="true"><div class="jar-label">TIPS</div><svg class="cracks" viewBox="0 0 100 120" preserveAspectRatio="none" aria-hidden="true">
+          <g class="c c1"><path d="M62,40 L70,30 M62,40 L74,44 M62,40 L56,50 M62,40 L58,31"/></g>
+          <g class="c c2"><path d="M70,30 L78,18 L84,12 M74,44 L88,50 L97,49 M56,50 L48,62 L44,74 M58,31 L50,22"/></g>
+          <g class="c c3"><path d="M55,36 Q62,30 69,36 Q70,45 62,47 Q54,45 55,36 M48,62 L36,66 L22,64 M44,74 L46,90 L40,104 M88,50 L92,66"/></g>
+          <g class="c c4"><path d="M22,64 L10,60 M40,104 L30,116 M84,12 L90,4 M46,90 L60,98 L72,112 M36,66 L30,80 L18,92 M92,66 L86,84 L90,100 M50,22 L40,10"/></g>
+        </svg></div>
       </div>
       <div>
         <p class="kicker">The tip jar</p>
@@ -1884,10 +1929,59 @@ h1, h2, h3, .kicker, .fb-line, .lede, .tab-note, .rule-list li, .item p, .note, 
   req.addEventListener('submit', function (e) {
     e.preventDefault();
     var song = (document.getElementById('request-song').value || '').trim();
-    var msg = /wagon/i.test(song) ? 'WAGON WHEEL: HELL NO' : (song ? '"' + song + '"? DENIED. WE PLAY WAGON WHEEL NOW.' : 'WAGON WHEEL: DENIED');
+    var free = /free\s*bird/i.test(song);
+    var msg = free ? "DON'T TYPE FREEBIRD IN THE TEXT BOX." : /wagon/i.test(song) ? 'WAGON WHEEL: HELL NO' : (song ? '"' + song + '"? DENIED. WE PLAY WAGON WHEEL NOW.' : 'WAGON WHEEL: DENIED');
+    if (free && window.freedom) window.freedom();
     deniedWrap.innerHTML = '';
     var d = document.createElement('div'); d.className = 'denied'; d.textContent = msg; deniedWrap.appendChild(d);
     if (hasG && !reduce) gsap.fromTo(d, { scale: 2.4, opacity: 0, rotate: -20 }, { scale: 1, opacity: 1, rotate: -6, duration: .35, ease: 'power4.in' });
+  });
+
+  // ---- smack the tip jar: it cracks, then shatters and falls, then a new one drops in ----
+  var jarBox = document.querySelector('.jar-box'), jarHits = 0, jarBusy = false;
+  var crackLines = ['Hey. Easy.', "That's glass, genius.", "It's cracking, Brenda.", "One more and it's coming out of your tab."];
+  var shardShapes = [
+    '0 0,55% 0,48% 30%,20% 40%,0 35%', '55% 0,100% 0,100% 30%,70% 38%,48% 30%', '0 35%,20% 40%,30% 65%,0 70%',
+    '20% 40%,48% 30%,70% 38%,62% 62%,30% 65%', '70% 38%,100% 30%,100% 68%,62% 62%', '0 70%,30% 65%,45% 100%,0 100%',
+    '30% 65%,62% 62%,70% 100%,45% 100%', '62% 62%,100% 68%,100% 100%,70% 100%'];
+  function setCracks(n) { jar.className = 'jar' + (n ? ' cr' + n : ''); }
+  function shatter() {
+    jarBusy = true;
+    var r = jarBox.getBoundingClientRect();
+    say.textContent = "You broke the tip jar. That's coming out of your tab.";
+    if (!hasG || reduce) {
+      jar.querySelectorAll('.bill').forEach(function (b) { b.remove(); });
+      total = 0; billCount = 0; totalEl.textContent = "Tonight's take: $0"; setCracks(0); jarHits = 0; jarBusy = false; return;
+    }
+    var shards = shardShapes.map(function (poly) {
+      var c = jarBox.cloneNode(true);
+      c.querySelectorAll('[id]').forEach(function (el) { el.removeAttribute('id'); });
+      c.classList.add('jar-shard');
+      c.style.cssText = 'position:fixed;left:' + r.left + 'px;top:' + r.top + 'px;width:' + r.width + 'px;height:' + r.height + 'px;margin:0;z-index:90;pointer-events:none;clip-path:polygon(' + poly + ')';
+      document.body.appendChild(c);
+      return c;
+    });
+    jarBox.style.visibility = 'hidden';
+    jar.querySelectorAll('.bill').forEach(function (b) { b.remove(); });
+    total = 0; billCount = 0; totalEl.textContent = "Tonight's take: $0"; setCracks(0); jarHits = 0;
+    shards.forEach(function (c, k) {
+      var dir = (k % 2 ? 1 : -1) * (0.4 + Math.random());
+      gsap.timeline({ onComplete: function () { c.remove(); } })
+        .to(c, { x: dir * 26, y: -18 - Math.random() * 22, rotate: dir * 12, duration: .18, ease: 'power2.out' })
+        .to(c, { x: dir * (80 + Math.random() * 140), y: window.innerHeight - r.top + 80, rotate: dir * (90 + Math.random() * 200), duration: 1 + Math.random() * .5, ease: 'power2.in' });
+    });
+    setTimeout(function () {
+      jarBox.style.visibility = '';
+      gsap.fromTo(jarBox, { y: -(r.bottom + 80), rotate: -10 }, { y: 0, rotate: 0, duration: 1.1, ease: 'bounce.out', clearProps: 'transform',
+        onComplete: function () { jarBusy = false; say.textContent = 'New jar. Try not to break this one.'; } });
+    }, 1700);
+  }
+  if (jarBox) jarBox.addEventListener('click', function () {
+    if (jarBusy) return;
+    jarHits++;
+    if (jarHits >= 5) { shatter(); return; }
+    setCracks(jarHits); say.textContent = crackLines[jarHits - 1];
+    if (hasG && !reduce) gsap.fromTo(jarBox, { x: -6, rotate: -2 }, { x: 0, rotate: 0, duration: .55, ease: 'elastic.out(1,.3)', clearProps: 'transform' });
   });
 
   // ---- hide the bar fight button while the footer is on screen ----
@@ -2674,5 +2768,123 @@ document.querySelectorAll('.fight-inline').forEach(function (b) {
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(draw);
   window.addEventListener('load', draw);
   var to; window.addEventListener('resize', function () { clearTimeout(to); to = setTimeout(draw, 120); });
+})();
+</script>
+<script>
+// FREEBIRD: fireworks, waving flags, and Uncle Sam riding a bald eagle across the screen
+(function () {
+  var stars = '';
+  for (var r = 0; r < 9; r++) for (var c = 0; c < (r % 2 ? 5 : 6); c++)
+    stars += '<circle cx="' + ((r % 2 ? 12.6 : 6.3) + c * 12.6).toFixed(1) + '" cy="' + (5.4 + r * 5.4).toFixed(1) + '" r="1.9" fill="#fff"/>';
+  var stripes = '';
+  for (var k = 0; k < 13; k++) stripes += '<rect y="' + (k * 100 / 13).toFixed(2) + '" width="190" height="' + (100 / 13 + .05).toFixed(2) + '" fill="' + (k % 2 ? '#fff' : '#b22234') + '"/>';
+  var flagSvg = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 190 100" preserveAspectRatio="none">' + stripes + '<rect width="76" height="53.85" fill="#3c3b6e"/>' + stars + '</svg>';
+  var flagUrl = 'url("data:image/svg+xml,' + encodeURIComponent(flagSvg) + '")';
+
+  var riderSvg = '<svg viewBox="-20 -20 270 175" xmlns="http://www.w3.org/2000/svg"><defs>' +
+    '<pattern id="fb-pants" width="6" height="6" patternUnits="userSpaceOnUse"><rect width="6" height="6" fill="#fff"/><rect width="6" height="3" fill="#c8102e"/></pattern>' +
+    '<pattern id="fb-hat" width="6" height="6" patternUnits="userSpaceOnUse"><rect width="6" height="6" fill="#fff"/><rect width="3" height="6" fill="#c8102e"/></pattern>' +
+    '<pattern id="fb-flag" width="4" height="4" patternUnits="userSpaceOnUse"><rect width="4" height="4" fill="#fff"/><rect width="4" height="2" fill="#c8102e"/></pattern>' +
+    '<linearGradient id="fb-body" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6e4724"/><stop offset="1" stop-color="#3b2410"/></linearGradient></defs>' +
+    '<g class="bob">' +
+    '<g class="wing-far"><path d="M110,108 C80,58 40,26 -12,16 C18,46 26,56 16,66 C46,66 66,88 100,116 Z" fill="#3a2410"/></g>' +
+    '<path d="M44,118 L4,106 L10,122 L2,138 L46,132 Z" fill="#f4f1ea" stroke="#b9b2a2" stroke-width="1.5"/>' +
+    '<path d="M12,112 L40,122 M8,128 L40,128" stroke="#cfc7b6" stroke-width="1"/>' +
+    '<ellipse cx="110" cy="122" rx="72" ry="27" fill="url(#fb-body)" transform="rotate(-8 110 122)"/>' +
+    '<path d="M112,146 l-6,14 m6,-14 l2,15 m-2,-15 l9,12 M140,142 l-4,14 m4,-14 l4,14 m-4,-14 l10,10" stroke="#f2b21c" stroke-width="3.2" stroke-linecap="round"/>' +
+    '<path d="M110,98 L128,98 L136,128 L122,131 Z" fill="url(#fb-pants)" stroke="#8a1020" stroke-width="1"/>' +
+    '<ellipse cx="131" cy="131" rx="10" ry="5" fill="#111"/>' +
+    '<path d="M103,62 L133,62 L137,101 L101,101 Z" fill="#1d3a8a" stroke="#0e1f55" stroke-width="1.5"/>' +
+    '<path d="M112,62 L118,80 L124,62 Z" fill="#fff"/><path d="M113,64 L118,67 L123,64 L123,70 L118,67 L113,70 Z" fill="#c8102e"/>' +
+    '<path d="M130,68 L158,40" stroke="#1d3a8a" stroke-width="9" stroke-linecap="round"/>' +
+    '<line x1="161" y1="42" x2="161" y2="4" stroke="#d9c49a" stroke-width="2"/>' +
+    '<rect x="161" y="4" width="26" height="16" fill="url(#fb-flag)"/><rect x="161" y="4" width="11" height="8.5" fill="#3c3b6e"/>' +
+    '<circle cx="160" cy="39" r="5.5" fill="#f1c9a5"/>' +
+    '<circle cx="118" cy="51" r="11.5" fill="#f1c9a5"/>' +
+    '<path d="M109,56 Q118,80 127,56 Q118,62 109,56 Z" fill="#fff" stroke="#ddd" stroke-width=".8"/>' +
+    '<path d="M111,46 l6,1.5 M120,47.5 l6,-1.5" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/>' +
+    '<circle cx="114.5" cy="50" r="1.4" fill="#222"/><circle cx="122.5" cy="50" r="1.4" fill="#222"/>' +
+    '<path d="M115,57 Q118,59 121,57" stroke="#a0522d" stroke-width="1.4" fill="none"/>' +
+    '<rect x="105" y="2" width="26" height="38" fill="url(#fb-hat)" stroke="#999" stroke-width="1"/>' +
+    '<rect x="105" y="29" width="26" height="8" fill="#1d3a8a"/>' +
+    '<circle cx="110" cy="33" r="1.3" fill="#fff"/><circle cx="116" cy="33" r="1.3" fill="#fff"/><circle cx="122" cy="33" r="1.3" fill="#fff"/><circle cx="128" cy="33" r="1.3" fill="#fff"/>' +
+    '<ellipse cx="118" cy="40.5" rx="19" ry="4" fill="#fff" stroke="#999" stroke-width="1"/>' +
+    '<ellipse cx="170" cy="112" rx="24" ry="19" fill="#f7f5ef"/><circle cx="186" cy="100" r="22" fill="#f7f5ef"/>' +
+    '<path d="M168,94 Q176,86 190,86" stroke="#ddd8cc" stroke-width="1.2" fill="none"/>' +
+    '<path d="M203,94 Q224,95 226,108 Q221,113 214,106 Q210,104 204,108 Z" fill="#f2b21c" stroke="#a8700a" stroke-width="1.2"/>' +
+    '<circle cx="193" cy="96" r="3.2" fill="#2a1a08"/><circle cx="194" cy="95" r="1" fill="#fff"/>' +
+    '<path d="M185,90 L200,93" stroke="#4a3522" stroke-width="3.4" stroke-linecap="round"/>' +
+    '<g class="wing-near"><path d="M120,112 C100,50 70,8 18,-12 C38,24 44,34 34,44 C54,44 60,54 54,62 C80,64 96,90 118,124 Z" fill="#6b4523" stroke="#3a220f" stroke-width="1.5"/>' +
+    '<path d="M40,6 L70,40 M50,40 L82,66 M62,58 L92,86" stroke="#4a2e14" stroke-width="1.4"/></g>' +
+    '</g></svg>';
+
+  window.freedom = function () {
+    if (document.querySelector('.freedom')) return;
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var o = document.createElement('div'); o.className = 'freedom'; o.setAttribute('aria-hidden', 'true');
+    var small = window.innerWidth < 640, fw = small ? 130 : 220, fh = Math.round(fw * 100 / 190), n = small ? 16 : 24, sw = fw / n;
+    function flag(side) {
+      var pole = document.createElement('div'); pole.className = 'pole ' + side;
+      var f = document.createElement('div'); f.className = 'flag';
+      f.style.setProperty('--fw', fw + 'px'); f.style.setProperty('--fh', fh + 'px');
+      for (var i = 0; i < n; i++) {
+        var sl = document.createElement('i');
+        sl.style.width = sw + 'px'; sl.style.backgroundImage = flagUrl; sl.style.backgroundPosition = (-i * sw) + 'px 0';
+        sl.style.setProperty('--amp', (1 + i * (small ? .35 : .4)).toFixed(1) + 'px');
+        sl.style.animationDelay = (-i * .07) + 's';
+        f.appendChild(sl);
+      }
+      pole.appendChild(f); return pole;
+    }
+    o.innerHTML = '<div class="flash"></div><canvas class="fw"></canvas>' +
+      '<div class="rider">' + riderSvg + '</div>' +
+      '<div class="msg"><b>DON\'T TYPE FREEBIRD</b><span>IN THE TEXT BOX.</span></div>';
+    o.appendChild(flag('l')); o.appendChild(flag('r'));
+    document.body.appendChild(o);
+    var G = window.gsap;
+    if (reduce || !G) { setTimeout(function () { o.remove(); }, 3500); return; }
+
+    // fireworks
+    var cv = o.querySelector('canvas'), ctx = cv.getContext('2d'), dpr = Math.min(window.devicePixelRatio || 1, 2);
+    var W = cv.width = window.innerWidth * dpr, H = cv.height = window.innerHeight * dpr;
+    var parts = [], cols = ['#ff3b3b', '#ffffff', '#4d7cff', '#ffd84a', '#ff3b3b', '#ffffff'];
+    function burst(x, y) {
+      var col = cols[Math.floor(Math.random() * cols.length)], col2 = cols[Math.floor(Math.random() * cols.length)];
+      var cnt = 70 + Math.random() * 40, sp = (2.2 + Math.random() * 2.6) * dpr;
+      for (var i = 0; i < cnt; i++) {
+        var a = Math.PI * 2 * i / cnt + Math.random() * .1, v = sp * (.55 + Math.random() * .45);
+        parts.push({ x: x, y: y, vx: Math.cos(a) * v, vy: Math.sin(a) * v, life: 55 + Math.random() * 35, age: 0, c: i % 3 ? col : col2, s: (1.2 + Math.random() * 1.4) * dpr });
+      }
+      parts.push({ flash: true, x: x, y: y, age: 0, life: 8 });
+    }
+    var t0 = performance.now(), last = 0, running = true;
+    function frame(now) {
+      if (!running) return;
+      var t = now - t0;
+      if (t < 6200 && now - last > (small ? 380 : 260)) { last = now; burst(W * (.08 + Math.random() * .84), H * (.08 + Math.random() * .45)); }
+      ctx.globalCompositeOperation = 'destination-out'; ctx.fillStyle = 'rgba(0,0,0,.22)'; ctx.fillRect(0, 0, W, H);
+      ctx.globalCompositeOperation = 'lighter';
+      for (var i = parts.length - 1; i >= 0; i--) {
+        var p = parts[i]; p.age++;
+        if (p.age > p.life) { parts.splice(i, 1); continue; }
+        if (p.flash) { var g = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, 70 * dpr); g.addColorStop(0, 'rgba(255,255,230,' + (.5 * (1 - p.age / p.life)) + ')'); g.addColorStop(1, 'rgba(255,255,230,0)'); ctx.fillStyle = g; ctx.fillRect(p.x - 70 * dpr, p.y - 70 * dpr, 140 * dpr, 140 * dpr); continue; }
+        p.vx *= .975; p.vy = p.vy * .975 + .045 * dpr; p.x += p.vx; p.y += p.vy;
+        ctx.globalAlpha = Math.max(0, 1 - p.age / p.life) * (Math.random() < .12 ? .4 : 1);
+        ctx.fillStyle = p.c; ctx.beginPath(); ctx.arc(p.x, p.y, p.s, 0, 6.283); ctx.fill();
+      }
+      ctx.globalAlpha = 1;
+      if (t < 8200) requestAnimationFrame(frame);
+    }
+    requestAnimationFrame(frame);
+
+    var rider = o.querySelector('.rider'), msg = o.querySelector('.msg');
+    G.timeline({ onComplete: function () { running = false; o.remove(); } })
+      .from(o.querySelector('.flash'), { opacity: 0, duration: .3 })
+      .from(o.querySelectorAll('.pole'), { yPercent: 105, duration: .8, ease: 'back.out(1.4)', stagger: .12 }, 0)
+      .fromTo(rider, { x: -rider.offsetWidth - 40, y: 40 }, { x: window.innerWidth + 40, y: -30, duration: 4.6, ease: 'none' }, .3)
+      .fromTo(msg, { scale: 3, opacity: 0, rotate: -8 }, { scale: 1, opacity: 1, rotate: -3, duration: .4, ease: 'power4.in' }, 1.1)
+      .to(msg, { x: '+=6', yoyo: true, repeat: 5, duration: .05 }, 1.5)
+      .to(o, { opacity: 0, duration: .6 }, 7.2);
+  };
 })();
 </script>
