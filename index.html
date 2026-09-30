@@ -1115,7 +1115,7 @@ h1, h2, h3, .kicker, .fb-line, .lede, .tab-note, .rule-list li, .item p, .note, 
 .freedom .msg { position: absolute; left: 50%; top: 58%; width: min(92vw, 900px); transform: translate(-50%, -50%); text-align: center;
   font-family: var(--display); color: #fff; line-height: .95; letter-spacing: .02em;
   text-shadow: 3px 3px 0 #b22234, 6px 6px 0 #1b2f7a, 0 0 30px rgba(255,255,255,.35); }
-.freedom .msg b { display: block; font-weight: 400; font-size: clamp(2.4rem, 8vw, 6rem); }
+.freedom .msg b { display: block; font-weight: 400; font-size: clamp(3.6rem, 15vw, 10rem); letter-spacing: .04em; }
 .freedom .msg span { display: block; margin-top: .3em; font-size: clamp(1.2rem, 3.4vw, 2.4rem); color: #ffd84a; }
 @media (max-width: 640px) { .freedom .pole { height: 30vh; width: 6px; } .freedom .rider { top: 3vh; } .freedom .msg { top: 45%; } }
 .freedom .msg { z-index: 3; }
@@ -1913,7 +1913,7 @@ h1, h2, h3, .kicker, .fb-line, .lede, .tab-note, .rule-list li, .item p, .note, 
       total += amt; billCount++;
       say.textContent = pick(lines[amt]);
       totalEl.textContent = "Tonight's take: $" + total.toLocaleString();
-      if (total >= 100) req.hidden = false;
+      if (total > 0) req.hidden = false;
       if (billCount > 40) return;
       var bill = document.createElement('div'); bill.className = 'bill'; bill.textContent = '$' + amt;
       var w = jar.clientWidth, h = jar.clientHeight;
@@ -1930,8 +1930,8 @@ h1, h2, h3, .kicker, .fb-line, .lede, .tab-note, .rule-list li, .item p, .note, 
     e.preventDefault();
     var song = (document.getElementById('request-song').value || '').trim();
     var free = /free\s*bird/i.test(song);
-    var msg = free ? "DON'T TYPE FREEBIRD IN THE TEXT BOX." : /wagon/i.test(song) ? 'WAGON WHEEL: HELL NO' : (song ? '"' + song + '"? DENIED. WE PLAY WAGON WHEEL NOW.' : 'WAGON WHEEL: DENIED');
-    if (free && window.freedom) window.freedom();
+    var msg = free ? 'AMERICA' : /wagon/i.test(song) ? 'WAGON WHEEL: HELL NO' : (song ? '"' + song + '"? DENIED. WE PLAY WAGON WHEEL NOW.' : 'WAGON WHEEL: DENIED');
+    if (free) { deniedWrap.innerHTML = ''; if (window.freedom) window.freedom(); return; }
     deniedWrap.innerHTML = '';
     var d = document.createElement('div'); d.className = 'denied'; d.textContent = msg; deniedWrap.appendChild(d);
     if (hasG && !reduce) gsap.fromTo(d, { scale: 2.4, opacity: 0, rotate: -20 }, { scale: 1, opacity: 1, rotate: -6, duration: .35, ease: 'power4.in' });
@@ -2838,7 +2838,7 @@ document.querySelectorAll('.fight-inline').forEach(function (b) {
     }
     o.innerHTML = '<div class="flash"></div><canvas class="fw"></canvas>' +
       '<div class="rider">' + riderSvg + '</div>' +
-      '<div class="msg"><b>DON\'T TYPE FREEBIRD</b><span>IN THE TEXT BOX.</span></div>';
+      '<div class="msg"><b>AMERICA</b></div>';
     o.appendChild(flag('l')); o.appendChild(flag('r'));
     document.body.appendChild(o);
     var G = window.gsap;
