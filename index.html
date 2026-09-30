@@ -1130,7 +1130,6 @@ h1, h2, h3, .kicker, .fb-line, .lede, .tab-note, .rule-list li, .item p, .note, 
 .gate .hang-rope::after { bottom: -6px; }
 
 
-@media (hover: none), (pointer: coarse) { .chaser { display: none !important; } }
 
 
 /* nothing (rat, shards, puddles, animations) is ever allowed to widen the page, so phones never zoom out */
@@ -2214,8 +2213,6 @@ html, body { overflow-x: hidden; overflow-x: clip; -webkit-text-size-adjust: 100
   // when the ground moves out from under it.
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   var rat = document.getElementById('chaser'); if (!rat) return;
-  // phones and tablets: no mouse to chase, so no rat
-  if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) { rat.style.display = 'none'; return; }
   var flip = rat.querySelector('.flip');
 
   var SEL = [
