@@ -1139,6 +1139,10 @@ html, body { overflow-x: hidden; overflow-x: clip; -webkit-text-size-adjust: 100
 /* the whole hanger no longer rotates as one piece: hooks are fixed to the beam, the ropes and sign swing */
 .gate .sign-hang { animation: none !important; }
 
+
+.gate .hook { z-index: 5; }
+.gate .gate-btn, .gate .gate-hint { z-index: 6; }
+
 /* ---------- phones: center the hero and a few loose pieces ---------- */
 @media (max-width: 640px) {
   .hero-grid > div:last-child { text-align: center; }
@@ -2582,7 +2586,7 @@ document.querySelectorAll('.fight-inline').forEach(function (b) {
   if (!hang || !sign) return;
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var hits = 0, broken = false, last = 0;
-  var th = 0, om = 0, ph, k2, dist, v, P, tail, beta = 0, bom = 0, TL = 44, t0;
+  var th = 0, om = 0, ph, k2, dist, v, P, tail, beta = 0, bom = 0, TL = 44, t0, rl, Hk, Lr, LrT, al = 0, aom = 0;
   var G = 9800, DAMP = 0.55, TDAMP = 3.2;
   function smack(e) {
     e.stopPropagation();
@@ -2611,6 +2615,14 @@ document.querySelectorAll('.fight-inline').forEach(function (b) {
     v = eR.x - eL.x;
     P = { x: sign.offsetLeft + eL.x, y: sign.offsetTop + eL.y };
     sign.style.transformOrigin = eL.x + 'px ' + eL.y + 'px';
+    // the surviving rope: hangs from its hook and swings too; the knot slips a little so the
+    // sign's top corner clears the beam once it hangs from one hole
+    rl = hang.querySelector('.r-l');
+    Hk = { x: P.x, y: rl.offsetTop };
+    Lr = Math.max(8, P.y - Hk.y);
+    LrT = Math.max(Lr, Math.hypot(eL.x, eL.y) + 16);
+    al = 0; aom = 0;
+    rl.style.transformOrigin = '50% 0';
     // broken rope: stub recoils up to the hook, the other half stays tied to the sign
     var rr = hang.querySelector('.r-r');
     rr.classList.add('snapped');
@@ -2623,12 +2635,14 @@ document.querySelectorAll('.fight-inline').forEach(function (b) {
     beta = Math.PI - 0.25; bom = 0;   // tail starts pointing up at the hook it came from
     th = 0; om = -1.2;                // a little kick back from the snap
     t0 = performance.now();
-    if (reduce) { th = ph; draw(); return; }
+    if (reduce) { th = ph; Lr = LrT; draw(); return; }
     requestAnimationFrame(step);
   }
   function draw() {
-    sign.style.transform = 'rotate(' + th + 'rad)';
-    var x = P.x + v * Math.cos(th), y = P.y + v * Math.sin(th);
+    var ex = Hk.x + Lr * Math.sin(al), ey = Hk.y + Lr * Math.cos(al);
+    rl.style.height = Lr + 'px'; rl.style.transform = 'rotate(' + (-al) + 'rad)';
+    sign.style.transform = 'translate(' + (ex - P.x).toFixed(2) + 'px,' + (ey - P.y).toFixed(2) + 'px) rotate(' + th + 'rad)';
+    var x = ex + v * Math.cos(th), y = ey + v * Math.sin(th);
     tail.style.left = (x - 3) + 'px'; tail.style.top = y + 'px';
     tail.style.transform = 'rotate(' + beta + 'rad)';
   }
@@ -2640,6 +2654,10 @@ document.querySelectorAll('.fight-inline').forEach(function (b) {
       // plank: torque from gravity about the pivot, plus air drag
       var a = -(G * dist / k2) * Math.sin(th - ph) - DAMP * om;
       om += a * h; th += om * h;
+      // the rope it hangs from swings under the plank's weight and the jerk of the plank turning
+      Lr += (LrT - Lr) * Math.min(1, h * 9);
+      var aa = -(G / Math.max(Lr, 20)) * .35 * Math.sin(al) - 2.2 * aom - a * .012;
+      aom += aa * h; al += aom * h;
       // loose rope end: its own little pendulum hanging off the swinging eyelet
       var ax = -v * (a * Math.sin(th) + om * om * Math.cos(th)), ay = v * (a * Math.cos(th) - om * om * Math.sin(th));
       var ba = -(G / TL) * .5 * Math.sin(beta) - (ax * Math.cos(beta) + ay * Math.sin(beta)) / TL * .5 - TDAMP * bom;
