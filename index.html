@@ -1758,6 +1758,20 @@ html, body { touch-action: pan-x pan-y; -webkit-text-size-adjust: 100%; text-siz
    even when the toolbar shrinks, so no lighter strip shows at the bottom */
 body::before, body::after { inset: auto !important; top: 0 !important; left: 0 !important; right: 0 !important; height: 120vh !important; height: calc(100lvh + 60px) !important; }
 .haze { inset: auto !important; top: -10vh !important; left: -10% !important; right: -10% !important; height: calc(100lvh + 25vh) !important; }
+
+/* house rules: fixed number column so two-digit rules line up with the rest */
+.rule-list li { grid-template-columns: 3.5rem 1fr !important; column-gap: 10px !important; text-wrap: pretty; }
+.rule-list li::before { font-variant-numeric: tabular-nums; text-align: right; padding-right: 2px; }
+@media (max-width: 640px) {
+  .rule-list li { grid-template-columns: 2.5rem 1fr !important; column-gap: 8px !important; }
+}
+
+.fine-print {
+  margin: 30px 0 0; max-width: 72ch; padding-top: 14px; border-top: 1px dashed rgba(230,210,168,.35);
+  font-size: .92rem; line-height: 1.5; font-style: italic; color: rgba(230,210,168,.78); text-wrap: pretty;
+}
+.fine-print span { font-style: normal; font-family: var(--label); font-weight: 700; text-transform: uppercase; letter-spacing: .14em; font-size: .72rem; color: var(--gold); margin-right: 4px; }
+@media (max-width: 640px) { .fine-print { font-size: .85rem; margin-top: 22px; } }
 </style>
 
 <div class="haze" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
@@ -1977,7 +1991,7 @@ body::before, body::after { inset: auto !important; top: 0 !important; left: 0 !
         <li>Willie Nelson <span>Smoked weed on the White House roof. Look it up.</span></li>
         <li>Loretta Lynn <span>Would kick your ass</span></li>
         <li>George Jones <span>Drove a mower to the bar</span></li>
-        <li>Hank Williams <span>Pills, whiskey, and heartbreak. Our role model.</span></li>
+        <li>Hank Williams <span>Wrote the book on heartbreak</span></li>
       </ul>
     </div>
   </section>
@@ -2014,17 +2028,20 @@ body::before, body::after { inset: auto !important; top: 0 !important; left: 0 !
       <ol class="rule-list">
         <li>Requests go in the tip jar. A five gets you a song. A twenty gets you a song and our respect.</li>
         <li>We will not play Wagon Wheel. Ask again and we play it for 45 minutes straight.</li>
+        <li>If you yell “Freebird,” you're buying the next round. For the band.</li>
+        <li>If you request a song we don't know, we'll play it anyway. Badly.</li>
         <li>Dance like your ex is watching. They are. They're with someone worse.</li>
-        <li>Cry during a George Jones song and the next round's on the drummer.</li>
+        <li>Cry during a George Jones song and the next round's on you.</li>
+        <li>No phones during slow songs. Your ex doesn't deserve a text.</li>
         <li>Line dancing requires a minimum of four drinks and a signed waiver.</li>
+        <li>If you can't sing, sing louder.</li>
         <li>Hitting on the band is encouraged. Hitting the band is a misdemeanor.</li>
-        <li>If you lose your panties on the dance floor, we're keeping them for the merch table.</li>
+        <li>If the fiddle player winks at you, he winks at everybody. Don't make it weird.</li>
         <li>The bathroom is not a VIP room. Get a motel.</li>
-        <li>Married folks may only dance with someone else's spouse after 10 PM.</li>
         <li>Anyone caught line dancing sober will be asked to leave.</li>
-        <li>If you throw your bra, throw a twenty with it.</li>
-        <li>Slow songs are for grinding, not for texting your ex.</li>
+        <li>We take requests, cash and compliments. In that order.</li>
       </ol>
+      <p class="fine-print"><span>Fine print:</span> These house rules are for entertainment purposes only and are not enforced by the band, the venue or any court of law. The venue's actual rules always win. Please drink responsibly, tip your bartender and get home safe. Rat River Boys are not liable for sore feet, lost voices, broken hearts or anything you decide to do after last call.</p>
       <button class="btn alt fight-inline" type="button">Break a rule. Start a bar fight.</button>
     </div>
   </section>
@@ -2125,9 +2142,8 @@ body::before, body::after { inset: auto !important; top: 0 !important; left: 0 !
         <div class="copied" id="copied" aria-live="polite"></div>
         <p class="fb-line">Or slide into our DMs on <a href="https://www.facebook.com/profile.php?id=61589395443501" target="_blank" rel="noopener">Facebook</a>. We answer faster than your ex.</p>
         <ul class="perks">
-          <li>Mostly sober</li>
+          <li>Always on time</li>
           <li>We run our own sound</li>
-          <li>Will play for beer (and money)</li>
           <li>Long sets, short memories</li>
         </ul>
       </div>
@@ -2267,7 +2283,6 @@ body::before, body::after { inset: auto !important; top: 0 !important; left: 0 !
     "Bring your wife. Leave with regrets.",
     "We don't do encores. We do a second round.",
     "Like a good one night stand, you'll pretend you don't remember us.",
-    "Warning: may cause beer belly and pregnancy in the front row."
   ];
   // shuffle so every visit starts somewhere different
   for (var k = lines.length - 1; k > 0; k--) {
