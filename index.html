@@ -1,6 +1,6 @@
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#13213f">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<meta name="theme-color" content="#1d140e">
 <meta name="description" content="Rat River Boys. Wisconsin's filthiest honky tonk band. Traditional and outlaw country, old and new. Booking: ratriverboysband@gmail.com">
 <meta property="og:title" content="Rat River Boys">
 <meta property="og:description" content="Wisconsin's filthiest honky tonk band. Your mom's favorite band.">
@@ -33,7 +33,7 @@
 <title>Rat River Boys</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Oswald:wght@400;500;600;700&family=Crimson+Pro:ital,wght@0,400;0,600;1,400&family=Permanent+Marker&family=Caveat:wght@600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Rye&family=Yellowtail&family=Oswald:wght@400;500;600;700&family=Crimson+Pro:ital,wght@0,400;0,600;1,400&family=Permanent+Marker&family=Caveat:wght@600&display=swap">
 <style>
 /* Layout: a beat-up gig poster stapled to a bar wall. Night-sky hero with the lasso rat, then mustard, rust and navy slabs with grime, stains and torn edges. */
 :root {
@@ -154,7 +154,7 @@ nav ul a:hover { border-color: var(--mustard); }
   border: 2px solid var(--mustard); color: var(--mustard); padding: 6px 12px; transform: rotate(-1.5deg);
   margin-bottom: 20px;
 }
-h1 {
+h1, .slogan {
   font-family: var(--display); font-weight: 400;
   font-size: clamp(2.6rem, 6.5vw, 4.6rem); line-height: .95;
   margin: 0 0 20px; color: var(--mustard); text-wrap: balance;
@@ -570,7 +570,7 @@ footer a.fb-foot:hover { background: var(--bone); }
     position: fixed; left: 0; right: 0; top: 0; z-index: 90;
     display: flex; flex-wrap: nowrap; align-items: center; gap: 10px;
     padding: calc(10px + env(safe-area-inset-top, 0px)) 16px 10px;
-    background: rgba(11,21,40,.94); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
+    background: var(--beam); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
     border-bottom: 2px solid rgba(233,174,28,.35);
     box-shadow: 0 6px 18px rgba(0,0,0,.35);
   }
@@ -757,7 +757,7 @@ nav ul a.fb-nav .fb-f { display: none; }
     position: fixed; top: 0; left: 0; right: 0; z-index: 90;
     display: flex; flex-wrap: nowrap; align-items: center; gap: 26px;
     padding: 14px max(24px, calc((100vw - 1100px) / 2 + 20px));
-    background: rgba(11,21,40,.95); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
+    background: var(--beam); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
     border-bottom: 3px solid var(--mustard); box-shadow: 0 8px 24px rgba(0,0,0,.35);
     transition: padding .25s ease;
   }
@@ -1222,8 +1222,541 @@ html, body { overflow-x: hidden; overflow-x: clip; -webkit-text-size-adjust: 100
   @keyframes flame { 0%,100% { box-shadow: 0 0 14px 4px rgba(255,180,80,.55); } 45% { box-shadow: 0 0 10px 3px rgba(255,160,60,.45); } 70% { box-shadow: 0 0 16px 5px rgba(255,190,90,.6); } }
 }
 @media (max-width: 560px) { .lantern { display: none; } .doorway { width: 78vw; border-width: 12px; } }
+
+/* ---------- THE BOYS: bone ---------- */
+.boys-slab { background: var(--bone); color: var(--ink); }
+.boys-slab h2 { color: var(--rust); text-shadow: 3px 3px 0 var(--ink); }
+.boys-slab .kicker { color: var(--navy); }
+.bios { display: grid; grid-template-columns: repeat(2, 1fr); gap: 36px; margin-top: 30px; }
+.bio {
+  min-width: 0; background: #fbf3dc; border: 3px solid var(--ink);
+  box-shadow: 7px 7px 0 var(--ink); padding: 26px 26px 22px; position: relative;
+}
+.bio:nth-child(1) { transform: rotate(-.8deg); }
+.bio:nth-child(2) { transform: rotate(.8deg); }
+.bio .name { font-family: var(--display); font-size: clamp(1.8rem, 4.5vw, 2.4rem); line-height: 1; margin: 0 0 10px; color: var(--navy); }
+.bio .role {
+  display: inline-block; font-family: var(--label); font-weight: 700; text-transform: uppercase; letter-spacing: .14em; font-size: .82rem;
+  background: var(--rust); color: var(--bone); padding: 5px 10px; margin-bottom: 16px; transform: rotate(-1.5deg);
+}
+.bio p { margin: 0 0 14px; }
+.bio p:last-child { margin-bottom: 0; }
+@media (max-width: 800px) {
+  .bios { grid-template-columns: 1fr; gap: 28px; }
+  .bio { padding: 22px 18px 18px; }
+}
+
+/* =====================================================================
+   HONKY TONK RESTYLE
+   Layout: a real smoke-filled roadhouse. Dark knotty-pine walls, an oxblood
+   tuck-and-roll booth, nicotine-stained posters, brass lamp light cutting
+   through cigarette haze, and one neon tube sign glowing in the hero.
+   ===================================================================== */
+:root {
+  --mustard: #d9a24a;       /* brass lamp / whiskey amber */
+  --mustard-deep: #a8752c;
+  --rust: #a3311f;          /* barn-red oxblood */
+  --rust-deep: #5e1a12;
+  --navy: #1d140e;          /* smoke-blackened pine */
+  --navy-deep: #0f0a07;     /* corner booth shadow */
+  --steel: #6e5a44;
+  --bone: #e6d2a8;          /* nicotine-stained paper */
+  --ink: #1a100a;
+  --gold: #e7bd6a;          /* gold-leaf sign paint */
+  --neon: #ff4b2b;          /* neon tube red */
+  --neon-core: #ffe9de;
+  --display: "Rye", "Alfa Slab One", "Rockwell", Georgia, serif;
+  --woodgrain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='w'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.012 .32' numOctaves='3' seed='4'/%3E%3CfeColorMatrix values='0 0 0 0 0.08 0 0 0 0 0.04 0 0 0 0 0.01 0 0 0 1.3 -.45'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23w)'/%3E%3C/svg%3E");
+  --planks:
+    repeating-linear-gradient(90deg, rgba(0,0,0,.55) 0 3px, rgba(255,210,150,.05) 3px 4px, transparent 4px 132px),
+    var(--woodgrain),
+    linear-gradient(90deg, #4a2e19 0%, #3a2312 18%, #523320 34%, #3d2513 52%, #4b2f1a 70%, #362010 86%, #47301b 100%);
+  color-scheme: dark;
+}
+html, body { background: var(--navy-deep); }
+body { color: var(--bone); }
+
+/* cigarette haze drifting over everything */
+.haze { position: fixed; inset: -10%; pointer-events: none; z-index: 49; overflow: hidden; mix-blend-mode: screen; opacity: .42; }
+.haze i {
+  position: absolute; width: 70vw; height: 50vh; border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(200,180,155,.28), rgba(200,180,155,.10) 55%, transparent 75%);
+  filter: blur(30px);
+}
+.haze i:nth-child(1) { top: 10%; left: -10%; }
+.haze i:nth-child(2) { top: 45%; left: 40%; width: 80vw; }
+.haze i:nth-child(3) { top: 75%; left: -5%; height: 40vh; }
+.haze i:nth-child(4) { top: 25%; left: 60%; width: 55vw; height: 35vh; }
+@media (prefers-reduced-motion: no-preference) {
+  .haze i { animation: hazedrift 46s ease-in-out infinite alternate; }
+  .haze i:nth-child(2) { animation-duration: 62s; animation-delay: -20s; }
+  .haze i:nth-child(3) { animation-duration: 54s; animation-delay: -35s; }
+  .haze i:nth-child(4) { animation-duration: 70s; animation-delay: -10s; }
+  @keyframes hazedrift { from { transform: translate(-6vw, 3vh) scale(1); } to { transform: translate(10vw, -5vh) scale(1.25); } }
+}
+/* dark corners like a dim bar */
+body::before {
+  content: ""; position: fixed; inset: 0; pointer-events: none; z-index: 48;
+  background: radial-gradient(ellipse at 50% 40%, transparent 45%, rgba(8,4,2,.55) 100%);
+}
+
+/* headings: hand-painted gold leaf sign lettering */
+h2 {
+  font-family: var(--display); font-size: clamp(2rem, 5.4vw, 3.4rem); line-height: 1.05; letter-spacing: .01em;
+  color: var(--gold) !important;
+  text-shadow: 2px 2px 0 var(--ink), 0 0 18px rgba(231,189,106,.18) !important;
+}
+.kicker { color: var(--mustard) !important; }
+
+/* every slab gets a pool of lamp light from above and smoky edges */
+.slab { box-shadow: inset 0 40px 80px -30px rgba(0,0,0,.7), inset 0 -40px 80px -30px rgba(0,0,0,.7); }
+
+/* HERO: back room with one neon sign */
+.hero {
+  background:
+    radial-gradient(ellipse 60% 55% at 70% 35%, rgba(255,75,43,.16), transparent 70%),
+    radial-gradient(ellipse 50% 60% at 20% 10%, rgba(217,162,74,.18), transparent 70%),
+    var(--planks);
+  background-color: var(--navy);
+}
+.hero::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(rgba(10,6,3,.35), rgba(10,6,3,.65)); }
+.hero > *:not(nav) { position: relative; }
+.slogan .s1 { background: var(--rust-deep); color: var(--bone); box-shadow: 4px 4px 0 var(--ink); }
+.slogan .s2 {
+  color: var(--neon-core) !important;
+  text-shadow: 0 0 2px #fff, 0 0 7px var(--neon), 0 0 16px var(--neon), 0 0 34px var(--neon), 0 0 60px rgba(255,75,43,.55) !important;
+}
+.caret { background: var(--neon); box-shadow: 0 0 10px var(--neon); }
+@media (prefers-reduced-motion: no-preference) {
+  .slogan .s2 { animation: buzz 7s infinite; }
+  @keyframes buzz { 0%, 41%, 43%, 45%, 88%, 100% { opacity: 1; } 42%, 44%, 89% { opacity: .55; } }
+}
+.lede { color: var(--bone); }
+.poster { border-color: #d8c49a; filter: sepia(.25) brightness(.92); }
+.warning { border-color: var(--mustard); color: var(--mustard); }
+.brand-text .b1 { -webkit-text-stroke: 1px var(--gold); }
+
+/* SHOWS: knotty pine wall */
+.shows-slab { background: var(--planks); background-color: #3d2513; color: var(--bone); }
+.shows-slab::after { opacity: .18; }
+.show { border-top-color: rgba(231,189,106,.4); }
+.show:last-child { border-bottom-color: rgba(231,189,106,.4); }
+.date .m { color: var(--bone); }
+.date .d { color: var(--gold); text-shadow: 2px 2px 0 var(--ink); }
+.where .venue { color: var(--gold); }
+.where .town, .note { color: var(--bone); }
+.time { background: var(--rust-deep); color: var(--bone); }
+
+/* SOUND + TIPS: deep in the smoke */
+.sound-slab, .tips-slab {
+  background: radial-gradient(ellipse 70% 60% at 30% 0%, rgba(217,162,74,.14), transparent 70%), var(--navy);
+}
+.legends li { border-bottom-color: rgba(231,189,106,.25); }
+
+/* RULES: oxblood tuck-and-roll booth */
+.rules-slab {
+  background:
+    radial-gradient(ellipse 60% 70% at 50% 0%, rgba(255,190,140,.12), transparent 70%),
+    repeating-linear-gradient(90deg, rgba(0,0,0,.38) 0 2px, transparent 2px 6px, rgba(255,200,170,.06) 6px 30px, transparent 30px 58px),
+    linear-gradient(#5a1a12, #3f110b);
+  color: var(--bone);
+}
+.rule-list li::before { color: var(--gold); }
+
+/* PLAYED + WALL: yellowed paper and grimy tile */
+.played-slab {
+  background:
+    radial-gradient(circle at 18% 30%, rgba(120,70,20,.22), transparent 22%),
+    radial-gradient(circle at 82% 70%, rgba(120,70,20,.18), transparent 26%),
+    radial-gradient(ellipse at 50% 50%, #e2cc9c, #c9a970 90%);
+  color: var(--ink);
+}
+.played-slab h2, .wall-slab h2 { color: var(--rust-deep) !important; text-shadow: 1px 1px 0 rgba(255,240,210,.4) !important; }
+.played-slab .kicker, .wall-slab .kicker { color: var(--rust-deep) !important; }
+.wall-slab { background-color: #b9ab8c; color: var(--ink); }
+.wall-slab::before { background: inherit; }
+
+/* MERCH: darker stained wood */
+.merch-slab { background: linear-gradient(rgba(20,10,5,.35), rgba(20,10,5,.35)), var(--planks); background-color: #2c1a0e; }
+.item { background: #e8d4a8; }
+
+/* THE BOYS: posters tacked on the pine */
+.boys-slab { background: var(--planks); background-color: #3d2513; color: var(--bone); }
+.bio { background: radial-gradient(ellipse at 30% 20%, #f0deb4, #d9bd85 95%); color: var(--ink); }
+.bio .name { color: var(--rust-deep); font-family: var(--display); }
+.bio .role { background: var(--ink); color: var(--gold); }
+
+/* BOOK: the bar top */
+.book-slab {
+  background:
+    radial-gradient(ellipse 60% 50% at 30% 10%, rgba(217,162,74,.2), transparent 70%),
+    linear-gradient(rgba(10,5,2,.25), rgba(10,5,2,.45)),
+    var(--planks);
+  background-color: #3a2212; color: var(--bone);
+}
+.book-slab .lede { color: var(--bone); }
+.tab { --tab: #eedcb2; }
+
+/* buttons: painted wood and brass */
+.btn { background: var(--rust); color: var(--bone); border-color: var(--ink); }
+.btn.alt { background: var(--mustard); color: var(--ink); }
+
+footer { background: #0b0705; color: var(--mustard); }
+
+/* =====================================================================
+   ROADHOUSE PASS 2: Texas dance hall + Lower Broadway boot-wall honky tonk
+   Pressed tin ceiling, string lights, weathered barnwood, a wall of boots
+   on shelves under neon beer signs, scuffed dance-floor boards.
+   ===================================================================== */
+:root {
+  --tin:
+    radial-gradient(circle at 50% 50%, rgba(255,222,170,.22) 0 5px, rgba(0,0,0,.45) 6px 8px, transparent 9px) 0 0 / 36px 36px,
+    radial-gradient(circle at 0 0, rgba(255,222,170,.12) 0 3px, transparent 4px) 0 0 / 18px 18px,
+    linear-gradient(45deg, rgba(0,0,0,.28) 25%, transparent 25% 75%, rgba(0,0,0,.28) 75%) 0 0 / 36px 36px,
+    linear-gradient(-45deg, rgba(255,220,170,.06) 25%, transparent 25% 75%, rgba(255,220,170,.06) 75%) 0 0 / 36px 36px,
+    linear-gradient(#5e432b, #3d2a1a);
+  --grain-h: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='500' height='300'%3E%3Cfilter id='w'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.28 .01' numOctaves='3' seed='9'/%3E%3CfeColorMatrix values='0 0 0 0 0.09 0 0 0 0 0.06 0 0 0 0 0.03 0 0 0 1.4 -.5'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23w)'/%3E%3C/svg%3E");
+  --barnwood:
+    repeating-linear-gradient(180deg, rgba(0,0,0,.65) 0 3px, rgba(255,230,190,.05) 3px 4px, transparent 4px 54px),
+    var(--grain-h),
+    linear-gradient(90deg, #5b4433 0%, #4a3527 22%, #63493a 40%, #4b372a 61%, #574131 80%, #43301f 100%);
+  --floor:
+    repeating-linear-gradient(180deg, rgba(0,0,0,.5) 0 2px, transparent 2px 38px),
+    repeating-linear-gradient(90deg, transparent 0 210px, rgba(0,0,0,.45) 210px 212px, transparent 212px 420px),
+    radial-gradient(ellipse 30% 18% at 35% 55%, rgba(255,230,180,.08), transparent 70%),
+    radial-gradient(ellipse 25% 15% at 70% 40%, rgba(255,230,180,.07), transparent 70%),
+    var(--grain-h),
+    linear-gradient(#6a4423, #4f3119);
+  --neon-blue: #4fc3ff;
+  --neon-pink: #ff5fa2;
+  --bulb: #ffcf7a;
+}
+
+/* HERO: weathered barnwood dance hall wall */
+.hero {
+  background:
+    radial-gradient(ellipse 60% 55% at 72% 30%, rgba(255,75,43,.14), transparent 70%),
+    radial-gradient(ellipse 45% 50% at 22% 12%, rgba(255,200,120,.2), transparent 70%),
+    var(--barnwood) !important;
+  background-color: #4a3527 !important;
+}
+.hero::after { background: linear-gradient(rgba(10,6,3,.3), rgba(10,6,3,.62)) !important; }
+
+/* THE BACK WALL: boots on shelves under neon */
+.backwall {
+  position: relative; overflow: hidden; padding-block: 46px 34px;
+  background: radial-gradient(ellipse 70% 80% at 50% 0%, rgba(255,190,110,.16), transparent 70%), var(--barnwood);
+  background-color: #4a3527;
+  box-shadow: inset 0 30px 60px -20px rgba(0,0,0,.75), inset 0 -30px 60px -20px rgba(0,0,0,.75);
+}
+.backwall::before { content: ""; position: absolute; inset: 0; background: rgba(12,7,4,.42); pointer-events: none; }
+.backwall > * { position: relative; }
+.signs { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 18px 46px; margin-bottom: 30px; }
+.sign {
+  border: 2px solid rgba(255,255,255,.06); border-radius: 10px; padding: 8px 18px;
+  background: rgba(5,3,2,.55); box-shadow: inset 0 0 20px rgba(0,0,0,.8), 0 6px 18px rgba(0,0,0,.5);
+  line-height: 1; white-space: nowrap;
+}
+.sign.script { font-family: "Yellowtail", "Brush Script MT", cursive; font-size: clamp(2.2rem, 6vw, 3.4rem); color: #ffe3ef;
+  text-shadow: 0 0 2px #fff, 0 0 8px var(--neon-pink), 0 0 18px var(--neon-pink), 0 0 36px var(--neon-pink); }
+.sign.block { font-family: var(--label); font-weight: 700; letter-spacing: .18em; font-size: clamp(1.1rem, 3vw, 1.6rem); color: #e2f6ff;
+  text-shadow: 0 0 2px #fff, 0 0 8px var(--neon-blue), 0 0 18px var(--neon-blue), 0 0 32px var(--neon-blue); }
+.sign.red { font-family: var(--label); font-weight: 700; letter-spacing: .14em; font-size: clamp(1rem, 2.6vw, 1.35rem); color: var(--neon-core);
+  text-shadow: 0 0 2px #fff, 0 0 8px var(--neon), 0 0 18px var(--neon), 0 0 30px var(--neon); }
+.sign.red .off { opacity: .35; text-shadow: none; color: #7a3a2c; }
+@media (prefers-reduced-motion: no-preference) {
+  .sign.block { animation: buzz 9s infinite; }
+}
+.shelf { position: relative; display: flex; justify-content: center; align-items: flex-end; gap: 4px; height: 92px; padding-inline: 8px; overflow: hidden; }
+.shelf + .shelf { margin-top: 26px; }
+.shelf::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 12px;
+  background: linear-gradient(#7a5434, #4a2f1a 60%, #2a190d); box-shadow: 0 8px 14px rgba(0,0,0,.6);
+}
+.shelf svg { flex: none; width: 56px; height: 80px; position: relative; z-index: 1; margin-bottom: 10px; filter: drop-shadow(2px 3px 2px rgba(0,0,0,.55)); }
+.shelf svg.flip { transform: scaleX(-1); }
+@media (max-width: 640px) {
+  .shelf { justify-content: flex-start; height: 74px; }
+  .shelf svg { width: 44px; height: 64px; }
+  .signs { gap: 14px 20px; }
+}
+
+/* SHOWS: scuffed dance floor */
+.shows-slab {
+  background: radial-gradient(ellipse 70% 60% at 50% 0%, rgba(255,200,120,.16), transparent 70%), linear-gradient(rgba(12,7,3,.38), rgba(12,7,3,.5)), var(--floor) !important;
+  background-color: #5a3a1e !important;
+}
+
+/* bios + book + merch: barnwood instead of pine */
+.boys-slab, .book-slab {
+  background: radial-gradient(ellipse 60% 50% at 30% 0%, rgba(255,200,120,.16), transparent 70%), linear-gradient(rgba(12,7,3,.38), rgba(12,7,3,.5)), var(--barnwood) !important;
+  background-color: #4a3527 !important;
+}
+.merch-slab { background: linear-gradient(rgba(12,7,3,.5), rgba(12,7,3,.55)), var(--barnwood) !important; }
+/* pinned posters get thumbtacks */
+.bio::before {
+  content: ""; position: absolute; top: 10px; left: 50%; width: 14px; height: 14px; margin-left: -7px; border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #ff9a7a, #b3261a 60%, #5a120b); box-shadow: 1px 2px 2px rgba(0,0,0,.5);
+}
+footer { background: var(--beam) !important; border-top: 3px solid var(--brass); }
+
+/* ---------- NAV v3: the back-bar header beam ---------- */
+:root {
+  --brass: #b8873a;
+  --beam:
+    linear-gradient(180deg, rgba(255,220,170,.07), transparent 40%, rgba(0,0,0,.35)),
+    var(--grain-h),
+    linear-gradient(90deg, #24160d, #2e1c10 30%, #22140b 60%, #2b1a0f);
+}
+nav {
+  background: var(--beam) !important;
+  border-bottom: 0 !important;
+  box-shadow: 0 1px 0 #6e4f22, 0 3px 0 var(--brass), 0 4px 0 #3a250f, 0 14px 26px rgba(0,0,0,.6) !important;
+}
+nav ul.nav-links a { color: var(--bone); font-weight: 600; }
+nav ul.nav-links a:hover { color: var(--gold); border-color: var(--gold); }
+nav ul.nav-links li + li::before { content: "" !important; display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: var(--brass); box-shadow: 0 0 6px rgba(184,135,58,.8); top: -3px !important; }
+.brand-text .b1 { font-family: var(--display); color: var(--gold); -webkit-text-stroke: 0; text-shadow: 2px 2px 0 #000; }
+.brand-text .b2 { color: var(--brass); }
+.badge { border-color: var(--brass); box-shadow: 0 0 0 2px #2a190d, 0 3px 8px rgba(0,0,0,.6); }
+/* Book Us: a little neon sign with a glowing tube border */
+nav ul.nav-cta a.neon, nav a.neon {
+  background: rgba(10,5,3,.7) !important; color: var(--neon-core) !important;
+  border: 2px solid var(--neon) !important; border-radius: 6px;
+  box-shadow: 0 0 6px var(--neon), inset 0 0 6px rgba(255,75,43,.6) !important;
+  text-shadow: 0 0 4px var(--neon), 0 0 10px var(--neon) !important;
+}
+nav ul.nav-cta a.neon:hover { box-shadow: 0 0 12px var(--neon), inset 0 0 10px rgba(255,75,43,.7) !important; transform: none !important; }
+nav ul.nav-cta a.fb-nav { color: var(--brass) !important; border-color: var(--brass) !important; border-radius: 6px; }
+nav ul.nav-cta a.fb-nav:hover { background: var(--brass) !important; color: var(--ink) !important; }
+@media (max-width: 640px) {
+  nav ul.nav-links { background: linear-gradient(#24160d, #1a0f08) !important; border-bottom: 3px solid var(--brass) !important; }
+  nav ul.nav-links li::before, nav ul.nav-links li + li::before { content: none !important; display: none !important; }
+}
+
+/* string lights: edison bulbs on a sagging wire under the ceiling */
+.hero .lights {
+  position: absolute; left: 0; right: 0; height: 76px; pointer-events: none; z-index: 0;
+  top: 64px;
+  background: url("lights.svg") -60px 0 / 240px 76px repeat-x;
+  filter: drop-shadow(0 6px 10px rgba(255,170,70,.18));
+}
+.hero .lights::after {
+  content: ""; position: absolute; left: 0; right: 0; top: 30px; height: 140px;
+  background: radial-gradient(ellipse 60% 100% at 50% 0%, rgba(255,190,110,.16), transparent 70%);
+}
+@media (min-width: 641px) { .hero .lights { top: 70px; } }
+@media (max-width: 640px) { .hero .lights { top: calc(62px + env(safe-area-inset-top, 0px)); background-size: 200px 63px; height: 63px; background-position: -50px 0; } }
+@media (prefers-reduced-motion: no-preference) {
+  .hero .lights { animation: bulbs 6s ease-in-out infinite; }
+  @keyframes bulbs { 0%, 100% { opacity: 1; } 47% { opacity: 1; } 50% { opacity: .86; } 53% { opacity: 1; } }
+}
+
+/* ---------- boots v2: pairs, bigger, shaded ---------- */
+.shelf { height: 138px; gap: 14px; }
+.shelf .pair { flex: none; position: relative; width: 104px; height: 120px; z-index: 1; margin-bottom: 10px; }
+.shelf .pair svg { position: absolute; bottom: 0; width: 78px; height: 110px; margin: 0; filter: drop-shadow(3px 4px 3px rgba(0,0,0,.6)); }
+.shelf .pair svg:first-child { left: 0; filter: brightness(.7) drop-shadow(3px 4px 3px rgba(0,0,0,.6)); }
+.shelf .pair svg:last-child { left: 22px; }
+.shelf .pair.flip { transform: scaleX(-1); }
+@media (max-width: 640px) {
+  .shelf { height: 112px; gap: 8px; }
+  .shelf .pair { width: 84px; height: 96px; }
+  .shelf .pair svg { width: 62px; height: 88px; }
+  .shelf .pair svg:last-child { left: 18px; }
+}
+
+/* ---------- WANTED POSTER BIOS ---------- */
+.bios { align-items: start; gap: 44px; }
+.bio.wanted {
+  text-align: center; padding: 34px 30px 30px; border: 0;
+  background:
+    radial-gradient(circle at 12% 88%, rgba(110,60,20,.28), transparent 18%),
+    radial-gradient(circle at 90% 8%, rgba(110,60,20,.22), transparent 16%),
+    radial-gradient(ellipse at 50% 45%, #f1dfb2, #d7b67a 92%);
+  box-shadow: inset 0 0 40px rgba(90,50,15,.45), 0 16px 30px rgba(0,0,0,.55);
+  clip-path: polygon(0 1%, 6% 0, 18% 1.2%, 31% .2%, 47% 1%, 63% 0, 78% 1.3%, 92% .3%, 100% 1.5%, 99.2% 14%, 100% 33%, 99.4% 55%, 100% 78%, 99.3% 99%, 86% 100%, 70% 98.9%, 52% 100%, 36% 99%, 19% 100%, 4% 99.2%, 0 100%, .6% 76%, 0 52%, .7% 29%);
+}
+.bio.wanted::before {
+  top: 12px; width: 12px; height: 12px; margin-left: -6px;
+  background: radial-gradient(circle at 35% 30%, #c9c3b8, #6d665c 60%, #2e2a25);
+}
+.bio.wanted::after {
+  content: ""; position: absolute; inset: 14px; border: 2px solid rgba(43,23,11,.7); outline: 1px solid rgba(43,23,11,.45); outline-offset: 4px; pointer-events: none;
+}
+.w-head {
+  font-family: var(--display); font-size: clamp(3rem, 7.5vw, 4.6rem); line-height: .9; margin: 6px 0 2px;
+  color: var(--ink); letter-spacing: .04em; text-transform: uppercase;
+}
+.w-for {
+  font-family: var(--label); font-weight: 700; text-transform: uppercase; letter-spacing: .2em; font-size: .9rem;
+  margin: 0 0 16px; color: var(--rust-deep);
+  display: flex; align-items: center; gap: 10px; justify-content: center;
+}
+.w-for::before, .w-for::after { content: ""; flex: 0 1 40px; height: 2px; background: currentColor; }
+.mug { margin: 0 auto 16px; max-width: 300px; padding: 8px; background: #2b170b; transform: rotate(-1deg); box-shadow: 0 4px 10px rgba(0,0,0,.4); }
+.bio.wanted:nth-child(2) .mug { transform: rotate(1deg); }
+.mug img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: cover; filter: grayscale(.85) sepia(.55) contrast(1.12) brightness(.95); }
+.bio.wanted .name {
+  font-family: var(--display); font-size: clamp(1.7rem, 4vw, 2.2rem); color: var(--ink); margin: 0 0 14px;
+  padding-bottom: 12px; border-bottom: 2px solid rgba(43,23,11,.6);
+}
+.w-body { text-align: left; font-size: 1.08rem; }
+.w-body p { margin: 0 0 12px; }
+.w-body p:last-child { margin-bottom: 0; }
+@media (max-width: 800px) { .bio.wanted { padding: 30px 22px 26px; } }
+
+/* keep the pinned nav on top: no stacking context around it; darkening lives in the background */
+.hero::after { display: none !important; }
+.hero {
+  background:
+    linear-gradient(rgba(10,6,3,.3), rgba(10,6,3,.62)),
+    radial-gradient(ellipse 60% 55% at 72% 30%, rgba(255,75,43,.14), transparent 70%),
+    radial-gradient(ellipse 45% 50% at 22% 12%, rgba(255,200,120,.2), transparent 70%),
+    var(--barnwood) !important;
+}
+nav { z-index: 95 !important; }
+
+/* ---------- poster interactions: bullet holes + sighting stamp ---------- */
+.bio.wanted { cursor: crosshair; }
+.bio.wanted .sight-btn, .bio.wanted .stamp a { cursor: pointer; }
+.hole {
+  position: absolute; width: 34px; height: 34px; margin: -17px 0 0 -17px; border-radius: 50%; pointer-events: none; z-index: 3;
+  background:
+    radial-gradient(circle, #050302 0 6px, #2a170b 7px, rgba(60,30,10,.85) 8px, rgba(120,70,25,.5) 10px, rgba(255,240,210,.6) 12px, rgba(90,50,15,.35) 14px, transparent 17px);
+}
+.hole::before, .hole::after {
+  content: ""; position: absolute; left: 50%; top: 50%; width: 22px; height: 1.5px; background: rgba(40,20,8,.55); transform-origin: 0 50%;
+}
+.hole::before { transform: rotate(var(--r1, 20deg)); }
+.hole::after { transform: rotate(var(--r2, 200deg)); width: 16px; }
+@media (prefers-reduced-motion: no-preference) {
+  .bio.wanted.hit { animation: jolt .22s ease-out; }
+  @keyframes jolt { 0% { translate: 0 0; } 30% { translate: 3px -2px; } 60% { translate: -2px 1px; } 100% { translate: 0 0; } }
+}
+.sight-btn {
+  display: inline-block; margin: 0 0 16px; padding: 8px 16px; cursor: pointer;
+  font-family: var(--label); font-weight: 700; text-transform: uppercase; letter-spacing: .16em; font-size: .85rem;
+  background: var(--ink); color: var(--gold); border: 2px solid var(--ink); box-shadow: 3px 3px 0 var(--rust);
+}
+.sight-btn:hover { background: var(--rust-deep); }
+.stamp {
+  position: absolute; left: 50%; top: 38%; z-index: 4; width: min(84%, 320px);
+  translate: -50% -50%; rotate: -12deg;
+  border: 5px double rgba(170,28,18,.92); border-radius: 8px; padding: 10px 14px;
+  color: #a81c12; text-align: center; background: rgba(243,226,184,.94);
+  font-family: var(--label); text-transform: uppercase; letter-spacing: .1em; font-weight: 700; line-height: 1.15;
+  box-shadow: 0 6px 18px rgba(0,0,0,.45);
+}
+.stamp .big { display: block; font-family: var(--display); font-size: clamp(2.2rem, 6vw, 3rem); letter-spacing: .06em; line-height: 1; }
+.stamp .when { display: block; font-size: .95rem; margin-top: 6px; }
+.stamp a { display: inline-block; margin-top: 8px; font-size: .78rem; letter-spacing: .14em; color: inherit; text-decoration: underline; text-underline-offset: 3px; }
+@media (prefers-reduced-motion: no-preference) {
+  .stamp { animation: slam .28s cubic-bezier(.2,1.6,.4,1) both; }
+  @keyframes slam { from { scale: 2.2; opacity: 0; } to { scale: 1; opacity: 1; } }
+}
+
+/* ---------- rap sheet under the mugshot ---------- */
+.rap { margin: 0 0 18px; text-align: left; display: grid; gap: 0; border-top: 2px solid rgba(43,23,11,.6); border-bottom: 2px solid rgba(43,23,11,.6); }
+.rap > div { display: grid; grid-template-columns: 6.2rem 1fr; gap: 10px; padding-block: 8px; border-bottom: 1px dashed rgba(43,23,11,.45); }
+.rap > div:last-child { border-bottom: 0; }
+.rap > div > * { min-width: 0; }
+.rap dt { font-family: var(--label); font-weight: 700; text-transform: uppercase; letter-spacing: .14em; font-size: .78rem; color: var(--rust-deep); padding-top: 3px; }
+.rap dd { margin: 0; font-size: 1.05rem; line-height: 1.35; }
+.rap ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 3px; }
+.rap li { padding-left: 14px; position: relative; }
+.rap li::before { content: "\2717"; position: absolute; left: 0; color: var(--rust); font-size: .85em; top: .1em; }
+.rap .reward dd { font-family: var(--display); font-size: 1.2rem; color: var(--rust-deep); }
+@media (max-width: 480px) {
+  .rap > div { grid-template-columns: 1fr; gap: 2px; }
+}
+.bio.wanted .name { border-bottom: 0; padding-bottom: 0; margin-bottom: 10px; }
+
+/* posters hang from their nail and sway a little */
+.bio.wanted { transform-origin: 50% 12px; }
+@media (prefers-reduced-motion: no-preference) {
+  .bio.wanted { animation: sway 5.5s ease-in-out infinite alternate; }
+  .bio.wanted:nth-child(2) { animation-duration: 6.8s; animation-delay: -2.4s; }
+  .bio.wanted.hit { animation: sway 5.5s ease-in-out infinite alternate, jolt .22s ease-out; }
+  .bio.wanted:nth-child(2).hit { animation: sway 6.8s ease-in-out -2.4s infinite alternate, jolt .22s ease-out; }
+  @keyframes sway { from { rotate: -1.2deg; } to { rotate: 1.2deg; } }
+}
+
+/* hero poster: slideshow of live shots */
+.poster { position: relative; filter: none !important; }
+.poster img { aspect-ratio: 3 / 2; object-fit: cover; filter: sepia(.15) contrast(1.05) brightness(.95) !important; }
+.poster .slide { opacity: 0; transition: opacity 1.1s ease; }
+.poster .slide + .slide { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+.poster .slide.is-on { opacity: 1; }
+@media (prefers-reduced-motion: reduce) { .poster .slide { transition: none; } }
+
+/* real plank textures instead of stretched noise */
+:root {
+  --barnwood: url("barnwood.jpg") 0 0 / 800px 378px repeat;
+  --floor: url("floor.jpg") 0 0 / 800px 378px repeat;
+}
+/* no pinch or double-tap zoom on phones */
+html, body { touch-action: pan-x pan-y; -webkit-text-size-adjust: 100%; text-size-adjust: 100%; overscroll-behavior-x: none; }
+
+/* ---------- hand-painted sign with the band name ---------- */
+.sign-wrap { display: flex; justify-content: center; padding-top: 58px; position: relative; z-index: 1; }
+.rrb-sign {
+  position: relative; margin: 0; max-width: 100%;
+  padding: .32em .7em .38em;
+  transform: rotate(-1.2deg);
+  background:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='c'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.035 .09' numOctaves='4' seed='3'/%3E%3CfeColorMatrix values='0 0 0 0 .22 0 0 0 0 .14 0 0 0 0 .08 16 0 0 0 -11.4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23c)'/%3E%3C/svg%3E") 0 0 / 300px 300px,
+    radial-gradient(ellipse at 30% 20%, rgba(255,250,235,.35), transparent 60%),
+    linear-gradient(#e6d3a6, #cdb17a);
+  box-shadow: inset 0 0 0 .14em #cdb17a, inset 0 0 0 .2em #7e2416, inset 0 0 26px rgba(80,45,15,.55), 0 14px 26px rgba(0,0,0,.6);
+  clip-path: polygon(0 3%, 9% 0, 27% 2%, 48% .5%, 71% 2.5%, 88% 0, 100% 2%, 99.4% 50%, 100% 97%, 82% 100%, 60% 98.5%, 38% 100%, 17% 98%, 0 100%, .6% 52%);
+  font-size: clamp(2.4rem, 7.4vw, 5.4rem);
+  text-shadow: none !important;
+}
+.rrb-sign .sign-text {
+  display: block; font-family: var(--display); font-weight: 400; line-height: 1; letter-spacing: .03em; white-space: nowrap;
+  color: #a12a18;
+  text-shadow: .04em .04em 0 #2b170b;
+}
+/* nail heads */
+.rrb-sign::before, .rrb-sign::after {
+  content: ""; position: absolute; top: 9px; width: 10px; height: 10px; border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #b9b2a6, #5d564d 60%, #241f1a);
+  box-shadow: 1px 2px 2px rgba(0,0,0,.5);
+}
+.rrb-sign::before { left: 10px; }
+.rrb-sign::after { right: 10px; }
+.hero-grid { padding-top: 34px !important; }
+@media (max-width: 640px) {
+  .sign-wrap { padding-top: 46px; }
+  .rrb-sign { font-size: clamp(1.9rem, 10.4vw, 2.6rem); padding: .3em .55em .36em; }
+  .hero-grid { padding-top: 22px !important; }
+}
+
+/* ---------- sizing pass ---------- */
+.wrap { max-width: 1160px; }
+@media (min-width: 801px) {
+  .hero-grid { grid-template-columns: 1.2fr 1fr; gap: 56px; align-items: center; padding-bottom: 80px; }
+  .poster-wrap { width: 100%; }
+  .poster { max-width: 620px; margin-inline: auto; transform: rotate(-2deg); }
+  .lede { max-width: 38ch; }
+}
+@media (min-width: 801px) and (max-width: 1080px) {
+  .hero-grid { grid-template-columns: 1.1fr 1fr; gap: 36px; }
+  .poster { max-width: 94%; }
+  .slogan .s2 { font-size: clamp(1.6rem, 3.2vw, 2.4rem); }
+}
+@media (max-width: 800px) {
+  .poster-wrap { width: min(560px, 100%); justify-self: center; }
+}
+@media (max-width: 640px) {
+  .poster-wrap { width: min(380px, 94%); }
+  .tape { width: 70px; height: 20px; }
+}
+@media (min-width: 801px) { .mug { max-width: 340px; } .bios { gap: 52px; } }
 </style>
 
+<div class="haze" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
 <div class="gate" id="gate" role="dialog" aria-modal="true" aria-labelledby="gate-title">
   <canvas class="wall-cv" id="wall-cv" aria-hidden="true"></canvas>
   <canvas class="smoke" id="smoke" aria-hidden="true"></canvas>
@@ -1332,6 +1865,7 @@ html, body { overflow-x: hidden; overflow-x: clip; -webkit-text-size-adjust: 100
 })();
 </script>
 <section class="hero" id="top">
+  <div class="lights" aria-hidden="true"></div>
   <div class="wrap">
     <nav aria-label="Main">
       <a class="brand" href="#top" aria-label="Rat River Boys, back to top">
@@ -1341,6 +1875,7 @@ html, body { overflow-x: hidden; overflow-x: clip; -webkit-text-size-adjust: 100
       <ul class="nav-links" id="nav-links">
         <li><a href="#shows">Shows</a></li>
         <li><a href="#sound">The Sound</a></li>
+        <li><a href="#boys">The Boys</a></li>
         <li><a href="#rules">House Rules</a></li>
         <li class="m-only"><a href="#tips">Tip Jar</a></li>
         <li><a href="#merch">Merch</a></li>
@@ -1354,19 +1889,29 @@ html, body { overflow-x: hidden; overflow-x: clip; -webkit-text-size-adjust: 100
         <li class="m-only"><button class="menu-btn" id="menu-btn" type="button" aria-expanded="false" aria-controls="nav-links"><span class="bars" aria-hidden="true"><span></span><span></span><span></span></span><span class="menu-word">Menu</span></button></li>
       </ul>
     </nav>
+    <div class="sign-wrap">
+      <h1 class="rrb-sign"><span class="sign-text">Rat River Boys</span></h1>
+    </div>
     <div class="hero-grid">
       <div class="poster-wrap">
       <div class="poster" role="button" tabindex="0" aria-label="Give the poster a smack">
         <span class="tape t1" aria-hidden="true"></span>
-        <img src="rat-moon.jpg" alt="A cowboy rat in a bandana lassoing the moon under a starry sky, over the RRB Rat River Boys logo" width="1000" height="1000">
+        <img class="slide is-on" src="live-crowd.jpg" alt="Rat River Boys on stage under colored lights with the crowd cheering" width="1200" height="800">
+        <img class="slide" src="live-stage.jpg" alt="The full band playing on a theater stage in front of blue curtains" width="1200" height="800" loading="lazy" decoding="async">
+        <img class="slide" src="axes2.jpg" alt="Tyler and Weston posing with old axes against a black backdrop" width="1200" height="800" loading="lazy" decoding="async">
+        <img class="slide" src="crowd-view.jpg" alt="A packed bar seen from the stage over a guitar headstock" width="1200" height="800" loading="lazy" decoding="async">
+        <img class="slide" src="thumbs.jpg" alt="Weston on stage with an acoustic guitar giving two thumbs up" width="1200" height="800" loading="lazy" decoding="async">
+        <img class="slide" src="weston-acoustic.jpg" alt="Weston grinning in sunglasses while playing acoustic guitar" width="1200" height="800" loading="lazy" decoding="async">
+        <img class="slide" src="giddyup.jpg" alt="Tyler in a red jacket playing a Telecaster at Giddy Up" width="1200" height="800" loading="lazy" decoding="async">
+        <img class="slide" src="tosafest.jpg" alt="The band playing the State Street Stage at Tosa Fest" width="1200" height="800" loading="lazy" decoding="async">
         <span class="tape t2" aria-hidden="true"></span>
       </div>
       </div>
       <div>
-        <h1 class="slogan">
+        <div class="slogan">
           <span class="s1">Your mom's favorite band.</span>
           <span class="s2 hero-typer"><span class="tl"><span id="typed">Got a venue that needs its reputation ruined?</span><span class="caret" aria-hidden="true"></span></span></span>
-        </h1>
+        </div>
         <p class="lede">Wisconsin's filthiest honky tonk band. We play the songs your granddad got divorced to, three times, to the same woman.</p>
         <div class="cta-row">
           <a class="btn" href="#shows">Where we're drinkin' next</a>
@@ -1378,7 +1923,7 @@ html, body { overflow-x: hidden; overflow-x: clip; -webkit-text-size-adjust: 100
 </section>
 
 <main>
-  <section class="slab shows-slab torn" id="shows">
+<section class="slab shows-slab torn" id="shows">
     <div class="wrap">
       <h2>Upcoming shows</h2>
       <div class="countdown" id="countdown" aria-live="off">
@@ -1430,6 +1975,43 @@ html, body { overflow-x: hidden; overflow-x: clip; -webkit-text-size-adjust: 100
         <li>George Jones <span>Drove a mower to the bar</span></li>
         <li>Hank Williams <span>Pills, whiskey, and heartbreak. Our role model.</span></li>
       </ul>
+    </div>
+  </section>
+
+  <section class="slab boys-slab torn" id="boys">
+    <div class="wrap">
+      <p class="kicker">Meet the boys</p>
+      <h2>The guys out front.</h2>
+      <div class="bios">
+        <article class="bio wanted">
+          <p class="w-head">Wanted</p>
+          <p class="w-for">for lead vocals &amp; guitar</p>
+          <figure class="mug"><img src="weston.jpg" alt="Weston Mueller sitting on a trailer gate with a beer" width="800" height="1000" loading="lazy"></figure>
+          <h3 class="name">Weston Mueller</h3>
+          <dl class="rap">
+            <div><dt>Aliases</dt><dd>&ldquo;Mustard Mueller,&rdquo; &ldquo;Corndog Weston&rdquo;</dd></div>
+            <div><dt>Crimes</dt><dd><ul><li>Singing so sad a bartender quit on the spot</li><li>Playing 120 shows a year without a doctor&rsquo;s note</li><li>Eating his body weight in corndogs at the State Fair</li><li>Making grown men cry during a George Jones song</li></ul></dd></div>
+            <div><dt>Last seen</dt><dd>On a trailer gate with a Miller Lite, scanning for a corndog stand</dd></div>
+            <div class="reward"><dt>Reward</dt><dd>One cold brewski and a corndog, no questions asked</dd></div>
+          </dl>
+          <button class="sight-btn" type="button">Report a sighting</button>
+          <div class="w-body"><p>Weston Mueller is a Wisconsin singer-songwriter with more than a decade of road miles behind him. Before Rat River Boys, he founded and fronted Milwaukee Americana band Listening Party, writing and singing five albums and earning a 2018 WAMI nomination for Bluegrass/Americana.</p><p>He writes about real life: love, loss, bad decisions and long roads. The Milwaukee Journal Sentinel said every note he sings is full of feeling, and he's played it all, from corner dive bars to Summerfest, Wisconsin State Fair and Mile of Music, at around 120 shows a year.</p><p>Now he's out front as lead singer and guitarist for Rat River Boys, where the songs got louder, the nights got longer and nobody's ready to go home.</p></div>
+        </article>
+        <article class="bio wanted">
+          <p class="w-head">Wanted</p>
+          <p class="w-for">for lead guitar</p>
+          <figure class="mug"><img src="tyler.jpg" alt="Tyler Furrer playing an acoustic guitar" width="800" height="1000" loading="lazy"></figure>
+          <h3 class="name">Tyler Furrer</h3>
+          <dl class="rap">
+            <div><dt>Aliases</dt><dd>&ldquo;Fret Felon,&rdquo; &ldquo;The Mustache Mischief&rdquo;</dd></div>
+            <div><dt>Crimes</dt><dd><ul><li>Taking guitar solos longer than the song allows</li><li>Running a bar tab with its own zip code</li><li>Counting drink tickets as part of his pay</li><li>Ordering Mal&ouml;rt on purpose, and enjoying it</li></ul></dd></div>
+            <div><dt>Last seen</dt><dd>In a honky tonk bar, asking for one more song and a round of Mal&ouml;rt</dd></div>
+            <div class="reward"><dt>Reward</dt><dd>A fake mustache and a shot of Mal&ouml;rt</dd></div>
+          </dl>
+          <button class="sight-btn" type="button">Report a sighting</button>
+          <div class="w-body"><p>Tyler Furrer is a guitarist from Wisconsin who has built his career on the road. He has spent the past three years honing his craft in Nashville, playing everywhere from downtown on Broadway to large festival stages, with shows all over the country, including New York, Las Vegas and Chicago.</p><p>He's toured the country playing everything from honky tonk to Americana to polka, including runs with Mollie B &amp; SqueezeBox, the award-winning band behind RFD-TV's Mollie B Polka Party. He joined Listening Party for their album High &amp; Low, which is where he met Weston, and has shared stages with national acts including Brantley Gilbert, Parker McCollum, Chase Matthew and Clay Street Unit. Along the way he's played Summerfest, Wisconsin State Fair, the Hodag Country Festival, Mile of Music and the Tri-State Rodeo in Iowa.</p><p>Now he's on lead guitar for Rat River Boys, bringing the Nashville polish and the Wisconsin grit to every set.</p></div>
+        </article>
+      </div>
     </div>
   </section>
 
@@ -1560,8 +2142,8 @@ html, body { overflow-x: hidden; overflow-x: clip; -webkit-text-size-adjust: 100
       <form class="book-form tab" id="book-form" novalidate><input id="bf-hp" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
         <div class="tab-head">
           <div>
-            <div class="tab-title">Bar Tab</div>
-            <div class="tab-no">No. 0169 &middot; Booking request</div>
+            <div class="tab-title">Booking</div>
+            <div class="tab-no">Bar Tab No. 420</div>
           </div>
           <img class="tab-stamp" src="rat-crest.jpg" alt="" width="690" height="760">
         </div>
@@ -2966,5 +3548,102 @@ document.querySelectorAll('.fight-inline').forEach(function (b) {
       .to(msg, { x: '+=6', yoyo: true, repeat: 5, duration: .05 }, 1.5)
       .to(o, { opacity: 0, duration: .6 }, 7.2);
   };
+})();
+</script>
+
+<script>
+/* wanted posters: shoot 'em, or report a sighting */
+(function () {
+  var actx = null;
+  function bang() {
+    try {
+      actx = actx || new (window.AudioContext || window.webkitAudioContext)();
+      var t = actx.currentTime, len = Math.floor(actx.sampleRate * 0.35);
+      var buf = actx.createBuffer(1, len, actx.sampleRate), d = buf.getChannelData(0);
+      for (var i = 0; i < len; i++) d[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / len, 4);
+      var src = actx.createBufferSource(); src.buffer = buf;
+      var lp = actx.createBiquadFilter(); lp.type = 'lowpass'; lp.frequency.value = 2600;
+      var g = actx.createGain(); g.gain.setValueAtTime(0.9, t); g.gain.exponentialRampToValueAtTime(0.001, t + 0.35);
+      src.connect(lp); lp.connect(g); g.connect(actx.destination); src.start(t);
+      var o = actx.createOscillator(), og = actx.createGain();
+      o.frequency.setValueAtTime(140, t); o.frequency.exponentialRampToValueAtTime(40, t + 0.15);
+      og.gain.setValueAtTime(0.8, t); og.gain.exponentialRampToValueAtTime(0.001, t + 0.18);
+      o.connect(og); og.connect(actx.destination); o.start(t); o.stop(t + 0.2);
+    } catch (e) {}
+  }
+  function nextShow() {
+    var li = document.querySelector('#shows .show');
+    if (!li) return null;
+    var q = function (sel) { var el = li.querySelector(sel); return el ? el.textContent.trim() : ''; };
+    return { m: q('.date .m'), d: q('.date .d'), venue: q('.venue'), town: q('.town'), time: q('.time') };
+  }
+  document.querySelectorAll('.bio.wanted').forEach(function (poster) {
+    poster.addEventListener('click', function (e) {
+      if (e.target.closest('.sight-btn, .stamp a')) return;
+      var r = poster.getBoundingClientRect();
+      var h = document.createElement('span');
+      h.className = 'hole';
+      h.style.left = (e.clientX - r.left) + 'px';
+      h.style.top = (e.clientY - r.top) + 'px';
+      h.style.setProperty('--r1', Math.round(Math.random() * 360) + 'deg');
+      h.style.setProperty('--r2', Math.round(Math.random() * 360) + 'deg');
+      poster.appendChild(h);
+      var holes = poster.querySelectorAll('.hole');
+      if (holes.length > 12) holes[0].remove();
+      poster.classList.remove('hit'); void poster.offsetWidth; poster.classList.add('hit');
+      bang();
+    });
+    var btn = poster.querySelector('.sight-btn');
+    btn.addEventListener('click', function () {
+      var old = poster.querySelector('.stamp');
+      if (old) old.remove();
+      var s = nextShow();
+      var st = document.createElement('div');
+      st.className = 'stamp';
+      st.setAttribute('role', 'status');
+      st.innerHTML = '<span class="big">Spotted</span>' +
+        (s ? '<span class="when">' + s.m + ' ' + s.d + ' &middot; ' + s.venue + '<br>' + s.town + (s.time ? ' &middot; ' + s.time : '') + '</span>'
+           : '<span class="when">Somewhere with cheap beer</span>') +
+        '<a href="#shows">Catch him at the next show</a>';
+      poster.appendChild(st);
+      btn.textContent = 'Sighting reported';
+    });
+  });
+})();
+</script>
+
+<script>
+/* block pinch and double-tap zoom (iOS ignores user-scalable=no) */
+(function () {
+  var last = 0;
+  ['gesturestart', 'gesturechange', 'gestureend'].forEach(function (t) {
+    document.addEventListener(t, function (e) { e.preventDefault(); }, { passive: false });
+  });
+  document.addEventListener('touchmove', function (e) { if (e.touches && e.touches.length > 1) e.preventDefault(); }, { passive: false });
+  document.addEventListener('touchend', function (e) {
+    var now = Date.now();
+    if (now - last < 300 && !e.target.closest('input, textarea, select, a, button')) e.preventDefault();
+    last = now;
+  }, { passive: false });
+})();
+</script>
+
+<script>
+/* hero slideshow: a new photo every 5 seconds */
+(function () {
+  var slides = document.querySelectorAll('.poster .slide');
+  if (slides.length < 2) return;
+  var i = 0;
+  setInterval(function () {
+    if (document.hidden) return;
+    var next = slides[(i + 1) % slides.length];
+    if (!next.complete) { next.loading = 'eager'; return; }
+    slides[i].classList.remove('is-on');
+    i = (i + 1) % slides.length;
+    slides[i].classList.add('is-on');
+    var after = slides[(i + 1) % slides.length];
+    if (after.loading === 'lazy') after.loading = 'eager';
+  }, 5000);
+  slides[1].loading = 'eager';
 })();
 </script>
