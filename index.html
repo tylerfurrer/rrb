@@ -1753,6 +1753,11 @@ html, body { touch-action: pan-x pan-y; -webkit-text-size-adjust: 100%; text-siz
   .tape { width: 70px; height: 20px; }
 }
 @media (min-width: 801px) { .mug { max-width: 340px; } .bios { gap: 52px; } }
+
+/* iPhone Safari: fixed overlays (grain, dim corners, haze) cover the full screen
+   even when the toolbar shrinks, so no lighter strip shows at the bottom */
+body::before, body::after { inset: auto !important; top: 0 !important; left: 0 !important; right: 0 !important; height: 120vh !important; height: calc(100lvh + 60px) !important; }
+.haze { inset: auto !important; top: -10vh !important; left: -10% !important; right: -10% !important; height: calc(100lvh + 25vh) !important; }
 </style>
 
 <div class="haze" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
@@ -2364,7 +2369,7 @@ html, body { touch-action: pan-x pan-y; -webkit-text-size-adjust: 100%; text-siz
     afterGate(function () { tl.play(0); setTimeout(function () { if (tl.progress() < 1) tl.progress(1); }, 4200); });
 
     // poster drifts as you scroll away
-    gsap.to('.poster-wrap', { yPercent: 12, rotate: 4, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true } });
+    gsap.to('.poster-wrap', { yPercent: 3, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true } });
 
     // section kickers draw their line, headings punch up
     gsap.utils.toArray('.slab').forEach(function (sec) {
@@ -2399,7 +2404,7 @@ html, body { touch-action: pan-x pan-y; -webkit-text-size-adjust: 100%; text-siz
     if (poster) {
       // lazy idle sway, like it's hanging off one piece of tape
       var startIdle = function () {
-        gsap.fromTo(poster, { rotate: -2.5 }, { rotate: .8, duration: 2.6, ease: 'sine.inOut', yoyo: true, repeat: -1 });
+        gsap.fromTo(poster, { rotate: -2.2 }, { rotate: -1.4, duration: 4.5, ease: 'sine.inOut', yoyo: true, repeat: -1 });
       };
       if (tl.progress() >= 1) startIdle(); else tl.eventCallback('onComplete', startIdle);
       var swing = function () {
