@@ -1772,6 +1772,18 @@ body::before, body::after { inset: auto !important; top: 0 !important; left: 0 !
 }
 .fine-print span { font-style: normal; font-family: var(--label); font-weight: 700; text-transform: uppercase; letter-spacing: .14em; font-size: .72rem; color: var(--gold); margin-right: 4px; }
 @media (max-width: 640px) { .fine-print { font-size: .85rem; margin-top: 22px; } }
+
+/* phones and tablets: nothing pinned to the screen (Safari tints pinned layers behind its toolbar).
+   The grain and the dark edges ride with the page instead, so the look stays the same. */
+@media (hover: none), (max-width: 800px) {
+  body { position: relative; }
+  body::after { position: absolute !important; top: 0 !important; left: 0 !important; right: 0 !important; bottom: 0 !important; height: auto !important; }
+  body::before {
+    position: absolute !important; top: 0 !important; left: 0 !important; right: 0 !important; bottom: 0 !important; height: auto !important;
+    background: linear-gradient(90deg, rgba(8,4,2,.5), transparent 18%, transparent 82%, rgba(8,4,2,.5)) !important;
+  }
+  .haze { display: none !important; }
+}
 </style>
 
 <div class="haze" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
