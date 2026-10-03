@@ -3418,8 +3418,10 @@ document.querySelectorAll('.fight-inline').forEach(function (b) {
       .to('#gate-inner', { scale: 4.2, duration: .8, ease: 'power2.in' }, '<.15')
       .to(gate, { opacity: 0, duration: .45, ease: 'power1.in' }, '-=.4');
   }
-  setTimeout(open, 3000);
-  document.getElementById('doorway').addEventListener('click', open);
+  setTimeout(open, 2000);
+  // tap or click anywhere on the gate to skip the wait
+  gate.addEventListener('pointerdown', open);
+  gate.addEventListener('click', open);
   document.addEventListener('keydown', function (e) { if (!opened && document.getElementById('gate') && (e.key === 'Enter' || e.key === ' ' || e.key === 'Escape')) { e.preventDefault(); open(); } });
 })();
 </script>
