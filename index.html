@@ -33,7 +33,7 @@
 <title>Rat River Boys</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Rye&family=Yellowtail&family=Oswald:wght@400;500;600;700&family=Crimson+Pro:ital,wght@0,400;0,600;1,400&family=Permanent+Marker&family=Caveat:wght@600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Rye&family=Fredericka+the+Great&family=Cabin+Sketch:wght@400;700&family=Yellowtail&family=Oswald:wght@400;500;600;700&family=Crimson+Pro:ital,wght@0,400;0,600;1,400&family=Permanent+Marker&family=Caveat:wght@600&display=swap">
 <style>
 /* Layout: a beat-up gig poster stapled to a bar wall. Night-sky hero with the lasso rat, then mustard, rust and navy slabs with grime, stains and torn edges. */
 :root {
@@ -1071,6 +1071,16 @@ img { -webkit-user-drag: none; }
 }
 
 
+/* tip jar: real money via Venmo */
+.tip-real { margin-top: 26px; padding-top: 20px; border-top: 1px dashed rgba(231,189,106,.35); display: flex; flex-wrap: wrap; align-items: center; gap: 12px 18px; }
+.tr-label { font-family: var(--label); text-transform: uppercase; letter-spacing: .14em; font-weight: 600; font-size: .9rem; color: var(--bone); opacity: .85; }
+.btn.venmo-btn { background: var(--bone); color: var(--ink); text-decoration: none; display: inline-flex; align-items: baseline; gap: 10px; }
+.btn.venmo-btn:hover { background: #fff6dc; }
+.venmo-btn small { font-size: .78em; opacity: .85; text-transform: none; letter-spacing: .02em; }
+@media (max-width: 640px) {
+  .tips-grid .tip-real { order: 3; justify-content: center; flex-direction: column; text-align: center; }
+}
+
 /* bar tab: send button */
 .tab .bf-send { width: 100%; text-align: center; font-size: 1.05rem; padding: 14px 12px; margin-top: 4px; }
 .tab .bf-send:disabled { opacity: .75; cursor: default; }
@@ -1839,6 +1849,168 @@ body::before, body::after { inset: auto !important; top: 0 !important; left: 0 !
   .jar-label { font-size: 1.2rem !important; padding: 6px 12px 4px !important; }
 }
 .tips-grid .request label { order: -1 !important; }
+
+/* the sound: headline + legends only */
+.legends-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 48px; margin-top: 18px; }
+.legends-grid li { min-width: 0; }
+.legends-more { text-align: center; margin: 26px 0 0; display: grid; gap: 4px; font-family: var(--display); font-size: clamp(1.25rem, 3vw, 1.6rem); color: var(--gold); }
+@media (max-width: 800px) { .legends-grid { grid-template-columns: 1fr; } }
+
+/* the sound: legends as jukebox title strips */
+.legends-more p { margin: 0; }
+.legends-grid li::before { display: none !important; }
+.legends-grid { grid-template-columns: repeat(3, minmax(0, 1fr)) !important; gap: 18px !important; counter-reset: jb; margin-top: 24px !important; }
+.legends-grid li {
+  counter-increment: jb; position: relative; display: block !important; border: 0 !important;
+  padding: 16px 18px 14px !important; color: var(--ink) !important; line-height: 1.05 !important;
+  font-size: clamp(1.6rem, 2.4vw, 2.1rem) !important; font-family: var(--display) !important;
+  background:
+    linear-gradient(#a3311f, #a3311f) 0 0 / 100% 6px no-repeat,
+    linear-gradient(#a3311f, #a3311f) 0 100% / 100% 6px no-repeat,
+    radial-gradient(ellipse at 30% 20%, #f3e6c4, #dcc596 95%);
+  box-shadow: inset 0 0 18px rgba(90,50,15,.35), 0 8px 18px rgba(0,0,0,.45);
+}
+.legends-grid li::before {
+  content: "A" counter(jb); position: absolute; left: 12px; top: 50%; transform: translateY(-50%);
+  width: 38px; height: 38px; border-radius: 50%; display: grid; place-items: center;
+  background: #1a100a; color: var(--gold); font-family: var(--label); font-weight: 700; font-size: .9rem; letter-spacing: .04em;
+  box-shadow: inset 0 0 0 2px var(--brass);
+}
+.legends-grid li span {
+  display: block; margin-top: 8px; max-width: none !important; text-align: left !important;
+  color: #8a2a18 !important; font-size: .72rem !important; letter-spacing: .12em !important; line-height: 1.3;
+}
+@media (max-width: 1000px) { .legends-grid { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; } }
+@media (max-width: 560px) { .legends-grid { grid-template-columns: 1fr !important; gap: 14px !important; } .legends-grid li { font-size: 1.7rem !important; } }
+
+
+.bio.wanted .sight-btn { margin: 20px 0 0; }
+
+
+
+/* ---------- THE SOUND: chalkboard menu behind the bar ---------- */
+.chalk-frame {
+  position: relative; max-width: 980px; margin: 30px auto 0; padding: 22px; border-radius: 6px;
+  background: linear-gradient(rgba(20,10,4,.25), rgba(20,10,4,.45)), var(--barnwood);
+  box-shadow: 0 26px 40px rgba(0,0,0,.6), inset 0 0 0 2px rgba(0,0,0,.6), inset 0 2px 0 rgba(255,220,170,.15);
+}
+.chalk-frame::before, .chalk-frame::after { /* hanging nails */
+  content: ""; position: absolute; top: 8px; width: 10px; height: 10px; border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #c9c3b8, #5d564d 60%, #241f1a); box-shadow: 1px 2px 2px rgba(0,0,0,.6);
+}
+.chalk-frame::before { left: 8px; } .chalk-frame::after { right: 8px; }
+.chalkboard {
+  position: relative; overflow: hidden; border-radius: 2px; padding: 38px 46px 54px;
+  background:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='400'%3E%3Cfilter id='c'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.012 .03' numOctaves='3' seed='5'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .32 -.12'/%3E%3C/filter%3E%3Crect width='100%' height='100%' filter='url(%23c)'/%3E%3C/svg%3E") 0 0 / 600px 400px,
+    radial-gradient(ellipse 40% 30% at 22% 30%, rgba(255,255,255,.07), transparent 70%),
+    radial-gradient(ellipse 35% 25% at 78% 75%, rgba(255,255,255,.06), transparent 70%),
+    linear-gradient(160deg, #26302a, #1b231e 55%, #202923);
+  box-shadow: inset 0 0 0 3px #0e1310, inset 0 0 60px rgba(0,0,0,.7);
+  color: #f2efe6;
+}
+.chalkboard::after { /* chalk dust grain over everything */
+  content: ""; position: absolute; inset: 0; pointer-events: none; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='d'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' seed='2'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 9 -7.6'/%3E%3C/filter%3E%3Crect width='100%' height='100%' filter='url(%23d)'/%3E%3C/svg%3E") 0 0 / 200px 200px; opacity: .22; mix-blend-mode: screen;
+}
+.cb-title {
+  margin: 0; text-align: center; font-family: "Fredericka the Great", "Rye", serif; font-size: clamp(2.4rem, 6vw, 4rem); line-height: 1;
+  color: #f6f2e8; text-shadow: 0 0 1px #fff, 0 0 6px rgba(255,255,255,.35), 1px 1px 0 rgba(255,255,255,.15);
+}
+.cb-sub {
+  margin: 10px auto 0; width: fit-content; max-width: 100%; text-align: center; font-family: "Cabin Sketch", "Caveat", cursive; font-size: clamp(1rem, 2.2vw, 1.3rem);
+  color: #f2c9c0; padding-bottom: 8px;
+  background: linear-gradient(90deg, transparent, rgba(242,201,192,.75) 8%, rgba(242,201,192,.6) 50%, rgba(242,201,192,.75) 92%, transparent) 0 100% / 100% 2px no-repeat;
+}
+.cb-cols { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 56px; margin-top: 30px; }
+.cb-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 16px; align-content: start; }
+.cb-list li { display: grid; gap: 2px; min-width: 0; }
+.cb-name {
+  font-family: "Cabin Sketch", "Fredericka the Great", cursive; font-weight: 700; font-size: clamp(1.35rem, 2.4vw, 1.75rem); line-height: 1.05;
+  color: #fbf8ef; text-shadow: 0 0 4px rgba(255,255,255,.3);
+  display: flex; align-items: baseline; gap: 10px;
+}
+.cb-name::after { /* dotted chalk leader to a little star */
+  content: "\2605"; flex: 1; text-align: right; font-size: .7em; color: #f1d27a;
+  background: radial-gradient(circle, rgba(255,255,255,.55) 0 1.4px, transparent 1.8px) 0 75% / 10px 4px repeat-x;
+}
+.cb-list li:nth-child(3n+2) .cb-name::after { color: #9fd3c4; }
+.cb-list li:nth-child(3n) .cb-name::after { color: #f2a99c; }
+.cb-tag { font-family: "Cabin Sketch", "Caveat", cursive; font-size: clamp(.95rem, 1.6vw, 1.1rem); line-height: 1.25; color: #d9e4dc; opacity: .88; }
+.cb-doodle { position: absolute; fill: none; stroke: rgba(246,242,232,.55); stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; pointer-events: none; }
+.cb-star { width: 46px; top: 26px; left: 34px; transform: rotate(-12deg); stroke: rgba(241,210,122,.75); }
+.cb-mug { width: 54px; top: 22px; right: 36px; transform: rotate(8deg); }
+.cb-eraser { /* eraser and chalk resting on the tray */
+  position: absolute; right: 70px; bottom: 12px; width: 70px; height: 20px; border-radius: 3px; z-index: 2;
+  background: linear-gradient(#8b5a2b, #6b4220 55%, #e9e2d2 56%, #cfc7b4); box-shadow: 0 3px 4px rgba(0,0,0,.5);
+}
+.cb-chalk { position: absolute; right: 158px; bottom: 15px; width: 38px; height: 7px; border-radius: 4px; background: linear-gradient(#fff, #ddd8cc); box-shadow: 0 2px 3px rgba(0,0,0,.5); z-index: 2; transform: rotate(-4deg); }
+.chalkboard::before { /* chalk tray */
+  content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 14px; z-index: 1;
+  background: linear-gradient(#5a3a1e, #3a2412); box-shadow: 0 -2px 0 rgba(0,0,0,.4), inset 0 2px 0 rgba(255,220,170,.15);
+}
+@media (max-width: 760px) {
+  .chalk-frame { padding: 14px; }
+  .chalkboard { padding: 30px 20px 44px; }
+  .cb-cols { grid-template-columns: 1fr; gap: 16px; margin-top: 24px; }
+  .cb-star { width: 30px; top: 16px; left: 14px; } .cb-mug { width: 34px; top: 14px; right: 14px; }
+  .cb-eraser { right: 24px; width: 54px; } .cb-chalk { right: 92px; }
+}
+
+/* chalkboard v2: hand-drawn border, banner title, colored chalk */
+.cb-border { position: absolute; inset: 14px 14px 26px; border: 2px dashed rgba(246,242,232,.28); border-radius: 10px; pointer-events: none; }
+.cb-border::before, .cb-border::after { content: "\2726"; position: absolute; top: -13px; font-size: 1.1rem; color: rgba(241,210,122,.8); padding: 0 6px; text-shadow: 0 0 6px #1f2823, 0 0 3px #1f2823; }
+.cb-border::before { left: 22px; } .cb-border::after { right: 22px; }
+.cb-kicker { margin: 4px 0 0; text-align: center; font-family: "Cabin Sketch", cursive; font-weight: 700; text-transform: uppercase; letter-spacing: .3em; font-size: .85rem; color: #a9dccd; }
+.cb-title { color: #f6e08a !important; font-size: clamp(2.8rem, 7vw, 4.8rem) !important; margin-top: 4px !important;
+  text-shadow: 0 0 1px #fff6c8, 0 0 8px rgba(246,224,138,.4), 2px 2px 0 rgba(0,0,0,.25) !important; }
+.cb-swash { display: block; width: min(420px, 80%); height: 22px; margin: 4px auto 0; fill: none; stroke: rgba(242,201,192,.8); stroke-width: 2.6; stroke-linecap: round; }
+.cb-swash path + path { stroke: rgba(242,201,192,.45); stroke-width: 1.8; }
+.cb-sub { background: none !important; padding-bottom: 0 !important; margin-top: 8px !important; color: #f2efe6 !important; font-style: italic; }
+.cb-star { top: 36px !important; left: 44px !important; } .cb-mug { top: 30px !important; right: 46px !important; }
+.cb-cols { position: relative; margin-top: 34px !important; }
+.cb-cols::before { content: ""; position: absolute; left: 50%; top: 4px; bottom: 4px; width: 2px; transform: translateX(-1px) rotate(.4deg);
+  background: repeating-linear-gradient(180deg, rgba(246,242,232,.35) 0 14px, transparent 14px 20px); }
+.cb-list li:nth-child(odd) { transform: rotate(-.35deg); }
+.cb-list li:nth-child(even) { transform: rotate(.3deg); }
+.cb-list li:nth-child(4n+2) .cb-name { color: #f6e08a; }
+.cb-list li:nth-child(4n+4) .cb-name { color: #f4b6ab; }
+@media (max-width: 760px) {
+  .cb-cols::before { display: none; }
+  .cb-border { inset: 10px 10px 22px; }
+  .cb-star { top: 26px !important; left: 22px !important; } .cb-mug { top: 22px !important; right: 22px !important; }
+  .cb-kicker { font-size: .72rem; letter-spacing: .22em; }
+}
+
+/* phones: the bar tab form comes first in the booking section */
+@media (max-width: 800px) {
+  .book-grid .tab { order: -1; }
+  .book-grid { display: flex !important; flex-direction: column; }
+}
+
+/* chalk footer: there's more than what's on the board */
+.cb-plus { position: relative; z-index: 2; text-align: center; margin: 34px auto 8px; transform: rotate(-1.5deg); }
+.cbp-big {
+  margin: 0; font-family: "Caveat", cursive; font-weight: 700; font-size: clamp(1.7rem, 4vw, 2.4rem); line-height: 1.1; color: #f6e08a;
+  text-shadow: 0 0 1px rgba(246,224,138,.7), 0 0 10px rgba(246,224,138,.18);
+}
+.cbp-swoosh { display: block; width: min(220px, 60%); height: 14px; margin: 2px auto 0; }
+.cbp-small {
+  margin: 0; font-family: "Cabin Sketch", "Caveat", cursive; font-size: clamp(1.05rem, 2.4vw, 1.3rem); letter-spacing: .03em;
+  color: rgba(246,242,232,.85); text-shadow: 0 0 1px rgba(246,242,232,.5);
+}
+@media (max-width: 760px) { .cb-plus { margin-top: 26px; } }
+
+/* phones: short menu with a chalk button for the rest */
+.cb-more { display: none; }
+@media (max-width: 760px) {
+  .cb-cols:not(.open) .cb-list:first-child li:nth-child(n+9), .cb-cols:not(.open) .cb-list + .cb-list { display: none; }
+  .cb-more {
+    display: block; margin: 22px auto 4px; padding: 8px 18px; cursor: pointer; background: none;
+    border: 2px dashed rgba(246,242,232,.55); border-radius: 8px; color: #f6e08a;
+    font-family: "Cabin Sketch", "Caveat", cursive; font-weight: 700; font-size: 1.15rem; letter-spacing: .04em;
+  }
+  .cb-more:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+}
 </style>
 
 <div class="haze" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
@@ -1882,8 +2054,6 @@ body::before, body::after { inset: auto !important; top: 0 !important; left: 0 !
       </div>
       <span class="sill" aria-hidden="true"></span>
     </div>
-    <button class="btn gate-btn" id="gate-btn" type="button">Kick the doors open</button>
-    <p class="gate-hint">By entering you swear you're old enough to make bad decisions.</p>
   </div>
 </div>
 
@@ -2044,22 +2214,42 @@ body::before, body::after { inset: auto !important; top: 0 !important; left: 0 !
   </section>
 
   <section class="slab sound-slab torn" id="sound">
-    <div class="wrap two">
-      <div class="prose">
-        <p class="kicker">The sound</p>
-        <h2>Golden age country, served warm, flat, and a little hungover.</h2>
-        <p>We play the real stuff. The records that came out of jukeboxes in bars with sawdust on the floor, a lady named Darlene on her fourth husband, and a fistfight in the parking lot by 11.</p>
-        <p>No bro country. No songs about tailgates or sippin' on Fireball. If there's no steel guitar crying in it, we don't know it, and we are not learning it for your cousin's wedding. Unless he pays. Then we'll learn anything.</p>
-        <p>We run our own sound, so all you gotta do is pour. Heavy.</p>
+    <div class="wrap">
+      <p class="kicker">The sound</p>
+      <h2>Golden age country. No chaser.</h2>
+      <div class="chalk-frame">
+        <div class="chalkboard">
+          
+          <div class="cb-cols">
+            <ul class="cb-list">
+              <li><span class="cb-name">Merle Haggard</span><span class="cb-tag">Sang about prison because he'd been there</span></li>
+              <li><span class="cb-name">Waylon Jennings</span><span class="cb-tag">Did more cocaine than your whole county</span></li>
+              <li><span class="cb-name">Willie Nelson</span><span class="cb-tag">Smoked weed on the White House roof. Look it up.</span></li>
+              <li><span class="cb-name">Loretta Lynn</span><span class="cb-tag">Would kick your ass</span></li>
+              <li><span class="cb-name">George Jones</span><span class="cb-tag">Drove a riding mower 8 miles to the liquor store when his wife hid the car keys</span></li>
+              <li><span class="cb-name">Hank Williams</span><span class="cb-tag">Wrote the book on heartbreak</span></li>
+              <li><span class="cb-name">Hank Williams Jr.</span><span class="cb-tag">Fell off a mountain and came back with a new face</span></li>
+            </ul>
+            <ul class="cb-list">
+              <li><span class="cb-name">Johnny Cash</span><span class="cb-tag">Never actually shot a man in Reno. Probably.</span></li>
+              <li><span class="cb-name">George Strait</span><span class="cb-tag">Has more No. 1 hits than you have exes</span></li>
+              <li><span class="cb-name">Buck Owens</span><span class="cb-tag">Put Bakersfield on the map and Hee Haw on TV</span></li>
+              <li><span class="cb-name">Conway Twitty</span><span class="cb-tag">Said &ldquo;Hello darlin&rsquo;&rdquo; and meant it every time</span></li>
+              <li><span class="cb-name">Alan Jackson</span><span class="cb-tag">Still thinks it&rsquo;s five o&rsquo;clock somewhere</span></li>
+              <li><span class="cb-name">Johnny Paycheck</span><span class="cb-tag">Sang the only resignation letter anyone ever needed</span></li>
+              <li><span class="cb-name">Jerry Reed</span><span class="cb-tag">Got paid to drive Burt Reynolds&rsquo; getaway truck</span></li>
+            </ul>
+          </div>
+          <button class="cb-more" id="cb-more" type="button" aria-expanded="false">See the whole menu</button>
+          <div class="cb-plus">
+            <p class="cbp-big">&hellip;and plenty more</p>
+            <svg class="cbp-swoosh" viewBox="0 0 300 16" preserveAspectRatio="none" aria-hidden="true"><path d="M4 11 C 70 3, 160 4, 296 8" fill="none" stroke="#f6e08a" stroke-width="3" stroke-linecap="round" opacity=".75"/><path d="M30 13 C 110 7, 200 8, 270 11" fill="none" stroke="#f6e08a" stroke-width="1.6" stroke-linecap="round" opacity=".4"/></svg>
+          </div>
+          <span class="cb-eraser" aria-hidden="true"></span>
+          <span class="cb-chalk" aria-hidden="true"></span>
+        </div>
       </div>
-      <ul class="legends" aria-label="Who we cover">
-        <li>Merle Haggard <span>Sang about prison because he'd been there</span></li>
-        <li>Waylon Jennings <span>Did more cocaine than your whole county</span></li>
-        <li>Willie Nelson <span>Smoked weed on the White House roof. Look it up.</span></li>
-        <li>Loretta Lynn <span>Would kick your ass</span></li>
-        <li>George Jones <span>Drove a mower to the bar</span></li>
-        <li>Hank Williams <span>Wrote the book on heartbreak</span></li>
-      </ul>
+      <div class="legends-more"><p>If it played on a jukebox before 1980, we probably know it.</p><p>We play the new stuff too. Just the good ones.</p></div>
     </div>
   </section>
 
@@ -2073,16 +2263,16 @@ body::before, body::after { inset: auto !important; top: 0 !important; left: 0 !
           <p class="w-for">for lead vocals &amp; guitar</p>
           <figure class="mug"><img src="weston.jpg" alt="Weston Mueller sitting on a trailer gate with a beer" width="800" height="1000" loading="lazy"></figure>
           <h3 class="name">Weston Mueller</h3>
-          <button class="sight-btn" type="button">Report a sighting</button>
           <div class="w-body"><p>Weston Mueller is a Wisconsin singer-songwriter with more than a decade of road miles behind him. Before Rat River Boys, he founded and fronted Milwaukee Americana band Listening Party, writing and singing five albums and earning a 2018 WAMI nomination for Bluegrass/Americana.</p><p>He writes about real life: love, loss, bad decisions and long roads. The Milwaukee Journal Sentinel said every note he sings is full of feeling, and he's played it all, from corner dive bars to Summerfest, Wisconsin State Fair and Mile of Music, at around 120 shows a year.</p><p>Now he's out front as lead singer and guitarist for Rat River Boys, where the songs got louder, the nights got longer and nobody's ready to go home.</p></div>
+          <button class="sight-btn" type="button">Report a sighting</button>
         </article>
         <article class="bio wanted">
           <p class="w-head">Wanted</p>
           <p class="w-for">for lead guitar</p>
           <figure class="mug"><img src="tyler.jpg" alt="Tyler Furrer playing an acoustic guitar" width="800" height="1000" loading="lazy"></figure>
           <h3 class="name">Tyler Furrer</h3>
-          <button class="sight-btn" type="button">Report a sighting</button>
           <div class="w-body"><p>Tyler Furrer is a guitarist from Wisconsin who has built his career on the road. He has spent the past three years honing his craft in Nashville, playing everywhere from downtown on Broadway to large festival stages, with shows all over the country, including New York, Las Vegas and Nashville.</p><p>He's toured the country playing everything from honky tonk to Americana to polka, including runs with Mollie B &amp; SqueezeBox, the award-winning band behind RFD-TV's Mollie B Polka Party. He joined Listening Party for their album High &amp; Low, which is where he met Weston, and has shared stages with national acts including Brantley Gilbert, Parker McCollum, Chase Matthew and Clay Street Unit. Along the way he's played Summerfest, Wisconsin State Fair, the Hodag Country Festival, Mile of Music and the Tri-State Rodeo in Iowa.</p><p>Now he's on lead guitar for Rat River Boys, bringing the Nashville polish and the Wisconsin grit to every set.</p></div>
+          <button class="sight-btn" type="button">Report a sighting</button>
         </article>
       </div>
     </div>
@@ -2142,6 +2332,10 @@ body::before, body::after { inset: auto !important; top: 0 !important; left: 0 !
           <button class="btn" type="submit">Request it</button>
         </form>
         <div id="denied-wrap" aria-live="polite"></div>
+        <div class="tip-real">
+          <span class="tr-label">Rather tip with real money?</span>
+          <a class="btn venmo-btn" href="https://venmo.com/u/ratriverboys" target="_blank" rel="noopener">Tip us on Venmo <small>@ratriverboys</small></a>
+        </div>
       </div>
     </div>
   </section>
@@ -2157,6 +2351,7 @@ body::before, body::after { inset: auto !important; top: 0 !important; left: 0 !
         <li>South Park Food Truck Friday<small>Oshkosh</small></li>
         <li>Wisconsin State Fair, Miller Lite Stage<small>West Allis</small></li>
         <li>Tosa Fest<small>Wauwatosa</small></li>
+        <li>Fletch&rsquo;s Local Tap House<small>Oshkosh</small></li>
       </ul>
     </div>
   </section>
@@ -2208,11 +2403,6 @@ body::before, body::after { inset: auto !important; top: 0 !important; left: 0 !
         </div>
         <div class="copied" id="copied" aria-live="polite"></div>
         <p class="fb-line">Or slide into our DMs on <a href="https://www.facebook.com/profile.php?id=61589395443501" target="_blank" rel="noopener">Facebook</a>. We answer faster than your ex.</p>
-        <ul class="perks">
-          <li>Always on time</li>
-          <li>We run our own sound</li>
-          <li>Long sets, short memories</li>
-        </ul>
       </div>
       <form class="book-form tab" id="book-form" novalidate><input id="bf-hp" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
         <div class="tab-head">
@@ -2222,7 +2412,7 @@ body::before, body::after { inset: auto !important; top: 0 !important; left: 0 !
           </div>
           <img class="tab-stamp" src="rat-crest.jpg" alt="" width="690" height="760">
         </div>
-        <p class="tab-note">Fill it out and close out the tab. We'll holler back.</p>
+        <p class="tab-note">Fill it out and hit send. We'll holler back.</p>
         <div class="bf-grid">
           <label>Venue<input id="bf-venue" name="venue" type="text" placeholder="Brenda's Bar &amp; Grill" autocomplete="organization"></label>
           <label>City<input id="bf-city" name="city" type="text" placeholder="Nashville, TN" autocomplete="address-level2"></label>
@@ -2232,7 +2422,7 @@ body::before, body::after { inset: auto !important; top: 0 !important; left: 0 !
           <label>Your email<input id="bf-email" name="email" type="email" placeholder="brenda@brendasbar.com" autocomplete="email"></label>
         </div>
         <label>Anything else<textarea id="bf-notes" name="notes" rows="3" placeholder="Set length, stage size, how drunk your regulars get"></textarea></label>
-        <button class="btn bf-send" id="bf-send" type="submit">Close out the tab</button>
+        <button class="btn bf-send" id="bf-send" type="submit">Send booking request</button>
         <div class="copied" id="bf-status" aria-live="polite"></div>
         <pre class="bf-preview" id="bf-preview"></pre>
         <div class="tab-foot">Gratuity not included. Tip your band.</div>
@@ -2860,18 +3050,18 @@ body::before, body::after { inset: auto !important; top: 0 !important; left: 0 !
       var subject = 'Bar Tab: ' + (v('venue') || 'Booking request') + (v('date') ? ' (' + v('date') + ')' : '');
       var payload = { venue: v('venue'), city: v('city'), date: v('date'), budget: v('budget'), name: v('name'), email: email, notes: v('notes'),
         _subject: subject, _replyto: email, _gotcha: document.getElementById('bf-hp').value };
-      sending = true; sendBtn.disabled = true; sendBtn.textContent = 'Running it to the bar...'; status.textContent = '';
+      sending = true; sendBtn.disabled = true; sendBtn.textContent = 'Sending...'; status.textContent = '';
       fetch(ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' }, body: JSON.stringify(payload) })
         .then(function (r) { if (!r.ok) throw new Error(r.status); return r; })
         .then(function () {
-          sendBtn.textContent = 'Tab closed. Cheers!';
+          sendBtn.textContent = 'Sent! We\'ll be in touch.';
           status.textContent = "Got it. We'll holler back before last call.";
           ['venue', 'city', 'date', 'budget', 'notes'].forEach(function (id) { document.getElementById('bf-' + id).value = ''; });
           build();
-          setTimeout(function () { sendBtn.textContent = 'Close out the tab'; sendBtn.disabled = false; sending = false; }, 4000);
+          setTimeout(function () { sendBtn.textContent = 'Send booking request'; sendBtn.disabled = false; sending = false; }, 4000);
         })
         .catch(function () {
-          sendBtn.textContent = 'Close out the tab'; sendBtn.disabled = false; sending = false;
+          sendBtn.textContent = 'Send booking request'; sendBtn.disabled = false; sending = false;
           status.textContent = 'The bartender dropped it. Try again, or email us at ratriverboysband@gmail.com.';
         });
     });
@@ -3197,7 +3387,7 @@ document.querySelectorAll('.fight-inline').forEach(function (b) {
 (function () {
   var gate = document.getElementById('gate'); if (!gate) return;
   if (!window.__gateOn) { gate.remove(); return; }
-  var btn = document.getElementById('gate-btn'), opened = false;
+  var opened = false;
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   function finish() {
     window.__gateOn = false;
@@ -3208,7 +3398,7 @@ document.querySelectorAll('.fight-inline').forEach(function (b) {
     q.forEach(function (fn) { try { fn(); } catch (e) {} });
   }
   function open() {
-    if (opened) return; opened = true;
+    if (opened || !document.getElementById('gate')) return; opened = true;
     var L = document.getElementById('door-l'), R = document.getElementById('door-r');
     L.style.animation = 'none'; R.style.animation = 'none';
     // the kick snaps both ropes: stubs stay on the beam anchors, the sign drops
@@ -3220,8 +3410,7 @@ document.querySelectorAll('.fight-inline').forEach(function (b) {
     });
     if (!window.gsap || reduce) { gate.style.transition = 'opacity .35s'; gate.style.opacity = '0'; setTimeout(finish, 360); return; }
     gsap.timeline({ onComplete: finish })
-      .to(btn, { scale: .9, duration: .08, yoyo: true, repeat: 1 })
-      .to(L, { rotateY: 118, duration: .42, ease: 'power3.out' }, '<')
+      .to(L, { rotateY: 118, duration: .42, ease: 'power3.out' })
       .to([signEl, hangEl.querySelector('.rope-tail')].filter(Boolean), { y: '+=' + (window.innerHeight + 200), rotate: '+=' + (Math.random() < .5 ? -24 : 24), duration: .85, ease: 'power2.in' }, '<.05')
       .to(R, { rotateY: -118, duration: .42, ease: 'power3.out' }, '<')
       .to(L, { rotateY: 62, duration: .9, ease: 'elastic.out(1, .35)' })
@@ -3229,7 +3418,7 @@ document.querySelectorAll('.fight-inline').forEach(function (b) {
       .to('#gate-inner', { scale: 4.2, duration: .8, ease: 'power2.in' }, '<.15')
       .to(gate, { opacity: 0, duration: .45, ease: 'power1.in' }, '-=.4');
   }
-  btn.addEventListener('click', function (e) { e.stopPropagation(); open(); });
+  setTimeout(open, 3000);
   document.getElementById('doorway').addEventListener('click', open);
   document.addEventListener('keydown', function (e) { if (!opened && document.getElementById('gate') && (e.key === 'Enter' || e.key === ' ' || e.key === 'Escape')) { e.preventDefault(); open(); } });
 })();
@@ -3719,5 +3908,18 @@ document.querySelectorAll('.fight-inline').forEach(function (b) {
     if (after.loading === 'lazy') after.loading = 'eager';
   }, 5000);
   slides[1].loading = 'eager';
+})();
+</script>
+
+<script>
+(function () {
+  var b = document.getElementById('cb-more'); if (!b) return;
+  var cols = b.parentNode.querySelector('.cb-cols');
+  b.addEventListener('click', function () {
+    var open = cols.classList.toggle('open');
+    b.textContent = open ? 'Show less' : 'See the whole menu';
+    b.setAttribute('aria-expanded', open ? 'true' : 'false');
+    if (!open) b.parentNode.scrollIntoView({ block: 'start', behavior: 'smooth' });
+  });
 })();
 </script>
