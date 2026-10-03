@@ -1081,6 +1081,20 @@ img { -webkit-user-drag: none; }
   .tips-grid .tip-real { order: 3; justify-content: center; flex-direction: column; text-align: center; }
 }
 
+/* phones: house rules show the first six, the rest behind a button */
+.rules-more { display: none; }
+@media (max-width: 640px) {
+  .rule-list { gap: 10px !important; }
+  .rule-list li { font-size: 1.05rem !important; line-height: 1.35 !important; }
+  .rule-list:not(.open) li:nth-child(n+7) { display: none; }
+  .rules-more {
+    display: block; margin: 20px auto 0; padding: 10px 18px; cursor: pointer; background: none;
+    border: 2px dashed rgba(241,228,196,.6); border-radius: 6px; color: var(--bone);
+    font-family: var(--label); text-transform: uppercase; letter-spacing: .12em; font-weight: 600; font-size: .9rem;
+  }
+  .rules-more:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+}
+
 /* bar tab: send button */
 .tab .bf-send { width: 100%; text-align: center; font-size: 1.05rem; padding: 14px 12px; margin-top: 4px; }
 .tab .bf-send:disabled { opacity: .75; cursor: default; }
@@ -2298,6 +2312,7 @@ body::before, body::after { inset: auto !important; top: 0 !important; left: 0 !
         <li>Anyone caught line dancing sober will be asked to leave.</li>
         <li>We take requests, cash and compliments. In that order.</li>
       </ol>
+      <button class="rules-more" id="rules-more" type="button" aria-expanded="false">Read all the rules</button>
       <p class="fine-print"><span>Fine print:</span> These house rules are for entertainment purposes only and are not enforced by the band, the venue or any court of law. The venue's actual rules always win. Please drink responsibly, tip your bartender and get home safe. Rat River Boys are not liable for sore feet, lost voices, broken hearts or anything you decide to do after last call.</p>
       <button class="btn alt fight-inline" type="button">Break a rule. Start a bar fight.</button>
     </div>
@@ -3922,6 +3937,17 @@ document.querySelectorAll('.fight-inline').forEach(function (b) {
     b.textContent = open ? 'Show less' : 'See the whole menu';
     b.setAttribute('aria-expanded', open ? 'true' : 'false');
     if (!open) b.parentNode.scrollIntoView({ block: 'start', behavior: 'smooth' });
+  });
+})();
+</script>
+<script>
+(function () {
+  var b = document.getElementById('rules-more'), l = document.querySelector('.rule-list'); if (!b || !l) return;
+  b.addEventListener('click', function () {
+    var on = l.classList.toggle('open');
+    b.textContent = on ? 'Show fewer rules' : 'Read all the rules';
+    b.setAttribute('aria-expanded', on ? 'true' : 'false');
+    if (!on) document.getElementById('rules').scrollIntoView({ behavior: 'smooth' });
   });
 })();
 </script>
