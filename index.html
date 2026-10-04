@@ -1996,10 +1996,13 @@ body::before, body::after { inset: auto !important; top: 0 !important; left: 0 !
   .cb-kicker { font-size: .72rem; letter-spacing: .22em; }
 }
 
-/* phones: the bar tab form comes first in the booking section */
+/* phones: booking words first, then the bar tab form, then the email */
 @media (max-width: 800px) {
-  .book-grid .tab { order: -1; }
-  .book-grid { display: flex !important; flex-direction: column; }
+  .book-grid { display: flex !important; flex-direction: column; gap: 0 !important; }
+  .book-grid .book-pitch { display: contents; }
+  .book-pitch .kicker, .book-pitch h2, .book-pitch .lede { order: 1; }
+  .book-grid .tab { order: 2; margin: 22px 0 30px; }
+  .book-pitch .email-row, .book-pitch .copied, .book-pitch .fb-line { order: 3; }
 }
 
 /* chalk footer: there's more than what's on the board */
