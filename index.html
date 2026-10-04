@@ -613,7 +613,8 @@ footer a.fb-foot:hover { background: var(--bone); }
   nav ul.nav-links li a:active { color: var(--mustard); }
   nav ul.nav-links li.m-fb { border-bottom: 0; padding-top: 18px; }
   nav ul.nav-links li.m-fb a.btn { font-family: var(--label); font-size: .95rem; letter-spacing: .12em; text-transform: uppercase; text-align: center; background: var(--mustard); color: var(--ink); padding: 13px 16px; }
-  nav a, nav .brand, .menu-btn { -webkit-tap-highlight-color: rgba(233,174,28,.25); touch-action: manipulation; }
+  nav a, nav .brand, .menu-btn { -webkit-tap-highlight-color: transparent; touch-action: manipulation; }
+  nav a:focus:not(:focus-visible), .menu-btn:focus:not(:focus-visible) { outline: none; }
 
   /* hero */
   .hero-grid { gap: 22px; padding-block: 20px 44px; }
@@ -2150,7 +2151,7 @@ body::before, body::after { inset: auto !important; top: 0 !important; left: 0 !
         <li><a href="#merch">Merch</a></li>
         <li class="m-only"><a href="#wall">Bathroom Wall</a></li>
         <li class="m-only"><a href="#book">Book Us</a></li>
-        <li class="m-only m-fb"><a class="btn" href="https://www.facebook.com/profile.php?id=61589395443501" target="_blank" rel="noopener">Follow us on Facebook</a></li>
+        <li class="m-only"><a href="https://www.facebook.com/profile.php?id=61589395443501" target="_blank" rel="noopener">Facebook</a></li>
       </ul>
       <ul class="nav-cta">
         <li><a class="neon" href="#book">Boo<span class="flick">k</span> Us</a></li>
