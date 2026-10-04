@@ -795,6 +795,8 @@ nav ul a.fb-nav .fb-f { display: none; }
 @media (min-width: 641px) and (max-width: 860px) {
   nav ul.nav-links li:nth-child(5) { display: none; }
 }
+/* desktop nav: keep each separator dot on the same line as its link */
+@media (min-width: 641px) { nav ul.nav-links li { display: flex; align-items: center; white-space: nowrap; } }
 @media (max-width: 800px) {
   .tab { transform: none; }
 }
@@ -1104,7 +1106,7 @@ img { -webkit-user-drag: none; }
   background: linear-gradient(rgba(20,10,4,.25), rgba(20,10,4,.45)), var(--barnwood);
   box-shadow: 0 22px 40px rgba(0,0,0,.6), inset 0 0 0 2px rgba(0,0,0,.6), inset 0 2px 0 rgba(255,220,170,.12);
 }
-.vid-screen { position: relative; aspect-ratio: 16 / 9; overflow: hidden; background: #000; border: 2px solid #0b0603; }
+.vid-screen { position: relative; z-index: 55; aspect-ratio: 16 / 9; overflow: hidden; background: #000; border: 2px solid #0b0603; }
 .vid-screen iframe, .vid-screen video { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; display: block; }
 .vid-poster { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: brightness(.45) sepia(.35) contrast(1.05); }
 .vid-ph { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px; text-align: center; }
@@ -2242,20 +2244,17 @@ body::before, body::after { inset: auto !important; top: 0 !important; left: 0 !
     <div class="vid-reel">
       <div class="vid-frame tall">
         <div class="vid-screen" id="vid-solo">
-          <img class="vid-poster yt-thumb" src="https://i.ytimg.com/vi/53UOsI0vwqo/oardefault.jpg" alt="" loading="lazy" onerror="var f=+(this.dataset.f||0);this.dataset.f=f+1;if(f===0){this.src='https://i.ytimg.com/vi/53UOsI0vwqo/hqdefault.jpg';}else if(f===1){this.classList.remove('yt-thumb');this.src='axes2.jpg';}">
-          <button class="vid-ph vid-go" type="button" data-yt="53UOsI0vwqo" aria-label="Play You Ain't Woman Enough (To Take My Man)"><span class="vid-play" aria-hidden="true"></span><span class="vid-note">You Ain&rsquo;t Woman Enough</span></button>
-          </div>
-      </div>
-      <div class="vid-frame tall">
-        <div class="vid-screen" id="vid-2">
-          <img class="vid-poster yt-thumb" src="https://i.ytimg.com/vi/L03nYWAjmDg/oardefault.jpg" alt="" loading="lazy" onerror="var f=+(this.dataset.f||0);this.dataset.f=f+1;if(f===0){this.src='https://i.ytimg.com/vi/L03nYWAjmDg/hqdefault.jpg';}else if(f===1){this.classList.remove('yt-thumb');this.src='live-crowd.jpg';}">
-          <button class="vid-ph vid-go" type="button" data-yt="L03nYWAjmDg" aria-label="Play Country Roads"><span class="vid-play" aria-hidden="true"></span><span class="vid-note">Country Roads</span></button>
+          <iframe src="https://www.youtube-nocookie.com/embed/53UOsI0vwqo?rel=0&amp;playsinline=1&amp;modestbranding=1" title="You Ain&#39;t Woman Enough (To Take My Man)" loading="lazy" allow="encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>
         </div>
       </div>
       <div class="vid-frame tall">
         <div class="vid-screen" id="vid-3">
-          <img class="vid-poster yt-thumb" src="https://i.ytimg.com/vi/eATwTSG0D2M/oardefault.jpg" alt="" loading="lazy" onerror="var f=+(this.dataset.f||0);this.dataset.f=f+1;if(f===0){this.src='https://i.ytimg.com/vi/eATwTSG0D2M/hqdefault.jpg';}else if(f===1){this.classList.remove('yt-thumb');this.src='live-stage.jpg';}">
-          <button class="vid-ph vid-go" type="button" data-yt="eATwTSG0D2M" aria-label="Play Dixieland Delight"><span class="vid-play" aria-hidden="true"></span><span class="vid-note">Dixieland Delight</span></button>
+          <iframe src="https://www.youtube-nocookie.com/embed/eATwTSG0D2M?rel=0&amp;playsinline=1&amp;modestbranding=1" title="Dixieland Delight" loading="lazy" allow="encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>
+        </div>
+      </div>
+      <div class="vid-frame tall">
+        <div class="vid-screen" id="vid-2">
+          <iframe src="https://www.youtube-nocookie.com/embed/L03nYWAjmDg?rel=0&amp;playsinline=1&amp;modestbranding=1" title="Country Roads" loading="lazy" allow="encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>
         </div>
       </div>
     </div>
@@ -4017,21 +4016,6 @@ document.querySelectorAll('.fight-inline').forEach(function (b) {
     b.textContent = on ? 'Show fewer rules' : 'Read all the rules';
     b.setAttribute('aria-expanded', on ? 'true' : 'false');
     if (!on) document.getElementById('rules').scrollIntoView({ behavior: 'smooth' });
-  });
-})();
-</script>
-<script>
-(function () {
-  document.querySelectorAll('.vid-go[data-yt]').forEach(function (b) {
-    b.addEventListener('click', function () {
-      var scr = b.parentNode, id = b.getAttribute('data-yt');
-      var f = document.createElement('iframe');
-      f.src = 'https://www.youtube-nocookie.com/embed/' + id + '?autoplay=1&playsinline=1&rel=0&modestbranding=1';
-      f.title = b.getAttribute('aria-label') || 'Video';
-      f.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
-      f.allowFullscreen = true;
-      scr.innerHTML = ''; scr.appendChild(f);
-    });
   });
 })();
 </script>
