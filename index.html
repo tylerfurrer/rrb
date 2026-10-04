@@ -275,7 +275,7 @@ footer {
   padding-block: 28px 44px;
   font-family: var(--label); text-transform: uppercase; letter-spacing: .14em; font-size: .85rem;
 }
-footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; }
+footer .wrap { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; }
 footer a { color: var(--mustard); }
 .foot-lines { display: grid; gap: 6px; }
 .legends li span { max-width: 22ch; }
@@ -2408,9 +2408,8 @@ body::before, body::after { inset: auto !important; top: 0 !important; left: 0 !
   <section class="slab book-slab torn" id="book">
     <div class="wrap book-grid">
       <div class="book-pitch">
-        <div class="lastcall" id="lastcall" aria-label="Last call"><span>LAST</span> <span>CALL</span></div>
         <p class="kicker">Booking</p>
-        <h2>Got a venue that needs its reputation ruined?</h2>
+        <h2>Got a stage that needs some twang?</h2>
         <p class="lede">Bars, breweries, festivals, divorce parties, backyard blowouts. We'll turn your place into a country night, drag a crowd in, and leave before anyone checks the bathroom.</p>
         <div class="email-row">
           <span class="email" id="email">ratriverboysband@gmail.com</span>
@@ -2448,7 +2447,6 @@ body::before, body::after { inset: auto !important; top: 0 !important; left: 0 !
 
 <footer>
   <div class="wrap">
-    <span class="foot-lines"><span>Rat River Boys. Your best mistake.</span><span>Rated R for rowdy, raunchy, and Rat River.</span><span>Made in Wisconsin, where the beer is cold and the cousins are close.</span><span>Tip your bartender, you animals.</span></span>
     <a class="fb-foot" href="https://www.facebook.com/profile.php?id=61589395443501" target="_blank" rel="noopener">Follow us on Facebook</a>
   </div>
 </footer>
@@ -2945,8 +2943,10 @@ body::before, body::after { inset: auto !important; top: 0 !important; left: 0 !
     var steps = [0, 120, 220, 420, 520, 900];
     steps.forEach(function (t, n) { setTimeout(function () { lc.classList.toggle('lit', n % 2 === 0 || n === steps.length - 1); }, t); });
   }
-  if (window.ScrollTrigger) ScrollTrigger.create({ trigger: lc, start: 'top 85%', onEnter: light, onEnterBack: function () { lc.classList.remove('lit'); light(); } });
-  else light();
+  if (lc) {
+    if (window.ScrollTrigger) ScrollTrigger.create({ trigger: lc, start: 'top 85%', onEnter: light, onEnterBack: function () { lc.classList.remove('lit'); light(); } });
+    else light();
+  }
 
   // ---- hidden rat ----
   var rat = document.getElementById('sneaky-rat');
