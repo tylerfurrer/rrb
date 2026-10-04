@@ -1262,6 +1262,11 @@ img { -webkit-user-drag: none; }
 .mini-wanted .hole { z-index: 3; }
 @media (prefers-reduced-motion: no-preference) { .mini-wanted.hit { animation: jolt .22s ease-out; } }
 
+/* chalkboard: dotted leader stops short of the star */
+.cb-name::after {
+  background: repeating-linear-gradient(90deg, rgba(236,231,218,.5) 0 2.4px, transparent 2.4px 9px) 0 72% / calc(100% - 1.9em) 2.4px no-repeat !important;
+}
+
 /* bar tab: send button */
 .tab .bf-send { width: 100%; text-align: center; font-size: 1.05rem; padding: 14px 12px; margin-top: 4px; }
 .tab .bf-send:disabled { opacity: .75; cursor: default; }
@@ -2473,7 +2478,7 @@ body::before, body::after { inset: auto !important; top: 0 !important; left: 0 !
       <div class="bios">
         <article class="bio wanted">
           <p class="w-head">Wanted</p>
-          <p class="w-for">lead vocals &amp; guitar</p>
+          <p class="w-for">Lead Vocals &amp; Guitar</p>
           <figure class="mug"><img src="weston.jpg" alt="Weston Mueller sitting on a trailer gate with a beer" width="800" height="1000" loading="lazy"></figure>
           <h3 class="name">Weston Mueller</h3>
           <div class="w-body"><p>Weston Mueller is a Wisconsin singer-songwriter with more than a decade of road miles behind him. Before Rat River Boys, he founded and fronted Milwaukee Americana band Listening Party, writing and singing five albums and earning a 2018 WAMI nomination for Bluegrass/Americana.</p><p>He writes about real life: love, loss, bad decisions and long roads. The Milwaukee Journal Sentinel said every note he sings is full of feeling, and he's played it all, from corner dive bars to Summerfest, Wisconsin State Fair and Mile of Music, at around 120 shows a year.</p><p>Now he's out front as lead singer and guitarist for Rat River Boys, where the songs got louder, the nights got longer and nobody's ready to go home.</p></div>
@@ -2481,7 +2486,7 @@ body::before, body::after { inset: auto !important; top: 0 !important; left: 0 !
         </article>
         <article class="bio wanted">
           <p class="w-head">Wanted</p>
-          <p class="w-for">lead guitar</p>
+          <p class="w-for">Lead &amp; Steel Guitar</p>
           <figure class="mug"><img src="tyler.jpg" alt="Tyler Furrer playing an acoustic guitar" width="800" height="1000" loading="lazy"></figure>
           <h3 class="name">Tyler Furrer</h3>
           <div class="w-body"><p>Tyler Furrer is a guitarist from Wisconsin who has built his career on the road. He has spent the past three years honing his craft in Nashville, playing everywhere from downtown on Broadway to large festival stages, with shows all over the country, including New York, Las Vegas and Nashville.</p><p>He's toured the country playing everything from honky tonk to Americana to polka, including runs with Mollie B &amp; SqueezeBox, the award-winning band behind RFD-TV's Mollie B Polka Party. He joined Listening Party for their album High &amp; Low, which is where he met Weston, and has shared stages with national acts including Brantley Gilbert, Parker McCollum, Chase Matthew and Clay Street Unit. Along the way he's played Summerfest, Wisconsin State Fair, the Hodag Country Festival, Mile of Music and the Tri-State Rodeo in Iowa.</p><p>Now he's on lead guitar for Rat River Boys, bringing the Nashville polish and the Wisconsin grit to every set.</p></div>
