@@ -1137,6 +1137,75 @@ img { -webkit-user-drag: none; }
   .vid-reel .vid-frame { flex: 0 0 74%; scroll-snap-align: center; box-sizing: border-box; }
 }
 
+/* chalkboard v4: bar specials board (beer rings, polaroid, $2 Hamm's, 86'd Wagon Wheel) */
+.chalk-frame { overflow: visible; }
+.cb-head { position: relative; z-index: 2; display: flex; align-items: center; justify-content: center; gap: 28px; margin: -6px 0 22px; }
+.cbh-title {
+  margin: 0; font-family: "Cabin Sketch", "Caveat", cursive; font-weight: 700; font-size: clamp(1.5rem, 3.4vw, 2.1rem); letter-spacing: .06em;
+  color: #f2efe6; text-transform: uppercase; padding-bottom: 4px; border-bottom: 3px solid rgba(242,239,230,.55);
+}
+.cbh-deal {
+  margin: 0; position: absolute; right: 4px; top: 50%; transform: translateY(-50%) rotate(8deg);
+  font-family: "Caveat", cursive; font-weight: 700; font-size: 1.6rem; line-height: 1; color: #f6e08a; text-align: center;
+  padding: 12px 16px; border: 3px solid rgba(246,224,138,.75); border-radius: 50% 46% 52% 44%;
+}
+.cbh-deal span { font-size: 1.25em; display: block; }
+.cb-ring { position: absolute; z-index: 1; pointer-events: none; border-radius: 50%; border: 5px solid rgba(176,128,62,.22); box-shadow: 0 0 0 2px rgba(176,128,62,.1), inset 0 0 6px rgba(176,128,62,.18); }
+.cb-ring.r1 { width: 112px; height: 108px; left: 41%; bottom: 70px; transform: rotate(-12deg); border-left-color: rgba(176,128,62,.08); }
+.cb-ring.r2 { width: 96px; height: 94px; left: 6%; top: 46%; border-top-color: rgba(176,128,62,.08); }
+.cb-cols { position: relative; z-index: 2; }
+.cb-polaroid {
+  position: absolute; z-index: 4; left: -26px; top: -34px; width: 118px; margin: 0; padding: 8px 8px 0; background: #f4efe2;
+  box-shadow: 0 8px 16px rgba(0,0,0,.55); transform: rotate(-8deg);
+}
+.cb-polaroid img { display: block; width: 100%; aspect-ratio: 1; object-fit: cover; filter: sepia(.3) contrast(1.05); }
+.cb-polaroid figcaption { font-family: "Permanent Marker", "Caveat", cursive; font-size: .78rem; color: #2b170b; text-align: center; padding: 6px 0 9px; }
+.cbp-tape { position: absolute; left: 50%; top: -10px; width: 62px; height: 20px; margin-left: -31px; background: rgba(238,226,190,.75); transform: rotate(4deg); box-shadow: 0 1px 2px rgba(0,0,0,.25); }
+.cb-86 { margin: 0 0 10px; font-family: "Cabin Sketch", "Caveat", cursive; font-size: clamp(1.15rem, 2.4vw, 1.4rem); color: #f2efe6; }
+.cb-86 s { text-decoration-color: #f4b6ab; text-decoration-thickness: 3px; }
+.cb-86 span { font-family: "Caveat", cursive; font-weight: 700; font-size: 1.35em; color: #f4b6ab; display: inline-block; transform: rotate(-6deg); margin-left: 6px; }
+@media (max-width: 760px) {
+  .cb-head { flex-direction: column; gap: 10px; margin: 0 0 18px; }
+  .cbh-deal { position: static; transform: rotate(-4deg); font-size: 1.25rem; padding: 8px 14px; }
+  .cb-polaroid { width: 74px; left: -6px; top: auto; bottom: -18px; padding: 5px 5px 0; transform: rotate(-8deg); }
+  .cb-polaroid figcaption { font-size: .55rem; padding: 4px 0 6px; }
+  .cbp-tape { width: 40px; height: 14px; margin-left: -20px; top: -7px; }
+  .cb-ring.r1 { width: 84px; height: 80px; left: 55%; bottom: 120px; }
+  .cb-ring.r2 { width: 70px; height: 68px; left: 4%; top: 38%; }
+}
+
+/* chalkboard v5 lettering: saloon slab names, hand-chalked tags, script header */
+.cb-name { font-family: "Rye", "Cabin Sketch", serif !important; font-weight: 400 !important; font-size: clamp(1.15rem, 2.1vw, 1.5rem) !important; letter-spacing: .02em; text-shadow: 0 0 3px rgba(255,255,255,.35), 0 0 1px rgba(255,255,255,.6) !important; }
+.cb-tag { font-family: "Caveat", "Cabin Sketch", cursive !important; font-weight: 600; font-size: clamp(1.1rem, 1.9vw, 1.3rem) !important; line-height: 1.15 !important; opacity: .92 !important; }
+.cbh-title { font-family: "Yellowtail", "Caveat", cursive !important; font-weight: 400 !important; text-transform: none !important; letter-spacing: .01em !important; font-size: clamp(2.2rem, 5vw, 3rem) !important; border-bottom: 0 !important; padding-bottom: 0 !important; color: #fbf8ef; text-shadow: 0 0 4px rgba(255,255,255,.35); }
+
+/* second polaroid, bottom right */
+.cb-polaroid.p2 { left: auto; top: auto; right: -24px; bottom: -30px; transform: rotate(7deg); }
+.cb-polaroid.p2 .cbp-tape { transform: rotate(-5deg); }
+.cb-polaroid.p2 { padding: 0; background: none; width: 140px; } /* the photo already has its own polaroid border */
+.cb-polaroid.p2 img { aspect-ratio: auto; filter: none; }
+@media (max-width: 760px) { .cb-polaroid.p2 { left: auto; right: -6px; bottom: -18px; width: 80px; padding: 0; transform: rotate(8deg); } }
+
+/* third polaroid, bottom left */
+.cb-polaroid.p3 { right: auto; left: -24px; bottom: -30px; transform: rotate(-6deg); }
+.cb-polaroid.p3 .cbp-tape { transform: rotate(3deg); }
+@media (max-width: 760px) { .cb-polaroid.p3 { right: auto; left: -6px; transform: rotate(-7deg); } }
+
+/* chalkboard v6: real chalk, not cartoon. One chalk color, dusty texture on the lettering, quiet stars */
+.cb-list li .cb-name, .cb-list li:nth-child(n) .cb-name { color: #ece7da !important; text-shadow: 0 0 2px rgba(236,231,218,.35) !important; }
+.cb-list li:nth-child(n) .cb-name::after { color: rgba(236,231,218,.45) !important; }
+.cb-tag { color: #cfd5cf !important; opacity: .85 !important; }
+.cb-head, .cb-cols, .cb-plus {
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='m'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' seed='9'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -2.2 2.05'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23m)'/%3E%3C/svg%3E");
+          mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='m'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' seed='9'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -2.2 2.05'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23m)'/%3E%3C/svg%3E");
+  -webkit-mask-size: 160px 160px; mask-size: 160px 160px;
+}
+.cbh-deal { color: #ece7da !important; border-color: rgba(236,231,218,.6) !important; }
+@media (min-width: 761px) { .cb-head { padding: 22px 0; margin: -28px 0 0; } } /* room for the circled deal inside the chalk texture mask */
+.cbp-big { color: #ece7da !important; }
+.cbp-swoosh path { stroke: #ece7da; }
+.cb-ring { opacity: .6; }
+
 /* bar tab: send button */
 .tab .bf-send { width: 100%; text-align: center; font-size: 1.05rem; padding: 14px 12px; margin-top: 4px; }
 .tab .bf-send:disabled { opacity: .75; cursor: default; }
@@ -2300,8 +2369,14 @@ body::before, body::after { inset: auto !important; top: 0 !important; left: 0 !
       <p class="kicker">The sound</p>
       <h2>Golden age country. No chaser.</h2>
       <div class="chalk-frame">
+        <figure class="cb-polaroid p2 p3" aria-hidden="true"><span class="cbp-tape"></span><img src="corndog-mueller.jpg" alt="" loading="lazy"></figure>
+        <figure class="cb-polaroid p2" aria-hidden="true"><span class="cbp-tape"></span><img src="wild-wes.jpg" alt="" loading="lazy"></figure>
         <div class="chalkboard">
-          
+          <span class="cb-ring r1" aria-hidden="true"></span><span class="cb-ring r2" aria-hidden="true"></span>
+          <div class="cb-head">
+            <p class="cbh-title">Tonight&rsquo;s Specials</p>
+            <p class="cbh-deal"><span>$2</span> Beer</p>
+          </div>
           <div class="cb-cols">
             <ul class="cb-list">
               <li><span class="cb-name">Merle Haggard</span><span class="cb-tag">Sang about prison because he'd been there</span></li>
@@ -2327,11 +2402,9 @@ body::before, body::after { inset: auto !important; top: 0 !important; left: 0 !
             <p class="cbp-big">&hellip;and plenty more</p>
             <svg class="cbp-swoosh" viewBox="0 0 300 16" preserveAspectRatio="none" aria-hidden="true"><path d="M4 11 C 70 3, 160 4, 296 8" fill="none" stroke="#f6e08a" stroke-width="3" stroke-linecap="round" opacity=".75"/><path d="M30 13 C 110 7, 200 8, 270 11" fill="none" stroke="#f6e08a" stroke-width="1.6" stroke-linecap="round" opacity=".4"/></svg>
           </div>
-          <span class="cb-eraser" aria-hidden="true"></span>
-          <span class="cb-chalk" aria-hidden="true"></span>
         </div>
       </div>
-      <div class="legends-more"><p>If it played on a jukebox before 1980, we probably know it.</p><p>We play the new stuff too. Just the good ones.</p></div>
+      <div class="legends-more"><p>If it played on a jukebox before 1985, we probably know it.</p><p>We play the new stuff too. Just the good ones.</p></div>
     </div>
   </section>
 
@@ -3168,8 +3241,9 @@ body::before, body::after { inset: auto !important; top: 0 !important; left: 0 !
 
   var SEL = [
     '.poster', '.warning', '.slogan .s1', '.hero .btn', '.show', '.cd-clock > div', '.fb-btn',
-    '.legends li', '.rule-list li', '.jar-rim', '.tip-buttons .btn', '.venues li', '.item', '.g',
-    '.tab-head', '.lastcall', '.email', '.perks li', '.bf-actions .btn', '.book-form textarea',
+    '.vid-frame', '.chalk-frame', '.cb-list li', '.cb-polaroid', '.bio.wanted', '.mug', '.sight-btn',
+    '.rule-list li', '.jar-rim', '.tip-buttons .btn', '.tip-real .btn', '.venues li', '.item', '.g',
+    '.tab', '.tab-head', '.email', '.bf-actions .btn', '.book-form textarea',
     '.kicker', 'main h2', '.fb-foot', 'footer'
   ].join(',');
   var G = 2400, WALK = 90, RUN = 250, CLIMB = 150, MAX_UP = 250, MAX_GAP = 360;
