@@ -1196,8 +1196,8 @@ img { -webkit-user-drag: none; }
 .cb-list li:nth-child(n) .cb-name::after { color: rgba(236,231,218,.45) !important; }
 .cb-tag { color: #cfd5cf !important; opacity: .85 !important; }
 .cb-head, .cb-cols, .cb-plus {
-  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='m'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' seed='9'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -2.2 2.05'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23m)'/%3E%3C/svg%3E");
-          mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='m'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' seed='9'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -2.2 2.05'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23m)'/%3E%3C/svg%3E");
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='m'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' seed='9' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -2.2 2.05'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23m)'/%3E%3C/svg%3E");
+          mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='m'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' seed='9' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -2.2 2.05'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23m)'/%3E%3C/svg%3E");
   -webkit-mask-size: 160px 160px; mask-size: 160px 160px;
 }
 .cbh-deal { color: #ece7da !important; border-color: rgba(236,231,218,.6) !important; }
@@ -1208,6 +1208,59 @@ img { -webkit-user-drag: none; }
 
 /* light sections: no dark shading at the top so the torn edge matches the section color */
 .played-slab, .wall-slab { box-shadow: inset 0 -40px 80px -30px rgba(0,0,0,.7) !important; }
+
+/* chalkboard v7: real slate. Near black, faint erased-chalk haze, fine dust, no tile seams */
+.chalkboard {
+  background:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='900' height='600'%3E%3Cfilter id='e'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.004 .018' numOctaves='4' seed='14' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .32 -.17'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23e)'/%3E%3C/svg%3E") 0 0 / 100% 100% no-repeat,
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='f'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.6' numOctaves='2' seed='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .3 -.15'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23f)'/%3E%3C/svg%3E") 0 0 / 300px 300px,
+    radial-gradient(ellipse 70% 60% at 50% 45%, #141917, #0c0f0d 75%, #080a09) !important;
+  box-shadow: inset 0 0 0 3px #0a0c0b, inset 0 0 80px rgba(0,0,0,.85), inset 0 2px 0 rgba(255,255,255,.04) !important;
+}
+.chalkboard::after { opacity: .06 !important; }
+.cb-list li:nth-child(n) .cb-name { color: #f6f2e8 !important; }
+.cb-tag { color: #dde2dc !important; opacity: .92 !important; }
+
+/* the rest of the band: smaller wanted posters on the same aged paper */
+.gang { margin-top: 64px; }
+.gang-head { font-family: var(--display); font-size: clamp(1.8rem, 3.6vw, 2.5rem); line-height: 1.05; margin: 4px 0 6px; color: var(--gold, #d9a24a); }
+.gang-sub { margin: 0 0 26px; font-size: 1.15rem; opacity: .9; }
+.gang-row { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px; max-width: 760px; margin: 0 auto; }
+.mini-wanted {
+  position: relative; text-align: center; padding: 26px 20px 20px; color: var(--ink);
+  background:
+    radial-gradient(circle at 12% 88%, rgba(110,60,20,.28), transparent 18%),
+    radial-gradient(circle at 90% 8%, rgba(110,60,20,.22), transparent 16%),
+    radial-gradient(ellipse at 50% 45%, #f1dfb2, #d7b67a 92%);
+  box-shadow: inset 0 0 34px rgba(90,50,15,.45), 0 14px 26px rgba(0,0,0,.55);
+  clip-path: polygon(0 1%, 8% 0, 22% 1.2%, 38% .2%, 55% 1%, 72% 0, 88% 1.3%, 100% .6%, 99.3% 30%, 100% 62%, 99.4% 99%, 82% 100%, 60% 98.9%, 40% 100%, 18% 99%, 0 100%, .6% 66%, 0 34%);
+  transform: rotate(-.8deg);
+}
+.mini-wanted:nth-child(2) { transform: rotate(.6deg); } .mini-wanted:nth-child(3) { transform: rotate(-.4deg); }
+.mini-wanted::after { content: ""; position: absolute; inset: 10px; border: 2px solid rgba(43,23,11,.6); pointer-events: none; }
+.mw-head { margin: 0; font-family: var(--display); text-transform: uppercase; letter-spacing: .04em; font-size: clamp(1.7rem, 3vw, 2.4rem); line-height: .9; }
+.mw-for { margin: 6px 0 12px; font-family: var(--label); font-weight: 700; text-transform: uppercase; letter-spacing: .2em; font-size: .85rem; color: var(--rust-deep); }
+.mw-shot { aspect-ratio: 1; background: #2b170b; display: grid; place-items: center; padding: 6px; box-shadow: inset 0 0 0 6px #2b170b, inset 0 0 40px rgba(0,0,0,.6);
+  background-image: radial-gradient(ellipse at 50% 40%, #4a3424, #24140a 75%); }
+.mw-shot img { display: block; width: 100%; height: 100%; object-fit: cover; filter: grayscale(.85) sepia(.55) contrast(1.12) brightness(.95); }
+.mw-head { margin-bottom: 12px !important; }
+.mw-shot span { font-family: var(--label); text-transform: uppercase; letter-spacing: .18em; font-size: .78rem; line-height: 1.5; color: rgba(241,223,178,.55); }
+.mw-note { margin: 12px 0 0; font-style: italic; font-size: 1rem; }
+@media (max-width: 760px) {
+  .gang { margin-top: 48px; }
+  .gang-row { gap: 10px; }
+  .mini-wanted { padding: 16px 8px 12px; }
+  .mini-wanted::after { inset: 6px; }
+  .mw-head { font-size: 1.05rem; }
+  .mw-for { font-size: .62rem; letter-spacing: .12em; margin: 4px 0 8px; }
+  .mw-shot span { font-size: .5rem; letter-spacing: .1em; }
+  .mw-note { font-size: .72rem; margin-top: 8px; }
+}
+
+/* small band posters can be shot like the big ones */
+.mini-wanted { cursor: crosshair; }
+.mini-wanted .hole { z-index: 3; }
+@media (prefers-reduced-motion: no-preference) { .mini-wanted.hit { animation: jolt .22s ease-out; } }
 
 /* bar tab: send button */
 .tab .bf-send { width: 100%; text-align: center; font-size: 1.05rem; padding: 14px 12px; margin-top: 4px; }
@@ -1812,11 +1865,11 @@ nav { z-index: 95 !important; }
 /* posters hang from their nail and sway a little */
 .bio.wanted { transform-origin: 50% 12px; }
 @media (prefers-reduced-motion: no-preference) {
-  .bio.wanted { animation: sway 5.5s ease-in-out infinite alternate; }
-  .bio.wanted:nth-child(2) { animation-duration: 6.8s; animation-delay: -2.4s; }
-  .bio.wanted.hit { animation: sway 5.5s ease-in-out infinite alternate, jolt .22s ease-out; }
-  .bio.wanted:nth-child(2).hit { animation: sway 6.8s ease-in-out -2.4s infinite alternate, jolt .22s ease-out; }
-  @keyframes sway { from { rotate: -1.2deg; } to { rotate: 1.2deg; } }
+  .bio.wanted { animation: sway 9s ease-in-out infinite alternate; }
+  .bio.wanted:nth-child(2) { animation-duration: 11s; animation-delay: -4s; }
+  .bio.wanted.hit { animation: sway 9s ease-in-out infinite alternate, jolt .22s ease-out; }
+  .bio.wanted:nth-child(2).hit { animation: sway 11s ease-in-out -4s infinite alternate, jolt .22s ease-out; }
+  @keyframes sway { from { rotate: -.5deg; } to { rotate: .5deg; } }
 }
 
 /* hero poster: slideshow of live shots */
@@ -2030,7 +2083,7 @@ body::before, body::after { inset: auto !important; top: 0 !important; left: 0 !
 .chalkboard {
   position: relative; overflow: hidden; border-radius: 2px; padding: 38px 46px 54px;
   background:
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='400'%3E%3Cfilter id='c'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.012 .03' numOctaves='3' seed='5'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .32 -.12'/%3E%3C/filter%3E%3Crect width='100%' height='100%' filter='url(%23c)'/%3E%3C/svg%3E") 0 0 / 600px 400px,
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='400'%3E%3Cfilter id='c'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.012 .03' numOctaves='3' seed='5' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .32 -.12'/%3E%3C/filter%3E%3Crect width='100%' height='100%' filter='url(%23c)'/%3E%3C/svg%3E") 0 0 / 600px 400px,
     radial-gradient(ellipse 40% 30% at 22% 30%, rgba(255,255,255,.07), transparent 70%),
     radial-gradient(ellipse 35% 25% at 78% 75%, rgba(255,255,255,.06), transparent 70%),
     linear-gradient(160deg, #26302a, #1b231e 55%, #202923);
@@ -2038,7 +2091,7 @@ body::before, body::after { inset: auto !important; top: 0 !important; left: 0 !
   color: #f2efe6;
 }
 .chalkboard::after { /* chalk dust grain over everything */
-  content: ""; position: absolute; inset: 0; pointer-events: none; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='d'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' seed='2'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 9 -7.6'/%3E%3C/filter%3E%3Crect width='100%' height='100%' filter='url(%23d)'/%3E%3C/svg%3E") 0 0 / 200px 200px; opacity: .22; mix-blend-mode: screen;
+  content: ""; position: absolute; inset: 0; pointer-events: none; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='d'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' seed='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 9 -7.6'/%3E%3C/filter%3E%3Crect width='100%' height='100%' filter='url(%23d)'/%3E%3C/svg%3E") 0 0 / 200px 200px; opacity: .22; mix-blend-mode: screen;
 }
 .cb-title {
   margin: 0; text-align: center; font-family: "Fredericka the Great", "Rye", serif; font-size: clamp(2.4rem, 6vw, 4rem); line-height: 1;
@@ -2178,7 +2231,7 @@ body::before, body::after { inset: auto !important; top: 0 !important; left: 0 !
     <div class="doorway" id="doorway">
       <span class="lantern ln-l" aria-hidden="true"><span class="arm"></span><span class="body"></span></span><span class="lantern ln-r" aria-hidden="true"><span class="arm"></span><span class="body"></span></span>
       <svg class="horseshoe" viewBox="0 0 60 60" aria-hidden="true"><path d="M14 6 Q4 30 14 48 Q30 62 46 48 Q56 30 46 6" fill="none" stroke="#6b5a48" stroke-width="10" stroke-linecap="round"/><path d="M14 6 Q4 30 14 48 Q30 62 46 48 Q56 30 46 6" fill="none" stroke="#9c8a74" stroke-width="3" stroke-linecap="round" stroke-dasharray="1 9"/></svg>
-      <div class="glow" aria-hidden="true"><svg class="bar-scene" viewBox="0 0 440 330" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><rect x="18" y="58" width="404" height="4" fill="#2a0f05"/><rect x="24" y="36" width="10" height="22" rx="2" fill="#4a1c09"/><rect x="27.5" y="29" width="3" height="7" fill="#4a1c09"/><rect x="37" y="40" width="8" height="18" rx="2" fill="#4a1c09"/><rect x="39.5" y="33" width="3" height="7" fill="#4a1c09"/><rect x="48" y="40" width="9" height="18" rx="2" fill="#3a1508"/><rect x="51.0" y="35" width="3" height="5" fill="#3a1508"/><rect x="66" y="36" width="8" height="22" rx="2" fill="#4a1c09"/><rect x="68.5" y="31" width="3" height="5" fill="#4a1c09"/><rect x="83" y="40" width="8" height="18" rx="2" fill="#4a1c09"/><rect x="85.5" y="35" width="3" height="5" fill="#4a1c09"/><rect x="94" y="40" width="12" height="18" rx="2" fill="#2a0f05"/><rect x="98.5" y="35" width="3" height="5" fill="#2a0f05"/><rect x="110" y="28" width="10" height="30" rx="2" fill="#4a1c09"/><rect x="113.5" y="23" width="3" height="5" fill="#4a1c09"/><rect x="123" y="36" width="10" height="22" rx="2" fill="#4a1c09"/><rect x="126.5" y="31" width="3" height="5" fill="#4a1c09"/><rect x="137" y="40" width="10" height="18" rx="2" fill="#4a1c09"/><rect x="140.5" y="31" width="3" height="9" fill="#4a1c09"/><rect x="150" y="36" width="8" height="22" rx="2" fill="#4a1c09"/><rect x="152.5" y="29" width="3" height="7" fill="#4a1c09"/><rect x="167" y="28" width="10" height="30" rx="2" fill="#3a1508"/><rect x="170.5" y="19" width="3" height="9" fill="#3a1508"/><rect x="183" y="36" width="10" height="22" rx="2" fill="#4a1c09"/><rect x="186.5" y="31" width="3" height="5" fill="#4a1c09"/><rect x="197" y="32" width="8" height="26" rx="2" fill="#3a1508"/><rect x="199.5" y="23" width="3" height="9" fill="#3a1508"/><rect x="211" y="32" width="12" height="26" rx="2" fill="#2a0f05"/><rect x="215.5" y="23" width="3" height="9" fill="#2a0f05"/><rect x="226" y="36" width="12" height="22" rx="2" fill="#2a0f05"/><rect x="230.5" y="29" width="3" height="7" fill="#2a0f05"/><rect x="247" y="40" width="12" height="18" rx="2" fill="#2a0f05"/><rect x="251.5" y="31" width="3" height="9" fill="#2a0f05"/><rect x="265" y="32" width="10" height="26" rx="2" fill="#3a1508"/><rect x="268.5" y="23" width="3" height="9" fill="#3a1508"/><rect x="284" y="40" width="8" height="18" rx="2" fill="#3a1508"/><rect x="286.5" y="33" width="3" height="7" fill="#3a1508"/><rect x="295" y="32" width="8" height="26" rx="2" fill="#4a1c09"/><rect x="297.5" y="23" width="3" height="9" fill="#4a1c09"/><rect x="312" y="28" width="10" height="30" rx="2" fill="#3a1508"/><rect x="315.5" y="19" width="3" height="9" fill="#3a1508"/><rect x="325" y="32" width="12" height="26" rx="2" fill="#4a1c09"/><rect x="329.5" y="27" width="3" height="5" fill="#4a1c09"/><rect x="340" y="40" width="12" height="18" rx="2" fill="#3a1508"/><rect x="344.5" y="35" width="3" height="5" fill="#3a1508"/><rect x="356" y="28" width="9" height="30" rx="2" fill="#3a1508"/><rect x="359.0" y="21" width="3" height="7" fill="#3a1508"/><rect x="368" y="28" width="9" height="30" rx="2" fill="#4a1c09"/><rect x="371.0" y="21" width="3" height="7" fill="#4a1c09"/><rect x="383" y="28" width="9" height="30" rx="2" fill="#3a1508"/><rect x="386.0" y="19" width="3" height="9" fill="#3a1508"/><rect x="401" y="28" width="10" height="30" rx="2" fill="#2a0f05"/><rect x="404.5" y="23" width="3" height="5" fill="#2a0f05"/><line x1="95" y1="0" x2="95" y2="18" stroke="#2a0f05" stroke-width="2"/><path d="M81 30 L89 18 L101 18 L109 30 Z" fill="#2a0f05"/><path d="M81 30 L35 150 L155 150 L109 30 Z" fill="#fff3c4" opacity=".16"/><line x1="220" y1="0" x2="220" y2="18" stroke="#2a0f05" stroke-width="2"/><path d="M206 30 L214 18 L226 18 L234 30 Z" fill="#2a0f05"/><path d="M206 30 L160 150 L280 150 L234 30 Z" fill="#fff3c4" opacity=".16"/><line x1="345" y1="0" x2="345" y2="18" stroke="#2a0f05" stroke-width="2"/><path d="M331 30 L339 18 L351 18 L359 30 Z" fill="#2a0f05"/><path d="M331 30 L285 150 L405 150 L359 30 Z" fill="#fff3c4" opacity=".16"/><rect x="0" y="262" width="440" height="10" fill="#2a0f05"/><rect x="48" y="272" width="24" height="5" fill="#2a0f05"/><line x1="51" y1="277" x2="47" y2="330" stroke="#2a0f05" stroke-width="3"/><line x1="69" y1="277" x2="73" y2="330" stroke="#2a0f05" stroke-width="3"/><line x1="49" y1="305" x2="71" y2="305" stroke="#2a0f05" stroke-width="2"/><rect x="148" y="272" width="24" height="5" fill="#2a0f05"/><line x1="151" y1="277" x2="147" y2="330" stroke="#2a0f05" stroke-width="3"/><line x1="169" y1="277" x2="173" y2="330" stroke="#2a0f05" stroke-width="3"/><line x1="149" y1="305" x2="171" y2="305" stroke="#2a0f05" stroke-width="2"/><rect x="268" y="272" width="24" height="5" fill="#2a0f05"/><line x1="271" y1="277" x2="267" y2="330" stroke="#2a0f05" stroke-width="3"/><line x1="289" y1="277" x2="293" y2="330" stroke="#2a0f05" stroke-width="3"/><line x1="269" y1="305" x2="291" y2="305" stroke="#2a0f05" stroke-width="2"/><rect x="368" y="272" width="24" height="5" fill="#2a0f05"/><line x1="371" y1="277" x2="367" y2="330" stroke="#2a0f05" stroke-width="3"/><line x1="389" y1="277" x2="393" y2="330" stroke="#2a0f05" stroke-width="3"/><line x1="369" y1="305" x2="391" y2="305" stroke="#2a0f05" stroke-width="2"/><rect x="0" y="322" width="440" height="8" fill="#2a0f05" opacity=".6"/></svg><span class="bar-sign">OPEN</span></div>
+      <div class="glow" aria-hidden="true"><svg class="bar-scene" viewBox="0 0 440 330" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><rect x="18" y="58" width="404" height="4" fill="#2a0f05"/><rect x="24" y="36" width="10" height="22" rx="2" fill="#4a1c09"/><rect x="27.5" y="29" width="3" height="7" fill="#4a1c09"/><rect x="37" y="40" width="8" height="18" rx="2" fill="#4a1c09"/><rect x="39.5" y="33" width="3" height="7" fill="#4a1c09"/><rect x="48" y="40" width="9" height="18" rx="2" fill="#3a1508"/><rect x="51.0" y="35" width="3" height="5" fill="#3a1508"/><rect x="66" y="36" width="8" height="22" rx="2" fill="#4a1c09"/><rect x="68.5" y="31" width="3" height="5" fill="#4a1c09"/><rect x="83" y="40" width="8" height="18" rx="2" fill="#4a1c09"/><rect x="85.5" y="35" width="3" height="5" fill="#4a1c09"/><rect x="94" y="40" width="12" height="18" rx="2" fill="#2a0f05"/><rect x="98.5" y="35" width="3" height="5" fill="#2a0f05"/><rect x="110" y="28" width="10" height="30" rx="2" fill="#4a1c09"/><rect x="113.5" y="23" width="3" height="5" fill="#4a1c09"/><rect x="123" y="36" width="10" height="22" rx="2" fill="#4a1c09"/><rect x="126.5" y="31" width="3" height="5" fill="#4a1c09"/><rect x="137" y="40" width="10" height="18" rx="2" fill="#4a1c09"/><rect x="140.5" y="31" width="3" height="9" fill="#4a1c09"/><rect x="150" y="36" width="8" height="22" rx="2" fill="#4a1c09"/><rect x="152.5" y="29" width="3" height="7" fill="#4a1c09"/><rect x="167" y="28" width="10" height="30" rx="2" fill="#3a1508"/><rect x="170.5" y="19" width="3" height="9" fill="#3a1508"/><rect x="183" y="36" width="10" height="22" rx="2" fill="#4a1c09"/><rect x="186.5" y="31" width="3" height="5" fill="#4a1c09"/><rect x="197" y="32" width="8" height="26" rx="2" fill="#3a1508"/><rect x="199.5" y="23" width="3" height="9" fill="#3a1508"/><rect x="211" y="32" width="12" height="26" rx="2" fill="#2a0f05"/><rect x="215.5" y="23" width="3" height="9" fill="#2a0f05"/><rect x="226" y="36" width="12" height="22" rx="2" fill="#2a0f05"/><rect x="230.5" y="29" width="3" height="7" fill="#2a0f05"/><rect x="247" y="40" width="12" height="18" rx="2" fill="#2a0f05"/><rect x="251.5" y="31" width="3" height="9" fill="#2a0f05"/><rect x="265" y="32" width="10" height="26" rx="2" fill="#3a1508"/><rect x="268.5" y="23" width="3" height="9" fill="#3a1508"/><rect x="284" y="40" width="8" height="18" rx="2" fill="#3a1508"/><rect x="286.5" y="33" width="3" height="7" fill="#3a1508"/><rect x="295" y="32" width="8" height="26" rx="2" fill="#4a1c09"/><rect x="297.5" y="23" width="3" height="9" fill="#4a1c09"/><rect x="312" y="28" width="10" height="30" rx="2" fill="#3a1508"/><rect x="315.5" y="19" width="3" height="9" fill="#3a1508"/><rect x="325" y="32" width="12" height="26" rx="2" fill="#4a1c09"/><rect x="329.5" y="27" width="3" height="5" fill="#4a1c09"/><rect x="340" y="40" width="12" height="18" rx="2" fill="#3a1508"/><rect x="344.5" y="35" width="3" height="5" fill="#3a1508"/><rect x="356" y="28" width="9" height="30" rx="2" fill="#3a1508"/><rect x="359.0" y="21" width="3" height="7" fill="#3a1508"/><rect x="368" y="28" width="9" height="30" rx="2" fill="#4a1c09"/><rect x="371.0" y="21" width="3" height="7" fill="#4a1c09"/><rect x="383" y="28" width="9" height="30" rx="2" fill="#3a1508"/><rect x="386.0" y="19" width="3" height="9" fill="#3a1508"/><rect x="401" y="28" width="10" height="30" rx="2" fill="#2a0f05"/><rect x="404.5" y="23" width="3" height="5" fill="#2a0f05"/><line x1="95" y1="0" x2="95" y2="18" stroke="#2a0f05" stroke-width="2"/><path d="M81 30 L89 18 L101 18 L109 30 Z" fill="#2a0f05"/><path d="M81 30 L35 150 L155 150 L109 30 Z" fill="#fff3c4" opacity=".16"/><line x1="220" y1="0" x2="220" y2="18" stroke="#2a0f05" stroke-width="2"/><path d="M206 30 L214 18 L226 18 L234 30 Z" fill="#2a0f05"/><path d="M206 30 L160 150 L280 150 L234 30 Z" fill="#fff3c4" opacity=".16"/><line x1="345" y1="0" x2="345" y2="18" stroke="#2a0f05" stroke-width="2"/><path d="M331 30 L339 18 L351 18 L359 30 Z" fill="#2a0f05"/><path d="M331 30 L285 150 L405 150 L359 30 Z" fill="#fff3c4" opacity=".16"/><rect x="0" y="262" width="440" height="10" fill="#2a0f05"/><rect x="48" y="272" width="24" height="5" fill="#2a0f05"/><line x1="51" y1="277" x2="47" y2="330" stroke="#2a0f05" stroke-width="3"/><line x1="69" y1="277" x2="73" y2="330" stroke="#2a0f05" stroke-width="3"/><line x1="49" y1="305" x2="71" y2="305" stroke="#2a0f05" stroke-width="2"/><rect x="148" y="272" width="24" height="5" fill="#2a0f05"/><line x1="151" y1="277" x2="147" y2="330" stroke="#2a0f05" stroke-width="3"/><line x1="169" y1="277" x2="173" y2="330" stroke="#2a0f05" stroke-width="3"/><line x1="149" y1="305" x2="171" y2="305" stroke="#2a0f05" stroke-width="2"/><rect x="268" y="272" width="24" height="5" fill="#2a0f05"/><line x1="271" y1="277" x2="267" y2="330" stroke="#2a0f05" stroke-width="3"/><line x1="289" y1="277" x2="293" y2="330" stroke="#2a0f05" stroke-width="3"/><line x1="269" y1="305" x2="291" y2="305" stroke="#2a0f05" stroke-width="2"/><rect x="368" y="272" width="24" height="5" fill="#2a0f05"/><line x1="371" y1="277" x2="367" y2="330" stroke="#2a0f05" stroke-width="3"/><line x1="389" y1="277" x2="393" y2="330" stroke="#2a0f05" stroke-width="3"/><line x1="369" y1="305" x2="391" y2="305" stroke="#2a0f05" stroke-width="2"/><rect x="0" y="322" width="440" height="8" fill="#2a0f05" opacity=".6"/></svg></div>
       <div class="door-clip" aria-hidden="true">
         <div class="door left" id="door-l" aria-hidden="true"><span class="hinge h1"></span><span class="hinge h2"></span></div>
         <div class="door right" id="door-r" aria-hidden="true"><span class="hinge h1"></span><span class="hinge h2"></span></div>
@@ -2283,12 +2336,16 @@ body::before, body::after { inset: auto !important; top: 0 !important; left: 0 !
       <div class="poster" role="button" tabindex="0" aria-label="Give the poster a smack">
         <span class="tape t1" aria-hidden="true"></span>
         <img class="slide is-on" src="live-crowd.jpg" alt="Rat River Boys on stage under colored lights with the crowd cheering" width="1200" height="800">
+        <img class="slide" src="full-band.jpg" alt="The full band playing an outdoor stage downtown with fiddle, bass and drums" width="1200" height="800" loading="lazy" decoding="async">
         <img class="slide" src="live-stage.jpg" alt="The full band playing on a theater stage in front of blue curtains" width="1200" height="800" loading="lazy" decoding="async">
         <img class="slide" src="axes2.jpg" alt="Tyler and Weston posing with old axes against a black backdrop" width="1200" height="800" loading="lazy" decoding="async">
         <img class="slide" src="crowd-view.jpg" alt="A packed bar seen from the stage over a guitar headstock" width="1200" height="800" loading="lazy" decoding="async">
         <img class="slide" src="thumbs.jpg" alt="Weston on stage with an acoustic guitar giving two thumbs up" width="1200" height="800" loading="lazy" decoding="async">
         <img class="slide" src="weston-acoustic.jpg" alt="Weston grinning in sunglasses while playing acoustic guitar" width="1200" height="800" loading="lazy" decoding="async">
+        <img class="slide" src="stage-crowd.jpg" alt="View from behind the drums of a big outdoor crowd watching the band" width="1200" height="800" loading="lazy" decoding="async">
+        <img class="slide" src="tyler-weston.jpg" alt="Tyler on Telecaster and Weston on acoustic guitar playing outside" width="1200" height="800" loading="lazy" decoding="async">
         <img class="slide" src="giddyup.jpg" alt="Tyler in a red jacket playing a Telecaster at Giddy Up" width="1200" height="800" loading="lazy" decoding="async">
+        <img class="slide" src="drum-view.jpg" alt="The drum kit on stage looking out over a packed downtown street festival" width="1200" height="800" loading="lazy" decoding="async">
         <img class="slide" src="tosafest.jpg" alt="The band playing the State Street Stage at Tosa Fest" width="1200" height="800" loading="lazy" decoding="async">
         <span class="tape t2" aria-hidden="true"></span>
       </div>
@@ -2416,7 +2473,7 @@ body::before, body::after { inset: auto !important; top: 0 !important; left: 0 !
       <div class="bios">
         <article class="bio wanted">
           <p class="w-head">Wanted</p>
-          <p class="w-for">for lead vocals &amp; guitar</p>
+          <p class="w-for">lead vocals &amp; guitar</p>
           <figure class="mug"><img src="weston.jpg" alt="Weston Mueller sitting on a trailer gate with a beer" width="800" height="1000" loading="lazy"></figure>
           <h3 class="name">Weston Mueller</h3>
           <div class="w-body"><p>Weston Mueller is a Wisconsin singer-songwriter with more than a decade of road miles behind him. Before Rat River Boys, he founded and fronted Milwaukee Americana band Listening Party, writing and singing five albums and earning a 2018 WAMI nomination for Bluegrass/Americana.</p><p>He writes about real life: love, loss, bad decisions and long roads. The Milwaukee Journal Sentinel said every note he sings is full of feeling, and he's played it all, from corner dive bars to Summerfest, Wisconsin State Fair and Mile of Music, at around 120 shows a year.</p><p>Now he's out front as lead singer and guitarist for Rat River Boys, where the songs got louder, the nights got longer and nobody's ready to go home.</p></div>
@@ -2424,13 +2481,32 @@ body::before, body::after { inset: auto !important; top: 0 !important; left: 0 !
         </article>
         <article class="bio wanted">
           <p class="w-head">Wanted</p>
-          <p class="w-for">for lead guitar</p>
+          <p class="w-for">lead guitar</p>
           <figure class="mug"><img src="tyler.jpg" alt="Tyler Furrer playing an acoustic guitar" width="800" height="1000" loading="lazy"></figure>
           <h3 class="name">Tyler Furrer</h3>
           <div class="w-body"><p>Tyler Furrer is a guitarist from Wisconsin who has built his career on the road. He has spent the past three years honing his craft in Nashville, playing everywhere from downtown on Broadway to large festival stages, with shows all over the country, including New York, Las Vegas and Nashville.</p><p>He's toured the country playing everything from honky tonk to Americana to polka, including runs with Mollie B &amp; SqueezeBox, the award-winning band behind RFD-TV's Mollie B Polka Party. He joined Listening Party for their album High &amp; Low, which is where he met Weston, and has shared stages with national acts including Brantley Gilbert, Parker McCollum, Chase Matthew and Clay Street Unit. Along the way he's played Summerfest, Wisconsin State Fair, the Hodag Country Festival, Mile of Music and the Tri-State Rodeo in Iowa.</p><p>Now he's on lead guitar for Rat River Boys, bringing the Nashville polish and the Wisconsin grit to every set.</p></div>
           <button class="sight-btn" type="button">Report a sighting</button>
         </article>
       </div>
+    <div class="gang">
+      <p class="kicker">Accomplices</p>
+      <h3 class="gang-head">The rest of the gang.</h3>
+      <p class="gang-sub">It takes five of us to cause this much trouble. Sometimes more, depending on bail.</p>
+      <div class="gang-row">
+        <article class="mini-wanted">
+          <p class="mw-head">Drums</p>
+          <div class="mw-shot"><img src="drums.jpg" alt="Rat River Boys drums player" loading="lazy"></div>
+        </article>
+        <article class="mini-wanted">
+          <p class="mw-head">Bass</p>
+          <div class="mw-shot"><img src="bass.jpg" alt="Rat River Boys bass player" loading="lazy"></div>
+        </article>
+        <article class="mini-wanted">
+          <p class="mw-head">Fiddle</p>
+          <div class="mw-shot"><img src="fiddle.jpg" alt="Rat River Boys fiddle player" loading="lazy"></div>
+        </article>
+      </div>
+    </div>
     </div>
   </section>
 
@@ -2871,6 +2947,7 @@ body::before, body::after { inset: auto !important; top: 0 !important; left: 0 !
           .to(poster, { rotate: -2.5 + 25, duration: .2, ease: 'power2.in' }, '<')
           .to(poster, { y: dropBy, rotate: 110, duration: .9, ease: 'power2.in' })
           .set(poster, { y: startAbove, rotate: -30 })
+          .call(function () { if (window.__nextSlide) window.__nextSlide(); })
           .to({}, { duration: .6 })
           .to(poster, { y: 0, rotate: -2.5, duration: 1.1, ease: 'bounce.out' })
           .to(tapes, { y: 0, rotate: function (i) { return i ? 6 : -8; }, opacity: 1, duration: .25, stagger: .12, ease: 'power4.in' }, '-=.2');
@@ -4000,6 +4077,23 @@ document.querySelectorAll('.fight-inline').forEach(function (b) {
     var q = function (sel) { var el = li.querySelector(sel); return el ? el.textContent.trim() : ''; };
     return { m: q('.date .m'), d: q('.date .d'), venue: q('.venue'), town: q('.town'), time: q('.time') };
   }
+  // the small posters for the rest of the band take bullets too
+  document.querySelectorAll('.mini-wanted').forEach(function (poster) {
+    poster.addEventListener('click', function (e) {
+      var r = poster.getBoundingClientRect();
+      var h = document.createElement('span');
+      h.className = 'hole';
+      h.style.left = (e.clientX - r.left) + 'px';
+      h.style.top = (e.clientY - r.top) + 'px';
+      h.style.setProperty('--r1', Math.round(Math.random() * 360) + 'deg');
+      h.style.setProperty('--r2', Math.round(Math.random() * 360) + 'deg');
+      poster.appendChild(h);
+      var holes = poster.querySelectorAll('.hole');
+      if (holes.length > 12) holes[0].remove();
+      poster.classList.remove('hit'); void poster.offsetWidth; poster.classList.add('hit');
+      bang();
+    });
+  });
   document.querySelectorAll('.bio.wanted').forEach(function (poster) {
     poster.addEventListener('click', function (e) {
       if (e.target.closest('.sight-btn, .stamp a')) return;
@@ -4056,17 +4150,20 @@ document.querySelectorAll('.fight-inline').forEach(function (b) {
 (function () {
   var slides = document.querySelectorAll('.poster .slide');
   if (slides.length < 2) return;
-  var i = 0;
-  setInterval(function () {
-    if (document.hidden) return;
+  var i = 0, timer;
+  function advance(force) {
     var next = slides[(i + 1) % slides.length];
-    if (!next.complete) { next.loading = 'eager'; return; }
+    if (!force && !next.complete) { next.loading = 'eager'; return; }
     slides[i].classList.remove('is-on');
     i = (i + 1) % slides.length;
     slides[i].classList.add('is-on');
     var after = slides[(i + 1) % slides.length];
     if (after.loading === 'lazy') after.loading = 'eager';
-  }, 5000);
+  }
+  function start() { clearInterval(timer); timer = setInterval(function () { if (!document.hidden) advance(); }, 5000); }
+  // the poster falls off the screen and comes back with a new photo
+  window.__nextSlide = function () { slides[i].style.transition = 'none'; var n = slides[(i + 1) % slides.length]; n.style.transition = 'none'; advance(true); requestAnimationFrame(function () { slides.forEach(function (s) { s.style.transition = ''; }); }); start(); };
+  start();
   slides[1].loading = 'eager';
 })();
 </script>
