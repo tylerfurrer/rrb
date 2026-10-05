@@ -1339,9 +1339,9 @@ img { -webkit-user-drag: none; }
 /* floating "Start a bar fight" button removed (kept in the page so the House Rules one on phones still works) */
 #fight { display: none !important; }
 
-/* house rules read down each column on wide screens: 1-7 on the left, 8-14 on the right */
+/* house rules read down each column on wide screens: 1-5 on the left, 6-10 on the right */
 @media (min-width: 761px) {
-  .rule-list { grid-auto-flow: column; grid-template-rows: repeat(7, auto); }
+  .rule-list { grid-auto-flow: column; grid-template-rows: repeat(5, auto); }
 }
 
 /* bar tab: send button */
@@ -2603,13 +2603,9 @@ body::before, body::after { inset: auto !important; top: 0 !important; left: 0 !
         <li>Dance like your ex is watching. They are. They're with someone worse.</li>
         <li>Cry during a George Jones song and the next round's on you.</li>
         <li>No phones during slow songs. Your ex doesn't deserve a text.</li>
-        <li>Line dancing requires a minimum of four drinks and a signed waiver.</li>
-        <li>If you can't sing, sing louder.</li>
         <li>Hitting on the band is encouraged. Hitting the band is a misdemeanor.</li>
         <li>If the fiddle player winks at you, he winks at everybody. Don't make it weird.</li>
-        <li>The bathroom is not a VIP room. Get a motel.</li>
         <li>Anyone caught line dancing sober will be asked to leave.</li>
-        <li>We take requests, cash and compliments. In that order.</li>
       </ol>
       <button class="rules-more" id="rules-more" type="button" aria-expanded="false">Read all the rules</button>
       <p class="fine-print"><span>Fine print:</span> These house rules are for entertainment purposes only and are not enforced by the band, the venue or any court of law. The venue's actual rules always win. Please drink responsibly, tip your bartender and get home safe. Rat River Boys are not liable for sore feet, lost voices, broken hearts or anything you decide to do after last call.</p>
