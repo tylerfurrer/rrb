@@ -1,11 +1,13 @@
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#1d140e">
 <meta name="description" content="Outlaw country and honky tonk band from Wisconsin. Booking bars, festivals and events: ratriverboysband@gmail.com">
 <meta property="og:title" content="Rat River Boys">
 <meta property="og:description" content="Outlaw country and honky tonk from Wisconsin.">
 <meta property="og:image" content="https://ratriverboys.com/rat-moon.jpg">
-<meta property="og:url" content="https://ratriverboys.com">
+<meta property="og:url" content="https://www.ratriverboys.com/">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="favicon.ico?v=2" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png?v=2">
 <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=2">
@@ -22,9 +24,23 @@
 /* every load or refresh starts at the top of the page */
 (function () {
   try { if ('scrollRestoration' in history) history.scrollRestoration = 'manual'; } catch (e) {}
+  /* a shared link like ratriverboys.com/#book still opens at the top behind the doors, then rides down to that section once they're through */
+  var deep = (location.hash || '').replace(/^#/, '');
+  if (!/^[a-z][a-z0-9-]*$/i.test(deep)) deep = '';
+  window.__deepDone = !deep;
   function toTop() {
     if (location.hash) { try { history.replaceState(null, '', location.pathname + location.search); } catch (e) {} }
-    window.scrollTo(0, 0);
+    if (!window.__deepGoing) window.scrollTo(0, 0);
+  }
+  if (deep) {
+    window.afterGate(function () {
+      setTimeout(function () {
+        var el = document.getElementById(deep);
+        window.__deepGoing = true;
+        if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.pageYOffset - 84, behavior: 'smooth' });
+        try { history.replaceState(null, '', '#' + deep); } catch (e) {}
+      }, 350);
+    });
   }
   toTop();
   window.addEventListener('DOMContentLoaded', toTop);
@@ -32,7 +48,7 @@
   window.addEventListener('pageshow', function (e) { if (e.persisted) toTop(); });
 })();
 </script>
-<title>Rat River Boys</title>
+<title>Rat River Boys | Outlaw Country &amp; Honky Tonk Band, Wisconsin</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Rye&family=Fredericka+the+Great&family=Cabin+Sketch:wght@400;700&family=Yellowtail&family=Oswald:wght@400;500;600;700&family=Crimson+Pro:ital,wght@0,400;0,600;1,400&family=Permanent+Marker&family=Caveat:wght@600&display=swap">
@@ -2412,6 +2428,16 @@ footer a.foot-mail:hover { color: var(--gold); }
   nav ul.nav-links { flex-wrap: nowrap !important; overscroll-behavior: contain; -webkit-overflow-scrolling: touch; }
   nav ul.nav-links > li { flex: none; width: 100%; }
 }
+
+/* phones: no double-tap zoom (fast taps on posters, the rat or the tip jar), pinch-to-zoom still works */
+html, body, a, button, .bio.wanted, .mini-wanted, .jar-box, .show { touch-action: manipulation; }
+/* bigger tap areas for small links */
+.fb-line a { display: inline-block; padding: 10px 2px; margin: -10px 0; }
+footer a.foot-mail { display: inline-block; padding: 12px 4px 4px; }
+@media (max-width: 800px) { #shows .where a.venue { padding: 6px 0; margin: -6px 0; } }
+/* nothing booked */
+.show-none { padding: 22px 0; font-size: 1.2rem; border-bottom: 1px solid rgba(231,189,106,.4); }
+.show-none a { color: var(--gold); }
 </style>
 
 <div class="haze" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
@@ -2636,7 +2662,58 @@ footer a.foot-mail:hover { color: var(--gold); }
           <div class="where"><div class="venue">Fletch's Local Tap House</div><div class="town">Oshkosh, WI</div></div>
           <div class="time">8 PM</div>
         </li>
+      <li class="show-none" hidden>New dates coming soon. Watch <a href="https://www.facebook.com/profile.php?id=61589395443501" target="_blank" rel="noopener">Facebook</a> for the next one.</li>
       </ul>
+      <script>
+      /* the show list above is the only place shows live. Past shows drop off the morning after, and the countdown + Google event data read from here. */
+      (function () {
+        var MON = { jan:0, feb:1, mar:2, apr:3, may:4, jun:5, jul:6, aug:7, sep:8, oct:9, nov:10, dec:11 };
+        function chicago(y, m, d, hh, mm) {
+          var guess = Date.UTC(y, m, d, hh, mm);
+          try {
+            var f = new Intl.DateTimeFormat('en-US', { timeZone: 'America/Chicago', year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric', hourCycle: 'h23' });
+            var o = {}; f.formatToParts(new Date(guess)).forEach(function (p) { o[p.type] = p.value; });
+            var asUTC = Date.UTC(+o.year, +o.month - 1, +o.day, +o.hour % 24, +o.minute);
+            return new Date(guess - (asUTC - guess));
+          } catch (e) { return new Date(guess + 5 * 3600e3); }
+        }
+        function txt(li, sel) { var e = li.querySelector(sel); return e ? e.textContent.trim() : ''; }
+        var now = Date.now(), year = new Date().getFullYear(), list = [];
+        document.querySelectorAll('#shows .show').forEach(function (li) {
+          var m = MON[txt(li, '.date .m').slice(0, 3).toLowerCase()], d = parseInt(txt(li, '.date .d'), 10);
+          if (m == null || !d) return;
+          var hh = 19, mm = 0, t = txt(li, '.time').toLowerCase().match(/(\d{1,2})(?::(\d{2}))?\s*(am|pm)?/);
+          if (t) { hh = parseInt(t[1], 10) % 12; mm = t[2] ? parseInt(t[2], 10) : 0; if (t[3] !== 'am') hh += 12; }
+          var y = year, start = chicago(y, m, d, hh, mm);
+          if (start.getTime() < now - 60 * 864e5) { y++; start = chicago(y, m, d, hh, mm); }
+          var dropAt = chicago(y, m, d + 1, 4, 0).getTime();   /* 4 AM the morning after */
+          if (now > dropAt) { li.remove(); return; }
+          var town = txt(li, '.town');
+          list.push({ li: li, start: start, venue: txt(li, '.venue'), town: town, city: town.replace(/,\s*[A-Z]{2}$/, ''), region: (town.match(/,\s*([A-Z]{2})$/) || [])[1] || '', fb: li.getAttribute('data-fb') || '' });
+        });
+        list.sort(function (a, b) { return a.start - b.start; });
+        window.RRB_SHOWS = list;
+        if (!list.length) { var none = document.querySelector('#shows .show-none'); if (none) none.hidden = false; }
+        /* Google event listings */
+        try {
+          var events = list.map(function (s) {
+            return { '@type': 'MusicEvent', name: 'Rat River Boys at ' + s.venue, startDate: s.start.toISOString(),
+              eventStatus: 'https://schema.org/EventScheduled', eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
+              location: { '@type': 'Place', name: s.venue, address: { '@type': 'PostalAddress', addressLocality: s.city, addressRegion: s.region, addressCountry: 'US' } },
+              image: ['https://www.ratriverboys.com/rat-moon.jpg'], description: 'Rat River Boys live at ' + s.venue + ', ' + s.town + '. Outlaw country and honky tonk.',
+              performer: { '@type': 'MusicGroup', name: 'Rat River Boys' }, organizer: { '@type': 'Organization', name: s.venue },
+              url: s.fb || 'https://www.ratriverboys.com/#shows' };
+          });
+          var data = { '@context': 'https://schema.org', '@type': 'MusicGroup', name: 'Rat River Boys', url: 'https://www.ratriverboys.com/',
+            genre: ['Country', 'Outlaw country', 'Honky tonk'], foundingLocation: { '@type': 'Place', name: 'Wisconsin' },
+            image: 'https://www.ratriverboys.com/rat-moon.jpg', email: 'ratriverboysband@gmail.com',
+            sameAs: ['https://www.facebook.com/profile.php?id=61589395443501'],
+            member: [{ '@type': 'Person', name: 'Weston Mueller', roleName: 'Lead vocals and guitar' }, { '@type': 'Person', name: 'Tyler Furrer', roleName: 'Lead and steel guitar' }],
+            event: events };
+          var sc = document.createElement('script'); sc.type = 'application/ld+json'; sc.textContent = JSON.stringify(data); document.head.appendChild(sc);
+        } catch (e) {}
+      })();
+      </script>
       <!-- <p class="note">Bring cash for the tip jar and a designated driver. We are not driving your drunk ass home, Brenda. Designated drivers drink free. Just kidding, they get tap water and our respect. Leave the kids with grandma. She's coming out too, though.</p> -->
     </div>
   </section>
@@ -3542,11 +3619,7 @@ footer a.foot-mail:hover { color: var(--gold); }
 <script>
 (function () {
   // ---- countdown to the next show ----
-  var shows = [
-    { at: '2026-10-10T19:00:00-05:00', name: 'Station 1 Brewing, Suamico' },
-    { at: '2026-10-17T19:00:00-05:00', name: 'Plymouth Arts Center, Plymouth' },
-    { at: '2026-11-21T20:00:00-06:00', name: "Fletch's Local Tap House, Oshkosh" }
-  ];
+  var shows = (window.RRB_SHOWS || []).map(function (x) { return { at: x.start.toISOString(), name: x.venue + ', ' + x.city }; });
   var quips = ['Start hydrating now.', 'Tell your boss you have a cold.', 'Plenty of time to lie to your wife about it.', 'Iron your good jeans.', 'Warn your liver.'];
   var q = quips[Math.floor(Math.random() * quips.length)];
   var el = { d: document.getElementById('cd-d'), h: document.getElementById('cd-h'), m: document.getElementById('cd-m'), s: document.getElementById('cd-s'), label: document.getElementById('cd-label'), quip: document.getElementById('cd-quip'), box: document.getElementById('countdown') };
@@ -3558,9 +3631,7 @@ footer a.foot-mail:hover { color: var(--gold); }
       if (t + 4 * 3600e3 > now) { next = { t: t, name: shows[k].name }; break; }
     }
     if (!next) {
-      el.label.textContent = 'No shows on the books right now';
-      el.box.querySelector('.cd-clock').hidden = true;
-      el.quip.textContent = '';
+      el.box.style.display = 'none';
       return;
     }
     el.label.textContent = 'Next show: ' + next.name;
