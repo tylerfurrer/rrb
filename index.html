@@ -1063,7 +1063,7 @@ img { -webkit-user-drag: none; }
 
 /* tip jar: the request form only shows once you've earned it; on phones the jar sits right under the buttons */
 .request[hidden] { display: none; }
-@media (max-width: 640px) {
+@media (max-width: 800px) {
   .tips-grid { gap: 0; }
   .tips-grid > div:last-child { display: contents; }
   .tips-grid .jar-box { order: 1; margin: 26px auto 6px; }
@@ -1082,7 +1082,7 @@ img { -webkit-user-drag: none; }
 .btn.venmo-btn { background: var(--bone); color: var(--ink); text-decoration: none; display: inline-flex; align-items: baseline; gap: 10px; }
 .btn.venmo-btn:hover { background: #fff6dc; }
 .venmo-btn small { font-size: .78em; opacity: .85; text-transform: none; letter-spacing: .02em; }
-@media (max-width: 640px) {
+@media (max-width: 800px) {
   .tips-grid .tip-real { order: 3; justify-content: center; flex-direction: column; text-align: center; }
 }
 
@@ -1964,8 +1964,8 @@ nav { z-index: 95 !important; }
 
 /* real plank textures instead of stretched noise */
 :root {
-  --barnwood: url("barnwood.jpg") 0 0 / 800px 378px repeat;
-  --floor: url("floor.jpg") 0 0 / 800px 378px repeat;
+  --barnwood: url("barnwood.webp") 0 0 / 800px 378px repeat;
+  --floor: url("floor.webp") 0 0 / 800px 378px repeat;
 }
 /* no pinch or double-tap zoom on phones */
 html, body { touch-action: pan-x pan-y; -webkit-text-size-adjust: 100%; text-size-adjust: 100%; overscroll-behavior-x: none; }
@@ -2277,6 +2277,135 @@ body::before, body::after { inset: auto !important; top: 0 !important; left: 0 !
   }
   .cb-more:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
 }
+
+/* ---------- polish pass ---------- */
+.gang-head { font-weight: 400 !important; color: var(--gold) !important; text-shadow: 2px 2px 0 var(--ink), 0 0 18px rgba(231,189,106,.18); }
+@media (min-width: 801px) {
+  .bio.wanted .w-body { margin-bottom: 0; }
+  .bio.wanted { padding-bottom: 46px !important; }
+}
+/* press kit download */
+.kit-btn {
+  display: inline-flex; align-items: center; gap: 14px; margin-top: 30px; padding: 14px 20px 14px 16px;
+  background: #ecdcb5; color: var(--ink); text-decoration: none; border: 2px solid var(--ink);
+  box-shadow: 4px 4px 0 var(--rust-deep), 0 10px 22px rgba(0,0,0,.45); transform: rotate(-.6deg);
+  transition: transform .18s ease, box-shadow .18s ease;
+}
+.kit-btn svg { width: 30px; height: 30px; flex: none; color: var(--rust-deep); }
+.kit-btn b { display: block; font-family: var(--label); font-weight: 700; text-transform: uppercase; letter-spacing: .12em; font-size: 1rem; }
+.kit-btn small { display: block; font-family: var(--body); font-style: italic; font-size: .98rem; opacity: .8; margin-top: 2px; }
+.kit-btn:hover { transform: rotate(0) translate(-1px,-2px); box-shadow: 6px 6px 0 var(--rust-deep), 0 14px 26px rgba(0,0,0,.5); }
+.kit-btn:focus-visible { outline: 2px solid var(--gold); outline-offset: 4px; }
+@media (max-width: 800px) {
+  .book-pitch .kit-btn { order: 3; width: 100%; margin-top: 26px; transform: none; }
+}
+/* footer */
+footer { padding-block: 46px 54px !important; border-top: 2px solid rgba(217,162,74,.35); }
+.foot-wrap { flex-direction: column; align-items: center; text-align: center; gap: 0 !important; }
+.foot-badge { width: 74px; height: 74px; border-radius: 50%; border: 3px solid var(--mustard); box-shadow: 0 6px 16px rgba(0,0,0,.5); }
+.foot-name { margin: 14px 0 2px; font-family: "Rye", serif; font-size: 1.7rem; letter-spacing: .02em; text-transform: none; color: var(--gold); text-shadow: 2px 2px 0 var(--ink); }
+.foot-tag { margin: 0 0 20px; font-size: .78rem; letter-spacing: .22em; opacity: .75; }
+.foot-links { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 14px 22px; }
+footer a.foot-mail { color: var(--bone); text-transform: none; letter-spacing: .04em; font-size: .95rem; text-decoration: none; border-bottom: 1px solid rgba(217,162,74,.6); padding-bottom: 2px; }
+footer a.foot-mail:hover { color: var(--gold); }
+.foot-copy { margin: 24px 0 0; font-size: .72rem; letter-spacing: .2em; opacity: .5; }
+@media (max-width: 800px) { .bio.wanted { padding-bottom: 34px !important; } }
+@media (max-width: 800px) { .foot-links { flex-direction: column; width: 100%; } footer a.fb-foot { align-self: stretch; } }
+
+/* add to calendar + facebook event links */
+.show-end { display: flex; align-items: center; gap: 14px; justify-self: end; position: relative; }
+.cal-btn {
+  font-family: var(--label); font-weight: 700; letter-spacing: .12em; text-transform: uppercase; font-size: .78rem;
+  background: transparent; color: var(--gold, #e7bd6a); border: 1.5px solid rgba(231,189,106,.6); padding: 7px 11px 6px;
+  cursor: pointer; white-space: nowrap; display: inline-flex; align-items: center; gap: 7px; -webkit-tap-highlight-color: transparent;
+  transition: background .15s ease, color .15s ease;
+}
+.cal-btn svg { width: 14px; height: 14px; flex: none; }
+.cal-btn:hover, .cal-btn[aria-expanded="true"] { background: var(--gold, #e7bd6a); color: var(--ink); }
+.cal-btn:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+.cal-menu {
+  position: absolute; top: calc(100% + 8px); right: 0; z-index: 30; min-width: 190px;
+  background: #ecdcb5; border: 2px solid var(--ink); box-shadow: 4px 4px 0 var(--rust-deep), 0 12px 24px rgba(0,0,0,.5);
+  display: flex; flex-direction: column; padding: 6px;
+}
+.cal-menu[hidden] { display: none; }
+.cal-menu a {
+  font-family: var(--label); font-weight: 700; letter-spacing: .1em; text-transform: uppercase; font-size: .85rem;
+  color: var(--ink); text-decoration: none; padding: 10px 12px; -webkit-tap-highlight-color: transparent;
+}
+.cal-menu a + a { border-top: 1px dashed rgba(26,16,10,.35); }
+.cal-menu a:hover { background: rgba(142,46,18,.12); }
+.where a.venue { display: inline; text-decoration: none; -webkit-tap-highlight-color: transparent; }
+.where a.venue .ext { display: inline-block; vertical-align: .18em; margin-left: .3em; width: .62em; height: .62em; opacity: .55; flex: none; transition: opacity .15s ease, transform .15s ease; }
+.where a.venue:hover { text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 4px; }
+.where a.venue:hover .ext { opacity: 1; transform: translate(2px,-2px); }
+.where a.venue:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+@media (max-width: 800px) {
+  .show-end { grid-column: 2; justify-self: start; gap: 10px; margin-top: 4px; }
+  .show-end .time { margin-top: 0 !important; }
+  .cal-btn { font-size: .7rem; padding: 5px 9px 4px; }
+  .cal-menu { left: 0; right: auto; }
+}
+
+.show.has-link { cursor: pointer; transition: background .15s ease; }
+@media (hover: hover) { .show.has-link:hover { background: rgba(231,189,106,.07); } .show.has-link:hover a.venue { text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 4px; } .show.has-link:hover a.venue .ext { opacity: 1; transform: translate(2px,-2px); } }
+.show.has-link .show-end { cursor: auto; }
+
+#shows .show { position: relative; }
+#shows .show.cal-open { z-index: 60; }
+#shows .show .show-end { z-index: 2; }
+
+/* phones: tidy show rows. date | venue, town, time | calendar icon */
+@media (max-width: 800px) {
+  #shows .show { grid-template-columns: 4.4rem 1fr auto !important; grid-template-rows: auto auto; column-gap: 14px !important; row-gap: 2px !important; align-items: center; }
+  #shows .show .date { grid-column: 1; grid-row: 1 / span 2; align-self: center; }
+  #shows .show .where { grid-column: 2; grid-row: 1; align-self: end; }
+  #shows .show .show-end { display: contents; }
+  #shows .show .time {
+    grid-column: 2; grid-row: 2; justify-self: start; align-self: start;
+    background: none !important; transform: none !important; padding: 0 !important; margin: 2px 0 0 !important;
+    color: var(--gold, #e7bd6a) !important; font-size: .82rem !important; letter-spacing: .16em; box-shadow: none !important;
+  }
+  #shows .show .cal-btn {
+    grid-column: 3; grid-row: 1 / span 2; align-self: center;
+    width: 44px; height: 44px; padding: 0 !important; justify-content: center; gap: 0; border-radius: 0;
+  }
+  #shows .show .cal-btn svg { width: 19px; height: 19px; }
+  #shows .show .cal-btn span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  #shows .show .cal-menu { top: calc(100% - 8px); right: 0; left: auto; }
+  #shows .show.has-link .where a.venue .ext { opacity: .7; }
+}
+
+/* show dates: little tear-off calendar tiles that match the countdown */
+#shows .show .date {
+  display: flex; flex-direction: column; align-items: stretch; width: 78px; justify-self: start;
+  background: var(--ink); box-shadow: 4px 4px 0 var(--rust); text-align: center; line-height: 1;
+}
+#shows .show .date .m {
+  display: block; background: var(--rust-deep, #8e2e12); color: var(--bone) !important;
+  font-family: var(--label); font-weight: 700; font-size: .78rem; letter-spacing: .22em; text-transform: uppercase;
+  padding: 5px 0 4px .22em;
+}
+#shows .show .date .d {
+  display: block; color: var(--gold) !important; font-family: var(--display); font-size: 2.5rem; line-height: 1;
+  padding: 8px 0 9px; text-shadow: none !important; font-variant-numeric: tabular-nums;
+}
+#shows .show { grid-template-columns: 6rem 1fr auto; }
+@media (max-width: 800px) {
+  #shows .show { grid-template-columns: 62px 1fr auto !important; }
+  #shows .show .date { width: 58px; box-shadow: 3px 3px 0 var(--rust); }
+  #shows .show .date .m { font-size: .66rem; letter-spacing: .18em; padding: 4px 0 3px .18em; }
+  #shows .show .date .d { font-size: 1.85rem; padding: 6px 0 7px; }
+}
+
+/* dates: same stacked layout, no box */
+#shows .show .date { background: none !important; box-shadow: none !important; }
+#shows .show .date .m { background: none !important; color: var(--bone) !important; padding: 0 0 4px .22em !important; opacity: .85; }
+#shows .show .date .d { padding: 0 !important; font-size: 2.9rem; text-shadow: 2px 2px 0 var(--ink) !important; }
+@media (max-width: 800px) {
+  #shows .show .date .m { padding: 0 0 3px .18em !important; }
+  #shows .show .date .d { font-size: 2.15rem; }
+}
 </style>
 
 <div class="haze" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
@@ -2390,7 +2519,7 @@ body::before, body::after { inset: auto !important; top: 0 !important; left: 0 !
   <div class="wrap">
     <nav aria-label="Main">
       <a class="brand" href="#top" aria-label="Rat River Boys, back to top">
-        <span class="badge"><img src="rat-badge.jpg" alt="" width="240" height="240"></span>
+        <span class="badge"><img src="rat-badge.webp" alt="" width="240" height="240"></span>
         <span class="brand-text"><span class="b1">RRB</span><span class="b2">Rat River Boys</span></span>
       </a>
       <ul class="nav-links" id="nav-links">
@@ -2398,8 +2527,8 @@ body::before, body::after { inset: auto !important; top: 0 !important; left: 0 !
         <li><a href="#sound">The Sound</a></li>
         <li><a href="#boys">The Boys</a></li>
         <!-- <li><a href="#rules">House Rules</a></li> -->
+        <!-- <li><a href="#merch">Merch</a></li> -->
         <li class="m-only"><a href="#tips">Tip Jar</a></li>
-        <li><a href="#merch">Merch</a></li>
         <li class="m-only"><a href="#wall">Bathroom Wall</a></li>
         <li class="m-only"><a href="#book">Book Us</a></li>
         <li class="m-only"><a href="https://www.facebook.com/profile.php?id=61589395443501" target="_blank" rel="noopener">Facebook</a></li>
@@ -2417,18 +2546,18 @@ body::before, body::after { inset: auto !important; top: 0 !important; left: 0 !
       <div class="poster-wrap">
       <div class="poster" role="button" tabindex="0" aria-label="Give the poster a smack">
         <span class="tape t1" aria-hidden="true"></span>
-        <img class="slide is-on" src="live-crowd.jpg" alt="Rat River Boys on stage under colored lights with the crowd cheering" width="1200" height="800">
-        <img class="slide" src="full-band.jpg" alt="The full band playing an outdoor stage downtown with fiddle, bass and drums" width="1200" height="800" loading="lazy" decoding="async">
-        <img class="slide" src="live-stage.jpg" alt="The full band playing on a theater stage in front of blue curtains" width="1200" height="800" loading="lazy" decoding="async">
-        <img class="slide" src="axes2.jpg" alt="Tyler and Weston posing with old axes against a black backdrop" width="1200" height="800" loading="lazy" decoding="async">
-        <img class="slide" src="crowd-view.jpg" alt="A packed bar seen from the stage over a guitar headstock" width="1200" height="800" loading="lazy" decoding="async">
-        <img class="slide" src="thumbs.jpg" alt="Weston on stage with an acoustic guitar giving two thumbs up" width="1200" height="800" loading="lazy" decoding="async">
-        <img class="slide" src="weston-acoustic.jpg" alt="Weston grinning in sunglasses while playing acoustic guitar" width="1200" height="800" loading="lazy" decoding="async">
-        <img class="slide" src="stage-crowd.jpg" alt="View from behind the drums of a big outdoor crowd watching the band" width="1200" height="800" loading="lazy" decoding="async">
-        <img class="slide" src="tyler-weston.jpg" alt="Tyler on Telecaster and Weston on acoustic guitar playing outside" width="1200" height="800" loading="lazy" decoding="async">
-        <img class="slide" src="giddyup.jpg" alt="Tyler in a red jacket playing a Telecaster at Giddy Up" width="1200" height="800" loading="lazy" decoding="async">
-        <img class="slide" src="drum-view.jpg" alt="The drum kit on stage looking out over a packed downtown street festival" width="1200" height="800" loading="lazy" decoding="async">
-        <img class="slide" src="tosafest.jpg" alt="The band playing the State Street Stage at Tosa Fest" width="1200" height="800" loading="lazy" decoding="async">
+        <img class="slide is-on" src="live-crowd.webp" fetchpriority="high" alt="Rat River Boys on stage under colored lights with the crowd cheering" width="1200" height="800">
+        <img class="slide" src="full-band.webp" alt="The full band playing an outdoor stage downtown with fiddle, bass and drums" width="1200" height="800" loading="lazy" decoding="async">
+        <img class="slide" src="live-stage.webp" alt="The full band playing on a theater stage in front of blue curtains" width="1200" height="800" loading="lazy" decoding="async">
+        <img class="slide" src="axes2.webp" alt="Tyler and Weston posing with old axes against a black backdrop" width="1200" height="800" loading="lazy" decoding="async">
+        <img class="slide" src="crowd-view.webp" alt="A packed bar seen from the stage over a guitar headstock" width="1200" height="800" loading="lazy" decoding="async">
+        <img class="slide" src="thumbs.webp" alt="Weston on stage with an acoustic guitar giving two thumbs up" width="1200" height="800" loading="lazy" decoding="async">
+        <img class="slide" src="weston-acoustic.webp" alt="Weston grinning in sunglasses while playing acoustic guitar" width="1200" height="800" loading="lazy" decoding="async">
+        <img class="slide" src="stage-crowd.webp" alt="View from behind the drums of a big outdoor crowd watching the band" width="1200" height="800" loading="lazy" decoding="async">
+        <img class="slide" src="tyler-weston.webp" alt="Tyler on Telecaster and Weston on acoustic guitar playing outside" width="1200" height="800" loading="lazy" decoding="async">
+        <img class="slide" src="giddyup.webp" alt="Tyler in a red jacket playing a Telecaster at Giddy Up" width="1200" height="800" loading="lazy" decoding="async">
+        <img class="slide" src="drum-view.webp" alt="The drum kit on stage looking out over a packed downtown street festival" width="1200" height="800" loading="lazy" decoding="async">
+        <img class="slide" src="tosafest.webp" alt="The band playing the State Street Stage at Tosa Fest" width="1200" height="800" loading="lazy" decoding="async">
         <span class="tape t2" aria-hidden="true"></span>
       </div>
       </div>
@@ -2473,6 +2602,7 @@ body::before, body::after { inset: auto !important; top: 0 !important; left: 0 !
 </section>
 <section class="slab shows-slab torn" id="shows">
     <div class="wrap">
+      <p class="kicker">On the road</p>
       <h2>Upcoming shows</h2>
       <div class="countdown" id="countdown" aria-live="off">
         <div class="cd-label" id="cd-label">Next show: Station 1 Brewing, Suamico</div>
@@ -2485,12 +2615,12 @@ body::before, body::after { inset: auto !important; top: 0 !important; left: 0 !
         <div class="cd-quip" id="cd-quip">Start hydrating now.</div>
       </div>
       <ul class="shows">
-        <li class="show">
+        <li class="show" data-fb="https://www.facebook.com/share/19WSicAn9C/">
           <div class="date"><span class="m">Oct</span><span class="d">10</span></div>
           <div class="where"><div class="venue">Station 1 Brewing</div><div class="town">Suamico, WI</div></div>
           <div class="time">7 PM</div>
         </li>
-        <li class="show">
+        <li class="show" data-fb="https://www.facebook.com/share/1BoHUhSeQq/">
           <div class="date"><span class="m">Oct</span><span class="d">17</span></div>
           <div class="where"><div class="venue">Plymouth Arts Center</div><div class="town">Plymouth, WI</div></div>
           <div class="time">7 PM</div>
@@ -2510,8 +2640,8 @@ body::before, body::after { inset: auto !important; top: 0 !important; left: 0 !
       <p class="kicker">The sound</p>
       <h2>Golden age country. No chaser.</h2>
       <div class="chalk-frame">
-        <figure class="cb-polaroid p2 p3" aria-hidden="true"><span class="cbp-tape"></span><img src="corndog-mueller.jpg" alt="" loading="lazy"></figure>
-        <figure class="cb-polaroid p2" aria-hidden="true"><span class="cbp-tape"></span><img src="wild-wes.jpg" alt="" loading="lazy"></figure>
+        <figure class="cb-polaroid p2 p3" aria-hidden="true"><span class="cbp-tape"></span><img src="corndog-mueller.webp" alt="" loading="lazy"></figure>
+        <figure class="cb-polaroid p2" aria-hidden="true"><span class="cbp-tape"></span><img src="wild-wes.webp" alt="" loading="lazy"></figure>
         <div class="chalkboard">
           <div class="cb-head">
             <p class="cbh-title">Tonight&rsquo;s Specials</p>
@@ -2555,18 +2685,16 @@ body::before, body::after { inset: auto !important; top: 0 !important; left: 0 !
         <article class="bio wanted">
           <p class="w-head">Wanted</p>
           <p class="w-for">Lead Vocals &amp; Guitar</p>
-          <figure class="mug"><img src="weston.jpg" alt="Weston Mueller sitting on a trailer gate with a beer" width="800" height="1000" loading="lazy"></figure>
+          <figure class="mug"><img src="weston.webp" alt="Weston Mueller sitting on a trailer gate with a beer" width="800" height="1000" loading="lazy"></figure>
           <h3 class="name">Weston Mueller</h3>
           <div class="w-body"><p>Weston Mueller is a Wisconsin singer-songwriter with more than a decade of road miles behind him. Before Rat River Boys, he founded and fronted Milwaukee Americana band Listening Party, writing and singing five albums and earning a 2018 WAMI nomination for Bluegrass/Americana.</p><p>He writes about real life: love, loss, bad decisions and long roads. The Milwaukee Journal Sentinel said every note he sings is full of feeling, and he's played it all, from corner dive bars to Summerfest, Wisconsin State Fair and Mile of Music, at around 120 shows a year.</p><p>Now he's out front as lead singer and guitarist for Rat River Boys, where the songs got louder, the nights got longer and nobody's ready to go home.</p></div>
-          <button class="sight-btn" type="button">Report a sighting</button>
         </article>
         <article class="bio wanted">
           <p class="w-head">Wanted</p>
           <p class="w-for">Lead &amp; Steel Guitar</p>
-          <figure class="mug"><img src="tyler.jpg" alt="Tyler Furrer playing an acoustic guitar" width="800" height="1000" loading="lazy"></figure>
+          <figure class="mug"><img src="tyler.webp" alt="Tyler Furrer playing an acoustic guitar" width="800" height="1000" loading="lazy"></figure>
           <h3 class="name">Tyler Furrer</h3>
           <div class="w-body"><p>Tyler Furrer is a guitarist from Wisconsin who has built his career on the road. He has spent the past three years honing his craft in Nashville, playing everywhere from downtown on Broadway to large festival stages, with shows all over the country, including New York, Las Vegas and Nashville.</p><p>He's toured the country playing everything from honky tonk to Americana to polka, including runs with Mollie B &amp; SqueezeBox, the award-winning band behind RFD-TV's Mollie B Polka Party. He joined Listening Party for their album High &amp; Low, which is where he met Weston, and has shared stages with national acts including Brantley Gilbert, Parker McCollum, Chase Matthew and Clay Street Unit. Along the way he's played Summerfest, Wisconsin State Fair, the Hodag Country Festival, Mile of Music and the Tri-State Rodeo in Iowa.</p><p>Now he's on lead guitar for Rat River Boys, bringing the Nashville polish and the Wisconsin grit to every set.</p></div>
-          <button class="sight-btn" type="button">Report a sighting</button>
         </article>
       </div>
     <div class="gang">
@@ -2576,15 +2704,15 @@ body::before, body::after { inset: auto !important; top: 0 !important; left: 0 !
       <div class="gang-row">
         <article class="mini-wanted">
           <p class="mw-head">Drums</p>
-          <div class="mw-shot"><img src="drums.jpg" alt="Rat River Boys drums player" loading="lazy"></div>
+          <div class="mw-shot"><img src="drums.webp" alt="Rat River Boys drums player" loading="lazy"></div>
         </article>
         <article class="mini-wanted">
           <p class="mw-head">Bass</p>
-          <div class="mw-shot"><img src="bass.jpg" alt="Rat River Boys bass player" loading="lazy"></div>
+          <div class="mw-shot"><img src="bass.webp" alt="Rat River Boys bass player" loading="lazy"></div>
         </article>
         <article class="mini-wanted">
           <p class="mw-head">Fiddle</p>
-          <div class="mw-shot"><img src="fiddle.jpg" alt="Rat River Boys fiddle player" loading="lazy"></div>
+          <div class="mw-shot"><img src="fiddle.webp" alt="Rat River Boys fiddle player" loading="lazy"></div>
         </article>
       </div>
     </div>
@@ -2610,6 +2738,38 @@ body::before, body::after { inset: auto !important; top: 0 !important; left: 0 !
       </ol>
       <button class="rules-more" id="rules-more" type="button" aria-expanded="false">Read all the rules</button>
       <p class="fine-print"><span>Fine print:</span> These house rules are for entertainment purposes only and are not enforced by the band, the venue or any court of law. The venue's actual rules always win. Please drink responsibly, tip your bartender and get home safe. Rat River Boys are not liable for sore feet, lost voices, broken hearts or anything you decide to do after last call.</p>
+    </div>
+  </section>
+-->
+
+
+  <section class="slab played-slab torn" id="played">
+    <div class="wrap">
+      <p class="kicker">Crime scenes</p>
+      <h2>Places that somehow let us back in.</h2>
+      <ul class="venues">
+        <li>Harley-Davidson Museum Bike Night<small>Milwaukee, WI</small></li>
+        <li>Hometown Days<small>Verona, WI</small></li>
+        <li>Hagemeister Park<small>Green Bay, WI</small></li>
+        <li>South Park Food Truck Festival<small>Oshkosh, WI</small></li>
+        <li>Wisconsin State Fair<small>West Allis, WI</small></li>
+        <li>Tosa Fest<small>Wauwatosa, WI</small></li>
+        <li>Fletch&rsquo;s Local Tap House<small>Oshkosh, WI</small></li>
+      </ul>
+    </div>
+  </section>
+
+<!-- MERCH (hidden for now)
+  <section class="slab merch-slab torn" id="merch">
+    <div class="wrap">
+      <p class="kicker">Merch table</p>
+      <h2>Coming soon. Probably.</h2>
+      <div class="merch">
+        <div class="item"><span class="soon">Coming soon</span><div class="name">RRB Koozie</div><div class="price">$5</div><p>Keeps your beer cold and your hands out of trouble.</p></div>
+        <div class="item"><span class="soon">Coming soon</span><div class="name">"Not Responsible" Panties</div><div class="price">$15</div><p>Lose them at the show. Legally, that's on you.</p></div>
+        <div class="item"><span class="soon">Coming soon</span><div class="name">Brenda's Designated Driver Tee</div><div class="price">$20</div><p>For the saint who drives everybody home and hates all of you.</p></div>
+        <div class="item"><span class="soon">Coming soon</span><div class="name">"Worse Decisions" Trucker Hat</div><div class="price">$25</div><p>Pairs well with a mullet and a restraining order.</p></div>
+      </div>
     </div>
   </section>
 -->
@@ -2651,35 +2811,6 @@ body::before, body::after { inset: auto !important; top: 0 !important; left: 0 !
     </div>
   </section>
 
-  <section class="slab played-slab torn" id="played">
-    <div class="wrap">
-      <p class="kicker">Crime scenes</p>
-      <h2>Places that somehow let us back in.</h2>
-      <ul class="venues">
-        <li>Harley-Davidson Museum Bike Night<small>Milwaukee, WI</small></li>
-        <li>Hometown Days<small>Verona, WI</small></li>
-        <li>Hagemeister Park<small>Green Bay, WI</small></li>
-        <li>South Park Food Truck Festival<small>Oshkosh, WI</small></li>
-        <li>Wisconsin State Fair<small>West Allis, WI</small></li>
-        <li>Tosa Fest<small>Wauwatosa, WI</small></li>
-        <li>Fletch&rsquo;s Local Tap House<small>Oshkosh, WI</small></li>
-      </ul>
-    </div>
-  </section>
-
-  <section class="slab merch-slab torn" id="merch">
-    <div class="wrap">
-      <p class="kicker">Merch table</p>
-      <h2>Coming soon. Probably.</h2>
-      <div class="merch">
-        <div class="item"><span class="soon">Coming soon</span><div class="name">RRB Koozie</div><div class="price">$5</div><p>Keeps your beer cold and your hands out of trouble.</p></div>
-        <div class="item"><span class="soon">Coming soon</span><div class="name">"Not Responsible" Panties</div><div class="price">$15</div><p>Lose them at the show. Legally, that's on you.</p></div>
-        <div class="item"><span class="soon">Coming soon</span><div class="name">Brenda's Designated Driver Tee</div><div class="price">$20</div><p>For the saint who drives everybody home and hates all of you.</p></div>
-        <div class="item"><span class="soon">Coming soon</span><div class="name">"Worse Decisions" Trucker Hat</div><div class="price">$25</div><p>Pairs well with a mullet and a restraining order.</p></div>
-      </div>
-    </div>
-  </section>
-
   <section class="slab wall-slab torn" id="wall">
     <div class="wrap">
       <p class="kicker">Men's room, stall two</p>
@@ -2713,6 +2844,12 @@ body::before, body::after { inset: auto !important; top: 0 !important; left: 0 !
         </div>
         <div class="copied" id="copied" aria-live="polite"></div>
         <p class="fb-line">Or slide into our DMs on <a href="https://www.facebook.com/profile.php?id=61589395443501" target="_blank" rel="noopener">Facebook</a>. We answer faster than your ex.</p>
+<!-- PRESS KIT (hidden for now)
+        <a class="kit-btn" href="rat-river-boys-press-kit.pdf" download="Rat-River-Boys-Press-Kit.pdf">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12m0 0-5-5m5 5 5-5M4 19h16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="square"/></svg>
+          <span><b>Download the press kit</b><small>One page. Bio, lineup, videos, contact.</small></span>
+        </a>
+        -->
       </div>
       <form class="book-form tab" id="book-form" novalidate><input id="bf-hp" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
         <div class="tab-head">
@@ -2720,7 +2857,7 @@ body::before, body::after { inset: auto !important; top: 0 !important; left: 0 !
             <div class="tab-title">Booking</div>
             <div class="tab-no">Bar Tab No. 420</div>
           </div>
-          <img class="tab-stamp" src="rat-crest.jpg" alt="" width="690" height="760">
+          <img class="tab-stamp" src="rat-crest.webp" alt="" width="690" height="760">
         </div>
         <p class="tab-note">Fill it out and hit send. We'll holler back.</p>
         <div class="bf-grid">
@@ -2742,8 +2879,15 @@ body::before, body::after { inset: auto !important; top: 0 !important; left: 0 !
 </main>
 
 <footer>
-  <div class="wrap">
-    <a class="fb-foot" href="https://www.facebook.com/profile.php?id=61589395443501" target="_blank" rel="noopener">Follow us on Facebook</a>
+  <div class="wrap foot-wrap">
+    <img class="foot-badge" src="rat-badge.webp" alt="" width="240" height="240" loading="lazy">
+    <p class="foot-name">Rat River Boys</p>
+    <p class="foot-tag">Outlaw country and honky tonk from Wisconsin</p>
+    <div class="foot-links">
+      <a class="fb-foot" href="https://www.facebook.com/profile.php?id=61589395443501" target="_blank" rel="noopener">Follow us on Facebook</a>
+      <a class="foot-mail" href="mailto:ratriverboysband@gmail.com">ratriverboysband@gmail.com</a>
+    </div>
+    <p class="foot-copy">&copy; <span id="yr">2026</span> Rat River Boys</p>
   </div>
 </footer>
 
@@ -2905,6 +3049,96 @@ body::before, body::after { inset: auto !important; top: 0 !important; left: 0 !
     }
   }
   afterGate(function () { setTimeout(tick, 3800); });
+})();
+</script>
+<script>(function(){var y=document.getElementById("yr");if(y)y.textContent=new Date().getFullYear();})();</script>
+<script>
+/* add to calendar + facebook events. Each show reads straight from the list; put the Facebook event link in data-fb on the <li> */
+(function () {
+  var MON = { jan:0, feb:1, mar:2, apr:3, may:4, jun:5, jul:6, aug:7, sep:8, oct:9, nov:10, dec:11 };
+  var ICON = '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M3 10h18M8 2.5v5M16 2.5v5" fill="none" stroke="currentColor" stroke-width="2.2"/></svg>';
+  var EXT = '<svg class="ext" viewBox="0 0 12 12" aria-hidden="true"><path d="M4 1h7v7M11 1 3 9" fill="none" stroke="currentColor" stroke-width="2"/></svg>';
+  var SITE = 'https://www.ratriverboys.com';
+  var isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+  function txt(li, sel) { var e = li.querySelector(sel); return e ? e.textContent.trim() : ''; }
+  function p2(n) { return (n < 10 ? '0' : '') + n; }
+  function stamp(d) { return d.getFullYear() + p2(d.getMonth() + 1) + p2(d.getDate()) + 'T' + p2(d.getHours()) + p2(d.getMinutes()) + '00'; }
+  function parse(li) {
+    var m = MON[txt(li, '.date .m').slice(0, 3).toLowerCase()], d = parseInt(txt(li, '.date .d'), 10);
+    if (m == null || !d) return null;
+    var hh = 19, mm = 0, t = txt(li, '.time').toLowerCase().match(/(\d{1,2})(?::(\d{2}))?\s*(am|pm)?/);
+    if (t) { hh = parseInt(t[1], 10) % 12; mm = t[2] ? parseInt(t[2], 10) : 0; if (t[3] !== 'am') hh += 12; }
+    var now = new Date(), y = now.getFullYear(), start = new Date(y, m, d, hh, mm);
+    if (start < new Date(now.getTime() - 60 * 864e5)) start = new Date(y + 1, m, d, hh, mm);
+    var venue = txt(li, '.venue'), town = txt(li, '.town'), fb = li.getAttribute('data-fb') || '';
+    return { start: start, end: new Date(start.getTime() + 3 * 3600e3), title: 'Rat River Boys at ' + venue,
+             where: venue + ', ' + town, venue: venue, link: fb || SITE,
+             details: 'Live at ' + venue + '.' + (fb ? ' Event: ' + fb : '') + ' ' + SITE };
+  }
+  function esc(v) { return v.replace(/\\/g, '\\\\').replace(/;/g, '\;').replace(/,/g, '\\,'); }
+  function ics(e) {
+    return ['BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//Rat River Boys//Shows//EN', 'BEGIN:VEVENT',
+      'UID:' + stamp(e.start) + '-' + e.venue.replace(/[^a-z0-9]/gi, '') + '@ratriverboys.com',
+      'DTSTAMP:' + new Date().toISOString().replace(/[-:]/g, '').slice(0, 15) + 'Z', 'DTSTART:' + stamp(e.start), 'DTEND:' + stamp(e.end),
+      'SUMMARY:' + esc(e.title), 'LOCATION:' + esc(e.where), 'DESCRIPTION:' + esc(e.details),
+      'URL:' + e.link, 'END:VEVENT', 'END:VCALENDAR'].join('\r\n');
+  }
+  function google(e) {
+    return 'https://calendar.google.com/calendar/render?action=TEMPLATE&text=' + encodeURIComponent(e.title) +
+      '&dates=' + stamp(e.start) + '/' + stamp(e.end) + '&ctz=America/Chicago&location=' + encodeURIComponent(e.where) +
+      '&details=' + encodeURIComponent(e.details);
+  }
+  var open = null;
+  function closeAll() { if (open) { open.menu.hidden = true; open.btn.setAttribute('aria-expanded', 'false'); open.row.classList.remove('cal-open'); open = null; } }
+  document.querySelectorAll('#shows .show').forEach(function (li, i) {
+    var ev = parse(li), time = li.querySelector('.time');
+    if (!ev || !time) return;
+    var fb = li.getAttribute('data-fb');
+    var vEl = li.querySelector('.venue');
+    if (fb && vEl && vEl.tagName !== 'A') {
+      var a = document.createElement('a');
+      a.className = vEl.className; a.href = fb; a.target = '_blank'; a.rel = 'noopener';
+      a.setAttribute('aria-label', ev.venue + ', Facebook event');
+      a.innerHTML = '<span>' + vEl.innerHTML + '</span>' + EXT;
+      vEl.replaceWith(a);
+    }
+    if (fb) {
+      li.classList.add('has-link');
+      li.addEventListener('click', function (e) {
+        if (e.target.closest('.show-end, a')) return;
+        if (window.getSelection && String(window.getSelection())) return;
+        window.open(fb, '_blank', 'noopener');
+      });
+    }
+    var wrap = document.createElement('div'); wrap.className = 'show-end';
+    time.parentNode.insertBefore(wrap, time); wrap.appendChild(time);
+    var btn = document.createElement('button');
+    btn.type = 'button'; btn.className = 'cal-btn'; btn.setAttribute('aria-haspopup', 'true'); btn.setAttribute('aria-expanded', 'false');
+    btn.setAttribute('aria-label', 'Add ' + ev.venue + ' to your calendar');
+    btn.innerHTML = ICON + '<span>Add to calendar</span>';
+    var menu = document.createElement('div'); menu.className = 'cal-menu'; menu.hidden = true; menu.id = 'cal-menu-' + i;
+    btn.setAttribute('aria-controls', menu.id);
+    var apple = document.createElement('a'); apple.href = '#'; apple.textContent = 'Apple / Outlook';
+    var g = document.createElement('a'); g.href = google(ev); g.target = '_blank'; g.rel = 'noopener'; g.textContent = 'Google Calendar';
+    apple.addEventListener('click', function (e) {
+      e.preventDefault();
+      var url = URL.createObjectURL(new Blob([ics(ev)], { type: 'text/calendar;charset=utf-8' }));
+      if (isIOS) { window.location.href = url; }
+      else { var d = document.createElement('a'); d.href = url; d.download = 'Rat-River-Boys-' + ev.venue.replace(/[^a-z0-9]+/gi, '-') + '.ics'; document.body.appendChild(d); d.click(); d.remove(); }
+      setTimeout(function () { URL.revokeObjectURL(url); }, 60000);
+      closeAll();
+    });
+    g.addEventListener('click', function () { closeAll(); });
+    menu.appendChild(apple); menu.appendChild(g);
+    wrap.appendChild(btn); wrap.appendChild(menu);
+    btn.addEventListener('click', function (e) {
+      e.stopPropagation();
+      var was = open && open.btn === btn; closeAll();
+      if (!was) { li.classList.add('cal-open'); menu.hidden = false; btn.setAttribute('aria-expanded', 'true'); open = { btn: btn, menu: menu, row: li }; }
+    });
+  });
+  document.addEventListener('click', function (e) { if (open && !open.menu.contains(e.target)) closeAll(); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeAll(); });
 })();
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
@@ -4189,7 +4423,7 @@ document.querySelectorAll('.fight-inline').forEach(function (b) {
       bang();
     });
     var btn = poster.querySelector('.sight-btn');
-    btn.addEventListener('click', function () {
+    if (btn) btn.addEventListener('click', function () {
       var old = poster.querySelector('.stamp');
       if (old) old.remove();
       var s = nextShow();
