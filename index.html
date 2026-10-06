@@ -2406,6 +2406,12 @@ footer a.foot-mail:hover { color: var(--gold); }
   #shows .show .date .m { padding: 0 0 3px .18em !important; }
   #shows .show .date .d { font-size: 2.15rem; }
 }
+
+/* phone menu: one column always; scroll if the screen is short instead of wrapping into a second column */
+@media (max-width: 640px) {
+  nav ul.nav-links { flex-wrap: nowrap !important; overscroll-behavior: contain; -webkit-overflow-scrolling: touch; }
+  nav ul.nav-links > li { flex: none; width: 100%; }
+}
 </style>
 
 <div class="haze" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
