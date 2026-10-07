@@ -2438,6 +2438,96 @@ footer a.foot-mail { display: inline-block; padding: 12px 4px 4px; }
 /* nothing booked */
 .show-none { padding: 22px 0; font-size: 1.2rem; border-bottom: 1px solid rgba(231,189,106,.4); }
 .show-none a { color: var(--gold); }
+
+/* ---------- SETLIST: sharpie sheets gaffer-taped to a black stage floor ---------- */
+.setlist-slab {
+  background:
+    radial-gradient(ellipse 70% 55% at 50% 0%, rgba(255,210,140,.12), transparent 70%),
+    radial-gradient(ellipse 120% 80% at 50% 120%, rgba(0,0,0,.6), transparent 60%),
+    linear-gradient(rgba(10,8,7,.82), rgba(10,8,7,.88)), var(--floor, #1a1410) !important;
+  color: var(--bone);
+}
+.setlist-slab h2 { margin-bottom: 8px; }
+.sl-sub { margin: 0 0 22px; font-size: 1.15rem; opacity: .85; }
+.sl-wrap { position: relative; }
+.sl-track {
+  display: grid; grid-auto-flow: column; grid-auto-columns: calc(50% - 20px); gap: 40px;
+  overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; overscroll-behavior-x: contain;
+  padding: 26px 14px 34px; margin: 0 -14px; scrollbar-width: none; -webkit-overflow-scrolling: touch;
+}
+.sl-track::-webkit-scrollbar { display: none; }
+.sl-track:focus-visible { outline: 2px solid var(--gold); outline-offset: 4px; }
+.sheet {
+  position: relative; scroll-snap-align: start; color: #15110d;
+  background:
+    radial-gradient(circle at 85% 92%, rgba(120,90,40,.10), transparent 22%),
+    radial-gradient(circle at 10% 6%, rgba(120,90,40,.08), transparent 18%),
+    linear-gradient(180deg, #f6f1e4, #ece4cf);
+  box-shadow: 0 14px 26px rgba(0,0,0,.55), 0 2px 0 rgba(0,0,0,.25);
+  padding: 30px 30px 26px; transform: rotate(-.8deg);
+}
+.sheet:nth-child(even) { transform: rotate(.9deg); }
+.sheet:nth-child(4n+3) { transform: rotate(-.4deg); }
+.tape { position: absolute; top: -12px; width: 84px; height: 26px; background: rgba(24,24,26,.9); box-shadow: 0 2px 3px rgba(0,0,0,.35); }
+.tape::after { content: ""; position: absolute; inset: 0; background: repeating-linear-gradient(90deg, rgba(255,255,255,.04) 0 2px, transparent 2px 5px); }
+.tape.tl { left: -18px; transform: rotate(-32deg); }
+.tape.tr { right: -18px; transform: rotate(30deg); }
+.ring { position: absolute; right: 26px; bottom: 34px; width: 120px; height: 120px; border-radius: 50%; border: 6px solid rgba(140,95,40,.16); box-shadow: inset 0 0 0 2px rgba(140,95,40,.08); pointer-events: none; transform: rotate(18deg) scaleX(1.05); }
+.sheet-head { display: flex; align-items: baseline; justify-content: space-between; border-bottom: 3px solid #15110d; padding-bottom: 6px; margin-bottom: 10px; }
+.sh-set { font-family: "Permanent Marker", "Caveat", cursive; font-size: 2rem; line-height: 1; transform: rotate(-2deg); display: inline-block; }
+.sh-range { font-family: "Caveat", cursive; font-weight: 600; font-size: 1.15rem; opacity: .6; }
+.sheet-list { list-style: none; margin: 0; padding: 0; }
+.sheet-list li { display: flex; align-items: baseline; flex-wrap: wrap; column-gap: 8px; padding: 3px 0; line-height: 1.15; }
+.sheet-list .n { font-family: "Caveat", cursive; font-weight: 600; font-size: .95rem; width: 1.7em; flex: none; opacity: .45; text-align: right; margin-right: 2px; }
+.sheet-list .t { font-family: "Permanent Marker", "Caveat", cursive; font-size: 1.12rem; letter-spacing: .01em; }
+.sheet-list .a { font-family: "Caveat", cursive; font-weight: 600; font-size: 1.02rem; color: #6a5a45; }
+.sheet-list li.nope .t { text-decoration: line-through; text-decoration-color: #a3311f; text-decoration-thickness: 3px; }
+.sheet-list .fine { font-family: "Permanent Marker", cursive; color: #a3311f; font-size: 1rem; transform: rotate(-6deg); display: inline-block; }
+.sl-arrow {
+  position: absolute; top: 50%; z-index: 3; width: 46px; height: 46px; margin-top: -23px; border-radius: 50%;
+  background: rgba(20,14,10,.85); color: var(--gold); border: 2px solid rgba(231,189,106,.6); font-size: 2rem; line-height: 1;
+  display: grid; place-items: center; cursor: pointer; padding: 0 0 4px; transition: opacity .2s, background .15s;
+}
+.sl-arrow:hover { background: var(--gold); color: var(--ink); }
+.sl-arrow.prev { left: -62px; } .sl-arrow.next { right: -62px; }
+.sl-arrow[disabled] { opacity: 0; pointer-events: none; }
+.sl-dots { display: flex; justify-content: center; gap: 10px; margin-top: 6px; }
+.sl-dots span { width: 9px; height: 9px; border-radius: 50%; background: rgba(231,189,106,.3); transition: background .2s, transform .2s; }
+.sl-dots span.on { background: var(--gold); transform: scale(1.25); }
+.cbp-link { color: inherit; text-decoration: none; }
+.cbp-link:hover { text-decoration: underline; text-underline-offset: 6px; }
+@media (max-width: 1360px) { .sl-arrow.prev { left: -8px; } .sl-arrow.next { right: -8px; } }
+@media (max-width: 800px) {
+  .sl-track { grid-auto-columns: 86%; gap: 22px; padding: 22px 16px 30px; margin: 0 -16px; scroll-padding-left: 16px; }
+  .sheet { padding: 26px 18px 20px; }
+  .sh-set { font-size: 1.7rem; }
+  .sheet-list .t { font-size: 1.02rem; }
+  .sheet-list .a { font-size: .95rem; }
+  .sl-arrow { display: none; }
+}
+
+/* setlist lines: number hangs in the margin, title + artist wrap as one line of text */
+.sheet-list li { display: block !important; position: relative; padding: 3px 0 3px 2.1em !important; line-height: 1.25 !important; overflow-wrap: break-word; }
+.sheet-list .n { position: absolute; left: 0; top: 5px; width: 1.6em !important; margin: 0 !important; }
+.sheet-list .t { margin-right: 6px; }
+.sheet-list .fine { margin-right: 6px; }
+.sheet-list .a { white-space: nowrap; }
+.sheet { min-width: 0; overflow: visible; }
+@media (max-width: 800px) { .sheet-list .a { white-space: normal; } }
+
+/* phones: shorter sheets. titles only, tighter lines */
+@media (max-width: 800px) {
+  .sheet-list .a { display: none !important; }
+  .sheet-list li { padding: 2px 0 2px 1.9em !important; line-height: 1.12 !important; }
+  .sheet-list .t { font-size: .92rem !important; margin-right: 4px; }
+  .sheet-list .n { top: 2px; font-size: .82rem; }
+  .sheet { padding: 20px 16px 16px !important; }
+  .sheet-head { margin-bottom: 6px; padding-bottom: 4px; }
+  .sh-set { font-size: 1.45rem !important; }
+  .sl-sub { margin-bottom: 10px; font-size: 1.05rem; }
+  .sl-track { padding-top: 18px !important; padding-bottom: 22px !important; }
+  .ring { width: 90px; height: 90px; }
+}
 </style>
 
 <div class="haze" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
@@ -2557,6 +2647,7 @@ footer a.foot-mail { display: inline-block; padding: 12px 4px 4px; }
       <ul class="nav-links" id="nav-links">
         <li><a href="#shows">Shows</a></li>
         <li><a href="#sound">The Sound</a></li>
+        <li><a href="#setlist">Setlist</a></li>
         <li><a href="#boys">The Boys</a></li>
         <!-- <li><a href="#rules">House Rules</a></li> -->
         <!-- <li><a href="#merch">Merch</a></li> -->
@@ -2615,13 +2706,13 @@ footer a.foot-mail { display: inline-block; padding: 12px 4px 4px; }
     <h2>Caught on tape.</h2>
     <div class="vid-reel">
       <div class="vid-frame tall">
-        <div class="vid-screen" id="vid-solo">
-          <iframe src="https://www.youtube-nocookie.com/embed/53UOsI0vwqo?rel=0&amp;playsinline=1&amp;modestbranding=1" title="You Ain&#39;t Woman Enough (To Take My Man)" loading="lazy" allow="encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>
+        <div class="vid-screen" id="vid-3">
+          <iframe src="https://www.youtube-nocookie.com/embed/eATwTSG0D2M?rel=0&amp;playsinline=1&amp;modestbranding=1" title="Dixieland Delight" loading="lazy" allow="encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>
         </div>
       </div>
       <div class="vid-frame tall">
-        <div class="vid-screen" id="vid-3">
-          <iframe src="https://www.youtube-nocookie.com/embed/eATwTSG0D2M?rel=0&amp;playsinline=1&amp;modestbranding=1" title="Dixieland Delight" loading="lazy" allow="encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>
+        <div class="vid-screen" id="vid-solo">
+          <iframe src="https://www.youtube-nocookie.com/embed/53UOsI0vwqo?rel=0&amp;playsinline=1&amp;modestbranding=1" title="You Ain&#39;t Woman Enough (To Take My Man)" loading="lazy" allow="encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>
         </div>
       </div>
       <div class="vid-frame tall">
@@ -2732,7 +2823,7 @@ footer a.foot-mail { display: inline-block; padding: 12px 4px 4px; }
           <div class="cb-cols">
             <ul class="cb-list">
               <li><span class="cb-name">Merle Haggard</span><span class="cb-tag">Sang about prison because he'd been there</span></li>
-              <li><span class="cb-name">Waylon Jennings</span><span class="cb-tag">Did more cocaine than your whole county</span></li>
+              <li><span class="cb-name">Waylon Jennings</span><span class="cb-tag">Narrated the Dukes of Hazzard and still never got caught</span></li>
               <li><span class="cb-name">Willie Nelson</span><span class="cb-tag">Smoked weed on the White House roof. Look it up.</span></li>
               <li><span class="cb-name">Loretta Lynn</span><span class="cb-tag">Would kick your ass</span></li>
               <li><span class="cb-name">George Jones</span><span class="cb-tag">Drove a riding mower 8 miles to the liquor store when his wife hid the car keys</span></li>
@@ -2751,12 +2842,175 @@ footer a.foot-mail { display: inline-block; padding: 12px 4px 4px; }
           </div>
           <button class="cb-more" id="cb-more" type="button" aria-expanded="false">See the whole menu</button>
           <div class="cb-plus">
-            <p class="cbp-big">&hellip;and plenty more</p>
+            <p class="cbp-big"><a href="#setlist" class="cbp-link">&hellip;and plenty more</a></p>
             <svg class="cbp-swoosh" viewBox="0 0 300 16" preserveAspectRatio="none" aria-hidden="true"><path d="M4 11 C 70 3, 160 4, 296 8" fill="none" stroke="#f6e08a" stroke-width="3" stroke-linecap="round" opacity=".75"/><path d="M30 13 C 110 7, 200 8, 270 11" fill="none" stroke="#f6e08a" stroke-width="1.6" stroke-linecap="round" opacity=".4"/></svg>
           </div>
         </div>
       </div>
       <div class="legends-more"><p>If it played on a jukebox before 1985, we probably know it.</p><p>We play the new stuff too. Just the good ones.</p></div>
+    </div>
+  </section>
+
+  <section class="slab setlist-slab torn" id="setlist">
+    <div class="wrap">
+      <p class="kicker">The setlist</p>
+      <h2>Taped to the stage floor.</h2>
+      <p class="sl-sub">A hundred songs we can play tonight. Don't see yours? Ask anyway.</p>
+      <div class="sl-wrap">
+        <button class="sl-arrow prev" type="button" aria-label="Previous sheet">&#8249;</button>
+        <div class="sl-track" id="sl-track" tabindex="0" aria-label="Song list, swipe for more">
+        <article class="sheet" aria-label="Songs 1 to 13">
+          <span class="tape tl" aria-hidden="true"></span><span class="tape tr" aria-hidden="true"></span>
+          <header class="sheet-head"><span class="sh-set">Set 1</span><span class="sh-range">1&ndash;13</span></header>
+          <ol class="sheet-list" start="1">
+            <li><span class="n">1</span><span class="t">25 &amp; Wastin&#x27; Time</span><span class="a">Vincent Neil Emerson</span></li>
+            <li><span class="n">2</span><span class="t">All My Ex&#x27;s Live in Texas</span><span class="a">George Strait</span></li>
+            <li><span class="n">3</span><span class="t">Amarillo by Morning</span><span class="a">George Strait</span></li>
+            <li><span class="n">4</span><span class="t">Amie</span><span class="a">Pure Prairie League</span></li>
+            <li><span class="n">5</span><span class="t">Are You Sure Hank Done It This Way</span><span class="a">Waylon Jennings</span></li>
+            <li><span class="n">6</span><span class="t">Beer for My Horses</span><span class="a">Toby Keith &amp; Willie Nelson</span></li>
+            <li><span class="n">7</span><span class="t">Boot Scootin&#x27; Boogie</span><span class="a">Brooks &amp; Dunn</span></li>
+            <li><span class="n">8</span><span class="t">Born to Be Wild</span><span class="a">Steppenwolf</span></li>
+            <li><span class="n">9</span><span class="t">Call Me the Breeze</span><span class="a">J.J. Cale</span></li>
+            <li><span class="n">10</span><span class="t">Callin&#x27; Baton Rouge</span><span class="a">Garth Brooks</span></li>
+            <li><span class="n">11</span><span class="t">Can&#x27;t You See</span><span class="a">The Marshall Tucker Band</span></li>
+            <li><span class="n">12</span><span class="t">Chattahoochee</span><span class="a">Alan Jackson</span></li>
+            <li><span class="n">13</span><span class="t">Chicken Fried</span><span class="a">Zac Brown Band</span></li>
+          </ol>
+        </article>
+        <article class="sheet" aria-label="Songs 14 to 26">
+          <span class="tape tl" aria-hidden="true"></span><span class="tape tr" aria-hidden="true"></span>
+          <header class="sheet-head"><span class="sh-set">Set 2</span><span class="sh-range">14&ndash;26</span></header>
+          <ol class="sheet-list" start="14">
+            <li><span class="n">14</span><span class="t">Choosin&#x27; Texas</span><span class="a">Ella Langley</span></li>
+            <li><span class="n">15</span><span class="t">Cocaine</span><span class="a">J.J. Cale</span></li>
+            <li><span class="n">16</span><span class="t">Copperhead Road</span><span class="a">Steve Earle</span></li>
+            <li><span class="n">17</span><span class="t">The Devil Went Down to Georgia</span><span class="a">The Charlie Daniels Band</span></li>
+            <li><span class="n">18</span><span class="t">Dixieland Delight</span><span class="a">Alabama</span></li>
+            <li><span class="n">19</span><span class="t">Don&#x27;t Take Her, She&#x27;s All I Got</span><span class="a">Johnny Paycheck</span></li>
+            <li><span class="n">20</span><span class="t">Drinkin&#x27; and Drivin&#x27;</span><span class="a">Johnny Paycheck</span></li>
+            <li><span class="n">21</span><span class="t">East Bound and Down</span><span class="a">Jerry Reed</span></li>
+            <li><span class="n">22</span><span class="t">Family Tradition</span><span class="a">Hank Williams Jr.</span></li>
+            <li><span class="n">23</span><span class="t">Feathered Indians</span><span class="a">Tyler Childers</span></li>
+            <li><span class="n">24</span><span class="t">The Fireman</span><span class="a">George Strait</span></li>
+            <li><span class="n">25</span><span class="t">Fishin&#x27; in the Dark</span><span class="a">Nitty Gritty Dirt Band</span></li>
+            <li><span class="n">26</span><span class="t">Folsom Prison Blues</span><span class="a">Johnny Cash</span></li>
+          </ol>
+        </article>
+        <article class="sheet" aria-label="Songs 27 to 39">
+          <span class="tape tl" aria-hidden="true"></span><span class="tape tr" aria-hidden="true"></span><span class="ring" aria-hidden="true"></span>
+          <header class="sheet-head"><span class="sh-set">Set 3</span><span class="sh-range">27&ndash;39</span></header>
+          <ol class="sheet-list" start="27">
+            <li><span class="n">27</span><span class="t">Fourteen Carat Mind</span><span class="a">Gene Watson</span></li>
+            <li><span class="n">28</span><span class="t">Free Bird</span><span class="a">Lynyrd Skynyrd</span></li>
+            <li><span class="n">29</span><span class="t">Freeborn Man</span><span class="a">Keith Allison</span></li>
+            <li><span class="n">30</span><span class="t">Friends in Low Places</span><span class="a">Garth Brooks</span></li>
+            <li><span class="n">31</span><span class="t">Ghost Riders in the Sky</span><span class="a">Johnny Cash</span></li>
+            <li><span class="n">32</span><span class="t">Gone Country</span><span class="a">Alan Jackson</span></li>
+            <li><span class="n">33</span><span class="t">Good Hearted Woman</span><span class="a">Waylon Jennings</span></li>
+            <li><span class="n">34</span><span class="t">Guitars, Cadillacs</span><span class="a">Dwight Yoakam</span></li>
+            <li><span class="n">35</span><span class="t">Hey, Good Lookin&#x27;</span><span class="a">Hank Williams</span></li>
+            <li><span class="n">36</span><span class="t">Highway 40 Blues</span><span class="a">Ricky Skaggs</span></li>
+            <li><span class="n">37</span><span class="t">I Love This Bar</span><span class="a">Toby Keith</span></li>
+            <li><span class="n">38</span><span class="t">I Never Lie</span><span class="a">Zach Top</span></li>
+            <li><span class="n">39</span><span class="t">I Think I&#x27;ll Just Stay Here and Drink</span><span class="a">Merle Haggard</span></li>
+          </ol>
+        </article>
+        <article class="sheet" aria-label="Songs 40 to 52">
+          <span class="tape tl" aria-hidden="true"></span><span class="tape tr" aria-hidden="true"></span>
+          <header class="sheet-head"><span class="sh-set">Set 4</span><span class="sh-range">40&ndash;52</span></header>
+          <ol class="sheet-list" start="40">
+            <li><span class="n">40</span><span class="t">I&#x27;m a Ramblin&#x27; Man</span><span class="a">Waylon Jennings</span></li>
+            <li><span class="n">41</span><span class="t">I&#x27;m from the Country</span><span class="a">Tracy Byrd</span></li>
+            <li><span class="n">42</span><span class="t">I&#x27;m So Lonesome I Could Cry</span><span class="a">Hank Williams</span></li>
+            <li><span class="n">43</span><span class="t">In Color</span><span class="a">Jamey Johnson</span></li>
+            <li><span class="n">44</span><span class="t">I&#x27;ve Got a Tiger by the Tail</span><span class="a">Buck Owens</span></li>
+            <li><span class="n">45</span><span class="t">The Joker</span><span class="a">Steve Miller Band</span></li>
+            <li><span class="n">46</span><span class="t">Jolene</span><span class="a">Dolly Parton</span></li>
+            <li><span class="n">47</span><span class="t">Killin&#x27; Time</span><span class="a">Clint Black</span></li>
+            <li><span class="n">48</span><span class="t">Life Is a Highway</span><span class="a">Tom Cochrane</span></li>
+            <li><span class="n">49</span><span class="t">Like My Dog</span><span class="a">Billy Currington</span></li>
+            <li><span class="n">50</span><span class="t">Liza Jane</span><span class="a">Vince Gill</span></li>
+            <li><span class="n">51</span><span class="t">Lodi</span><span class="a">Creedence Clearwater Revival</span></li>
+            <li><span class="n">52</span><span class="t">Long Haired Country Boy</span><span class="a">The Charlie Daniels Band</span></li>
+          </ol>
+        </article>
+        <article class="sheet" aria-label="Songs 53 to 64">
+          <span class="tape tl" aria-hidden="true"></span><span class="tape tr" aria-hidden="true"></span>
+          <header class="sheet-head"><span class="sh-set">Set 5</span><span class="sh-range">53&ndash;64</span></header>
+          <ol class="sheet-list" start="53">
+            <li><span class="n">53</span><span class="t">Luckenbach, Texas</span><span class="a">Waylon Jennings</span></li>
+            <li><span class="n">54</span><span class="t">Make-Up and Faded Blue Jeans</span><span class="a">Merle Haggard</span></li>
+            <li><span class="n">55</span><span class="t">Mama Tried</span><span class="a">Merle Haggard</span></li>
+            <li><span class="n">56</span><span class="t">Mary Jane&#x27;s Last Dance</span><span class="a">Tom Petty and the Heartbreakers</span></li>
+            <li><span class="n">57</span><span class="t">Mercury Blues</span><span class="a">Alan Jackson</span></li>
+            <li><span class="n">58</span><span class="t">Move It On Over</span><span class="a">Hank Williams</span></li>
+            <li><span class="n">59</span><span class="t">Much Too Young (To Feel This Damn Old)</span><span class="a">Garth Brooks</span></li>
+            <li><span class="n">60</span><span class="t">Neon Moon</span><span class="a">Brooks &amp; Dunn</span></li>
+            <li><span class="n">61</span><span class="t">Ol&#x27; Red</span><span class="a">Blake Shelton</span></li>
+            <li><span class="n">62</span><span class="t">On the Road Again</span><span class="a">Willie Nelson</span></li>
+            <li><span class="n">63</span><span class="t">One More Last Chance</span><span class="a">Vince Gill</span></li>
+            <li><span class="n">64</span><span class="t">Only Daddy That&#x27;ll Walk the Line</span><span class="a">Waylon Jennings</span></li>
+          </ol>
+        </article>
+        <article class="sheet" aria-label="Songs 65 to 76">
+          <span class="tape tl" aria-hidden="true"></span><span class="tape tr" aria-hidden="true"></span>
+          <header class="sheet-head"><span class="sh-set">Set 6</span><span class="sh-range">65&ndash;76</span></header>
+          <ol class="sheet-list" start="65">
+            <li><span class="n">65</span><span class="t">Orange Blossom Special</span><span class="a">Johnny Cash</span></li>
+            <li><span class="n">66</span><span class="t">Pickup Man</span><span class="a">Joe Diffie</span></li>
+            <li><span class="n">67</span><span class="t">Pretty Good at Drinkin&#x27; Beer</span><span class="a">Billy Currington</span></li>
+            <li><span class="n">68</span><span class="t">The Race Is On</span><span class="a">George Jones</span></li>
+            <li><span class="n">69</span><span class="t">Ramblin&#x27; Fever</span><span class="a">Merle Haggard</span></li>
+            <li><span class="n">70</span><span class="t">Ring of Fire</span><span class="a">Johnny Cash</span></li>
+            <li><span class="n">71</span><span class="t">Rocky Top</span><span class="a">The Osborne Brothers</span></li>
+            <li><span class="n">72</span><span class="t">Save a Horse (Ride a Cowboy)</span><span class="a">Big &amp; Rich</span></li>
+            <li><span class="n">73</span><span class="t">Should&#x27;ve Been a Cowboy</span><span class="a">Toby Keith</span></li>
+            <li><span class="n">74</span><span class="t">Six Days on the Road</span><span class="a">Dave Dudley</span></li>
+            <li><span class="n">75</span><span class="t">Slow Hand</span><span class="a">Conway Twitty</span></li>
+            <li><span class="n">76</span><span class="t">Sold (The Grundy County Auction Incident)</span><span class="a">John Michael Montgomery</span></li>
+          </ol>
+        </article>
+        <article class="sheet" aria-label="Songs 77 to 88">
+          <span class="tape tl" aria-hidden="true"></span><span class="tape tr" aria-hidden="true"></span>
+          <header class="sheet-head"><span class="sh-set">Set 7</span><span class="sh-range">77&ndash;88</span></header>
+          <ol class="sheet-list" start="77">
+            <li><span class="n">77</span><span class="t">Sweet Home Alabama</span><span class="a">Lynyrd Skynyrd</span></li>
+            <li><span class="n">78</span><span class="t">Take It Easy</span><span class="a">Eagles</span></li>
+            <li><span class="n">79</span><span class="t">Take Me Home, Country Roads</span><span class="a">John Denver</span></li>
+            <li><span class="n">80</span><span class="t">Take This Job and Shove It</span><span class="a">Johnny Paycheck</span></li>
+            <li><span class="n">81</span><span class="t">Tennessee Whiskey</span><span class="a">David Allan Coe</span></li>
+            <li><span class="n">82</span><span class="t">Tequila Makes Her Clothes Fall Off</span><span class="a">Joe Nichols</span></li>
+            <li><span class="n">83</span><span class="t">That&#x27;s All Right (Mama)</span><span class="a">Elvis Presley</span></li>
+            <li><span class="n">84</span><span class="t">Tulsa Time</span><span class="a">Don Williams</span></li>
+            <li><span class="n">85</span><span class="t">Two Dozen Roses</span><span class="a">Shenandoah</span></li>
+            <li class="nope"><span class="n">86</span><span class="t">Wagon Wheel</span><span class="fine" aria-hidden="true">fine.</span><span class="a">Old Crow Medicine Show</span></li>
+            <li><span class="n">87</span><span class="t">Walkin&#x27; After Midnight</span><span class="a">Patsy Cline</span></li>
+            <li><span class="n">88</span><span class="t">Watermelon Crawl</span><span class="a">Tracy Byrd</span></li>
+          </ol>
+        </article>
+        <article class="sheet" aria-label="Songs 89 to 100">
+          <span class="tape tl" aria-hidden="true"></span><span class="tape tr" aria-hidden="true"></span>
+          <header class="sheet-head"><span class="sh-set">Set 8</span><span class="sh-range">89&ndash;100</span></header>
+          <ol class="sheet-list" start="89">
+            <li><span class="n">89</span><span class="t">Waymore&#x27;s Blues</span><span class="a">Waylon Jennings</span></li>
+            <li><span class="n">90</span><span class="t">Whiskey River</span><span class="a">Willie Nelson</span></li>
+            <li><span class="n">91</span><span class="t">Whitehouse Road</span><span class="a">Tyler Childers</span></li>
+            <li><span class="n">92</span><span class="t">Who&#x27;s Your Daddy?</span><span class="a">Toby Keith</span></li>
+            <li><span class="n">93</span><span class="t">Will the Circle Be Unbroken</span><span class="a">The Carter Family</span></li>
+            <li><span class="n">94</span><span class="t">Workin&#x27; Man Blues</span><span class="a">Merle Haggard</span></li>
+            <li><span class="n">95</span><span class="t">Write This Down</span><span class="a">George Strait</span></li>
+            <li><span class="n">96</span><span class="t">You Ain&#x27;t Gotta Die (To Be Dead to Me)</span><span class="a">Kaitlin Butts</span></li>
+            <li><span class="n">97</span><span class="t">You Ain&#x27;t Woman Enough (To Take My Man)</span><span class="a">Loretta Lynn</span></li>
+            <li><span class="n">98</span><span class="t">You Never Even Called Me by My Name</span><span class="a">David Allan Coe</span></li>
+            <li><span class="n">99</span><span class="t">Your Cheatin&#x27; Heart</span><span class="a">Hank Williams</span></li>
+            <li><span class="n">100</span><span class="t">You&#x27;re Still on My Mind</span><span class="a">George Jones</span></li>
+          </ol>
+        </article>
+        </div>
+        <button class="sl-arrow next" type="button" aria-label="Next sheet">&#8250;</button>
+      </div>
+      <div class="sl-dots" id="sl-dots" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
     </div>
   </section>
 
@@ -3222,6 +3476,27 @@ footer a.foot-mail { display: inline-block; padding: 12px 4px 4px; }
   });
   document.addEventListener('click', function (e) { if (open && !open.menu.contains(e.target)) closeAll(); });
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeAll(); });
+})();
+</script>
+<script>
+/* setlist sheets: arrows + dots */
+(function () {
+  var track = document.getElementById('sl-track'); if (!track) return;
+  var sheets = track.querySelectorAll('.sheet'), dots = document.querySelectorAll('#sl-dots span');
+  var prev = document.querySelector('.sl-arrow.prev'), next = document.querySelector('.sl-arrow.next');
+  function step() { return sheets.length > 1 ? sheets[1].offsetLeft - sheets[0].offsetLeft : track.clientWidth; }
+  function update() {
+    var st = step(), max = track.scrollWidth - track.clientWidth - 4;
+    var visible = Math.max(1, Math.round((track.clientWidth + 10) / st)), stops = Math.max(1, sheets.length - visible + 1);
+    var i = track.scrollLeft >= max ? stops - 1 : Math.round(track.scrollLeft / st);
+    dots.forEach(function (d, k) { d.style.display = k < stops ? '' : 'none'; d.classList.toggle('on', k === Math.min(i, stops - 1)); });
+    if (prev) prev.disabled = track.scrollLeft <= 16;
+    if (next) next.disabled = track.scrollLeft >= max - 12;
+  }
+  if (prev) prev.addEventListener('click', function () { track.scrollBy({ left: -step(), behavior: 'smooth' }); });
+  if (next) next.addEventListener('click', function () { track.scrollBy({ left: step(), behavior: 'smooth' }); });
+  track.addEventListener('scroll', function () { window.requestAnimationFrame(update); }, { passive: true });
+  window.addEventListener('resize', update); update();
 })();
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
