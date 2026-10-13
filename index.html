@@ -1,13 +1,18 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#1d140e">
-<meta name="description" content="Outlaw country and honky tonk band from Wisconsin. Booking bars, festivals and events: ratriverboysband@gmail.com">
+<meta name="description" content="Classic country and honky tonk band from Wisconsin. Booking bars, festivals and events: ratriverboysband@gmail.com">
 <meta property="og:title" content="Rat River Boys">
-<meta property="og:description" content="Outlaw country and honky tonk from Wisconsin.">
-<meta property="og:image" content="https://ratriverboys.com/rat-moon.jpg">
+<meta property="og:description" content="Classic country and honky tonk from Wisconsin.">
+<meta property="og:image" content="https://www.ratriverboys.com/rat-moon.jpg">
+<meta property="og:image:width" content="1000">
+<meta property="og:image:height" content="1000">
+<meta property="og:image:alt" content="Rat River Boys logo: a cowboy rat lassoing the moon">
+<meta name="twitter:image" content="https://www.ratriverboys.com/rat-moon.jpg">
+<link rel="image_src" href="https://www.ratriverboys.com/rat-moon.jpg">
 <meta property="og:url" content="https://www.ratriverboys.com/">
 <meta property="og:type" content="website">
-<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:card" content="summary">
 <link rel="icon" href="favicon.ico?v=2" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png?v=2">
 <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=2">
@@ -48,7 +53,7 @@
   window.addEventListener('pageshow', function (e) { if (e.persisted) toTop(); });
 })();
 </script>
-<title>Rat River Boys | Outlaw Country &amp; Honky Tonk Band, Wisconsin</title>
+<title>Rat River Boys | Classic Country &amp; Honky Tonk Band, Wisconsin</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Rye&family=Fredericka+the+Great&family=Cabin+Sketch:wght@400;700&family=Yellowtail&family=Oswald:wght@400;500;600;700&family=Crimson+Pro:ital,wght@0,400;0,600;1,400&family=Permanent+Marker&family=Caveat:wght@600&display=swap">
@@ -2528,6 +2533,53 @@ footer a.foot-mail { display: inline-block; padding: 12px 4px 4px; }
   .sl-track { padding-top: 18px !important; padding-bottom: 22px !important; }
   .ring { width: 90px; height: 90px; }
 }
+
+/* hero without the slogan: the genre line leads */
+.hero .lede {
+  font-size: clamp(1.7rem, 3vw, 2.5rem) !important; letter-spacing: .1em !important; line-height: 1.15 !important;
+  margin: 6px 0 30px !important; max-width: 18ch !important; text-wrap: balance;
+}
+@media (max-width: 760px) { .hero .lede { font-size: 1.4rem !important; max-width: none !important; margin: 4px auto 22px !important; } .hero .lede .br { display: block; } }
+
+/* hero genre line: stacked sign lettering */
+.hero .lede.genre {
+  font-family: var(--display) !important; text-transform: none !important; letter-spacing: .02em !important;
+  font-weight: 400 !important; max-width: none !important; margin: 0 0 30px !important; line-height: 1 !important;
+  display: inline-flex; flex-direction: column; align-items: center; gap: 2px; text-shadow: none !important;
+}
+.genre .g-big {
+  display: block; font-size: clamp(2.3rem, 4.1vw, 3.5rem); color: var(--gold, #e7bd6a);
+  text-shadow: 2px 2px 0 #1a0f08, 0 0 18px rgba(231,189,106,.18); white-space: nowrap;
+}
+.genre .g-amp { font-family: "Crimson Pro", Georgia, serif; font-style: italic; font-weight: 600; color: inherit; font-size: 1.12em; margin-right: .1em; display: inline; text-shadow: 2px 2px 0 #1a0f08; }
+.genre .g-from {
+  display: flex; align-items: center; gap: 12px; margin-top: 12px;
+  font-family: var(--label); font-weight: 600; text-transform: uppercase; letter-spacing: .32em; font-size: clamp(.82rem, 1.1vw, .98rem);
+  color: var(--bone, #e6d2a8); padding-left: .32em;
+}
+.genre .g-rule { position: relative; width: 46px; height: 2px; background: linear-gradient(90deg, transparent, rgba(231,189,106,.85)); }
+.genre .g-rule:last-child { background: linear-gradient(90deg, rgba(231,189,106,.85), transparent); }
+.genre .g-rule::after { content: "\2605"; position: absolute; top: 50%; transform: translateY(-52%); font-size: 10px; color: var(--gold, #e7bd6a); letter-spacing: 0; }
+.genre .g-rule:first-child::after { right: -14px; }
+.genre .g-rule:last-child::after { left: -14px; }
+.genre .g-rule:first-child { margin-right: 10px; }
+.genre .g-rule:last-child { margin-left: 10px; }
+@media (max-width: 760px) {
+  .hero .lede.genre { display: flex !important; margin: 6px auto 24px !important; }
+  .genre .g-big { font-size: clamp(1.9rem, 9vw, 2.5rem); }
+  .genre .g-from { font-size: .8rem; letter-spacing: .26em; gap: 8px; margin-top: 10px; }
+  .genre .g-rule { width: 30px; }
+}
+
+
+/* desktop: genre lettering and both buttons centered on one axis */
+@media (min-width: 761px) {
+  .hero-copy { display: flex; flex-direction: column; align-items: center; text-align: center; }
+  .hero-copy .lede.genre { align-items: center !important; margin: 0 0 26px !important; }
+  .hero-copy .cta-row { flex-direction: column; align-items: center; gap: 22px !important; }
+  .hero-copy .cta-row .btn { min-width: 300px; text-align: center; justify-content: center; }
+  .hero-copy .book-wrap { order: -1; }
+}
 </style>
 
 <div class="haze" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
@@ -2685,12 +2737,14 @@ footer a.foot-mail { display: inline-block; padding: 12px 4px 4px; }
         <span class="tape t2" aria-hidden="true"></span>
       </div>
       </div>
-      <div>
+      <div class="hero-copy">
+        <!-- HERO SLOGAN + TYPED HEADLINE (hidden for now)
         <div class="slogan">
           <span class="s1">Your mom's favorite band.</span>
           <span class="s2 hero-typer"><span class="tl"><span id="typed">Got a venue that needs its reputation ruined?</span><span class="caret" aria-hidden="true"></span></span></span>
         </div>
-        <p class="lede">Outlaw country and honky tonk from Wisconsin.</p>
+        -->
+        <p class="lede genre"><span class="g-big">Classic Country</span><span class="g-big"><span class="g-amp">&amp;</span> Honky Tonk</span><span class="g-from"><span class="g-rule" aria-hidden="true"></span>From Wisconsin<span class="g-rule" aria-hidden="true"></span></span></p>
         <div class="cta-row">
           <a class="btn" href="#shows">Where we're playing next</a>
           <span class="book-wrap"><a class="btn alt" href="#book">Book these degenerates<span class="book-arrow" aria-hidden="true"><svg viewBox="0 0 196 84"><path class="mq-body" d="M10 42 L 66 2 L 66 16 L 188 16 L 188 68 L 66 68 L 66 82 Z"/><path class="mq-inner" d="M24 42 L 60 16 L 60 26 L 172 26 L 172 58 L 60 58 L 60 68 Z"/><circle class="mq-b" cx="178" cy="24" r="5.2" style="--i:0"/><circle class="mq-b" cx="178" cy="60" r="5.2" style="--i:0"/><circle class="mq-b" cx="160" cy="24" r="5.2" style="--i:1"/><circle class="mq-b" cx="160" cy="60" r="5.2" style="--i:1"/><circle class="mq-b" cx="142" cy="24" r="5.2" style="--i:2"/><circle class="mq-b" cx="142" cy="60" r="5.2" style="--i:2"/><circle class="mq-b" cx="124" cy="24" r="5.2" style="--i:3"/><circle class="mq-b" cx="124" cy="60" r="5.2" style="--i:3"/><circle class="mq-b" cx="106" cy="24" r="5.2" style="--i:4"/><circle class="mq-b" cx="106" cy="60" r="5.2" style="--i:4"/><circle class="mq-b" cx="88" cy="24" r="5.2" style="--i:5"/><circle class="mq-b" cx="88" cy="60" r="5.2" style="--i:5"/><circle class="mq-b" cx="70" cy="24" r="5.2" style="--i:6"/><circle class="mq-b" cx="70" cy="60" r="5.2" style="--i:6"/><circle class="mq-b" cx="70" cy="10" r="5.2" style="--i:7"/><circle class="mq-b" cx="70" cy="74" r="5.2" style="--i:7"/><circle class="mq-b" cx="52" cy="20" r="5.2" style="--i:8"/><circle class="mq-b" cx="52" cy="64" r="5.2" style="--i:8"/><circle class="mq-b" cx="36" cy="32" r="5.2" style="--i:9"/><circle class="mq-b" cx="36" cy="52" r="5.2" style="--i:9"/><circle class="mq-b" cx="20" cy="42" r="5.2" style="--i:10"/><circle class="mq-b" cx="178" cy="42" r="5.2" style="--i:0"/></svg></span></a>
@@ -2729,7 +2783,7 @@ footer a.foot-mail { display: inline-block; padding: 12px 4px 4px; }
       <p class="kicker">On the road</p>
       <h2>Upcoming shows</h2>
       <div class="countdown" id="countdown" aria-live="off">
-        <div class="cd-label" id="cd-label">Next show: Station 1 Brewing, Suamico</div>
+        <div class="cd-label" id="cd-label">Next show: Plymouth Arts Center, Plymouth</div>
         <div class="cd-clock">
           <div><span id="cd-d">--</span><small>Days</small></div>
           <div><span id="cd-h">--</span><small>Hours</small></div>
@@ -2739,11 +2793,6 @@ footer a.foot-mail { display: inline-block; padding: 12px 4px 4px; }
         <div class="cd-quip" id="cd-quip">Start hydrating now.</div>
       </div>
       <ul class="shows">
-        <li class="show" data-fb="https://www.facebook.com/share/19WSicAn9C/">
-          <div class="date"><span class="m">Oct</span><span class="d">10</span></div>
-          <div class="where"><div class="venue">Station 1 Brewing</div><div class="town">Suamico, WI</div></div>
-          <div class="time">7 PM</div>
-        </li>
         <li class="show" data-fb="https://www.facebook.com/share/1BoHUhSeQq/">
           <div class="date"><span class="m">Oct</span><span class="d">17</span></div>
           <div class="where"><div class="venue">Plymouth Arts Center</div><div class="town">Plymouth, WI</div></div>
@@ -2753,6 +2802,36 @@ footer a.foot-mail { display: inline-block; padding: 12px 4px 4px; }
           <div class="date"><span class="m">Nov</span><span class="d">21</span></div>
           <div class="where"><div class="venue">Fletch's Local Tap House</div><div class="town">Oshkosh, WI</div></div>
           <div class="time">8 PM</div>
+        </li>
+        <li class="show" data-hours="2">
+          <div class="date"><span class="m">Dec</span><span class="d">19</span></div>
+          <div class="where"><div class="venue">Iron Horse Hotel</div><div class="town">Milwaukee, WI</div></div>
+          <div class="time">7-9 PM</div>
+        </li>
+        <li class="show" data-hours="3">
+          <div class="date"><span class="m">Mar</span><span class="d">27</span></div>
+          <div class="where"><div class="venue">Ziegler Winery</div><div class="town">Malone, WI</div></div>
+          <div class="time">3-6 PM</div>
+        </li>
+        <li class="show">
+          <div class="date"><span class="m">Apr</span><span class="d">2</span></div>
+          <div class="where"><div class="venue">Jolene&rsquo;s</div><div class="town">Cleveland, OH</div></div>
+          <div class="time">TBA</div>
+        </li>
+        <li class="show">
+          <div class="date"><span class="m">Apr</span><span class="d">9</span></div>
+          <div class="where"><div class="venue">Potawatomi Carter Casino</div><div class="town">Carter, WI</div></div>
+          <div class="time">TBA</div>
+        </li>
+        <li class="show">
+          <div class="date"><span class="m">Apr</span><span class="d">10</span></div>
+          <div class="where"><div class="venue">Potawatomi Carter Casino</div><div class="town">Carter, WI</div></div>
+          <div class="time">TBA</div>
+        </li>
+        <li class="show" data-hours="3">
+          <div class="date"><span class="m">Jun</span><span class="d">13</span></div>
+          <div class="where"><div class="venue">Hagemeister Park</div><div class="town">Green Bay, WI</div></div>
+          <div class="time">2-5 PM</div>
         </li>
       <li class="show-none" hidden>New dates coming soon. Watch <a href="https://www.facebook.com/profile.php?id=61589395443501" target="_blank" rel="noopener">Facebook</a> for the next one.</li>
       </ul>
@@ -2781,7 +2860,7 @@ footer a.foot-mail { display: inline-block; padding: 12px 4px 4px; }
           var dropAt = chicago(y, m, d + 1, 4, 0).getTime();   /* 4 AM the morning after */
           if (now > dropAt) { li.remove(); return; }
           var town = txt(li, '.town');
-          list.push({ li: li, start: start, venue: txt(li, '.venue'), town: town, city: town.replace(/,\s*[A-Z]{2}$/, ''), region: (town.match(/,\s*([A-Z]{2})$/) || [])[1] || '', fb: li.getAttribute('data-fb') || '' });
+          list.push({ li: li, start: start, tba: !/\d/.test(txt(li, '.time')), ymd: y + '-' + ('0' + (m + 1)).slice(-2) + '-' + ('0' + d).slice(-2), venue: txt(li, '.venue'), town: town, city: town.replace(/,\s*[A-Z]{2}$/, ''), region: (town.match(/,\s*([A-Z]{2})$/) || [])[1] || '', fb: li.getAttribute('data-fb') || '' });
         });
         list.sort(function (a, b) { return a.start - b.start; });
         window.RRB_SHOWS = list;
@@ -2789,15 +2868,15 @@ footer a.foot-mail { display: inline-block; padding: 12px 4px 4px; }
         /* Google event listings */
         try {
           var events = list.map(function (s) {
-            return { '@type': 'MusicEvent', name: 'Rat River Boys at ' + s.venue, startDate: s.start.toISOString(),
+            return { '@type': 'MusicEvent', name: 'Rat River Boys at ' + s.venue, startDate: s.tba ? s.ymd : s.start.toISOString(),
               eventStatus: 'https://schema.org/EventScheduled', eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
               location: { '@type': 'Place', name: s.venue, address: { '@type': 'PostalAddress', addressLocality: s.city, addressRegion: s.region, addressCountry: 'US' } },
-              image: ['https://www.ratriverboys.com/rat-moon.jpg'], description: 'Rat River Boys live at ' + s.venue + ', ' + s.town + '. Outlaw country and honky tonk.',
+              image: ['https://www.ratriverboys.com/rat-moon.jpg'], description: 'Rat River Boys live at ' + s.venue + ', ' + s.town + '. Classic country and honky tonk.',
               performer: { '@type': 'MusicGroup', name: 'Rat River Boys' }, organizer: { '@type': 'Organization', name: s.venue },
               url: s.fb || 'https://www.ratriverboys.com/#shows' };
           });
           var data = { '@context': 'https://schema.org', '@type': 'MusicGroup', name: 'Rat River Boys', url: 'https://www.ratriverboys.com/',
-            genre: ['Country', 'Outlaw country', 'Honky tonk'], foundingLocation: { '@type': 'Place', name: 'Wisconsin' },
+            genre: ['Country', 'Classic country', 'Honky tonk'], foundingLocation: { '@type': 'Place', name: 'Wisconsin' },
             image: 'https://www.ratriverboys.com/rat-moon.jpg', email: 'ratriverboysband@gmail.com',
             sameAs: ['https://www.facebook.com/profile.php?id=61589395443501'],
             member: [{ '@type': 'Person', name: 'Weston Mueller', roleName: 'Lead vocals and guitar' }, { '@type': 'Person', name: 'Tyler Furrer', roleName: 'Lead and steel guitar' }],
@@ -2815,7 +2894,7 @@ footer a.foot-mail { display: inline-block; padding: 12px 4px 4px; }
       <p class="kicker">The sound</p>
       <h2>Golden age country. No chaser.</h2>
       <div class="chalk-frame">
-        <figure class="cb-polaroid p2 p3" aria-hidden="true"><span class="cbp-tape"></span><img src="corndog-mueller.webp" alt="" loading="lazy"></figure>
+        <!-- <figure class="cb-polaroid p2 p3" aria-hidden="true"><span class="cbp-tape"></span><img src="corndog-mueller.webp" alt="" loading="lazy"></figure> -->
         <figure class="cb-polaroid p2" aria-hidden="true"><span class="cbp-tape"></span><img src="wild-wes.webp" alt="" loading="lazy"></figure>
         <div class="chalkboard">
           <div class="cb-head">
@@ -3093,6 +3172,7 @@ footer a.foot-mail { display: inline-block; padding: 12px 4px 4px; }
         <li>Wisconsin State Fair<small>West Allis, WI</small></li>
         <li>Tosa Fest<small>Wauwatosa, WI</small></li>
         <li>Fletch&rsquo;s Local Tap House<small>Oshkosh, WI</small></li>
+        <li>Station 1 Brewing<small>Suamico, WI</small></li>
       </ul>
     </div>
   </section>
@@ -3220,7 +3300,7 @@ footer a.foot-mail { display: inline-block; padding: 12px 4px 4px; }
   <div class="wrap foot-wrap">
     <img class="foot-badge" src="rat-badge.webp" alt="" width="240" height="240" loading="lazy">
     <p class="foot-name">Rat River Boys</p>
-    <p class="foot-tag">Outlaw country and honky tonk from Wisconsin</p>
+    <p class="foot-tag">Classic country and honky tonk from Wisconsin</p>
     <div class="foot-links">
       <a class="fb-foot" href="https://www.facebook.com/profile.php?id=61589395443501" target="_blank" rel="noopener">Follow us on Facebook</a>
       <a class="foot-mail" href="mailto:ratriverboysband@gmail.com">ratriverboysband@gmail.com</a>
@@ -3408,7 +3488,8 @@ footer a.foot-mail { display: inline-block; padding: 12px 4px 4px; }
     var now = new Date(), y = now.getFullYear(), start = new Date(y, m, d, hh, mm);
     if (start < new Date(now.getTime() - 60 * 864e5)) start = new Date(y + 1, m, d, hh, mm);
     var venue = txt(li, '.venue'), town = txt(li, '.town'), fb = li.getAttribute('data-fb') || '';
-    return { start: start, end: new Date(start.getTime() + 3 * 3600e3), title: 'Rat River Boys at ' + venue,
+    var hrs = parseFloat(li.getAttribute('data-hours')) || 3;
+    return { start: start, end: new Date(start.getTime() + hrs * 3600e3), title: 'Rat River Boys at ' + venue,
              where: venue + ', ' + town, venue: venue, link: fb || SITE,
              details: 'Live at ' + venue + '.' + (fb ? ' Event: ' + fb : '') + ' ' + SITE };
   }
@@ -3430,6 +3511,7 @@ footer a.foot-mail { display: inline-block; padding: 12px 4px 4px; }
   document.querySelectorAll('#shows .show').forEach(function (li, i) {
     var ev = parse(li), time = li.querySelector('.time');
     if (!ev || !time) return;
+    if (!/\d/.test(time.textContent)) return;
     var fb = li.getAttribute('data-fb');
     var vEl = li.querySelector('.venue');
     if (fb && vEl && vEl.tagName !== 'A') {
@@ -3531,16 +3613,18 @@ footer a.foot-mail { display: inline-block; padding: 12px 4px 4px; }
   mm.add('(prefers-reduced-motion: no-preference)', function () {
     // hero entrance
     var tl = gsap.timeline({ defaults: { ease: 'power3.out' }, paused: !!window.__gateOn });
-    tl.from('nav', { y: -40, opacity: 0, duration: .5 })
-      .from('.poster', { scale: 1.35, rotate: 10, opacity: 0, duration: .7, ease: 'back.out(1.6)' }, '-=.2')
-      .from('.tape', { scale: 2.2, opacity: 0, duration: .3, stagger: .12, ease: 'power4.in' }, '-=.15')
-      .from('.slogan .s1', { x: -60, rotate: -8, opacity: 0, duration: .4 })
-      .from('.slogan .s2', { y: 40, scale: .9, opacity: 0, duration: .5, ease: 'back.out(2)' }, '-=.15')
-      .from('.hero .lede', { y: 20, opacity: 0, duration: .5 }, '-=.2')
-      .from('.hero .btn', { y: 24, opacity: 0, stagger: .1, duration: .4, ease: 'back.out(2)' }, '-=.3')
-      .add(function () { var ar = document.querySelector('.book-arrow'); if (ar) ar.classList.add('show'); }, '+=.15');
+    /* everything lands together, quick, so nothing looks missing on first view */
+    tl.from('nav', { y: -24, opacity: 0, duration: .35 }, 0)
+      .from('.poster', { scale: 1.12, rotate: 4, opacity: 0, duration: .5, ease: 'back.out(1.4)' }, 0)
+      .from('.tape', { scale: 1.6, opacity: 0, duration: .25, stagger: .06, ease: 'power3.in' }, .2)
+      .from('.hero .lede', { y: 14, opacity: 0, duration: .4 }, .1)
+      .from('.hero .btn', { y: 14, opacity: 0, stagger: .06, duration: .35, ease: 'back.out(1.8)' }, .18)
+      .add(function () { var ar = document.querySelector('.book-arrow'); if (ar) ar.classList.add('show'); }, .45);
     // never leave the hero half-built if the tab is throttled
-    afterGate(function () { tl.play(0); setTimeout(function () { if (tl.progress() < 1) tl.progress(1); }, 4200); });
+    var heroGo = false;
+    function heroStart() { if (heroGo) return; heroGo = true; tl.play(0); setTimeout(function () { if (tl.progress() < 1) tl.progress(1); }, 1500); }
+    window.addEventListener('rrb:gateopening', heroStart, { once: true });  /* build the hero while the doors swing */
+    afterGate(heroStart);
 
     // poster drifts as you scroll away
     gsap.to('.poster-wrap', { yPercent: 3, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true } });
@@ -3548,29 +3632,29 @@ footer a.foot-mail { display: inline-block; padding: 12px 4px 4px; }
     // section kickers draw their line, headings punch up
     gsap.utils.toArray('.slab').forEach(function (sec) {
       var k = sec.querySelector('.kicker'), h = sec.querySelector('h2');
-      var t = gsap.timeline({ scrollTrigger: { trigger: sec, start: 'top 75%', toggleActions: 'restart none restart none' } });
+      var t = gsap.timeline({ scrollTrigger: { trigger: sec, start: 'top 95%', toggleActions: 'play none none none' } });
       if (k) t.from(k, { x: -30, opacity: 0, duration: .4 });
-      if (h) t.from(h, { y: 40, opacity: 0, duration: .55, ease: 'back.out(1.7)' }, '-=.2');
+      if (h) t.from(h, { y: 24, opacity: 0, duration: .4, ease: 'back.out(1.5)' }, '-=.2');
     });
 
     // shows slide in like tickets from alternating sides
     gsap.utils.toArray('.show').forEach(function (row, i) {
-      gsap.from(row, { x: i % 2 ? 80 : -80, opacity: 0, duration: .6, ease: 'power3.out', scrollTrigger: { trigger: row, start: 'top 88%', toggleActions: 'restart none restart none' } });
-      gsap.from(row.querySelector('.time'), { scale: 2, rotate: -20, opacity: 0, duration: .35, delay: .35, ease: 'power4.in', scrollTrigger: { trigger: row, start: 'top 88%', toggleActions: 'restart none restart none' } });
+      gsap.from(row, { x: i % 2 ? 40 : -40, opacity: 0, duration: .45, ease: 'power3.out', scrollTrigger: { trigger: row, start: 'top 95%', toggleActions: 'play none none none' } });
+      gsap.from(row.querySelector('.time'), { scale: 2, rotate: -20, opacity: 0, duration: .35, delay: .35, ease: 'power4.in', scrollTrigger: { trigger: row, start: 'top 95%', toggleActions: 'play none none none' } });
     });
 
     // legends roll in
-    gsap.from('.legends li', { x: 60, opacity: 0, stagger: .08, duration: .5, scrollTrigger: { trigger: '.legends', start: 'top 80%', toggleActions: 'restart none restart none' } });
+    gsap.from('.legends li', { x: 60, opacity: 0, stagger: .08, duration: .5, scrollTrigger: { trigger: '.legends', start: 'top 95%', toggleActions: 'play none none none' } });
 
     // rules get stamped
-    gsap.from('.rule-list li', { scale: 1.4, rotate: function () { return gsap.utils.random(-6, 6); }, opacity: 0, stagger: .1, duration: .35, ease: 'power4.in', scrollTrigger: { trigger: '.rule-list', start: 'top 80%', toggleActions: 'restart none restart none' } });
+    gsap.from('.rule-list li', { scale: 1.4, rotate: function () { return gsap.utils.random(-6, 6); }, opacity: 0, stagger: .1, duration: .35, ease: 'power4.in', scrollTrigger: { trigger: '.rule-list', start: 'top 95%', toggleActions: 'play none none none' } });
 
     // venue stickers get slapped on
-    gsap.from('.venues li', { y: -80, rotate: function () { return gsap.utils.random(-30, 30); }, opacity: 0, stagger: .08, duration: .6, ease: 'bounce.out', scrollTrigger: { trigger: '.venues', start: 'top 85%', toggleActions: 'restart none restart none' } });
+    gsap.from('.venues li', { y: -80, rotate: function () { return gsap.utils.random(-30, 30); }, opacity: 0, stagger: .08, duration: .6, ease: 'bounce.out', scrollTrigger: { trigger: '.venues', start: 'top 95%', toggleActions: 'play none none none' } });
 
     // bar tab gets slapped down on the counter
-    gsap.from('.tab', { y: 80, rotate: 8, opacity: 0, duration: .7, ease: 'back.out(1.6)', scrollTrigger: { trigger: '.book-slab', start: 'top 70%', toggleActions: 'restart none restart none' } });
-    gsap.from('.perks li', { y: 20, opacity: 0, stagger: .08, duration: .35, scrollTrigger: { trigger: '.perks', start: 'top 90%', toggleActions: 'restart none restart none' } });
+    gsap.from('.tab', { y: 80, rotate: 8, opacity: 0, duration: .7, ease: 'back.out(1.6)', scrollTrigger: { trigger: '.book-slab', start: 'top 95%', toggleActions: 'play none none none' } });
+    gsap.from('.perks li', { y: 20, opacity: 0, stagger: .08, duration: .35, scrollTrigger: { trigger: '.perks', start: 'top 95%', toggleActions: 'play none none none' } });
 
 
     // smack the poster and it swings off the tape
@@ -3833,7 +3917,7 @@ footer a.foot-mail { display: inline-block; padding: 12px 4px 4px; }
     steps.forEach(function (t, n) { setTimeout(function () { lc.classList.toggle('lit', n % 2 === 0 || n === steps.length - 1); }, t); });
   }
   if (lc) {
-    if (window.ScrollTrigger) ScrollTrigger.create({ trigger: lc, start: 'top 85%', onEnter: light, onEnterBack: function () { lc.classList.remove('lit'); light(); } });
+    if (window.ScrollTrigger) ScrollTrigger.create({ trigger: lc, start: 'top 95%', onEnter: light, onEnterBack: function () { lc.classList.remove('lit'); light(); } });
     else light();
   }
 
@@ -3967,7 +4051,7 @@ footer a.foot-mail { display: inline-block; padding: 12px 4px 4px; }
 
   // ---- graffiti gets scribbled on ----
   if (window.gsap && window.ScrollTrigger && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    gsap.from('.g', { scale: 1.6, opacity: 0, stagger: .09, duration: .3, ease: 'power3.in', scrollTrigger: { trigger: '.graffiti', start: 'top 80%', toggleActions: 'restart none restart none' } });
+    gsap.from('.g', { scale: 1.6, opacity: 0, stagger: .09, duration: .3, ease: 'power3.in', scrollTrigger: { trigger: '.graffiti', start: 'top 95%', toggleActions: 'play none none none' } });
   }
 })();
 </script>
@@ -3982,7 +4066,7 @@ footer a.foot-mail { display: inline-block; padding: 12px 4px 4px; }
   var flip = rat.querySelector('.flip');
 
   var SEL = [
-    '.poster', '.warning', '.slogan .s1', '.hero .btn', '.show', '.cd-clock > div', '.fb-btn',
+    '.poster', '.warning', '.hero .lede', '.hero .btn', '.show', '.cd-clock > div', '.fb-btn',
     '.vid-frame', '.chalk-frame', '.cb-list li', '.cb-polaroid', '.bio.wanted', '.mug', '.sight-btn',
     '.rule-list li', '.jar-rim', '.tip-buttons .btn', '.tip-real .btn', '.venues li', '.item', '.g',
     '.tab', '.tab-head', '.email', '.bf-actions .btn', '.book-form textarea',
@@ -4298,6 +4382,7 @@ document.querySelectorAll('.fight-inline').forEach(function (b) {
   }
   function open() {
     if (opened || !document.getElementById('gate')) return; opened = true;
+    try { window.dispatchEvent(new Event('rrb:gateopening')); } catch (e) {}
     var L = document.getElementById('door-l'), R = document.getElementById('door-r');
     L.style.animation = 'none'; R.style.animation = 'none';
     // the kick snaps both ropes: stubs stay on the beam anchors, the sign drops
