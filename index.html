@@ -2704,7 +2704,7 @@ footer a.foot-mail { display: inline-block; padding: 12px 4px 4px; }
         <!-- <li><a href="#rules">House Rules</a></li> -->
         <!-- <li><a href="#merch">Merch</a></li> -->
         <li class="m-only"><a href="#tips">Tip Jar</a></li>
-        <li class="m-only"><a href="#wall">Bathroom Wall</a></li>
+        <!-- <li class="m-only"><a href="#wall">Bathroom Wall</a></li> -->
         <li class="m-only"><a href="#book">Book Us</a></li>
         <li class="m-only"><a href="https://www.facebook.com/profile.php?id=61589395443501" target="_blank" rel="noopener">Facebook</a></li>
       </ul>
@@ -2820,12 +2820,12 @@ footer a.foot-mail { display: inline-block; padding: 12px 4px 4px; }
         </li>
         <li class="show">
           <div class="date"><span class="m">Apr</span><span class="d">9</span></div>
-          <div class="where"><div class="venue">Potawatomi Carter Casino</div><div class="town">Carter, WI</div></div>
+          <div class="where"><div class="venue">Potawatomi Carter Casino</div><div class="town">Wabeno, WI</div></div>
           <div class="time">TBA</div>
         </li>
         <li class="show">
           <div class="date"><span class="m">Apr</span><span class="d">10</span></div>
-          <div class="where"><div class="venue">Potawatomi Carter Casino</div><div class="town">Carter, WI</div></div>
+          <div class="where"><div class="venue">Potawatomi Carter Casino</div><div class="town">Wabeno, WI</div></div>
           <div class="time">TBA</div>
         </li>
         <li class="show" data-hours="3">
@@ -2870,7 +2870,7 @@ footer a.foot-mail { display: inline-block; padding: 12px 4px 4px; }
           var events = list.map(function (s) {
             return { '@type': 'MusicEvent', name: 'Rat River Boys at ' + s.venue, startDate: s.tba ? s.ymd : s.start.toISOString(),
               eventStatus: 'https://schema.org/EventScheduled', eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
-              location: { '@type': 'Place', name: s.venue, address: { '@type': 'PostalAddress', addressLocality: s.city, addressRegion: s.region, addressCountry: 'US' } },
+              location: { '@type': 'Place', name: s.venue, address: { '@type': 'PostalAddress', streetAddress: (s.li.getAttribute('data-addr') || '').split(',')[0] || undefined, addressLocality: s.city, addressRegion: s.region, addressCountry: 'US' } },
               image: ['https://www.ratriverboys.com/rat-moon.jpg'], description: 'Rat River Boys live at ' + s.venue + ', ' + s.town + '. Classic country and honky tonk.',
               performer: { '@type': 'MusicGroup', name: 'Rat River Boys' }, organizer: { '@type': 'Organization', name: s.venue },
               url: s.fb || 'https://www.ratriverboys.com/#shows' };
@@ -3229,6 +3229,7 @@ footer a.foot-mail { display: inline-block; padding: 12px 4px 4px; }
     </div>
   </section>
 
+<!-- BATHROOM WALL (hidden for now)
   <section class="slab wall-slab torn" id="wall">
     <div class="wrap">
       <p class="kicker">Men's room, stall two</p>
@@ -3249,6 +3250,7 @@ footer a.foot-mail { display: inline-block; padding: 12px 4px 4px; }
       </div>
     </div>
   </section>
+-->
 
   <section class="slab book-slab torn" id="book">
     <div class="wrap book-grid">
@@ -3490,7 +3492,7 @@ footer a.foot-mail { display: inline-block; padding: 12px 4px 4px; }
     var venue = txt(li, '.venue'), town = txt(li, '.town'), fb = li.getAttribute('data-fb') || '';
     var hrs = parseFloat(li.getAttribute('data-hours')) || 3;
     return { start: start, end: new Date(start.getTime() + hrs * 3600e3), title: 'Rat River Boys at ' + venue,
-             where: venue + ', ' + town, venue: venue, link: fb || SITE,
+             where: venue + ', ' + (li.getAttribute('data-addr') || town), venue: venue, link: fb || SITE,
              details: 'Live at ' + venue + '.' + (fb ? ' Event: ' + fb : '') + ' ' + SITE };
   }
   function esc(v) { return v.replace(/\\/g, '\\\\').replace(/;/g, '\;').replace(/,/g, '\\,'); }
