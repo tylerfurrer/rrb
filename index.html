@@ -18,6 +18,24 @@
 <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=2">
 <link rel="apple-touch-icon" href="apple-touch-icon.png?v=2">
 <script>
+/* hold the door sign until its fonts (Rye, Oswald) are in, so it never flashes a backup font */
+(function () {
+  var html = document.documentElement; html.classList.add('fonts-wait');
+  function ok() { html.classList.remove('fonts-wait'); html.classList.add('fonts-ok'); }
+  try {
+    if (document.fonts && document.fonts.load) {
+      var go = function () { Promise.all([document.fonts.load('1em Rye'), document.fonts.load('700 1em Oswald'), document.fonts.load('600 1em Oswald')]).then(ok, ok); };
+      var wait = function () {
+        var l = document.getElementById('gfonts');
+        if (!l) return setTimeout(wait, 20);           /* link tag not parsed yet */
+        if (l.sheet) { try { if (l.sheet.cssRules) return go(); } catch (e) { return go(); } }
+        l.addEventListener('load', go); l.addEventListener('error', ok);
+      };
+      wait();
+      setTimeout(ok, 2500);
+    } else { ok(); }
+  } catch (e) { ok(); }
+})();
 /* saloon-door gate: shows on every load */
 (function () {
   var seen = false;
@@ -56,7 +74,7 @@
 <title>Rat River Boys | Classic Country &amp; Honky Tonk Band, Wisconsin</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Rye&family=Fredericka+the+Great&family=Cabin+Sketch:wght@400;700&family=Yellowtail&family=Oswald:wght@400;500;600;700&family=Crimson+Pro:ital,wght@0,400;0,600;1,400&family=Permanent+Marker&family=Caveat:wght@600&display=swap">
+<link id="gfonts" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Rye&family=Fredericka+the+Great&family=Cabin+Sketch:wght@400;700&family=Yellowtail&family=Oswald:wght@400;500;600;700&family=Crimson+Pro:ital,wght@0,400;0,600;1,400&family=Permanent+Marker&family=Caveat:wght@600&display=swap">
 <style>
 /* Layout: a beat-up gig poster stapled to a bar wall. Night-sky hero with the lasso rat, then mustard, rust and navy slabs with grime, stains and torn edges. */
 :root {
@@ -2629,6 +2647,54 @@ nav { background: var(--beam) !important; background-color: #1d120a !important; 
 #cd-quip, .cd-quip { display: none !important; }
 
 .nowrap { white-space: nowrap; }
+
+/* hero: "on air" studio light that jumps to the videos */
+.on-air {
+  display: inline-flex; align-items: center; gap: 10px; margin-top: 22px; padding: 9px 16px 8px;
+  font-family: var(--label); font-weight: 700; text-transform: uppercase; letter-spacing: .18em; font-size: .9rem;
+  color: #ffd9cf; text-decoration: none; background: rgba(40,6,4,.55);
+  border: 2px solid #ff4b2b; border-radius: 6px;
+  box-shadow: 0 0 8px rgba(255,75,43,.55), inset 0 0 10px rgba(255,75,43,.35);
+  text-shadow: 0 0 4px rgba(255,75,43,.9), 0 0 10px rgba(255,75,43,.5);
+  -webkit-tap-highlight-color: transparent; transition: box-shadow .2s ease, background .2s ease;
+}
+.on-air:hover { background: rgba(70,10,6,.7); box-shadow: 0 0 14px rgba(255,75,43,.85), inset 0 0 14px rgba(255,75,43,.5); }
+.on-air:focus-visible { outline: 2px solid var(--gold); outline-offset: 4px; }
+.oa-dot { width: 10px; height: 10px; border-radius: 50%; background: #ff3b1f; box-shadow: 0 0 6px #ff3b1f, 0 0 12px rgba(255,59,31,.8); }
+.oa-live { color: #fff1ec; }
+.oa-sep { width: 1px; height: 14px; background: rgba(255,120,95,.6); }
+.oa-txt { color: #ffcbbd; }
+@media (prefers-reduced-motion: no-preference) {
+  .oa-dot { animation: oa-blink 1.6s ease-in-out infinite; }
+  @keyframes oa-blink { 0%, 100% { opacity: 1; } 50% { opacity: .25; box-shadow: none; } }
+}
+@media (max-width: 760px) { .on-air { margin: 18px auto 0; font-size: .82rem; } .hero-copy { display: flex; flex-direction: column; align-items: center; } }
+
+/* door sign waits for its fonts, then fades in */
+html.fonts-wait .gate-sign, html.fonts-wait .gate-sign * { color: transparent !important; text-shadow: none !important; }
+html.fonts-wait .gate-sign { opacity: 0; }
+.gate-sign { transition: opacity .25s ease; }
+
+
+
+
+
+#shows .where .town { display: inline; }
+#shows .where .venue, #shows .where a.venue { display: block; width: fit-content; }
+/* Band/Duo tags v3: drawn as SVG from fixed font metrics so they sit identically on every device.
+   Box middle = middle of the city's capitals (Crimson Pro cap height .5732em, so .2866em above its baseline). */
+#shows .lineup-tag, #shows .lineup-tag.band {
+  all: unset; display: inline-block; line-height: 0; color: var(--gold, #e7bd6a);
+  font-size: .7rem; margin-left: .7em;
+  vertical-align: calc(.2866 * 1.15rem - 0.765em);
+}
+#shows .lineup-tag svg { display: block; overflow: visible; }
+#shows .where .town { font-size: 1.15rem; }
+@media (max-width: 640px) {
+  #shows .where .town { font-size: 1rem; }
+  #shows .lineup-tag, #shows .lineup-tag.band { font-size: .62rem; vertical-align: calc(.2866 * 1rem - 0.765em); }
+}
+
 </style>
 
 <div class="haze" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
@@ -2844,42 +2910,47 @@ nav { background: var(--beam) !important; background-color: #1d120a !important; 
       <ul class="shows">
         <li class="show" data-fb="https://www.facebook.com/share/1BoHUhSeQq/">
           <div class="date"><span class="m">Oct</span><span class="d">17</span></div>
-          <div class="where"><div class="venue">Plymouth Arts Center</div><div class="town">Plymouth, WI</div></div>
+          <div class="where"><div class="venue">Plymouth Arts Center</div><div class="town">Plymouth, WI</div><span class="lineup-tag band" role="img" aria-label="Band"><svg viewBox="0 0 4166 1530" width="4.166em" height="1.530em" aria-hidden="true" focusable="false"><rect x="60" y="60" width="4046" height="1410" rx="220" fill="none" stroke="currentColor" stroke-opacity=".8" stroke-width="1.5" vector-effect="non-scaling-stroke"/><text x="700 1448 2159 2880" y="1170" fill="currentColor" font-family="Oswald, 'Arial Narrow', sans-serif" font-weight="700" font-size="1000">BAND</text></svg></span></div>
           <div class="time">7 PM</div>
+        </li>
+        <li class="show" data-lineup="Duo" data-hours="3">
+          <div class="date"><span class="m">Nov</span><span class="d">20</span></div>
+          <div class="where"><div class="venue">Vines &amp; Rushes</div><div class="town">Ripon, WI</div><span class="lineup-tag" role="img" aria-label="Duo"><svg viewBox="0 0 3480 1530" width="3.480em" height="1.530em" aria-hidden="true" focusable="false"><rect x="60" y="60" width="3360" height="1410" rx="220" fill="none" stroke="currentColor" stroke-opacity=".8" stroke-width="1.5" vector-effect="non-scaling-stroke"/><text x="700 1446 2194" y="1170" fill="currentColor" font-family="Oswald, 'Arial Narrow', sans-serif" font-weight="700" font-size="1000">DUO</text></svg></span></div>
+          <div class="time">5:30-8:30 PM</div>
         </li>
         <li class="show">
           <div class="date"><span class="m">Nov</span><span class="d">21</span></div>
-          <div class="where"><div class="venue">Fletch's Local Tap House</div><div class="town">Oshkosh, WI</div></div>
+          <div class="where"><div class="venue">Fletch's Local Tap House</div><div class="town">Oshkosh, WI</div><span class="lineup-tag band" role="img" aria-label="Band"><svg viewBox="0 0 4166 1530" width="4.166em" height="1.530em" aria-hidden="true" focusable="false"><rect x="60" y="60" width="4046" height="1410" rx="220" fill="none" stroke="currentColor" stroke-opacity=".8" stroke-width="1.5" vector-effect="non-scaling-stroke"/><text x="700 1448 2159 2880" y="1170" fill="currentColor" font-family="Oswald, 'Arial Narrow', sans-serif" font-weight="700" font-size="1000">BAND</text></svg></span></div>
           <div class="time">8 PM</div>
         </li>
-        <li class="show" data-hours="2">
+        <li class="show" data-lineup="Duo" data-hours="2">
           <div class="date"><span class="m">Dec</span><span class="d">19</span></div>
-          <div class="where"><div class="venue">Iron Horse Hotel</div><div class="town">Milwaukee, WI</div></div>
+          <div class="where"><div class="venue">Iron Horse Hotel</div><div class="town">Milwaukee, WI</div><span class="lineup-tag" role="img" aria-label="Duo"><svg viewBox="0 0 3480 1530" width="3.480em" height="1.530em" aria-hidden="true" focusable="false"><rect x="60" y="60" width="3360" height="1410" rx="220" fill="none" stroke="currentColor" stroke-opacity=".8" stroke-width="1.5" vector-effect="non-scaling-stroke"/><text x="700 1446 2194" y="1170" fill="currentColor" font-family="Oswald, 'Arial Narrow', sans-serif" font-weight="700" font-size="1000">DUO</text></svg></span></div>
           <div class="time">7-9 PM</div>
         </li>
-        <li class="show" data-hours="3">
+        <li class="show" data-lineup="Duo" data-hours="3">
           <div class="date"><span class="m">Mar</span><span class="d">27</span></div>
-          <div class="where"><div class="venue">Ziegler Winery</div><div class="town">Malone, WI</div></div>
+          <div class="where"><div class="venue">Ziegler Winery</div><div class="town">Malone, WI</div><span class="lineup-tag" role="img" aria-label="Duo"><svg viewBox="0 0 3480 1530" width="3.480em" height="1.530em" aria-hidden="true" focusable="false"><rect x="60" y="60" width="3360" height="1410" rx="220" fill="none" stroke="currentColor" stroke-opacity=".8" stroke-width="1.5" vector-effect="non-scaling-stroke"/><text x="700 1446 2194" y="1170" fill="currentColor" font-family="Oswald, 'Arial Narrow', sans-serif" font-weight="700" font-size="1000">DUO</text></svg></span></div>
           <div class="time">3-6 PM</div>
         </li>
         <li class="show">
           <div class="date"><span class="m">Apr</span><span class="d">2</span></div>
-          <div class="where"><div class="venue">Jolene&rsquo;s</div><div class="town">Cleveland, OH</div></div>
+          <div class="where"><div class="venue">Jolene&rsquo;s</div><div class="town">Cleveland, OH</div><span class="lineup-tag band" role="img" aria-label="Band"><svg viewBox="0 0 4166 1530" width="4.166em" height="1.530em" aria-hidden="true" focusable="false"><rect x="60" y="60" width="4046" height="1410" rx="220" fill="none" stroke="currentColor" stroke-opacity=".8" stroke-width="1.5" vector-effect="non-scaling-stroke"/><text x="700 1448 2159 2880" y="1170" fill="currentColor" font-family="Oswald, 'Arial Narrow', sans-serif" font-weight="700" font-size="1000">BAND</text></svg></span></div>
           <div class="time">TBA</div>
         </li>
         <li class="show">
           <div class="date"><span class="m">Apr</span><span class="d">9</span></div>
-          <div class="where"><div class="venue">Potawatomi Carter Casino</div><div class="town">Wabeno, WI</div></div>
+          <div class="where"><div class="venue">Potawatomi Carter Casino</div><div class="town">Wabeno, WI</div><span class="lineup-tag band" role="img" aria-label="Band"><svg viewBox="0 0 4166 1530" width="4.166em" height="1.530em" aria-hidden="true" focusable="false"><rect x="60" y="60" width="4046" height="1410" rx="220" fill="none" stroke="currentColor" stroke-opacity=".8" stroke-width="1.5" vector-effect="non-scaling-stroke"/><text x="700 1448 2159 2880" y="1170" fill="currentColor" font-family="Oswald, 'Arial Narrow', sans-serif" font-weight="700" font-size="1000">BAND</text></svg></span></div>
           <div class="time">TBA</div>
         </li>
         <li class="show">
           <div class="date"><span class="m">Apr</span><span class="d">10</span></div>
-          <div class="where"><div class="venue">Potawatomi Carter Casino</div><div class="town">Wabeno, WI</div></div>
+          <div class="where"><div class="venue">Potawatomi Carter Casino</div><div class="town">Wabeno, WI</div><span class="lineup-tag band" role="img" aria-label="Band"><svg viewBox="0 0 4166 1530" width="4.166em" height="1.530em" aria-hidden="true" focusable="false"><rect x="60" y="60" width="4046" height="1410" rx="220" fill="none" stroke="currentColor" stroke-opacity=".8" stroke-width="1.5" vector-effect="non-scaling-stroke"/><text x="700 1448 2159 2880" y="1170" fill="currentColor" font-family="Oswald, 'Arial Narrow', sans-serif" font-weight="700" font-size="1000">BAND</text></svg></span></div>
           <div class="time">TBA</div>
         </li>
         <li class="show" data-hours="3">
           <div class="date"><span class="m">Jun</span><span class="d">13</span></div>
-          <div class="where"><div class="venue">Hagemeister Park</div><div class="town">Green Bay, WI</div></div>
+          <div class="where"><div class="venue">Hagemeister Park</div><div class="town">Green Bay, WI</div><span class="lineup-tag band" role="img" aria-label="Band"><svg viewBox="0 0 4166 1530" width="4.166em" height="1.530em" aria-hidden="true" focusable="false"><rect x="60" y="60" width="4046" height="1410" rx="220" fill="none" stroke="currentColor" stroke-opacity=".8" stroke-width="1.5" vector-effect="non-scaling-stroke"/><text x="700 1448 2159 2880" y="1170" fill="currentColor" font-family="Oswald, 'Arial Narrow', sans-serif" font-weight="700" font-size="1000">BAND</text></svg></span></div>
           <div class="time">2-5 PM</div>
         </li>
       <li class="show-none" hidden>New dates coming soon. Watch <a href="https://www.facebook.com/profile.php?id=61589395443501" target="_blank" rel="noopener">Facebook</a> for the next one.</li>
@@ -2928,7 +2999,7 @@ nav { background: var(--beam) !important; background-color: #1d120a !important; 
         /* Google event listings */
         try {
           var events = list.map(function (s) {
-            return { '@type': 'MusicEvent', name: 'Rat River Boys at ' + s.venue, startDate: s.tba ? s.ymd : s.start.toISOString(),
+            return { '@type': 'MusicEvent', name: 'Rat River Boys' + (s.li.getAttribute('data-lineup') ? ' (' + s.li.getAttribute('data-lineup') + ')' : '') + ' at ' + s.venue, startDate: s.tba ? s.ymd : s.start.toISOString(),
               eventStatus: 'https://schema.org/EventScheduled', eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
               location: { '@type': 'Place', name: s.venue, address: { '@type': 'PostalAddress', streetAddress: (s.li.getAttribute('data-addr') || '').split(',')[0] || undefined, addressLocality: s.city, addressRegion: s.region, addressCountry: 'US' } },
               image: ['https://www.ratriverboys.com/rat-moon.jpg'], description: 'Rat River Boys live at ' + s.venue + ', ' + s.town + '. Classic country and honky tonk.',
@@ -3551,7 +3622,7 @@ nav { background: var(--beam) !important; background-color: #1d120a !important; 
     if (start < new Date(now.getTime() - 60 * 864e5)) start = new Date(y + 1, m, d, hh, mm);
     var venue = txt(li, '.venue'), town = txt(li, '.town'), fb = li.getAttribute('data-fb') || '';
     var hrs = parseFloat(li.getAttribute('data-hours')) || 3;
-    return { start: start, end: new Date(start.getTime() + hrs * 3600e3), title: 'Rat River Boys at ' + venue,
+    return { start: start, end: new Date(start.getTime() + hrs * 3600e3), title: 'Rat River Boys' + (li.getAttribute('data-lineup') ? ' (' + li.getAttribute('data-lineup') + ')' : '') + ' at ' + venue,
              where: venue + ', ' + (li.getAttribute('data-addr') || town), venue: venue, link: fb || SITE,
              details: 'Live at ' + venue + '.' + (fb ? ' Event: ' + fb : '') + ' ' + SITE };
   }
