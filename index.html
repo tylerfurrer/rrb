@@ -2612,6 +2612,19 @@ nav { background: var(--beam) !important; background-color: #1d120a !important; 
 #shows .show-year span::before, #shows .show-year span::after { content: "\2605"; font-family: var(--label); font-size: .55em; color: var(--gold, #e7bd6a); text-shadow: none; }
 #shows .show-year + .show { border-top: 0 !important; }
 @media (max-width: 800px) { #shows .show-year span { padding: 0 12px; gap: 10px; } }
+
+/* phones + tablets: center the countdown text, the tip jar and the crime scene tags */
+@media (max-width: 800px) {
+  #countdown { text-align: center; }
+  #countdown .cd-label, #countdown .cd-quip { text-align: center; margin-inline: auto; }
+  .tips-grid { text-align: center; }
+  .tips-grid .kicker { justify-content: center; }
+  .tips-grid .kicker::before { content: ""; flex: 1; height: 3px; background: currentColor; opacity: .5; }
+  .tips-grid .tip-buttons { justify-content: center; }
+  .tips-grid .request, .tips-grid .request * { text-align: left; }
+  .tips-grid .tip-real { align-items: center; }
+  .venues { justify-content: center !important; }
+}
 </style>
 
 <div class="haze" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
