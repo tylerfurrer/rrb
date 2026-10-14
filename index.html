@@ -2437,7 +2437,7 @@ footer a.foot-mail:hover { color: var(--gold); }
 /* phones: no double-tap zoom (fast taps on posters, the rat or the tip jar), pinch-to-zoom still works */
 html, body, a, button, .bio.wanted, .mini-wanted, .jar-box, .show { touch-action: manipulation; }
 /* bigger tap areas for small links */
-.fb-line a { display: inline-block; padding: 10px 2px; margin: -10px 0; }
+.fb-line a { display: inline-block; padding: 10px 0; margin: -10px 0; }
 footer a.foot-mail { display: inline-block; padding: 12px 4px 4px; }
 @media (max-width: 800px) { #shows .where a.venue { padding: 6px 0; margin: -6px 0; } }
 /* nothing booked */
@@ -2625,6 +2625,10 @@ nav { background: var(--beam) !important; background-color: #1d120a !important; 
   .tips-grid .tip-real { align-items: center; }
   .venues { justify-content: center !important; }
 }
+
+#cd-quip, .cd-quip { display: none !important; }
+
+.nowrap { white-space: nowrap; }
 </style>
 
 <div class="haze" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
@@ -2835,7 +2839,7 @@ nav { background: var(--beam) !important; background-color: #1d120a !important; 
           <div><span id="cd-m">--</span><small>Minutes</small></div>
           <div><span id="cd-s">--</span><small>Seconds</small></div>
         </div>
-        <div class="cd-quip" id="cd-quip">Start hydrating now.</div>
+        <div class="cd-quip" id="cd-quip" hidden></div>
       </div>
       <ul class="shows">
         <li class="show" data-fb="https://www.facebook.com/share/1BoHUhSeQq/">
@@ -3319,7 +3323,7 @@ nav { background: var(--beam) !important; background-color: #1d120a !important; 
           <button class="btn" id="copy" type="button">Copy email</button>
         </div>
         <div class="copied" id="copied" aria-live="polite"></div>
-        <p class="fb-line">Or slide into our DMs on <a href="https://www.facebook.com/profile.php?id=61589395443501" target="_blank" rel="noopener">Facebook</a>. We answer faster than your ex.</p>
+        <p class="fb-line">Or slide into our DMs on <span class="nowrap"><a href="https://www.facebook.com/profile.php?id=61589395443501" target="_blank" rel="noopener">Facebook</a>.</span> We answer faster than your ex.</p>
 <!-- PRESS KIT (hidden for now)
         <a class="kit-btn" href="rat-river-boys-press-kit.pdf" download="Rat-River-Boys-Press-Kit.pdf">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12m0 0-5-5m5 5 5-5M4 19h16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="square"/></svg>
@@ -4037,7 +4041,7 @@ nav { background: var(--beam) !important; background-color: #1d120a !important; 
 (function () {
   // ---- countdown to the next show ----
   var shows = (window.RRB_SHOWS || []).map(function (x) { return { at: x.start.toISOString(), name: x.venue + ', ' + x.city }; });
-  var quips = ['Start hydrating now.', 'Tell your boss you have a cold.', 'Plenty of time to lie to your wife about it.', 'Iron your good jeans.', 'Warn your liver.'];
+  var quips = ['Start hydrating now.', 'Tell your boss you have a cold.', 'Plenty of time to lie to your wife about it.', 'Iron your good jeans.'];
   var q = quips[Math.floor(Math.random() * quips.length)];
   var el = { d: document.getElementById('cd-d'), h: document.getElementById('cd-h'), m: document.getElementById('cd-m'), s: document.getElementById('cd-s'), label: document.getElementById('cd-label'), quip: document.getElementById('cd-quip'), box: document.getElementById('countdown') };
   function pad(n) { return (n < 10 ? '0' : '') + n; }
