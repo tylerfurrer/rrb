@@ -2597,6 +2597,21 @@ nav { background: var(--beam) !important; background-color: #1d120a !important; 
 #shows .show-year::after { background: linear-gradient(90deg, rgba(231,189,106,.6), transparent); }
 #shows .show-year span { font-family: var(--display); font-size: 2rem; line-height: 1; color: var(--gold, #e7bd6a); text-shadow: 2px 2px 0 #1a0f08; letter-spacing: .04em; }
 @media (max-width: 800px) { #shows .show-year span { font-size: 1.6rem; } #shows .show-year { padding: 18px 0 8px; } }
+
+#shows .shows > .show-year:first-child { padding-top: 6px; }
+
+/* year divider v2: one ornate rule, no doubled line under it */
+#shows .show-year { gap: 0; padding: 26px 0 14px !important; }
+#shows .shows > .show-year:first-child { padding-top: 8px !important; }
+#shows .show-year::before, #shows .show-year::after {
+  height: 3px; background: linear-gradient(90deg, rgba(231,189,106,0), rgba(231,189,106,.75)) !important;
+  border-bottom: 1px solid rgba(26,15,8,.6);
+}
+#shows .show-year::after { background: linear-gradient(90deg, rgba(231,189,106,.75), rgba(231,189,106,0)) !important; }
+#shows .show-year span { padding: 0 18px; position: relative; display: inline-flex; align-items: center; gap: 14px; }
+#shows .show-year span::before, #shows .show-year span::after { content: "\2605"; font-family: var(--label); font-size: .55em; color: var(--gold, #e7bd6a); text-shadow: none; }
+#shows .show-year + .show { border-top: 0 !important; }
+@media (max-width: 800px) { #shows .show-year span { padding: 0 12px; gap: 10px; } }
 </style>
 
 <div class="haze" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
@@ -2881,11 +2896,11 @@ nav { background: var(--beam) !important; background-color: #1d120a !important; 
         });
         list.sort(function (a, b) { return a.start - b.start; });
         window.RRB_SHOWS = list;
-        /* year marker before the first show that falls in a later year */
+        /* year marker before the first show of each year */
         var thisYear = new Date().getFullYear(), shown = {};
         list.forEach(function (sh) {
           var yr = sh.start.getFullYear();
-          if (yr > thisYear && !shown[yr]) {
+          if (!shown[yr]) {
             shown[yr] = 1;
             var div = document.createElement('li'); div.className = 'show-year'; div.setAttribute('aria-hidden', 'false');
             div.innerHTML = '<span>' + yr + '</span>';
