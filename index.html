@@ -2580,6 +2580,23 @@ footer a.foot-mail { display: inline-block; padding: 12px 4px 4px; }
   .hero-copy .cta-row .btn { min-width: 300px; text-align: center; justify-content: center; }
   .hero-copy .book-wrap { order: -1; }
 }
+
+/* header + footer: real barnwood photo, darkened, no synthetic grain streaks */
+:root {
+  --beam:
+    linear-gradient(180deg, rgba(255,220,170,.06), rgba(0,0,0,.15) 45%, rgba(0,0,0,.45)),
+    linear-gradient(rgba(18,10,5,.62), rgba(18,10,5,.62)),
+    url("barnwood.webp") 0 0 / 800px 378px repeat;
+}
+footer { background: var(--beam) !important; background-color: #1d120a !important; }
+nav { background: var(--beam) !important; background-color: #1d120a !important; }
+
+/* year divider in the shows list */
+#shows .show-year { list-style: none; display: flex; align-items: center; gap: 16px; padding: 22px 0 10px; border: 0 !important; }
+#shows .show-year::before, #shows .show-year::after { content: ""; flex: 1; height: 2px; background: linear-gradient(90deg, transparent, rgba(231,189,106,.6)); }
+#shows .show-year::after { background: linear-gradient(90deg, rgba(231,189,106,.6), transparent); }
+#shows .show-year span { font-family: var(--display); font-size: 2rem; line-height: 1; color: var(--gold, #e7bd6a); text-shadow: 2px 2px 0 #1a0f08; letter-spacing: .04em; }
+@media (max-width: 800px) { #shows .show-year span { font-size: 1.6rem; } #shows .show-year { padding: 18px 0 8px; } }
 </style>
 
 <div class="haze" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
@@ -2864,6 +2881,17 @@ footer a.foot-mail { display: inline-block; padding: 12px 4px 4px; }
         });
         list.sort(function (a, b) { return a.start - b.start; });
         window.RRB_SHOWS = list;
+        /* year marker before the first show that falls in a later year */
+        var thisYear = new Date().getFullYear(), shown = {};
+        list.forEach(function (sh) {
+          var yr = sh.start.getFullYear();
+          if (yr > thisYear && !shown[yr]) {
+            shown[yr] = 1;
+            var div = document.createElement('li'); div.className = 'show-year'; div.setAttribute('aria-hidden', 'false');
+            div.innerHTML = '<span>' + yr + '</span>';
+            sh.li.parentNode.insertBefore(div, sh.li);
+          }
+        });
         if (!list.length) { var none = document.querySelector('#shows .show-none'); if (none) none.hidden = false; }
         /* Google event listings */
         try {
