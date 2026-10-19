@@ -2702,6 +2702,62 @@ html.fonts-wait .gate-sign { opacity: 0; }
 }
 .bf-grid .bf-wide { grid-column: 1 / -1; }
 #shows .where a.venue .ext { display: none !important; }
+/* upcoming shows: theater marquee with chasing bulbs */
+#shows .marquee {
+  position: relative; width: fit-content; max-width: 100%; margin: 4px auto 28px; padding: 26px 52px 24px;
+  background: radial-gradient(ellipse at 50% 40%, #33200f, #150c05 80%);
+  border: 3px solid #c9963f; border-radius: 12px;
+  box-shadow: inset 0 0 0 7px #150c05, inset 0 0 0 9px rgba(201,150,63,.5), 0 12px 26px rgba(0,0,0,.6), 0 0 46px rgba(255,190,90,.14);
+}
+#shows .marquee h2 {
+  margin: 0; text-align: center; white-space: nowrap; color: #ffe3a3; letter-spacing: .02em;
+  text-shadow: 0 0 6px rgba(255,205,120,.6), 0 0 20px rgba(255,170,60,.38), 2px 2px 0 #2b170b;
+}
+#shows .mq-bulbs { position: absolute; inset: 11px; pointer-events: none; }
+#shows .mq-bulbs i { position: absolute; width: 9px; height: 9px; margin: -4.5px 0 0 -4.5px; border-radius: 50%; background: radial-gradient(circle at 40% 35%, #fff8e0, #ffd98a 60%, #e9a640); box-shadow: 0 0 5px #ffc85a, 0 0 11px rgba(255,180,70,.6); }
+@media (prefers-reduced-motion: no-preference) {
+  #shows .mq-bulbs i { animation: mq-glow 3.8s ease-in-out infinite; animation-delay: calc(var(--i) * -1.37s); }
+  #shows .marquee { animation: mq-warm 5s ease-in-out infinite; }
+  @keyframes mq-glow { 0%, 100% { filter: brightness(.9); box-shadow: 0 0 4px #ffc85a, 0 0 9px rgba(255,180,70,.45); } 50% { filter: brightness(1.12); box-shadow: 0 0 6px #ffd27a, 0 0 15px rgba(255,190,80,.75); } }
+  @keyframes mq-warm { 0%, 100% { box-shadow: inset 0 0 0 7px #150c05, inset 0 0 0 9px rgba(201,150,63,.5), 0 12px 26px rgba(0,0,0,.6), 0 0 40px rgba(255,180,80,.14); } 50% { box-shadow: inset 0 0 0 7px #150c05, inset 0 0 0 9px rgba(201,150,63,.5), 0 12px 26px rgba(0,0,0,.6), 0 0 64px rgba(255,180,80,.26); } }
+}
+#shows .countdown { justify-items: center; }
+#shows .cd-label { text-align: center; }
+#shows .cd-clock { justify-content: center; }
+@media (max-width: 640px) {
+  #shows .marquee { padding: 20px 26px 18px; margin-bottom: 22px; }
+  #shows .marquee h2 { font-size: clamp(1.6rem, 8.4vw, 2.2rem); }
+  #shows .mq-bulbs { inset: 9px; }
+  #shows .mq-bulbs i { width: 7px; height: 7px; margin: -3.5px 0 0 -3.5px; }
+}
+/* next show: changeable-letter marquee board */
+#shows .cd-label.lb {
+  display: block; width: fit-content; max-width: min(100%, 720px); margin: 0 auto 10px; padding: 8px; letter-spacing: 0; text-transform: none;
+  background: #241509; border-radius: 6px;
+  box-shadow: 0 0 0 2px #c9963f, 0 10px 22px rgba(0,0,0,.55);
+}
+#shows .lb-inner {
+  padding: 6px 18px 8px; border-radius: 2px;
+  background: radial-gradient(ellipse at 50% 40%, #fffdf4, #f1e7c8 85%);
+  box-shadow: inset 0 0 22px rgba(255,214,140,.55), inset 0 2px 6px rgba(0,0,0,.25);
+}
+#shows .lb-row {
+  display: flex; flex-wrap: wrap; justify-content: center; gap: 0 .55em; padding: 5px 0 6px;
+  background: linear-gradient(to bottom, rgba(60,40,20,.28) 0 2px, transparent 2px calc(100% - 2px), rgba(60,40,20,.28) calc(100% - 2px));
+}
+#shows .lb-row + .lb-row { margin-top: -2px; }
+#shows .lb-word { display: inline-flex; gap: 2px; white-space: nowrap; }
+#shows .lb-t {
+  display: inline-block; min-width: .5em; text-align: center; padding: 0 1px;
+  font-family: Oswald, 'Arial Narrow', sans-serif; font-weight: 700; font-size: 1.45rem; line-height: 1.1; color: #17110c;
+  transform: rotate(var(--r, 0deg)) translateY(var(--y, 0px));
+}
+#shows .lb-red .lb-t { color: #b3261e; font-size: 1.05rem; letter-spacing: .04em; }
+@media (max-width: 640px) {
+  #shows .lb-inner { padding: 4px 10px 6px; }
+  #shows .lb-t { font-size: 1.05rem; }
+  #shows .lb-red .lb-t { font-size: .85rem; }
+}
 </style>
 
 <div class="haze" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
@@ -2869,7 +2925,7 @@ html.fonts-wait .gate-sign { opacity: 0; }
         <p class="lede genre"><span class="g-big">Classic Country</span><span class="g-big"><span class="g-amp">&amp;</span> Honky Tonk</span><span class="g-from"><span class="g-rule" aria-hidden="true"></span>From Wisconsin<span class="g-rule" aria-hidden="true"></span></span></p>
         <div class="cta-row">
           <a class="btn" href="#shows">Where we're playing next</a>
-          <span class="book-wrap"><a class="btn alt" href="#book">Book these degenerates<span class="book-arrow" aria-hidden="true"><svg viewBox="0 0 196 84"><path class="mq-body" d="M10 42 L 66 2 L 66 16 L 188 16 L 188 68 L 66 68 L 66 82 Z"/><path class="mq-inner" d="M24 42 L 60 16 L 60 26 L 172 26 L 172 58 L 60 58 L 60 68 Z"/><circle class="mq-b" cx="178" cy="24" r="5.2" style="--i:0"/><circle class="mq-b" cx="178" cy="60" r="5.2" style="--i:0"/><circle class="mq-b" cx="160" cy="24" r="5.2" style="--i:1"/><circle class="mq-b" cx="160" cy="60" r="5.2" style="--i:1"/><circle class="mq-b" cx="142" cy="24" r="5.2" style="--i:2"/><circle class="mq-b" cx="142" cy="60" r="5.2" style="--i:2"/><circle class="mq-b" cx="124" cy="24" r="5.2" style="--i:3"/><circle class="mq-b" cx="124" cy="60" r="5.2" style="--i:3"/><circle class="mq-b" cx="106" cy="24" r="5.2" style="--i:4"/><circle class="mq-b" cx="106" cy="60" r="5.2" style="--i:4"/><circle class="mq-b" cx="88" cy="24" r="5.2" style="--i:5"/><circle class="mq-b" cx="88" cy="60" r="5.2" style="--i:5"/><circle class="mq-b" cx="70" cy="24" r="5.2" style="--i:6"/><circle class="mq-b" cx="70" cy="60" r="5.2" style="--i:6"/><circle class="mq-b" cx="70" cy="10" r="5.2" style="--i:7"/><circle class="mq-b" cx="70" cy="74" r="5.2" style="--i:7"/><circle class="mq-b" cx="52" cy="20" r="5.2" style="--i:8"/><circle class="mq-b" cx="52" cy="64" r="5.2" style="--i:8"/><circle class="mq-b" cx="36" cy="32" r="5.2" style="--i:9"/><circle class="mq-b" cx="36" cy="52" r="5.2" style="--i:9"/><circle class="mq-b" cx="20" cy="42" r="5.2" style="--i:10"/><circle class="mq-b" cx="178" cy="42" r="5.2" style="--i:0"/></svg></span></a>
+          <span class="book-wrap"><a class="btn alt" href="#book">Book the band<span class="book-arrow" aria-hidden="true"><svg viewBox="0 0 196 84"><path class="mq-body" d="M10 42 L 66 2 L 66 16 L 188 16 L 188 68 L 66 68 L 66 82 Z"/><path class="mq-inner" d="M24 42 L 60 16 L 60 26 L 172 26 L 172 58 L 60 58 L 60 68 Z"/><circle class="mq-b" cx="178" cy="24" r="5.2" style="--i:0"/><circle class="mq-b" cx="178" cy="60" r="5.2" style="--i:0"/><circle class="mq-b" cx="160" cy="24" r="5.2" style="--i:1"/><circle class="mq-b" cx="160" cy="60" r="5.2" style="--i:1"/><circle class="mq-b" cx="142" cy="24" r="5.2" style="--i:2"/><circle class="mq-b" cx="142" cy="60" r="5.2" style="--i:2"/><circle class="mq-b" cx="124" cy="24" r="5.2" style="--i:3"/><circle class="mq-b" cx="124" cy="60" r="5.2" style="--i:3"/><circle class="mq-b" cx="106" cy="24" r="5.2" style="--i:4"/><circle class="mq-b" cx="106" cy="60" r="5.2" style="--i:4"/><circle class="mq-b" cx="88" cy="24" r="5.2" style="--i:5"/><circle class="mq-b" cx="88" cy="60" r="5.2" style="--i:5"/><circle class="mq-b" cx="70" cy="24" r="5.2" style="--i:6"/><circle class="mq-b" cx="70" cy="60" r="5.2" style="--i:6"/><circle class="mq-b" cx="70" cy="10" r="5.2" style="--i:7"/><circle class="mq-b" cx="70" cy="74" r="5.2" style="--i:7"/><circle class="mq-b" cx="52" cy="20" r="5.2" style="--i:8"/><circle class="mq-b" cx="52" cy="64" r="5.2" style="--i:8"/><circle class="mq-b" cx="36" cy="32" r="5.2" style="--i:9"/><circle class="mq-b" cx="36" cy="52" r="5.2" style="--i:9"/><circle class="mq-b" cx="20" cy="42" r="5.2" style="--i:10"/><circle class="mq-b" cx="178" cy="42" r="5.2" style="--i:0"/></svg></span></a>
         </div>
       </div>
     </div>
@@ -2902,7 +2958,7 @@ html.fonts-wait .gate-sign { opacity: 0; }
 </section>
 <section class="slab shows-slab torn" id="shows">
     <div class="wrap">
-      <h2>Upcoming shows</h2>
+      <div class="marquee"><span class="mq-bulbs" aria-hidden="true"></span><h2>Upcoming Shows</h2></div>
       <div class="countdown" id="countdown" aria-live="off">
         <div class="cd-label" id="cd-label">Next show: Plymouth Arts Center, Plymouth</div>
         <div class="cd-clock">
@@ -3248,7 +3304,7 @@ html.fonts-wait .gate-sign { opacity: 0; }
           <p class="w-for">Lead &amp; Steel Guitar</p>
           <figure class="mug"><img src="tyler.webp" alt="Tyler Furrer playing an acoustic guitar" width="800" height="1000" loading="lazy"></figure>
           <h3 class="name">Tyler Furrer</h3>
-          <div class="w-body"><p>Tyler Furrer is a guitarist from Wisconsin who has built his career on the road. He has spent the past three years honing his craft in Nashville, playing everywhere from downtown on Broadway to large festival stages, with shows all over the country, including New York, Las Vegas and Nashville.</p><p>He's toured the country playing everything from honky tonk to Americana to polka, including runs with Mollie B &amp; SqueezeBox, the award-winning band behind RFD-TV's Mollie B Polka Party. He joined Listening Party for their album High &amp; Low, which is where he met Weston, and has shared stages with national acts including Brantley Gilbert, Parker McCollum, Chase Matthew and Clay Street Unit. Along the way he's played Summerfest, Wisconsin State Fair, the Hodag Country Festival, Mile of Music and the Tri-State Rodeo in Iowa.</p><p>Now he's on lead guitar for Rat River Boys, bringing the Nashville polish and the Wisconsin grit to every set.</p></div>
+          <div class="w-body"><p>Tyler Furrer is a guitarist from Wisconsin who has built his career on the road. He has spent several years honing his craft in Nashville, playing everywhere from downtown on Broadway to large festival stages, with shows all over the country, including New York, Las Vegas and Nashville.</p><p>He's toured the country playing everything from honky tonk to Americana to polka, including runs with Mollie B &amp; SqueezeBox, the award-winning band behind RFD-TV's Mollie B Polka Party. He joined Listening Party for their album High &amp; Low, which is where he met Weston, and has shared stages with national acts including Brantley Gilbert, Parker McCollum, Chase Matthew and Clay Street Unit. Along the way he's played Summerfest, Wisconsin State Fair, the Hodag Country Festival, Mile of Music and the Tri-State Rodeo in Iowa.</p><p>Now he's on lead guitar for Rat River Boys, bringing the Nashville polish and the Wisconsin grit to every set.</p></div>
         </article>
       </div>
     <div class="gang">
@@ -3394,13 +3450,13 @@ html.fonts-wait .gate-sign { opacity: 0; }
       <div class="book-pitch">
         <p class="kicker">Booking</p>
         <h2>Got a stage that needs some twang?</h2>
-        <p class="lede">Bars, breweries, festivals, divorce parties, backyard blowouts. We'll turn your place into a honky tonk.</p>
+        <p class="lede">Bars, breweries, festivals, weddings, backyard blowouts. We'll turn your place into a honky tonk.</p>
         <div class="email-row">
           <span class="email" id="email">ratriverboysband@gmail.com</span>
           <button class="btn" id="copy" type="button">Copy email</button>
         </div>
         <div class="copied" id="copied" aria-live="polite"></div>
-        <p class="fb-line">Or slide into our DMs on <span class="nowrap"><a href="https://www.facebook.com/profile.php?id=61589395443501" target="_blank" rel="noopener">Facebook</a>.</span> We answer faster than your ex.</p>
+        <p class="fb-line">Or slide into our DMs on <span class="nowrap"><a href="https://www.facebook.com/profile.php?id=61589395443501" target="_blank" rel="noopener">Facebook</a>.</span> We answer fast.</p>
 <!-- PRESS KIT (hidden for now)
         <a class="kit-btn" href="rat-river-boys-press-kit.pdf" download="Rat-River-Boys-Press-Kit.pdf">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12m0 0-5-5m5 5 5-5M4 19h16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="square"/></svg>
@@ -4120,11 +4176,38 @@ html.fonts-wait .gate-sign { opacity: 0; }
 <script>
 (function () {
   // ---- countdown to the next show ----
-  var shows = (window.RRB_SHOWS || []).map(function (x) { return { at: x.start.toISOString(), name: x.venue + ', ' + x.city }; });
+  var shows = (window.RRB_SHOWS || []).map(function (x) { return { at: x.start.toISOString(), name: x.venue + ', ' + (x.town || x.city) }; });
   var quips = ['Start hydrating now.', 'Tell your boss you have a cold.', 'Plenty of time to lie to your wife about it.', 'Iron your good jeans.'];
   var q = quips[Math.floor(Math.random() * quips.length)];
   var el = { d: document.getElementById('cd-d'), h: document.getElementById('cd-h'), m: document.getElementById('cd-m'), s: document.getElementById('cd-s'), label: document.getElementById('cd-label'), quip: document.getElementById('cd-quip'), box: document.getElementById('countdown') };
   function pad(n) { return (n < 10 ? '0' : '') + n; }
+  // next show on a changeable-letter board: each letter is its own card on a rail
+  var lbLast = '';
+  function lbRow(text, cls) {
+    var row = document.createElement('div'); row.className = 'lb-row' + (cls ? ' ' + cls : '');
+    text.split(' ').forEach(function (w) {
+      if (!w) return;
+      var word = document.createElement('span'); word.className = 'lb-word';
+      w.split('').forEach(function (ch) {
+        var t = document.createElement('span'); t.className = 'lb-t'; t.textContent = ch;
+        var h = (ch.charCodeAt(0) * 37 + word.childNodes.length * 11 + text.length) % 7;
+        t.style.setProperty('--r', ((h - 3) * 0.35).toFixed(2) + 'deg');
+        t.style.setProperty('--y', ((h % 3) - 1) * 0.6 + 'px');
+        word.appendChild(t);
+      });
+      row.appendChild(word);
+    });
+    return row;
+  }
+  function lbRender(name) {
+    if (name === lbLast) return; lbLast = name;
+    var box = el.label; box.classList.add('lb'); box.innerHTML = '';
+    box.setAttribute('aria-label', 'Next show: ' + name);
+    var inner = document.createElement('div'); inner.className = 'lb-inner'; inner.setAttribute('aria-hidden', 'true');
+    inner.appendChild(lbRow('NEXT SHOW', 'lb-red'));
+    inner.appendChild(lbRow(name.toUpperCase().replace(', ', ' \u00b7 '), ''));
+    box.appendChild(inner);
+  }
   function tickCd() {
     var now = Date.now(), next = null;
     for (var k = 0; k < shows.length; k++) {
@@ -4135,7 +4218,7 @@ html.fonts-wait .gate-sign { opacity: 0; }
       el.box.style.display = 'none';
       return;
     }
-    el.label.textContent = 'Next show: ' + next.name;
+    lbRender(next.name);
     var diff = Math.max(0, next.t - now);
     if (diff === 0) { el.quip.textContent = "We're on right now. What are you doing on your phone?"; }
     else el.quip.textContent = q;
@@ -5117,5 +5200,31 @@ document.querySelectorAll('.fight-inline').forEach(function (b) {
   window.addEventListener('load', build);
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(build);
   setTimeout(function () { build(); ring.classList.add('on'); }, 2600);
+})();
+</script>
+<script>
+/* bulbs around the Upcoming Shows marquee */
+(function () {
+  var ring = document.querySelector('#shows .mq-bulbs'); if (!ring) return;
+  var lastW = 0, lastH = 0;
+  function build() {
+    var w = ring.offsetWidth, h = ring.offsetHeight; if (!w || !h) return;
+    if (Math.abs(w - lastW) < 2 && Math.abs(h - lastH) < 2 && ring.childNodes.length) return;
+    lastW = w; lastH = h; ring.innerHTML = '';
+    var gap = w < 340 ? 20 : 26, nx = Math.max(2, Math.round(w / gap)), ny = Math.max(1, Math.round(h / gap)), pts = [], k;
+    for (k = 0; k < nx; k++) pts.push([k / nx * 100, 0]);
+    for (k = 0; k < ny; k++) pts.push([100, k / ny * 100]);
+    for (k = 0; k < nx; k++) pts.push([100 - k / nx * 100, 100]);
+    for (k = 0; k < ny; k++) pts.push([0, 100 - k / ny * 100]);
+    pts.forEach(function (p, idx) {
+      var b = document.createElement('i');
+      b.style.left = p[0] + '%'; b.style.top = p[1] + '%'; b.style.setProperty('--i', idx);
+      ring.appendChild(b);
+    });
+  }
+  build();
+  window.addEventListener('resize', build);
+  window.addEventListener('load', build);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(build);
 })();
 </script>
