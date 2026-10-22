@@ -3485,6 +3485,7 @@ html.fonts-wait .gate-sign { opacity: 0; }
           <label class="bf-wide">Venue or event<input id="bf-venue" name="venue" type="text" autocomplete="organization"></label>
           <label>City<input id="bf-city" name="city" type="text" autocomplete="address-level2"></label>
           <label>Date<input id="bf-date" name="date" type="text"></label>
+          <label class="bf-wide">Budget<input id="bf-budget" name="budget" type="text" inputmode="text" placeholder="e.g. $1,500"></label>
           <label>Your name<input id="bf-name" name="name" type="text" autocomplete="name"></label>
           <label>Your email<input id="bf-email" name="email" type="email" autocomplete="email"></label>
         </div>
@@ -4241,13 +4242,13 @@ html.fonts-wait .gate-sign { opacity: 0; }
   // ---- booking form writes the email ----
   var f = document.getElementById('book-form');
   if (f) {
-    var ids = ['venue', 'city', 'date', 'name', 'email', 'notes'];
+    var ids = ['venue', 'city', 'date', 'budget', 'name', 'email', 'notes'];
     var mail = document.getElementById('bf-mail'), status = document.getElementById('bf-status');
     function v(id) { return (document.getElementById('bf-' + id).value || '').trim(); }
     function build() {
       var subject = 'Booking inquiry' + (v('venue') ? ': ' + v('venue') : '') + (v('date') ? ' (' + v('date') + ')' : '');
       var body = 'Hey Rat River Boys,\n\nWe want you to come ruin our reputation.\n\n' +
-        'Venue: ' + (v('venue') || '') + '\nCity: ' + (v('city') || '') + '\nDate: ' + (v('date') || '') +
+        'Venue: ' + (v('venue') || '') + '\nCity: ' + (v('city') || '') + '\nDate: ' + (v('date') || '') + '\nBudget: ' + (v('budget') || '') +
         (v('notes') ? '\n\n' + v('notes') : '') + '\n\nThanks,\n' + (v('name') ? v('name') + '\n' : '') + (v('email') ? v('email') + '\n' : '');
       if (mail) mail.href = 'mailto:ratriverboysband@gmail.com?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
       return 'To: ratriverboysband@gmail.com\nSubject: ' + subject + '\n\n' + body;
@@ -4263,7 +4264,7 @@ html.fonts-wait .gate-sign { opacity: 0; }
       if (!v('venue') && !v('notes')) { status.textContent = "Tab's empty, partner. Tell us the venue at least."; document.getElementById('bf-venue').focus(); return; }
       if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { status.textContent = 'We need your email so we can holler back.'; document.getElementById('bf-email').focus(); return; }
       var subject = 'Bar Tab: ' + (v('venue') || 'Booking request') + (v('date') ? ' (' + v('date') + ')' : '');
-      var payload = { venue: v('venue'), city: v('city'), date: v('date'), name: v('name'), email: email, notes: v('notes'),
+      var payload = { venue: v('venue'), city: v('city'), date: v('date'), budget: v('budget'), name: v('name'), email: email, notes: v('notes'),
         _subject: subject, _replyto: email, _gotcha: document.getElementById('bf-hp').value };
       sending = true; sendBtn.disabled = true; sendBtn.textContent = 'Sending...'; status.textContent = '';
       fetch(ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' }, body: JSON.stringify(payload) })
@@ -4271,7 +4272,7 @@ html.fonts-wait .gate-sign { opacity: 0; }
         .then(function () {
           sendBtn.textContent = 'Sent! We\'ll be in touch.';
           status.textContent = "Got it. We'll holler back before last call.";
-          ['venue', 'city', 'date', 'notes'].forEach(function (id) { document.getElementById('bf-' + id).value = ''; });
+          ['venue', 'city', 'date', 'budget', 'notes'].forEach(function (id) { document.getElementById('bf-' + id).value = ''; });
           build();
           setTimeout(function () { sendBtn.textContent = 'Send booking request'; sendBtn.disabled = false; sending = false; }, 4000);
         })
