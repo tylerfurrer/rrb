@@ -2827,6 +2827,14 @@ html.fonts-wait .gate-sign { opacity: 0; }
 }
 .gate .hang-rope { filter: saturate(.6) brightness(.85); }
 .gate .beam { filter: saturate(.7) brightness(.85); }
+/* walking in: punch a hole in the wall where the doorway is so the real room shows through */
+.gate.opening { background: transparent !important; }
+.gate.opening .wall-cv, .gate.opening .smoke, .gate.opening::before, .gate.opening::after {
+  -webkit-mask: linear-gradient(#000 0 0) 0 0 / 100% 100% no-repeat, linear-gradient(#000 0 0) var(--hx) var(--hy) / var(--hw) var(--hh) no-repeat;
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) 0 0 / 100% 100% no-repeat exclude, linear-gradient(#000 0 0) var(--hx) var(--hy) / var(--hw) var(--hh) no-repeat;
+}
+.gate.opening { will-change: transform, opacity; }
 </style>
 
 <div class="haze" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
@@ -4695,14 +4703,34 @@ document.querySelectorAll('.fight-inline').forEach(function (b) {
       if (window.gsap && !reduce) gsap.to(r, { height: 18, duration: .5, ease: 'elastic.out(1.2,.3)' }); else r.style.height = '18px';
     });
     if (!window.gsap || reduce) { gate.style.transition = 'opacity .35s'; gate.style.opacity = '0'; setTimeout(finish, 360); return; }
+    // walk through: the doorway becomes a real opening onto the site, then we step through it
+    var glow = gate.querySelector('.glow'), gr = gate.getBoundingClientRect(), hr = glow.getBoundingClientRect();
+    var hx = hr.left - gr.left, hy = hr.top - gr.top;
+    gate.style.setProperty('--hx', hx + 'px'); gate.style.setProperty('--hy', hy + 'px');
+    gate.style.setProperty('--hw', hr.width + 'px'); gate.style.setProperty('--hh', hr.height + 'px');
+    var cx = hx + hr.width / 2, cy = hy + hr.height * .52;
+    function letIn() { // start the page's own intro while we walk in
+      if (!window.__gateOn) return;
+      window.__gateOn = false;
+      var q = window.__gateQ || []; window.__gateQ = [];
+      q.forEach(function (fn) { try { fn(); } catch (e) {} });
+    }
+    gsap.set(gate, { transformOrigin: cx + 'px ' + cy + 'px' });
     gsap.timeline({ onComplete: finish })
       .to(L, { rotateY: 118, duration: .42, ease: 'power3.out' })
       .to([signEl, hangEl.querySelector('.rope-tail')].filter(Boolean), { y: '+=' + (window.innerHeight + 200), rotate: '+=' + (Math.random() < .5 ? -24 : 24), duration: .85, ease: 'power2.in' }, '<.05')
       .to(R, { rotateY: -118, duration: .42, ease: 'power3.out' }, '<')
-      .to(L, { rotateY: 62, duration: .9, ease: 'elastic.out(1, .35)' })
-      .to(R, { rotateY: -62, duration: .9, ease: 'elastic.out(1, .35)' }, '<')
-      .to('#gate-inner', { scale: 4.2, duration: .8, ease: 'power2.in' }, '<.15')
-      .to(gate, { opacity: 0, duration: .45, ease: 'power1.in' }, '-=.4');
+      .add(function () { gate.classList.add('opening'); letIn(); }, '<.2')
+      .to(glow, { opacity: 0, duration: .35, ease: 'power1.out' }, '<')
+      .to(L, { rotateY: 78, duration: .8, ease: 'elastic.out(1, .4)' }, '<.1')
+      .to(R, { rotateY: -78, duration: .8, ease: 'elastic.out(1, .4)' }, '<')
+      .to(gate, { scale: 7, duration: 1.05, ease: 'power3.in' }, '<.05')
+      // footsteps: a little bob and sway on each step as we walk in
+      .to(gate, { keyframes: { y: [0, -9, 0, -9, 0, -7, 0], rotation: [0, .5, 0, -.5, 0, .35, 0] }, duration: 1.05, ease: 'none' }, '<')
+      // the doors swing back as we push through them
+      .to(L, { rotateY: 18, duration: .55, ease: 'power2.in' }, '<.5')
+      .to(R, { rotateY: -18, duration: .55, ease: 'power2.in' }, '<')
+      .to(gate, { opacity: 0, duration: .25, ease: 'power1.in' }, '-=.22');
   }
   setTimeout(open, 2000);
   // tap or click anywhere on the gate to skip the wait
