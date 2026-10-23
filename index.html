@@ -2759,6 +2759,74 @@ html.fonts-wait .gate-sign { opacity: 0; }
   #shows .lb-red .lb-t { font-size: .85rem; }
 }
 #shows .where .stage { font-family: var(--label); font-weight: 600; text-transform: uppercase; letter-spacing: .12em; font-size: .72rem; color: var(--bone); opacity: .8; margin-top: 4px; }
+/* ---------- gate v4: raw. real room through the doors, weathered wood, no cartoon props ---------- */
+.gate .lantern, .gate .horseshoe, .gate .bar-scene, .gate-sign .bh { display: none !important; }
+.gate .wall-cv, .gate .doorway { filter: saturate(.82) contrast(1.05); }
+.gate::before {
+  background:
+    radial-gradient(ellipse 46% 52% at 50% 62%, rgba(255,160,70,.24), transparent 70%),
+    radial-gradient(ellipse at 50% 50%, transparent 34%, rgba(0,0,0,.72) 100%) !important;
+}
+/* through the doors: the band on stage, dim and smoky */
+.gate .glow {
+  background:
+    radial-gradient(ellipse 70% 60% at 50% 45%, rgba(255,176,84,.55), rgba(190,90,30,.22) 55%, rgba(20,8,2,.5) 100%),
+    url("gate-room.webp") center 42% / cover no-repeat,
+    #3a1a08 !important;
+  background-blend-mode: screen, normal, normal !important;
+}
+.gate .glow::after { content: ""; position: absolute; inset: 0; background: var(--grain); opacity: .5; mix-blend-mode: overlay; pointer-events: none; }
+/* batwing doors: old dark pine, worn paint edges, plain iron hinges */
+.gate .door {
+  border-color: #3d2410 #2c1909 #22130a #33200e !important;
+  box-shadow: inset 0 0 0 1px rgba(0,0,0,.6), 0 0 0 1px rgba(0,0,0,.6), 0 6px 14px rgba(0,0,0,.5) !important;
+  filter: saturate(.7) brightness(.86);
+}
+.gate .door::before {
+  background:
+    repeating-linear-gradient(180deg,
+      rgba(0,0,0,0) 0 3px,
+      #1d0f06 3px 4px, #4a2c15 4px 6px, #5b3719 6px 8px, #3c2410 8px 11px, #1d0f06 11px 12px) !important;
+  opacity: .96;
+}
+.gate .door::after {
+  border-top-color: #2f1b0b !important;
+  background:
+    linear-gradient(180deg, rgba(255,210,150,.06), transparent 30%, rgba(0,0,0,.4)),
+    var(--woodgrain) 0 0 / 160px 320px,
+    var(--scratch),
+    linear-gradient(180deg, #4b2d15, #34200e) !important;
+  box-shadow: inset 0 0 0 7px #3b2410, inset 0 0 0 8px rgba(0,0,0,.5), inset 0 0 22px rgba(0,0,0,.45) !important;
+}
+.gate .hinge {
+  width: 6px !important; height: 26px !important; border-radius: 2px;
+  background: linear-gradient(90deg, #17130f, #4a433b 45%, #2a2520 75%, #17130f) !important;
+  box-shadow: 0 1px 2px rgba(0,0,0,.7) !important;
+}
+.gate .doorway { border-color: #24160b #1c1108 #140b05 #1c1108 !important;
+  box-shadow: inset 0 0 0 2px #0e0703, inset 0 14px 30px rgba(0,0,0,.6), 0 0 0 3px #2e1c0d, 0 0 0 6px #0e0703, 0 24px 60px rgba(0,0,0,.75) !important; }
+/* the sign: sun-bleached boards, hand-painted letters worn into the grain */
+.gate-sign {
+  background-color: #8e7650 !important;
+  box-shadow: inset 0 0 40px rgba(30,16,6,.7), inset 0 0 6px rgba(20,10,3,.9), 0 16px 30px rgba(0,0,0,.65) !important;
+  background-color: #85704f !important;
+}
+.gate-sign h2 {
+  color: #e7bd6a !important; -webkit-text-stroke: 0 !important;
+  text-shadow: 2px 2px 0 #1a100a, 0 0 18px rgba(231,189,106,.18) !important;
+  background: none !important; opacity: 1;
+}
+.gate-sign .gate-big { color: #1a100a !important; text-shadow: none !important; opacity: 1; }
+.gate-sign .gate-kicker { color: #1a100a !important; opacity: 1; }
+.gate-sign::after {
+  background:
+    var(--scratch),
+    radial-gradient(ellipse at 30% 20%, rgba(255,240,210,.12), transparent 55%),
+    linear-gradient(180deg, rgba(0,0,0,.22), transparent 35%, rgba(0,0,0,.25)) !important;
+  mix-blend-mode: multiply;
+}
+.gate .hang-rope { filter: saturate(.6) brightness(.85); }
+.gate .beam { filter: saturate(.7) brightness(.85); }
 </style>
 
 <div class="haze" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
@@ -3485,7 +3553,7 @@ html.fonts-wait .gate-sign { opacity: 0; }
           <label class="bf-wide">Venue or event<input id="bf-venue" name="venue" type="text" autocomplete="organization"></label>
           <label>City<input id="bf-city" name="city" type="text" autocomplete="address-level2"></label>
           <label>Date<input id="bf-date" name="date" type="text"></label>
-          <label class="bf-wide">Budget<input id="bf-budget" name="budget" type="text" inputmode="text" placeholder="e.g. $1,500"></label>
+          <label class="bf-wide">Budget<input id="bf-budget" name="budget" type="text" inputmode="text"></label>
           <label>Your name<input id="bf-name" name="name" type="text" autocomplete="name"></label>
           <label>Your email<input id="bf-email" name="email" type="email" autocomplete="email"></label>
         </div>
