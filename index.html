@@ -2761,11 +2761,13 @@ html.fonts-wait .gate-sign { opacity: 0; }
 #shows .where .stage { font-family: var(--label); font-weight: 600; text-transform: uppercase; letter-spacing: .12em; font-size: .72rem; color: var(--bone); opacity: .8; margin-top: 4px; }
 /* ---------- gate v4: raw. real room through the doors, weathered wood, no cartoon props ---------- */
 .gate .lantern, .gate .horseshoe, .gate .bar-scene, .gate-sign .bh { display: none !important; }
-.gate .wall-cv, .gate .doorway { filter: saturate(.82) contrast(1.05); }
+.gate .wall-cv { filter: saturate(.9) contrast(1.03) brightness(1.22); }
+.gate .doorway { filter: saturate(.85) contrast(1.04); }
 .gate::before {
   background:
-    radial-gradient(ellipse 46% 52% at 50% 62%, rgba(255,160,70,.24), transparent 70%),
-    radial-gradient(ellipse at 50% 50%, transparent 34%, rgba(0,0,0,.72) 100%) !important;
+    radial-gradient(ellipse 34% 46% at 50% 60%, rgba(255,170,80,.42), rgba(255,150,60,.16) 55%, transparent 80%),
+    radial-gradient(ellipse 60% 16% at 50% 94%, rgba(255,160,70,.32), transparent 75%),
+    radial-gradient(ellipse at 50% 50%, transparent 46%, rgba(0,0,0,.5) 100%) !important;
 }
 /* through the doors: the band on stage, dim and smoky */
 .gate .glow {
@@ -3406,7 +3408,7 @@ html.fonts-wait .gate-sign { opacity: 0; }
         </article>
         <article class="mini-wanted">
           <p class="mw-head">Fiddle</p>
-          <div class="mw-shot"><img src="fiddle.webp" alt="Rat River Boys fiddle player" loading="lazy"></div>
+          <div class="mw-shot"><img src="fiddle.webp?v=2" alt="Rat River Boys fiddle player" loading="lazy"></div>
         </article>
       </div>
     </div>
@@ -4715,22 +4717,37 @@ document.querySelectorAll('.fight-inline').forEach(function (b) {
       var q = window.__gateQ || []; window.__gateQ = [];
       q.forEach(function (fn) { try { fn(); } catch (e) {} });
     }
+    // how far we have to walk before the doorway fills the whole screen
+    var W = gate.clientWidth, H = gate.clientHeight;
+    var kEnd = 1.35 * Math.max(cx / Math.max(1, cx - hx), (W - cx) / Math.max(1, hx + hr.width - cx),
+      cy / Math.max(1, cy - hy), (H - cy) / Math.max(1, hy + hr.height - cy));
+    // the room is deeper than the wall: it starts small, dim and soft, and grows slower than the wall does
+    var room = [document.querySelector('.hero'), document.querySelector('main')].filter(Boolean);
+    room.forEach(function (el) {
+      var r = el.getBoundingClientRect();
+      gsap.set(el, { transformOrigin: (cx - r.left) + 'px ' + (cy - r.top) + 'px', scale: .62, filter: 'blur(6px) brightness(.45)' });
+    });
+    function roomDone() { room.forEach(function (el) { gsap.set(el, { clearProps: 'transform,filter,transformOrigin' }); }); }
     gsap.set(gate, { transformOrigin: cx + 'px ' + cy + 'px' });
-    gsap.timeline({ onComplete: finish })
-      .to(L, { rotateY: 118, duration: .42, ease: 'power3.out' })
+    var WALK = 1.15;
+    gsap.timeline({ onComplete: function () { roomDone(); finish(); } })
+      // kick: doors fly open, sign drops
+      .to(L, { rotateY: 110, duration: .38, ease: 'power3.out' })
+      .to(R, { rotateY: -110, duration: .38, ease: 'power3.out' }, '<')
       .to([signEl, hangEl.querySelector('.rope-tail')].filter(Boolean), { y: '+=' + (window.innerHeight + 200), rotate: '+=' + (Math.random() < .5 ? -24 : 24), duration: .85, ease: 'power2.in' }, '<.05')
-      .to(R, { rotateY: -118, duration: .42, ease: 'power3.out' }, '<')
-      .add(function () { gate.classList.add('opening'); letIn(); }, '<.2')
-      .to(glow, { opacity: 0, duration: .35, ease: 'power1.out' }, '<')
-      .to(L, { rotateY: 78, duration: .8, ease: 'elastic.out(1, .4)' }, '<.1')
-      .to(R, { rotateY: -78, duration: .8, ease: 'elastic.out(1, .4)' }, '<')
-      .to(gate, { scale: 7, duration: 1.05, ease: 'power3.in' }, '<.05')
-      // footsteps: a little bob and sway on each step as we walk in
-      .to(gate, { keyframes: { y: [0, -9, 0, -9, 0, -7, 0], rotation: [0, .5, 0, -.5, 0, .35, 0] }, duration: 1.05, ease: 'none' }, '<')
-      // the doors swing back as we push through them
-      .to(L, { rotateY: 18, duration: .55, ease: 'power2.in' }, '<.5')
-      .to(R, { rotateY: -18, duration: .55, ease: 'power2.in' }, '<')
-      .to(gate, { opacity: 0, duration: .25, ease: 'power1.in' }, '-=.22');
+      // the doorway opens onto the real room
+      .add(function () { gate.classList.add('opening'); letIn(); }, '<.12')
+      .to(glow, { opacity: 0, duration: .3, ease: 'power1.out' }, '<')
+      // walk in: the wall and frame rush past, the room comes up slower and into focus
+      .addLabel('walk', '<.1')
+      .to(gate, { scale: kEnd, duration: WALK, ease: 'power1.in' }, 'walk')
+      .to(room, { scale: 1, duration: WALK, ease: 'power1.in' }, 'walk')
+      .to(room, { filter: 'blur(0px) brightness(1)', duration: WALK * .9, ease: 'power1.out' }, 'walk')
+      // the doors swing wide as we push past them
+      .to(L, { rotateY: 96, duration: WALK, ease: 'sine.inOut' }, 'walk')
+      .to(R, { rotateY: -96, duration: WALK, ease: 'sine.inOut' }, 'walk')
+      // footsteps
+      .to(gate, { keyframes: { y: [0, -6, 0, -6, 0], rotation: [0, .35, 0, -.35, 0] }, duration: WALK, ease: 'none' }, 'walk');
   }
   setTimeout(open, 2000);
   // tap or click anywhere on the gate to skip the wait
