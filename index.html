@@ -2837,6 +2837,8 @@ html.fonts-wait .gate-sign { opacity: 0; }
   mask: linear-gradient(#000 0 0) 0 0 / 100% 100% no-repeat exclude, linear-gradient(#000 0 0) var(--hx) var(--hy) / var(--hw) var(--hh) no-repeat;
 }
 .gate.opening { will-change: transform, opacity; }
+.room-backdrop { position: fixed; inset: 0; z-index: 0; pointer-events: none;
+  background: radial-gradient(ellipse at 50% 45%, rgba(40,20,8,.35), rgba(12,6,2,.85) 80%), url("gate-room.webp") center / cover no-repeat, #1a0d05; }
 </style>
 
 <div class="haze" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
@@ -3071,17 +3073,17 @@ html.fonts-wait .gate-sign { opacity: 0; }
           <div class="where"><div class="venue">Iron Horse Hotel</div><div class="town">Milwaukee, WI</div><span class="lineup-tag" role="img" aria-label="Duo"><svg viewBox="0 0 3480 1530" width="3.480em" height="1.530em" aria-hidden="true" focusable="false"><rect x="60" y="60" width="3360" height="1410" rx="220" fill="none" stroke="currentColor" stroke-opacity=".8" stroke-width="1.5" vector-effect="non-scaling-stroke"/><text x="700 1446 2194" y="1170" fill="currentColor" font-family="Oswald, 'Arial Narrow', sans-serif" font-weight="700" font-size="1000">DUO</text></svg></span></div>
           <div class="time">7-9 PM</div>
         </li>
-        <li class="show">
+        <li class="show" data-hours="2.5" data-tz="America/New_York" data-fb="https://www.jolenescleveland.com/">
           <div class="date"><span class="m">Apr</span><span class="d">2</span></div>
           <div class="where"><div class="venue">Jolene&rsquo;s</div><div class="town">Cleveland, OH</div><span class="lineup-tag band" role="img" aria-label="Band"><svg viewBox="0 0 4166 1530" width="4.166em" height="1.530em" aria-hidden="true" focusable="false"><rect x="60" y="60" width="4046" height="1410" rx="220" fill="none" stroke="currentColor" stroke-opacity=".8" stroke-width="1.5" vector-effect="non-scaling-stroke"/><text x="700 1448 2159 2880" y="1170" fill="currentColor" font-family="Oswald, 'Arial Narrow', sans-serif" font-weight="700" font-size="1000">BAND</text></svg></span></div>
-          <div class="time">TBA</div>
+          <div class="time">8-10:30 PM</div>
         </li>
-        <li class="show">
+        <li class="show" data-fb="https://www.potawatomi.com/carter/">
           <div class="date"><span class="m">Apr</span><span class="d">9</span></div>
           <div class="where"><div class="venue">Potawatomi Carter Casino</div><div class="town">Wabeno, WI</div><span class="lineup-tag band" role="img" aria-label="Band"><svg viewBox="0 0 4166 1530" width="4.166em" height="1.530em" aria-hidden="true" focusable="false"><rect x="60" y="60" width="4046" height="1410" rx="220" fill="none" stroke="currentColor" stroke-opacity=".8" stroke-width="1.5" vector-effect="non-scaling-stroke"/><text x="700 1448 2159 2880" y="1170" fill="currentColor" font-family="Oswald, 'Arial Narrow', sans-serif" font-weight="700" font-size="1000">BAND</text></svg></span></div>
           <div class="time">TBA</div>
         </li>
-        <li class="show">
+        <li class="show" data-fb="https://www.potawatomi.com/carter/">
           <div class="date"><span class="m">Apr</span><span class="d">10</span></div>
           <div class="where"><div class="venue">Potawatomi Carter Casino</div><div class="town">Wabeno, WI</div><span class="lineup-tag band" role="img" aria-label="Band"><svg viewBox="0 0 4166 1530" width="4.166em" height="1.530em" aria-hidden="true" focusable="false"><rect x="60" y="60" width="4046" height="1410" rx="220" fill="none" stroke="currentColor" stroke-opacity=".8" stroke-width="1.5" vector-effect="non-scaling-stroke"/><text x="700 1448 2159 2880" y="1170" fill="currentColor" font-family="Oswald, 'Arial Narrow', sans-serif" font-weight="700" font-size="1000">BAND</text></svg></span></div>
           <div class="time">TBA</div>
@@ -3107,10 +3109,10 @@ html.fonts-wait .gate-sign { opacity: 0; }
       /* the show list above is the only place shows live. Past shows drop off the morning after, and the countdown + Google event data read from here. */
       (function () {
         var MON = { jan:0, feb:1, mar:2, apr:3, may:4, jun:5, jul:6, aug:7, sep:8, oct:9, nov:10, dec:11 };
-        function chicago(y, m, d, hh, mm) {
+        function chicago(y, m, d, hh, mm, tz) {
           var guess = Date.UTC(y, m, d, hh, mm);
           try {
-            var f = new Intl.DateTimeFormat('en-US', { timeZone: 'America/Chicago', year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric', hourCycle: 'h23' });
+            var f = new Intl.DateTimeFormat('en-US', { timeZone: tz || 'America/Chicago', year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric', hourCycle: 'h23' });
             var o = {}; f.formatToParts(new Date(guess)).forEach(function (p) { o[p.type] = p.value; });
             var asUTC = Date.UTC(+o.year, +o.month - 1, +o.day, +o.hour % 24, +o.minute);
             return new Date(guess - (asUTC - guess));
@@ -3123,9 +3125,10 @@ html.fonts-wait .gate-sign { opacity: 0; }
           if (m == null || !d) return;
           var hh = 19, mm = 0, t = txt(li, '.time').toLowerCase().match(/(\d{1,2})(?::(\d{2}))?\s*(am|pm)?/);
           if (t) { hh = parseInt(t[1], 10) % 12; mm = t[2] ? parseInt(t[2], 10) : 0; if (t[3] !== 'am') hh += 12; }
-          var y = year, start = chicago(y, m, d, hh, mm);
-          if (start.getTime() < now - 60 * 864e5) { y++; start = chicago(y, m, d, hh, mm); }
-          var dropAt = chicago(y, m, d + 1, 4, 0).getTime();   /* 4 AM the morning after */
+          var tz = li.getAttribute('data-tz') || '';
+          var y = year, start = chicago(y, m, d, hh, mm, tz);
+          if (start.getTime() < now - 60 * 864e5) { y++; start = chicago(y, m, d, hh, mm, tz); }
+          var dropAt = chicago(y, m, d + 1, 4, 0, tz).getTime();   /* 4 AM the morning after */
           if (now > dropAt) { li.remove(); return; }
           var town = txt(li, '.town');
           list.push({ li: li, start: start, tba: !/\d/.test(txt(li, '.time')), ymd: y + '-' + ('0' + (m + 1)).slice(-2) + '-' + ('0' + d).slice(-2), venue: txt(li, '.venue'), town: town, city: town.replace(/,\s*[A-Z]{2}$/, ''), region: (town.match(/,\s*([A-Z]{2})$/) || [])[1] || '', fb: li.getAttribute('data-fb') || '' });
@@ -3773,7 +3776,7 @@ html.fonts-wait .gate-sign { opacity: 0; }
     if (start < new Date(now.getTime() - 60 * 864e5)) start = new Date(y + 1, m, d, hh, mm);
     var venue = txt(li, '.venue'), town = txt(li, '.town'), fb = li.getAttribute('data-fb') || '';
     var hrs = parseFloat(li.getAttribute('data-hours')) || 3;
-    return { start: start, end: new Date(start.getTime() + hrs * 3600e3), title: 'Rat River Boys' + (li.getAttribute('data-lineup') ? ' (' + li.getAttribute('data-lineup') + ')' : '') + ' at ' + venue,
+    return { tz: li.getAttribute('data-tz') || 'America/Chicago', start: start, end: new Date(start.getTime() + hrs * 3600e3), title: 'Rat River Boys' + (li.getAttribute('data-lineup') ? ' (' + li.getAttribute('data-lineup') + ')' : '') + ' at ' + venue,
              where: venue + ', ' + (li.getAttribute('data-addr') || town), venue: venue, link: fb || SITE,
              details: 'Live at ' + venue + '.' + (fb ? ' Event: ' + fb : '') + ' ' + SITE };
   }
@@ -3787,7 +3790,7 @@ html.fonts-wait .gate-sign { opacity: 0; }
   }
   function google(e) {
     return 'https://calendar.google.com/calendar/render?action=TEMPLATE&text=' + encodeURIComponent(e.title) +
-      '&dates=' + stamp(e.start) + '/' + stamp(e.end) + '&ctz=America/Chicago&location=' + encodeURIComponent(e.where) +
+      '&dates=' + stamp(e.start) + '/' + stamp(e.end) + '&ctz=' + encodeURIComponent(e.tz || 'America/Chicago') + '&location=' + encodeURIComponent(e.where) +
       '&details=' + encodeURIComponent(e.details);
   }
   var open = null;
@@ -3795,16 +3798,17 @@ html.fonts-wait .gate-sign { opacity: 0; }
   document.querySelectorAll('#shows .show').forEach(function (li, i) {
     var ev = parse(li), time = li.querySelector('.time');
     if (!ev || !time) return;
-    if (!/\d/.test(time.textContent)) return;
     var fb = li.getAttribute('data-fb');
     var vEl = li.querySelector('.venue');
+    // the venue name links out even before set times are known
     if (fb && vEl && vEl.tagName !== 'A') {
       var a = document.createElement('a');
       a.className = vEl.className; a.href = fb; a.target = '_blank'; a.rel = 'noopener';
-      a.setAttribute('aria-label', ev.venue + ', Facebook event');
+      a.setAttribute('aria-label', ev.venue + (/facebook\.com/.test(fb) ? ', Facebook event' : ', venue website'));
       a.innerHTML = '<span>' + vEl.innerHTML + '</span>' + EXT;
       vEl.replaceWith(a);
     }
+    if (!/\d/.test(time.textContent)) return;
     if (fb) {
       li.classList.add('has-link');
       li.addEventListener('click', function (e) {
@@ -4725,9 +4729,13 @@ document.querySelectorAll('.fight-inline').forEach(function (b) {
     var room = [document.querySelector('.hero'), document.querySelector('main')].filter(Boolean);
     room.forEach(function (el) {
       var r = el.getBoundingClientRect();
-      gsap.set(el, { transformOrigin: (cx - r.left) + 'px ' + (cy - r.top) + 'px', scale: .62, filter: 'blur(6px) brightness(.45)' });
+      gsap.set(el, { transformOrigin: (cx - r.left) + 'px ' + (cy - r.top) + 'px', scale: 1, filter: 'blur(6px) brightness(.45)' });
     });
-    function roomDone() { room.forEach(function (el) { gsap.set(el, { clearProps: 'transform,filter,transformOrigin' }); }); }
+    // while the room is still far away, the space around it is the dim bar itself, not an empty void
+    function roomDone() {
+      // land: the last step settles you into the room
+      gsap.to(room, { scale: 1, duration: .7, ease: 'power3.out', onComplete: function () { room.forEach(function (el) { gsap.set(el, { clearProps: 'transform,filter,transformOrigin' }); }); } });
+    }
     gsap.set(gate, { transformOrigin: cx + 'px ' + cy + 'px' });
     var WALK = 1.15;
     gsap.timeline({ onComplete: function () { roomDone(); finish(); } })
@@ -4741,7 +4749,7 @@ document.querySelectorAll('.fight-inline').forEach(function (b) {
       // walk in: the wall and frame rush past, the room comes up slower and into focus
       .addLabel('walk', '<.1')
       .to(gate, { scale: kEnd, duration: WALK, ease: 'power1.in' }, 'walk')
-      .to(room, { scale: 1, duration: WALK, ease: 'power1.in' }, 'walk')
+      .to(room, { scale: 1.08, duration: WALK, ease: 'power1.in' }, 'walk')
       .to(room, { filter: 'blur(0px) brightness(1)', duration: WALK * .9, ease: 'power1.out' }, 'walk')
       // the doors swing wide as we push past them
       .to(L, { rotateY: 96, duration: WALK, ease: 'sine.inOut' }, 'walk')
