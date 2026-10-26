@@ -4061,9 +4061,15 @@ html.fonts-wait .gate-sign { opacity: 0; }
     var badge = document.querySelector('.badge');
     var brand = document.querySelector('.brand');
     if (badge && brand) {
-      brand.addEventListener('mouseenter', function () { gsap.to(badge, { rotate: '+=360', duration: .7, ease: 'power2.out' }); });
+      // always lands upright: spin to the next full turn(s) from wherever it is right now
+      function spin(turns, dur, ease) {
+        var now = gsap.getProperty(badge, 'rotate') || 0;
+        var end = (Math.floor(now / 360) + turns) * 360;
+        gsap.to(badge, { rotate: end, duration: dur, ease: ease, overwrite: true });
+      }
+      brand.addEventListener('mouseenter', function () { spin(1, .7, 'power2.out'); });
       // every click spins it, even mid-spin
-      brand.addEventListener('click', function () { gsap.to(badge, { rotate: '+=720', duration: 1.1, ease: 'power3.out', overwrite: true }); });
+      brand.addEventListener('click', function () { spin(2, 1.1, 'power3.out'); });
     }
 
     // buttons wobble on hover
