@@ -2884,10 +2884,15 @@ html.fonts-wait .gate-sign { opacity: 0; }
 }
 .vid-facade .vid-note::before, .vid-facade .vid-note::after { content: none !important; }
 .vid-reel .vid-facade .vid-note { font-size: .92rem; padding: .3em .9em .26em; }
+/* tape scales with each video so it reads the same on every screen */
+.vid-screen { container-type: inline-size; }
+.vid-wide .vid-facade .vid-note { font-size: clamp(14px, 3.4cqw, 24px) !important; }
+.vid-reel .vid-facade .vid-note { font-size: clamp(11px, 6.2cqw, 17px) !important; padding: .3em .75em .26em; }
+.vid-facade .vid-ph { padding-bottom: 7% !important; }
 .vid-reel .vid-frame:nth-child(2) .vid-note { transform: rotate(1.8deg); }
 .vid-reel .vid-frame:nth-child(3) .vid-note { transform: rotate(-1.2deg); }
 .vid-facade:hover .vid-note { transform: rotate(-2.5deg) translateY(-2px); }
-@media (max-width: 640px) { .vid-facade .vid-note { font-size: 1rem; } .vid-reel .vid-facade .vid-note { font-size: .82rem; } }
+
 </style>
 
 <div class="haze" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
