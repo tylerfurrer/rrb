@@ -2839,6 +2839,33 @@ html.fonts-wait .gate-sign { opacity: 0; }
 .gate.opening { will-change: transform, opacity; }
 .room-backdrop { position: fixed; inset: 0; z-index: 0; pointer-events: none;
   background: radial-gradient(ellipse at 50% 45%, rgba(40,20,8,.35), rgba(12,6,2,.85) 80%), url("gate-room.webp") center / cover no-repeat, #1a0d05; }
+/* full band video: our own poster and play button; the player only loads when someone hits play */
+.vid-wide { margin-bottom: 28px; }
+.vid-facade { all: unset; position: absolute; inset: 0; cursor: pointer; display: block; }
+.vid-facade .vid-poster { filter: brightness(.55) sepia(.35) contrast(1.05); transition: filter .25s ease; }
+.vid-facade:hover .vid-poster, .vid-facade:focus-visible .vid-poster { filter: brightness(.7) sepia(.25) contrast(1.05); }
+.vid-facade:hover .vid-play { transform: scale(1.06); }
+.vid-facade .vid-play { transition: transform .2s ease; }
+.vid-facade:focus-visible { outline: 3px solid var(--gold, #e7bd6a); outline-offset: -3px; }
+@media (max-width: 640px) { .vid-wide { margin-bottom: 18px; } }
+.vid-facade .vid-poster { filter: brightness(.72) saturate(.95) !important; }
+.vid-facade:hover .vid-poster { filter: brightness(.88) !important; }
+/* the shorts: smaller, labeled, clean covers */
+.vid-wide { margin-bottom: 44px; }
+.vid-more { max-width: 760px; margin: 0 auto 14px; display: flex; align-items: center; gap: 14px;
+  font-family: var(--label); font-weight: 600; text-transform: uppercase; letter-spacing: .24em; font-size: .78rem; color: var(--gold, #e7bd6a); }
+.vid-more::after { content: ""; flex: 1; height: 1px; background: rgba(231,189,106,.35); }
+.vid-reel { max-width: 760px !important; gap: 18px !important; }
+.vid-reel .vid-frame { padding: 8px; }
+.vid-reel .vid-play { width: 58px; height: 58px; }
+.vid-reel .vid-play::after { left: 23px; top: 16px; border-width: 13px 0 13px 20px; }
+.vid-reel .vid-note { font-size: .74rem; letter-spacing: .14em; padding: 0 8px; }
+.vid-reel .vid-ph { justify-content: flex-end; padding-bottom: 22px; gap: 12px; }
+@media (max-width: 760px) {
+  .vid-wide { margin-bottom: 30px; }
+  .vid-more { margin-bottom: 10px; }
+  .vid-reel .vid-frame { flex: 0 0 58% !important; }
+}
 </style>
 
 <div class="haze" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
@@ -3015,20 +3042,38 @@ html.fonts-wait .gate-sign { opacity: 0; }
   <div class="wrap">
     <p class="kicker">Videos</p>
     <h2>Caught on tape.</h2>
+    <div class="vid-frame vid-wide">
+      <div class="vid-screen" id="vid-full">
+        <button class="vid-facade" type="button" data-yt="K0LnWVe3yic" aria-label="Play the full band video">
+          <img class="vid-poster" src="https://i.ytimg.com/vi/K0LnWVe3yic/hqdefault.jpg" alt="" loading="lazy">
+          <span class="vid-ph"><span class="vid-play" aria-hidden="true"></span><span class="vid-note">Full band, live</span></span>
+        </button>
+      </div>
+    </div>
+    <p class="vid-more">More clips</p>
     <div class="vid-reel">
       <div class="vid-frame tall">
         <div class="vid-screen" id="vid-3">
-          <iframe src="https://www.youtube-nocookie.com/embed/eATwTSG0D2M?rel=0&amp;playsinline=1&amp;modestbranding=1" title="Dixieland Delight" loading="lazy" allow="encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>
+          <button class="vid-facade" type="button" data-yt="eATwTSG0D2M" data-title="Dixieland Delight" aria-label="Play Dixieland Delight">
+            <img class="vid-poster" src="https://i.ytimg.com/vi/eATwTSG0D2M/hqdefault.jpg" alt="" loading="lazy">
+            <span class="vid-ph"><span class="vid-play" aria-hidden="true"></span><span class="vid-note">Dixieland Delight</span></span>
+          </button>
         </div>
       </div>
       <div class="vid-frame tall">
         <div class="vid-screen" id="vid-solo">
-          <iframe src="https://www.youtube-nocookie.com/embed/53UOsI0vwqo?rel=0&amp;playsinline=1&amp;modestbranding=1" title="You Ain&#39;t Woman Enough (To Take My Man)" loading="lazy" allow="encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>
+          <button class="vid-facade" type="button" data-yt="53UOsI0vwqo" data-title="You Ain&#39;t Woman Enough (To Take My Man)" aria-label="Play You Ain&#39;t Woman Enough (To Take My Man)">
+            <img class="vid-poster" src="https://i.ytimg.com/vi/53UOsI0vwqo/hqdefault.jpg" alt="" loading="lazy">
+            <span class="vid-ph"><span class="vid-play" aria-hidden="true"></span><span class="vid-note">You Ain&#39;t Woman Enough</span></span>
+          </button>
         </div>
       </div>
       <div class="vid-frame tall">
         <div class="vid-screen" id="vid-2">
-          <iframe src="https://www.youtube-nocookie.com/embed/L03nYWAjmDg?rel=0&amp;playsinline=1&amp;modestbranding=1" title="Country Roads" loading="lazy" allow="encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>
+          <button class="vid-facade" type="button" data-yt="L03nYWAjmDg" data-title="Country Roads" aria-label="Play Country Roads">
+            <img class="vid-poster" src="https://i.ytimg.com/vi/L03nYWAjmDg/hqdefault.jpg" alt="" loading="lazy">
+            <span class="vid-ph"><span class="vid-play" aria-hidden="true"></span><span class="vid-note">Country Roads</span></span>
+          </button>
         </div>
       </div>
     </div>
@@ -5356,5 +5401,33 @@ document.querySelectorAll('.fight-inline').forEach(function (b) {
   window.addEventListener('resize', build);
   window.addEventListener('load', build);
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(build);
+})();
+</script>
+<script>
+/* full band video: swap our poster for the player on first tap, already playing */
+(function () {
+  // covers: each video's own YouTube thumbnail, upgraded to a sharper size when YouTube has one
+  document.querySelectorAll('.vid-facade').forEach(function (btn) {
+    var img = btn.querySelector('.vid-poster'), id = btn.getAttribute('data-yt'); if (!img || !id) return;
+    var tall = !!btn.closest('.tall');
+    var tries = (tall ? ['oardefault', 'sddefault'] : ['maxresdefault', 'sddefault'])
+      .map(function (n) { return 'https://i.ytimg.com/vi/' + id + '/' + n + '.jpg'; });
+    (function next() {
+      var url = tries.shift(); if (!url) return;
+      var t = new Image();
+      t.onload = function () { if (t.naturalWidth > 200) img.src = url; else next(); };
+      t.onerror = next;
+      t.src = url;
+    })();
+  });
+  document.querySelectorAll('.vid-facade').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var id = btn.getAttribute('data-yt'), f = document.createElement('iframe');
+      f.src = 'https://www.youtube-nocookie.com/embed/' + id + '?autoplay=1&rel=0&playsinline=1&modestbranding=1';
+      f.title = btn.getAttribute('data-title') || 'Rat River Boys full band live';
+      f.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen'; f.allowFullscreen = true;
+      btn.replaceWith(f);
+    });
+  });
 })();
 </script>
