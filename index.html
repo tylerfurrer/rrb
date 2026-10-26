@@ -2866,6 +2866,28 @@ html.fonts-wait .gate-sign { opacity: 0; }
   .vid-more { margin-bottom: 10px; }
   .vid-reel .vid-frame { flex: 0 0 58% !important; }
 }
+/* video covers: hand-labeled masking tape instead of big play buttons */
+.vid-facade .vid-play { display: none !important; }
+.vid-facade .vid-ph { justify-content: flex-end !important; align-items: center; padding: 0 0 20px !important; gap: 0 !important; }
+.vid-facade .vid-note {
+  position: relative; display: inline-block; max-width: 92%; white-space: nowrap;
+  padding: .32em 1.15em .28em; transform: rotate(-2.5deg);
+  font-family: 'Permanent Marker', 'Caveat', cursive; font-weight: 400; text-transform: none; letter-spacing: .02em; font-size: 1.15rem; line-height: 1.2;
+  color: #1c1610 !important; text-shadow: none !important;
+  background:
+    repeating-linear-gradient(90deg, rgba(120,95,50,.06) 0 1px, transparent 1px 4px),
+    linear-gradient(180deg, rgba(255,250,235,.25), transparent 45%, rgba(90,65,30,.12)),
+    rgba(226,211,168,.93);
+  box-shadow: 0 2px 4px rgba(0,0,0,.35);
+  clip-path: polygon(0 12%, 2% 0, 4% 9%, 6% 2%, 8% 6%, 100% 4%, 98% 14%, 100% 26%, 97% 40%, 100% 55%, 98% 70%, 100% 86%, 97% 100%, 6% 97%, 4% 100%, 2% 90%, 0 96%, 2% 80%, 0 64%, 2% 48%, 0 32%);
+  transition: transform .2s ease;
+}
+.vid-facade .vid-note::before, .vid-facade .vid-note::after { content: none !important; }
+.vid-reel .vid-facade .vid-note { font-size: .92rem; padding: .3em .9em .26em; }
+.vid-reel .vid-frame:nth-child(2) .vid-note { transform: rotate(1.8deg); }
+.vid-reel .vid-frame:nth-child(3) .vid-note { transform: rotate(-1.2deg); }
+.vid-facade:hover .vid-note { transform: rotate(-2.5deg) translateY(-2px); }
+@media (max-width: 640px) { .vid-facade .vid-note { font-size: 1rem; } .vid-reel .vid-facade .vid-note { font-size: .82rem; } }
 </style>
 
 <div class="haze" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
