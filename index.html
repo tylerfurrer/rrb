@@ -4636,7 +4636,15 @@ html.fonts-wait .gate-sign { opacity: 0; }
 <script>
 (function () {
   // ---- countdown to the next show ----
-  var shows = (window.RRB_SHOWS || []).map(function (x) { return { at: x.start.toISOString(), name: x.venue + ', ' + (x.town || x.city) }; });
+  var shows = (window.RRB_SHOWS || []).map(function (x) { return { at: x.start.toISOString(), tz: x.li.getAttribute('data-tz') || 'America/Chicago', name: x.venue + ', ' + (x.town || x.city) }; });
+  // count down in clock time where the show is, so a daylight saving change doesn't throw it off by an hour
+  function wall(ms, tz) {
+    try {
+      var o = {}; new Intl.DateTimeFormat('en-US', { timeZone: tz, year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric', hourCycle: 'h23' })
+        .formatToParts(new Date(ms)).forEach(function (p) { o[p.type] = p.value; });
+      return Date.UTC(+o.year, +o.month - 1, +o.day, +o.hour % 24, +o.minute, +o.second);
+    } catch (e) { return ms; }
+  }
   var quips = ['Start hydrating now.', 'Tell your boss you have a cold.', 'Plenty of time to lie to your wife about it.', 'Iron your good jeans.'];
   var q = quips[Math.floor(Math.random() * quips.length)];
   var el = { d: document.getElementById('cd-d'), h: document.getElementById('cd-h'), m: document.getElementById('cd-m'), s: document.getElementById('cd-s'), label: document.getElementById('cd-label'), quip: document.getElementById('cd-quip'), box: document.getElementById('countdown') };
@@ -4672,14 +4680,14 @@ html.fonts-wait .gate-sign { opacity: 0; }
     var now = Date.now(), next = null;
     for (var k = 0; k < shows.length; k++) {
       var t = new Date(shows[k].at).getTime();
-      if (t + 4 * 3600e3 > now) { next = { t: t, name: shows[k].name }; break; }
+      if (t + 4 * 3600e3 > now) { next = { t: t, tz: shows[k].tz, name: shows[k].name }; break; }
     }
     if (!next) {
       el.box.style.display = 'none';
       return;
     }
     lbRender(next.name);
-    var diff = Math.max(0, next.t - now);
+    var diff = next.t > now ? Math.max(0, wall(next.t, next.tz) - wall(now, next.tz)) : 0;
     if (diff === 0) { el.quip.textContent = "We're on right now. What are you doing on your phone?"; }
     else el.quip.textContent = q;
     var sec = Math.floor(diff / 1000);
