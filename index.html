@@ -2729,6 +2729,10 @@ html.fonts-wait .gate-sign { opacity: 0; }
   @keyframes mq-glow { 0%, 100% { filter: brightness(.9); box-shadow: 0 0 4px #ffc85a, 0 0 9px rgba(255,180,70,.45); } 50% { filter: brightness(1.12); box-shadow: 0 0 6px #ffd27a, 0 0 15px rgba(255,190,80,.75); } }
   @keyframes mq-warm { 0%, 100% { box-shadow: inset 0 0 0 7px #150c05, inset 0 0 0 9px rgba(201,150,63,.5), 0 12px 26px rgba(0,0,0,.6), 0 0 40px rgba(255,180,80,.14); } 50% { box-shadow: inset 0 0 0 7px #150c05, inset 0 0 0 9px rgba(201,150,63,.5), 0 12px 26px rgba(0,0,0,.6), 0 0 64px rgba(255,180,80,.26); } }
 }
+/* phones: hold the marquee glow still; the constant repaint was making the shows list twitch on iPhone */
+@media (hover: none), (pointer: coarse) {
+  #shows .mq-bulbs i, #shows .marquee { animation: none !important; }
+}
 #shows .countdown { justify-items: center; }
 #shows .cd-label { text-align: center; }
 #shows .cd-clock { justify-content: center; }
@@ -4684,7 +4688,10 @@ html.fonts-wait .gate-sign { opacity: 0; }
     el.m.textContent = pad(Math.floor(sec % 3600 / 60));
     el.s.textContent = pad(sec % 60);
   }
-  tickCd(); setInterval(tickCd, 1000);
+  // only tick while the countdown is on screen, so it isn't re-laying out the page while you read the shows
+  var cdVisible = true;
+  if (window.IntersectionObserver && el.box) new IntersectionObserver(function (es) { cdVisible = es[0].isIntersecting; if (cdVisible) tickCd(); }).observe(el.box);
+  tickCd(); setInterval(function () { if (cdVisible) tickCd(); }, 1000);
 
   // ---- booking form writes the email ----
   var f = document.getElementById('book-form');
