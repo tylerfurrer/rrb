@@ -5764,7 +5764,7 @@ document.querySelectorAll('.fight-inline').forEach(function (b) {
   if (opener) opener.addEventListener('click', function () { window.tipFor(); });
   window.tipFor = function () {
     if (TIP.venmo) {
-      v.href = 'https://venmo.com/?txn=pay&audience=private&recipients=' + encodeURIComponent(TIP.venmo) + '&note=' + encodeURIComponent('Tip for the Rat River Boys');
+      v.href = 'https://venmo.com/?txn=pay&audience=private&recipients=' + encodeURIComponent(TIP.venmo);
       v.classList.remove('off'); v.removeAttribute('aria-disabled');
     } else { v.href = '#'; v.classList.add('off'); v.setAttribute('aria-disabled', 'true'); }
     if (k && TIP.kofi) { k.href = 'https://ko-fi.com/' + encodeURIComponent(TIP.kofi); k.classList.remove('off'); k.removeAttribute('aria-disabled'); }
