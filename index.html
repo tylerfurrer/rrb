@@ -5047,9 +5047,10 @@ document.querySelectorAll('.fight-inline').forEach(function (b) {
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   function finish() {
     window.__gateOn = false;
+    if (!window.__deepGoing) window.scrollTo(0, 0);
     document.documentElement.classList.remove('gate-on');
     gate.remove();
-    window.scrollTo(0, 0);
+    if (!window.__deepGoing) window.scrollTo(0, 0);
     var q = window.__gateQ || []; window.__gateQ = [];
     q.forEach(function (fn) { try { fn(); } catch (e) {} });
   }
@@ -5680,7 +5681,6 @@ document.querySelectorAll('.fight-inline').forEach(function (b) {
         if (!book) return;
         var top = book.getBoundingClientRect().top + window.pageYOffset - (parseFloat(getComputedStyle(book).scrollMarginTop) || 0);
         window.scrollTo({ top: top, behavior: 'smooth' });
-        if (history.replaceState) history.replaceState(null, '', '#book');
       }, 80);
     });
   });
