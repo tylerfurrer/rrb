@@ -3025,16 +3025,25 @@ html.fonts-wait .gate-sign { opacity: 0; }
 .bp-main { text-align: center; margin: 0 auto 16px !important; max-width: 30ch; }
 .bp-go { display: block; width: 100%; text-align: center; }
 /* the Opry Show as a theater ticket: its own thing, tucked under the band */
-.bp-opry { display: flex; align-items: stretch; margin: 22px 0 0; transform: rotate(-1.2deg); filter: drop-shadow(0 4px 6px rgba(42,22,11,.35)); }
+.bp-opry { display: flex; align-items: stretch; width: 66%; min-width: 220px; margin: 18px auto 0; text-decoration: none; color: inherit; transition: transform .15s ease, filter .15s ease; transform: rotate(-1.2deg); filter: drop-shadow(0 4px 6px rgba(42,22,11,.35)); }
 .bpt-stub, .bpt-main { background: linear-gradient(180deg, rgba(255,255,255,.08), transparent 40%, rgba(0,0,0,.12)), var(--grain), #b3261e; }
-@media (max-width: 360px) { .bp-opry .bp-odesc { font-size: .84rem; } .book-pick .tp-card { padding-top: 20px; } .bp-main { margin-bottom: 12px !important; } }
+@media (max-width: 360px) { .bpt-sub { letter-spacing: .06em; font-size: .52rem; white-space: nowrap; } .bp-opry { width: 74%; } .bp-opry .bp-odesc { font-size: .84rem; } .book-pick .tp-card { padding-top: 20px; } .bp-main { margin-bottom: 12px !important; } }
 .bpt-stub { display: flex; align-items: center; justify-content: center; padding: 0 10px 0 14px; border-right: 2px dashed rgba(246,234,208,.6);
   -webkit-mask: radial-gradient(circle at 0 50%, transparent 9px, #000 9.5px); mask: radial-gradient(circle at 0 50%, transparent 9px, #000 9.5px); }
 .bpt-stub span { writing-mode: vertical-rl; transform: rotate(180deg); font-family: var(--label); font-weight: 700; text-transform: uppercase; letter-spacing: .22em; font-size: .6rem; color: #f6ead0; }
 .bpt-main { flex: 1; padding: 14px 18px 16px 14px; box-shadow: inset 0 0 0 4px #b3261e, inset 0 0 0 5px rgba(246,234,208,.55);
   -webkit-mask: radial-gradient(circle at 100% 50%, transparent 9px, #000 9.5px); mask: radial-gradient(circle at 100% 50%, transparent 9px, #000 9.5px); }
 .bp-opry h3 { color: #f6ead0 !important; text-shadow: 2px 2px 0 #5a120b !important; }
-.bp-opry .bp-odesc { color: #f6ead0 !important; }
+.bp-opry .bp-odesc { color: #f6ead0 !important; font-size: .74rem !important; line-height: 1.25; margin: 0 auto 8px !important; }
+.bp-opry:hover, .bp-opry:focus-visible { transform: rotate(-.6deg) translateY(-2px); filter: drop-shadow(0 7px 9px rgba(42,22,11,.4)); outline: none; }
+.bpt-main { display: block; text-align: center; }
+.bpt-title { display: block; margin: 0 0 3px; font-family: var(--display); font-size: .98rem; line-height: 1.05; color: #f6ead0; text-shadow: 2px 2px 0 #5a120b; }
+.bp-opry .bp-odesc { display: block; }
+.bpt-sub { margin: 0 0 7px; font-family: var(--label); font-weight: 600; text-transform: uppercase; letter-spacing: .1em; font-size: .56rem; color: #f6ead0; opacity: .9; white-space: nowrap; }
+.bp-opry .bp-opry-link { padding: 5px 10px 4px; font-size: .6rem; letter-spacing: .1em; box-shadow: 2px 2px 0 #2a160b; }
+.bpt-main { padding: 9px 12px 10px 9px !important; }
+.bpt-stub { padding: 0 8px 0 12px !important; }
+.bpt-stub span { font-size: .52rem !important; }
 .bp-opry .bp-opry-link { background: #f6ead0; }
 .bp-opry .bp-opry-link:hover { background: #fff6e0; }
 .bp-also { margin: 0 0 4px; font-family: var(--label); font-weight: 700; text-transform: uppercase; letter-spacing: .2em; font-size: .64rem; color: #8e2e12; }
@@ -3980,14 +3989,13 @@ html.fonts-wait .gate-sign { opacity: 0; }
     <h2 class="tp-amt" id="book-pick-title">Rat River Boys</h2>
     <p class="bp-desc bp-main">Classic country and honky tonk to dance to. Booked as a duo or the full band.</p>
     <button class="btn alt bp-go" type="button" data-show="rrb">Book Rat River Boys</button>
-    <div class="bp-opry">
-      <div class="bpt-stub" aria-hidden="true"><span>Admit One</span></div>
-      <div class="bpt-main">
-        <h3>The Opry Show</h3>
-        <p class="bp-odesc">A century of country, played live by the full band with fiddle and steel. Tribute to the music that came out of the Opry House.</p>
-        <a class="bp-opry-link" href="https://theopryshow.com" target="_blank" rel="noopener">Book the Opry Show</a>
-      </div>
-    </div>
+    <a class="bp-opry" href="https://theopryshow.com" target="_blank" rel="noopener" aria-label="The Opry Show: a century of country, played live by the full band with fiddle and steel. Opens theopryshow.com">
+      <span class="bpt-stub" aria-hidden="true"><span>Admit One</span></span>
+      <span class="bpt-main">
+        <span class="bpt-title">The Opry Show</span>
+        <span class="bp-odesc">A century of country, played live by the full band with fiddle and steel.</span>
+      </span>
+    </a>
   </div>
 </dialog>
 <div class="pint-wrap" aria-hidden="true">
@@ -5732,7 +5740,7 @@ document.querySelectorAll('.fight-inline').forEach(function (b) {
   });
   pick.querySelector('.tp-x').addEventListener('click', close);
   pick.addEventListener('click', function (e) { if (e.target === pick) close(); });
-  pick.querySelector('.bp-opry-link').addEventListener('click', function () { setTimeout(close, 300); });
+  pick.querySelector('.bp-opry').addEventListener('click', function () { setTimeout(close, 300); });
   pick.querySelectorAll('[data-show]').forEach(function (b) {
     b.addEventListener('click', function () {
       if (document.activeElement && document.activeElement.blur) document.activeElement.blur();
