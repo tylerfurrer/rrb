@@ -3013,6 +3013,23 @@ html.fonts-wait .gate-sign { opacity: 0; }
 .tp-card { position: relative; text-align: center; padding: 26px 24px 22px; color: #2a160b;
   background: linear-gradient(180deg, rgba(255,255,255,.25), transparent 30%), var(--grain), #efe2c2;
   border: 3px solid #2a160b; box-shadow: inset 0 0 0 6px #efe2c2, inset 0 0 0 7px rgba(42,22,11,.5), 0 20px 50px rgba(0,0,0,.6); }
+.book-pick { max-width: min(460px, calc(100vw - 32px)); max-height: calc(100dvh - 24px); overflow-y: auto; overscroll-behavior: contain; }
+.bp-opts { display: grid; gap: 14px; text-align: left; }
+.bp-opt { padding: 14px 14px 14px; border: 2px solid rgba(42,22,11,.35); background: rgba(255,248,230,.35); }
+.bp-opt h3 { margin: 0 0 6px; font-family: var(--display); font-weight: 400; font-size: 1.45rem; line-height: 1.05; color: #2a160b; text-shadow: none; }
+.bp-desc { margin: 0 0 12px; font-size: 1rem; line-height: 1.35; color: #2a160b; }
+.bp-for { margin: 0 0 12px; font-size: .92rem; line-height: 1.3; color: #4a2c18; }
+.bp-for b { display: block; font-family: var(--label); font-weight: 700; text-transform: uppercase; letter-spacing: .14em; font-size: .68rem; color: #8e2e12; margin-bottom: 2px; }
+.bp-opt .btn { display: block; width: 100%; text-align: center; }
+.book-pick .tp-amt { margin-bottom: 10px !important; }
+.bp-main { text-align: center; margin: 0 auto 16px !important; max-width: 30ch; }
+.bp-go { display: block; width: 100%; text-align: center; }
+.bp-opry { margin: 18px 0 0; padding-top: 14px; border-top: 1px dashed rgba(42,22,11,.4); }
+.bp-also { margin: 0 0 4px; font-family: var(--label); font-weight: 700; text-transform: uppercase; letter-spacing: .2em; font-size: .64rem; color: #8e2e12; }
+.bp-opry h3 { margin: 0 0 6px; font-family: var(--display); font-weight: 400; font-size: 1.3rem; line-height: 1.05; color: #2a160b; text-shadow: none; }
+.bp-odesc { margin: 0 auto 12px; max-width: 34ch; font-size: .92rem; line-height: 1.35; color: #4a2c18; }
+.bp-opry-link { display: inline-block; padding: 8px 16px 7px; border: 2px solid #2a160b; background: var(--mustard); color: #2a160b; box-shadow: 3px 3px 0 #2a160b; text-decoration: none; font-family: var(--label); font-weight: 700; text-transform: uppercase; letter-spacing: .12em; font-size: .78rem; }
+.bp-opry-link:hover { background: #f0b83a; }
 .tp-x { all: unset; cursor: pointer; position: absolute; top: 8px; right: 12px; font-size: 1.8rem; line-height: 1; color: #2a160b; padding: 4px 8px; }
 .tp-x:focus { outline: none; }
 .tp-pre { margin: 0; font-family: var(--label); font-weight: 600; text-transform: uppercase; letter-spacing: .26em; font-size: .72rem; color: #8e2e12; }
@@ -3415,6 +3432,11 @@ html.fonts-wait .gate-sign { opacity: 0; }
           <div class="where"><div class="venue">Hagemeister Park</div><div class="town">Green Bay, WI</div><span class="lineup-tag band" role="img" aria-label="Band"><svg viewBox="0 0 4166 1530" width="4.166em" height="1.530em" aria-hidden="true" focusable="false"><rect x="60" y="60" width="4046" height="1410" rx="220" fill="none" stroke="currentColor" stroke-opacity=".8" stroke-width="1.5" vector-effect="non-scaling-stroke"/><text x="700 1448 2159 2880" y="1170" fill="currentColor" font-family="Oswald, 'Arial Narrow', sans-serif" font-weight="700" font-size="1000">BAND</text></svg></span></div>
           <div class="time">2-5 PM</div>
         </li>
+        <li class="show" data-hours="1.5" data-fb="https://kaukauna.gov/live-from-hydro-park-concert-series/">
+          <div class="date"><span class="m">Aug</span><span class="d">4</span></div>
+          <div class="where"><div class="venue">Hydro Park</div><div class="town">Kaukauna, WI</div><span class="lineup-tag band" role="img" aria-label="Band"><svg viewBox="0 0 4166 1530" width="4.166em" height="1.530em" aria-hidden="true" focusable="false"><rect x="60" y="60" width="4046" height="1410" rx="220" fill="none" stroke="currentColor" stroke-opacity=".8" stroke-width="1.5" vector-effect="non-scaling-stroke"/><text x="700 1448 2159 2880" y="1170" fill="currentColor" font-family="Oswald, 'Arial Narrow', sans-serif" font-weight="700" font-size="1000">BAND</text></svg></span></div>
+          <div class="time">7-8:30 PM</div>
+        </li>
         <li class="show" data-addr="Wisconsin State Fair Park, West Allis, WI">
           <div class="date"><span class="m">Aug</span><span class="d">6</span></div>
           <div class="where"><div class="venue">Wisconsin State Fair</div><div class="town">West Allis, WI</div><span class="lineup-tag band" role="img" aria-label="Band"><svg viewBox="0 0 4166 1530" width="4.166em" height="1.530em" aria-hidden="true" focusable="false"><rect x="60" y="60" width="4046" height="1410" rx="220" fill="none" stroke="currentColor" stroke-opacity=".8" stroke-width="1.5" vector-effect="non-scaling-stroke"/><text x="700 1448 2159 2880" y="1170" fill="currentColor" font-family="Oswald, 'Arial Narrow', sans-serif" font-weight="700" font-size="1000">BAND</text></svg></span><div class="stage">Leff's Miller Lite Stage</div></div>
@@ -3495,8 +3517,7 @@ html.fonts-wait .gate-sign { opacity: 0; }
 
   <section class="slab sound-slab torn" id="sound">
     <div class="wrap">
-      <p class="kicker">The sound</p>
-      <h2>Golden age country. No chaser.</h2>
+      <h2>What we play.</h2>
       <div class="chalk-frame">
         <!-- <figure class="cb-polaroid p2 p3" aria-hidden="true"><span class="cbp-tape"></span><img src="corndog-mueller.webp" alt="" loading="lazy"></figure> -->
         <figure class="cb-polaroid p2" aria-hidden="true"><span class="cbp-tape"></span><img src="wild-wes.webp" alt="" loading="lazy"></figure>
@@ -3537,8 +3558,7 @@ html.fonts-wait .gate-sign { opacity: 0; }
 
   <section class="slab setlist-slab torn" id="setlist">
     <div class="wrap">
-      <p class="kicker">The setlist</p>
-      <h2>Taped to the stage floor.</h2>
+      <h2>Our typical set list.</h2>
       <p class="sl-sub">A hundred songs we can play tonight. Don't see yours? Ask anyway.</p>
       <div class="sl-wrap">
         <button class="sl-arrow prev" type="button" aria-label="Previous sheet">&#8249;</button>
@@ -3944,11 +3964,15 @@ html.fonts-wait .gate-sign { opacity: 0; }
 <dialog class="tip-pop book-pick" id="book-pick" aria-labelledby="book-pick-title">
   <div class="tp-card">
     <button class="tp-x" type="button" aria-label="Close">&times;</button>
-    <p class="tp-pre">Book a show</p>
-    <h2 class="tp-amt" id="book-pick-title">Which one?</h2>
-    <div class="tp-btns">
-      <button class="btn" type="button" data-show="rrb">Rat River Boys</button>
-      <a class="btn alt" href="https://theopryshow.com" target="_blank" rel="noopener">The Opry Show</a>
+    <p class="tp-pre">Book the band</p>
+    <h2 class="tp-amt" id="book-pick-title">Rat River Boys</h2>
+    <p class="bp-desc bp-main">Classic country and honky tonk to dance to. Booked as a duo or the full band.</p>
+    <button class="btn bp-go" type="button" data-show="rrb">Book Rat River Boys</button>
+    <div class="bp-opry">
+      <p class="bp-also">Also from the band</p>
+      <h3>The Opry Show</h3>
+      <p class="bp-odesc">A century of country, played live by the full band with fiddle and steel. Tribute to the music that came out of the Opry House.</p>
+      <a class="bp-opry-link" href="https://theopryshow.com" target="_blank" rel="noopener">Book the Opry Show</a>
     </div>
   </div>
 </dialog>
@@ -5692,7 +5716,7 @@ document.querySelectorAll('.fight-inline').forEach(function (b) {
   btn.addEventListener('click', function (e) { e.preventDefault(); pick.showModal(); });
   pick.querySelector('.tp-x').addEventListener('click', close);
   pick.addEventListener('click', function (e) { if (e.target === pick) close(); });
-  pick.querySelector('a.btn').addEventListener('click', function () { setTimeout(close, 300); });
+  pick.querySelector('.bp-opry-link').addEventListener('click', function () { setTimeout(close, 300); });
   pick.querySelectorAll('[data-show]').forEach(function (b) {
     b.addEventListener('click', function () {
       if (document.activeElement && document.activeElement.blur) document.activeElement.blur();
